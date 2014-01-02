@@ -7037,3 +7037,1382 @@ DEBUG - 2014-01-02 16:21:34 --> File loaded: application/views/admin/head.php
 DEBUG - 2014-01-02 16:21:34 --> File loaded: application/views/admin/roles.php
 DEBUG - 2014-01-02 16:21:34 --> Final output sent to browser
 DEBUG - 2014-01-02 16:21:34 --> Total execution time: 0.1233
+DEBUG - 2014-01-02 16:43:46 --> Config Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:43:46 --> URI Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Router Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Output Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Security Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Input Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:43:46 --> Language Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:43:46 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:43:46 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:43:46 --> Session Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:43:46 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Session routines successfully run
+DEBUG - 2014-01-02 16:43:46 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:43:46 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:43:46 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:43:46 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:43:46 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:43:46 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:43:46 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:43:46 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:43:46 --> File loaded: application/views/admin/perm.php
+DEBUG - 2014-01-02 16:43:46 --> Final output sent to browser
+DEBUG - 2014-01-02 16:43:46 --> Total execution time: 0.1655
+DEBUG - 2014-01-02 16:43:50 --> Config Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:43:50 --> URI Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Router Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Output Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Security Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Input Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:43:50 --> Language Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:43:50 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:43:50 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:43:50 --> Session Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:43:50 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Session routines successfully run
+DEBUG - 2014-01-02 16:43:50 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:43:50 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:43:50 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:43:50 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:43:50 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:43:50 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:43:50 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:43:50 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:43:50 --> File loaded: application/views/admin/perm.php
+DEBUG - 2014-01-02 16:43:50 --> Final output sent to browser
+DEBUG - 2014-01-02 16:43:50 --> Total execution time: 0.0933
+DEBUG - 2014-01-02 16:43:56 --> Config Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:43:56 --> URI Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Router Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Output Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Security Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Input Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:43:56 --> Language Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:43:56 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:43:56 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:43:56 --> Session Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:43:56 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Session routines successfully run
+DEBUG - 2014-01-02 16:43:56 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:43:56 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:43:56 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:43:56 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:43:56 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Model Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:43:56 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:43:56 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:43:56 --> Final output sent to browser
+DEBUG - 2014-01-02 16:43:56 --> Total execution time: 0.0796
+DEBUG - 2014-01-02 16:44:01 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:01 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:01 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:01 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:01 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:01 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:01 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:01 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:01 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:01 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:01 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:44:01 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:44:01 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:44:01 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:44:01 --> File loaded: application/views/admin_user/user_list.php
+DEBUG - 2014-01-02 16:44:01 --> Final output sent to browser
+DEBUG - 2014-01-02 16:44:01 --> Total execution time: 0.0952
+DEBUG - 2014-01-02 16:44:04 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:04 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:04 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:04 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:04 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:04 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:04 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:04 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:04 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:04 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:04 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:04 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:44:04 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:44:04 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:44:04 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:44:04 --> File loaded: application/views/admin/perm.php
+DEBUG - 2014-01-02 16:44:04 --> Final output sent to browser
+DEBUG - 2014-01-02 16:44:04 --> Total execution time: 0.1129
+DEBUG - 2014-01-02 16:44:07 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:07 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:07 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:07 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:07 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:07 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:07 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Session garbage collection performed.
+DEBUG - 2014-01-02 16:44:07 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:07 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:07 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:07 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:07 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:44:07 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:44:07 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:44:07 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:44:07 --> File loaded: application/views/admin/roles.php
+DEBUG - 2014-01-02 16:44:07 --> Final output sent to browser
+DEBUG - 2014-01-02 16:44:07 --> Total execution time: 0.0793
+DEBUG - 2014-01-02 16:44:09 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:09 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:09 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:09 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:09 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:09 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:09 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:09 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:09 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:09 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:09 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:09 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:44:09 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:09 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:09 --> DX_Auth_Event class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:09 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:09 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> No URI present. Default controller set.
+DEBUG - 2014-01-02 16:44:09 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:09 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:09 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:09 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:09 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:09 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> A session cookie was not found.
+DEBUG - 2014-01-02 16:44:09 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:09 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:09 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:09 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:09 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:09 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:09 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:10 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:10 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:10 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:10 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:10 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:10 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:10 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:10 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:10 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:10 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:10 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:44:10 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:10 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:10 --> DX_Auth_Event class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:10 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> File loaded: application/views/auth/login_form.php
+DEBUG - 2014-01-02 16:44:10 --> Final output sent to browser
+DEBUG - 2014-01-02 16:44:10 --> Total execution time: 0.1906
+DEBUG - 2014-01-02 16:44:10 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:10 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Router Class Initialized
+ERROR - 2014-01-02 16:44:10 --> 404 Page Not Found --> admin/css
+DEBUG - 2014-01-02 16:44:10 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:10 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Router Class Initialized
+ERROR - 2014-01-02 16:44:10 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:44:10 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:10 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Router Class Initialized
+ERROR - 2014-01-02 16:44:10 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:44:10 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:10 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:10 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Router Class Initialized
+ERROR - 2014-01-02 16:44:10 --> 404 Page Not Found --> admin/img
+DEBUG - 2014-01-02 16:44:10 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:10 --> Router Class Initialized
+ERROR - 2014-01-02 16:44:10 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:44:11 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:11 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:11 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:11 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:11 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:11 --> Router Class Initialized
+ERROR - 2014-01-02 16:44:11 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:44:11 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:11 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:11 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:11 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:11 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:11 --> Router Class Initialized
+ERROR - 2014-01-02 16:44:11 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:44:17 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:17 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:17 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:17 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:17 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:17 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:17 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:17 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:17 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:17 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:17 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:17 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:44:17 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:17 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:17 --> DX_Auth_Event class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:17 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Language file loaded: language/chinese/form_validation_lang.php
+DEBUG - 2014-01-02 16:44:17 --> XSS Filtering completed
+DEBUG - 2014-01-02 16:44:17 --> XSS Filtering completed
+DEBUG - 2014-01-02 16:44:17 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:17 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:17 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> No URI present. Default controller set.
+DEBUG - 2014-01-02 16:44:18 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:18 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:18 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:18 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:18 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:18 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:18 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:18 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:18 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:18 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:18 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:18 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:44:18 --> File loaded: application/views/admin/header.php
+DEBUG - 2014-01-02 16:44:18 --> File loaded: application/views/admin/left_menu.php
+DEBUG - 2014-01-02 16:44:18 --> File loaded: application/views/admin/home.php
+DEBUG - 2014-01-02 16:44:18 --> Final output sent to browser
+DEBUG - 2014-01-02 16:44:18 --> Total execution time: 0.0678
+DEBUG - 2014-01-02 16:44:24 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:24 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:24 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:24 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:24 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:24 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:24 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:24 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:24 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:24 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:24 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:44:24 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:44:24 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:44:24 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:44:24 --> File loaded: application/views/admin/roles.php
+DEBUG - 2014-01-02 16:44:24 --> Final output sent to browser
+DEBUG - 2014-01-02 16:44:24 --> Total execution time: 0.0939
+DEBUG - 2014-01-02 16:44:43 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:43 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:43 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:43 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:43 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:43 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:43 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:43 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:43 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:43 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:43 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:43 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:44:43 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:44:43 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:44:43 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:44:43 --> File loaded: application/views/admin/roles.php
+DEBUG - 2014-01-02 16:44:43 --> Final output sent to browser
+DEBUG - 2014-01-02 16:44:43 --> Total execution time: 0.0750
+DEBUG - 2014-01-02 16:44:57 --> Config Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:44:57 --> URI Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Router Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Output Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Security Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Input Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:44:57 --> Language Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:44:57 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:44:57 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:44:57 --> Session Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:44:57 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Session routines successfully run
+DEBUG - 2014-01-02 16:44:57 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:44:57 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:44:57 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:44:57 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:44:57 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Model Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:44:57 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:44:57 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:44:57 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:44:57 --> File loaded: application/views/admin/roles.php
+DEBUG - 2014-01-02 16:44:57 --> Final output sent to browser
+DEBUG - 2014-01-02 16:44:57 --> Total execution time: 0.1149
+DEBUG - 2014-01-02 16:45:01 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:01 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Router Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Output Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Security Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Input Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:45:01 --> Language Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:45:01 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:45:01 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:45:01 --> Session Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:45:01 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Session routines successfully run
+DEBUG - 2014-01-02 16:45:01 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:01 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:01 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:45:01 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:45:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:45:01 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:45:01 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:45:01 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:45:01 --> File loaded: application/views/admin/perm.php
+DEBUG - 2014-01-02 16:45:01 --> Final output sent to browser
+DEBUG - 2014-01-02 16:45:01 --> Total execution time: 0.0902
+DEBUG - 2014-01-02 16:45:07 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:07 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Router Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Output Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Security Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Input Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:45:07 --> Language Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:45:07 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:45:07 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:45:07 --> Session Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:45:07 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Session garbage collection performed.
+DEBUG - 2014-01-02 16:45:07 --> Session routines successfully run
+DEBUG - 2014-01-02 16:45:07 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:07 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:07 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:45:07 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:45:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:45:07 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:45:07 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:45:07 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:45:07 --> File loaded: application/views/admin/perm.php
+DEBUG - 2014-01-02 16:45:07 --> Final output sent to browser
+DEBUG - 2014-01-02 16:45:07 --> Total execution time: 0.0979
+DEBUG - 2014-01-02 16:45:12 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:12 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Router Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Output Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Security Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Input Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:45:12 --> Language Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:45:12 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:45:12 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:45:12 --> Session Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:45:12 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Session routines successfully run
+DEBUG - 2014-01-02 16:45:12 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:12 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:12 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:45:12 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:45:12 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:45:12 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:45:12 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:45:12 --> Final output sent to browser
+DEBUG - 2014-01-02 16:45:12 --> Total execution time: 0.0947
+DEBUG - 2014-01-02 16:45:14 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:14 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Router Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Output Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Security Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Input Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:45:14 --> Language Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:45:14 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:45:14 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:45:14 --> Session Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:45:14 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Session routines successfully run
+DEBUG - 2014-01-02 16:45:14 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:14 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:14 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:45:14 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:45:14 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:45:14 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:14 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:14 --> DX_Auth_Event class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:14 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:14 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Router Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> No URI present. Default controller set.
+DEBUG - 2014-01-02 16:45:14 --> Output Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Security Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Input Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:45:14 --> Language Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:45:14 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:45:14 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:45:14 --> Session Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:45:14 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> A session cookie was not found.
+DEBUG - 2014-01-02 16:45:14 --> Session routines successfully run
+DEBUG - 2014-01-02 16:45:14 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:14 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:14 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:45:14 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:45:14 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:14 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:15 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Router Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Output Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Security Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Input Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:45:15 --> Language Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:45:15 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:45:15 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:45:15 --> Session Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:45:15 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Session routines successfully run
+DEBUG - 2014-01-02 16:45:15 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:15 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:15 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:45:15 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:45:15 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:45:15 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:15 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:15 --> DX_Auth_Event class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:15 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> File loaded: application/views/auth/login_form.php
+DEBUG - 2014-01-02 16:45:15 --> Final output sent to browser
+DEBUG - 2014-01-02 16:45:15 --> Total execution time: 0.1491
+DEBUG - 2014-01-02 16:45:15 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:15 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Router Class Initialized
+ERROR - 2014-01-02 16:45:15 --> 404 Page Not Found --> admin/css
+DEBUG - 2014-01-02 16:45:15 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:15 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Router Class Initialized
+ERROR - 2014-01-02 16:45:15 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:45:15 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:15 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Router Class Initialized
+ERROR - 2014-01-02 16:45:15 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:45:15 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:15 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Router Class Initialized
+ERROR - 2014-01-02 16:45:15 --> 404 Page Not Found --> admin/img
+DEBUG - 2014-01-02 16:45:15 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:15 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Router Class Initialized
+ERROR - 2014-01-02 16:45:15 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:45:15 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:15 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:15 --> Router Class Initialized
+ERROR - 2014-01-02 16:45:15 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:45:16 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:16 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:16 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:16 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:16 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:16 --> Router Class Initialized
+ERROR - 2014-01-02 16:45:16 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:45:20 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:20 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Router Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Output Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Security Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Input Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:45:20 --> Language Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:45:20 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:45:20 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:45:20 --> Session Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:45:20 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Session routines successfully run
+DEBUG - 2014-01-02 16:45:20 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:20 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:20 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:45:20 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:45:20 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:20 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:20 --> DX_Auth_Event class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Language file loaded: language/chinese/form_validation_lang.php
+DEBUG - 2014-01-02 16:45:20 --> XSS Filtering completed
+DEBUG - 2014-01-02 16:45:20 --> XSS Filtering completed
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:20 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Router Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> No URI present. Default controller set.
+DEBUG - 2014-01-02 16:45:20 --> Output Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Security Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Input Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:45:20 --> Language Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:45:20 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:45:20 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:45:20 --> Session Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:45:20 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Session routines successfully run
+DEBUG - 2014-01-02 16:45:20 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:20 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:20 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:45:20 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:20 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:45:20 --> File loaded: application/views/admin/header.php
+DEBUG - 2014-01-02 16:45:20 --> File loaded: application/views/admin/left_menu.php
+DEBUG - 2014-01-02 16:45:20 --> File loaded: application/views/admin/home.php
+DEBUG - 2014-01-02 16:45:20 --> Final output sent to browser
+DEBUG - 2014-01-02 16:45:20 --> Total execution time: 0.1023
+DEBUG - 2014-01-02 16:45:23 --> Config Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:45:23 --> URI Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Router Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Output Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Security Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Input Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:45:23 --> Language Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:45:23 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:45:23 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:45:23 --> Session Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:45:23 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Session routines successfully run
+DEBUG - 2014-01-02 16:45:23 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:45:23 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:45:23 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:45:23 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:45:23 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Model Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:45:23 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:45:23 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:45:23 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:45:23 --> File loaded: application/views/admin_user/user_list.php
+DEBUG - 2014-01-02 16:45:23 --> Final output sent to browser
+DEBUG - 2014-01-02 16:45:23 --> Total execution time: 0.0928
+DEBUG - 2014-01-02 16:46:05 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:05 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:05 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:05 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:05 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:05 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:05 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:05 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:05 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:05 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:05 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:05 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:46:05 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:46:05 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:46:05 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:46:05 --> File loaded: application/views/admin_user/user_list.php
+DEBUG - 2014-01-02 16:46:05 --> Final output sent to browser
+DEBUG - 2014-01-02 16:46:05 --> Total execution time: 0.1363
+DEBUG - 2014-01-02 16:46:19 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:19 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:19 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:19 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:19 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:19 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:19 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:19 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:19 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:19 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:19 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:19 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:46:19 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:46:19 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:46:19 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:46:19 --> File loaded: application/views/admin/perm.php
+DEBUG - 2014-01-02 16:46:19 --> Final output sent to browser
+DEBUG - 2014-01-02 16:46:19 --> Total execution time: 0.0946
+DEBUG - 2014-01-02 16:46:22 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:22 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:22 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:22 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:22 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:22 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:22 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:22 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:22 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:22 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:22 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:22 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:46:22 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:46:22 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:46:22 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:46:22 --> File loaded: application/views/admin/perm.php
+DEBUG - 2014-01-02 16:46:22 --> Final output sent to browser
+DEBUG - 2014-01-02 16:46:22 --> Total execution time: 0.1126
+DEBUG - 2014-01-02 16:46:24 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:24 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:24 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:24 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:24 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:24 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:24 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:24 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:24 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:24 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:24 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:46:24 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:46:24 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:46:24 --> Final output sent to browser
+DEBUG - 2014-01-02 16:46:24 --> Total execution time: 0.0818
+DEBUG - 2014-01-02 16:46:27 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:27 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:27 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:27 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:28 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:28 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:28 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:28 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:28 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:28 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:46:28 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:28 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:28 --> DX_Auth_Event class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:28 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:28 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> No URI present. Default controller set.
+DEBUG - 2014-01-02 16:46:28 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:28 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:28 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:28 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> A session cookie was not found.
+DEBUG - 2014-01-02 16:46:28 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:28 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:28 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:28 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:28 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:28 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:28 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:28 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:28 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:28 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:28 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:28 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:28 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:46:28 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:28 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:28 --> DX_Auth_Event class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:28 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> File loaded: application/views/auth/login_form.php
+DEBUG - 2014-01-02 16:46:28 --> Final output sent to browser
+DEBUG - 2014-01-02 16:46:28 --> Total execution time: 0.0943
+DEBUG - 2014-01-02 16:46:28 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:28 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Router Class Initialized
+ERROR - 2014-01-02 16:46:28 --> 404 Page Not Found --> admin/css
+DEBUG - 2014-01-02 16:46:28 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:28 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Router Class Initialized
+ERROR - 2014-01-02 16:46:28 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:46:28 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:28 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:28 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:28 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:28 --> Router Class Initialized
+ERROR - 2014-01-02 16:46:28 --> 404 Page Not Found --> admin/img
+ERROR - 2014-01-02 16:46:28 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:46:28 --> Router Class Initialized
+ERROR - 2014-01-02 16:46:28 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:46:29 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:29 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:29 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:29 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:29 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:29 --> Router Class Initialized
+ERROR - 2014-01-02 16:46:29 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:46:29 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:29 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:29 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:29 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:29 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:29 --> Router Class Initialized
+ERROR - 2014-01-02 16:46:29 --> 404 Page Not Found --> admin/js
+DEBUG - 2014-01-02 16:46:34 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:34 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:34 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:34 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:34 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:34 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:34 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:34 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:34 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:34 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:34 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:46:34 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:34 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:34 --> DX_Auth_Event class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Language file loaded: language/chinese/form_validation_lang.php
+DEBUG - 2014-01-02 16:46:34 --> XSS Filtering completed
+DEBUG - 2014-01-02 16:46:34 --> XSS Filtering completed
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:34 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> No URI present. Default controller set.
+DEBUG - 2014-01-02 16:46:34 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:34 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:34 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:34 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:34 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:34 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:34 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:34 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:34 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:34 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:34 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:46:34 --> File loaded: application/views/admin/header.php
+DEBUG - 2014-01-02 16:46:34 --> File loaded: application/views/admin/left_menu.php
+DEBUG - 2014-01-02 16:46:34 --> File loaded: application/views/admin/home.php
+DEBUG - 2014-01-02 16:46:34 --> Final output sent to browser
+DEBUG - 2014-01-02 16:46:34 --> Total execution time: 0.1378
+DEBUG - 2014-01-02 16:46:37 --> Config Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Hooks Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Utf8 Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> UTF-8 Support Enabled
+DEBUG - 2014-01-02 16:46:37 --> URI Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Router Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Output Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Security Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Input Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-02 16:46:37 --> Language Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Loader Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Helper loaded: url_helper
+DEBUG - 2014-01-02 16:46:37 --> Helper loaded: common_helper
+DEBUG - 2014-01-02 16:46:37 --> Helper loaded: date_helper
+DEBUG - 2014-01-02 16:46:37 --> Session Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Helper loaded: string_helper
+DEBUG - 2014-01-02 16:46:37 --> Database Driver Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Session routines successfully run
+DEBUG - 2014-01-02 16:46:37 --> DX Auth Initialized
+DEBUG - 2014-01-02 16:46:37 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-02 16:46:37 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-02 16:46:37 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-02 16:46:37 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Controller Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Model Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Config file loaded: application/config/thumbimage.php
+DEBUG - 2014-01-02 16:46:37 --> Pagination Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> Helper loaded: form_helper
+DEBUG - 2014-01-02 16:46:37 --> Form Validation Class Initialized
+DEBUG - 2014-01-02 16:46:37 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-02 16:46:37 --> File loaded: application/views/admin_user/user_list.php
+DEBUG - 2014-01-02 16:46:37 --> Final output sent to browser
+DEBUG - 2014-01-02 16:46:37 --> Total execution time: 0.0850

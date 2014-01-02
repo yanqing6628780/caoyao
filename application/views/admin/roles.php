@@ -6,6 +6,7 @@
 			<div class="widget-box">
 				<div class="widget-title">
 					<h5>角色列表</h5>
+					<?php if(checkPermission2('role_edit')):?>
 					<div class="navbar-form pull-left">
 						<span>父角色</span>
 						<select name='role_parent'>
@@ -19,6 +20,7 @@
 						<input type="submit" name="add" value="添加角色"  class="btn btn-primary"/>
 						<input type="submit" name="delete" value="删除选中的角色"  class="btn btn-inverse"/>
 					</div>
+					<?php endif;?>
 				</div>
 				<div class="widget-content nopadding">
 					<table class="table table-bordered table-striped with-check">

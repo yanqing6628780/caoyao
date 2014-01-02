@@ -1,12 +1,9 @@
 <script type="text/javascript">
 function addUser(userId){
-    LoadAjaxPage('user_add', "", 'myModal',"添加用户")
+    LoadAjaxPage('user_add', "", 'myModal',"添加会议")
 }
 function editUser(userId){
     LoadAjaxPage('user_edit', {user_id: userId}, 'myModal',"编辑")
-}
-function changePassword(){
-    LoadAjaxPage('change_password_view', "", 'myModal',"修改密码")
 }
 function del(id){
     if(confirm('确认删除?'))
@@ -32,11 +29,9 @@ function del(id){
                 <div class="widget-title">
                     <div class="navbar-form pull-left">
                         <h5>用户列表</h5>
-                        <?php if(checkPermission2('user_edit')):?> 
                         <div class="buttons">
-                            <button href="#myModal" data-toggle="modal" onclick='addUser()'><i class="icon-plus"></i> 添加用户</button>
-                        </div>
-                        <?php endif;?>
+                            <button href="#myModal" data-toggle="modal" onclick='addUser()'><i class="icon-plus"></i> 添加会议</button>
+                        </div>   
                     </div>
                 </div>
                 <div class="widget-content nopadding">
@@ -68,10 +63,6 @@ function del(id){
                                     <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
                                     <?php endif;?>
                                     <?php endif;?>
-                                    <?php if($row['id'] == $this->dx_auth->get_user_id()):?>
-                                    <button href="#myModal" data-toggle="modal" class="btn btn-inverse" onclick='changePassword()' ><i class="icon-refresh icon-white"></i> 修改密码</button>
-                                    <?php endif;?>
-                                    <input type='hidden' value='<?=$row['id']?>' name='userId'/>
                                 </td>
                             </tr>
                         <?php endforeach;?>

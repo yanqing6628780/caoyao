@@ -29,13 +29,14 @@ class Party extends CI_Controller {
         $query = $this->general_mdl->get_query();
         $data['result'] = $query->result();
         $data['total'] = $query->num_rows();
-        $this->load->view('ad_party/main', $data);
+        $this->load->view('admin/head');
+        $this->load->view('admin_party/list', $data);
     }
 
     //评价添加
     public function add()
     {
-        $this->load->view('ad_party/add');
+        $this->load->view('admin_party/add');
     }
 
     //添加保存
@@ -61,7 +62,7 @@ class Party extends CI_Controller {
         $query = $this->general_mdl->get_query_by_where(array('id' => $data['id']));
         $data['row'] = $query->row_array();
 
-        $this->load->view('ad_party/edit', $data);
+        $this->load->view('admin_party/edit', $data);
     }
 
     //修改保存
