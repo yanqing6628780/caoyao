@@ -1,0 +1,2 @@
+2012-09-17 16:45:16	<?xml version="1.0" encoding="utf-8" ?><error_response><code>11</code><msg>Insufficient isv permissions</msg><sub_code>isv.permission-api-package-limit</sub_code><sub_msg>scope ids is 289 386 384 383 382 381 379 378</sub_msg></error_response><!--top049101.cm4-->
+2012-09-17 16:45:19	<?xml version="1.0" encoding="utf-8" ?><error_response><code>11</code><msg>Insufficient isv permissions</msg><sub_code>isv.permission-api-package-limit</sub_code><sub_msg>scope ids is 289 386 384 383 382 381 379 378</sub_msg></error_response><!--top049084.cm4-->
