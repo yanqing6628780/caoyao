@@ -68,9 +68,7 @@ function del(id){
                                     <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
                                     <?php endif;?>
                                     <?php endif;?>
-                                    <?php if($row['id'] == $this->dx_auth->get_user_id()):?>
                                     <button href="#myModal" data-toggle="modal" class="btn btn-inverse" onclick='changePassword()' ><i class="icon-refresh icon-white"></i> 修改密码</button>
-                                    <?php endif;?>
                                     <input type='hidden' value='<?=$row['id']?>' name='userId'/>
                                 </td>
                             </tr>

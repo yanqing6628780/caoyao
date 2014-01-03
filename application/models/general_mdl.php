@@ -85,7 +85,8 @@ class General_mdl extends CI_Model
         if($where){
             $this->db->where($where);
             if($this->_data){
-                return $this->db->update($this->_table, $this->_data);
+                $this->db->update($this->_table, $this->_data);
+                return $this->db->affected_rows();
             }else{
                 return false;
             }
@@ -139,13 +140,13 @@ class General_mdl extends CI_Model
         return $this->get_query($start, $pageSize);
     }
 
-    public function get_query_by_where_in($where_field = '',$where = array(), $start = 0, $pageSize = '')
+    public function get_query_by_where_in($where_field = '',$where = array(), $start = 0, $pageSize = '', $orderby = "")
     {
         if($where_field){
             $this->db->where_in($where_field, $where);
         }
 
-        return $this->get_query($start, $pageSize);
+        return $this->get_query($start, $pageSize, $orderby);
     }
 
 

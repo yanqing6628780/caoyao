@@ -343,18 +343,13 @@ class User_admin extends CI_Controller
         // $permissions = $this->config->item('permissions');
         //$perms = getPermissionsArray();
         //print_r($perms);
-        if($user_perms_data)
+        
+        foreach($perms as $key => $row)
         {
-            foreach($perms as $key => $row)
+            $perms[$key]['hasperm'] = FALSE;
+            if($user_perms_data and array_key_exists($row['action_code'], $user_perms_data) and $user_perms_data[$row['action_code']])
             {
-                $perms[$key]['hasperm'] = FALSE;
-                if(array_key_exists($row['action_code'], $user_perms_data))
-                {
-                    if($user_perms_data[$row['action_code']])
-                    {
-                        $perms[$key]['hasperm'] = TRUE;
-                    }
-                }
+                $perms[$key]['hasperm'] = TRUE;      
             }
         }
 

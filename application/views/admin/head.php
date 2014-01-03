@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="<?php echo base_url()?>css/unicorn.main.css" />
 <link rel="stylesheet" href="<?php echo base_url()?>css/unicorn.grey.css" class="skin-color" />	
 <link rel="stylesheet" href="<?php echo base_url()?>css/validform.css" />	
+<link rel="stylesheet" href="<?php echo base_url()?>css/datepicker.css" />	
+<link rel="stylesheet" href="<?php echo base_url()?>css/bootstrap-datetimepicker.css" />	
 <link rel="stylesheet" href="<?php echo base_url()?>css/style.css" />	
 
 <script src="<?php echo base_url()?>js/excanvas.min.js"></script>

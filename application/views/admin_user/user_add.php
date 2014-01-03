@@ -27,9 +27,15 @@ $(function () {
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">姓名</label>
+                        <label class="control-label">密码</label>
                         <div class="controls">
-                            <input type='text' name='profile[name]' value='' />
+                            <input type='password' name="password" value='' datatype="*6-16"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">确认密码</label>
+                        <div class="controls">
+                            <input type='password' name="confirm_password" value='' datatype="*" recheck="password" errormsg="您两次输入的密码不一致！"/>
                         </div>
                     </div>
                     <div class="control-group">
@@ -40,6 +46,12 @@ $(function () {
                                     <option value='<?=$row->id?>'><?=$row->cnname?></option>
                                 <?php endforeach;?>
                             </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">姓名</label>
+                        <div class="controls">
+                            <input type='text' name='profile[name]' value='' />
                         </div>
                     </div>
                     <div class="control-group">

@@ -394,7 +394,7 @@ function month_age($date){
 //单选按钮选中项
 function radio_check($val, $checkVal){
     if($val == $checkVal){
-        return 'checked=true';
+        echo 'checked=true';
     }
     return;
 }
@@ -402,7 +402,7 @@ function radio_check($val, $checkVal){
 //下拉选择选中项
 function option_select($val, $checkVal){
     if($val == $checkVal){
-        return 'selected=true';
+        echo 'selected=true';
     }
     return;
 }
