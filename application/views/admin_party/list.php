@@ -24,7 +24,9 @@ function del(id){
                     <h5>会议列表</h5>
                     <div class="navbar-form pull-left">
                         <div class="buttons">
+                            <?php if(checkPermission2('party_edit')):?>
                             <a href="<?=site_url($controller_url."add")?>" class="btn btn-small" target="right"><i class="icon-plus"></i> 添加会议</a>
+                            <?php endif;?>
                         </div>   
                     </div>
                 </div>
@@ -33,14 +35,15 @@ function del(id){
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>大会名称</th>
+                                <th>名称</th>
                                 <th>开始时间</th>
                                 <th>结束时间</th>
-                                <th>大会地点</th>
-                                <th>大会负责人</th>
-                                <th>是否使用讨论模块</th>
-                                <th>是否使用投票模块</th>
-                                <th>是否使用抽奖模块</th>
+                                <th>地点</th>
+                                <th width="50">负责人</th>
+                                <th width="60">是否使用讨论模块</th>
+                                <th width="60">是否使用投票模块</th>
+                                <th width="60">是否使用抽奖模块</th>
+                                <th>邀请码</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -56,11 +59,23 @@ function del(id){
                                 <td><?=$row['isDiscussion'] ? "是" : "否" ?></td>
                                 <td><?=$row['isVote'] ? "是" : "否" ?></td>
                                 <td><?=$row['isLottery'] ? "是" : "否" ?></td>
+                                <td><?=$row['inviteCode']?></td>
                                 <td>
-                                    <?php if(checkPermission2('party_edit')):?>                                    
-                                    <a href="<?=site_url($controller_url."edit/".$row['id'])?>" traget="right" class="btn btn-primary"> <i class="icon-pencil icon-white"></i> 编辑</a>
-                                    <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
+                                    <p>
+                                    <?php if(checkPermission2('party_edit')):?>
+                                                                    
+                                        <a class="btn btn-primary" href="<?=site_url($controller_url."edit/".$row['id'])?>" traget="right"> <i class="icon-pencil icon-white"></i> 编辑</a>
+                                        <a class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</a>                                    
                                     <?php endif;?>
+                                        <a class="btn btn-info" href="<?=site_url($controller_url."add_customer/".$row['id'])?>"><i class="icon-plus icon-white"></i> 会议参与人</a>
+                                    </p>
+                                    <div class="btn-group">
+                                        <a href="<?=site_url("admin/program/?party=".$row['id'])?>" class="btn btn-small btn-inverse" target="right">查看议程</a>
+                                        <a href="<?=site_url("admin/discussion/?party=".$row['id'])?>" class="btn btn-small btn-info" target="right">查看讨论主题</a>
+                                        <a href="<?=site_url("admin/vote/?party=".$row['id'])?>" class="btn btn-small btn-success" target="right">查看投票</a>
+                                        <a href="<?=site_url("admin/lottery/?party=".$row['id'])?>" class="btn btn-small btn-danger" target="right">查看抽奖</a>
+                                        <a href="<?=site_url("admin/sign/?party=".$row['id'])?>" class="btn btn-small" target="right">查看签到</a>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach;?>

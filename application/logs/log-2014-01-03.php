@@ -13421,3 +13421,36 @@ DEBUG - 2014-01-03 16:44:53 --> File loaded: application/views/admin/head.php
 DEBUG - 2014-01-03 16:44:53 --> File loaded: application/views/admin_program/list.php
 DEBUG - 2014-01-03 16:44:53 --> Final output sent to browser
 DEBUG - 2014-01-03 16:44:53 --> Total execution time: 0.0854
+DEBUG - 2014-01-03 17:28:47 --> Config Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Hooks Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Utf8 Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> UTF-8 Support Enabled
+DEBUG - 2014-01-03 17:28:47 --> URI Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Router Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Output Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Security Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Input Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-01-03 17:28:47 --> Language Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Loader Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Helper loaded: url_helper
+DEBUG - 2014-01-03 17:28:47 --> Helper loaded: common_helper
+DEBUG - 2014-01-03 17:28:47 --> Helper loaded: date_helper
+DEBUG - 2014-01-03 17:28:47 --> Session Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Helper loaded: string_helper
+DEBUG - 2014-01-03 17:28:47 --> Database Driver Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Session routines successfully run
+DEBUG - 2014-01-03 17:28:47 --> DX Auth Initialized
+DEBUG - 2014-01-03 17:28:47 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2014-01-03 17:28:47 --> Config file loaded: application/config/dx_auth.php
+DEBUG - 2014-01-03 17:28:47 --> Language file loaded: language/chinese/dx_auth_lang.php
+DEBUG - 2014-01-03 17:28:47 --> Model Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Model Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Model Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Controller Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Model Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> Model Class Initialized
+DEBUG - 2014-01-03 17:28:47 --> File loaded: application/views/admin/head.php
+DEBUG - 2014-01-03 17:28:47 --> File loaded: application/views/admin_program/edit.php
+DEBUG - 2014-01-03 17:28:47 --> Final output sent to browser
+DEBUG - 2014-01-03 17:28:47 --> Total execution time: 0.1449

@@ -1,3 +1,23 @@
+function common_del(url, id, code){
+    if(confirm('确认删除?'))
+    {
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: 'json',
+            data: {id: id, code: code},
+            success: function(respone){
+                if(respone.success){                
+                    alert( '删除成功' );
+                    location.reload(true)
+                }else{
+                    alert( '删除失败' );
+                }
+            }
+        });
+    }
+}
+
 //返回网站地址加string链接
 function siteUrl(string)
 {

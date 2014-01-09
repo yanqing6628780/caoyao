@@ -27,6 +27,7 @@ class User_admin extends CI_Controller
     //添加用户
     public function user_add()
     {
+        checkPermission('user_edit');
 
         $data['roles'] = $this->roles->get_all()->result();
 
@@ -37,6 +38,8 @@ class User_admin extends CI_Controller
     //保存添加用户
     public function user_add_save()
     {
+        checkPermission('user_edit');
+
         $username = $this->input->post('username');
         $role_id = $this->input->post('role_id');
         $profile = $this->input->post('profile');
@@ -57,6 +60,8 @@ class User_admin extends CI_Controller
     //用户详细信息
     public function user_detail()
     {
+        checkPermission('user_edit');
+
         $user_id = $this->input->post('user_id');
 
         $user = $this->users->get_user_by_id($user_id)->row_array();
@@ -72,6 +77,8 @@ class User_admin extends CI_Controller
     //用户信息修改
     public function user_edit()
     {
+        checkPermission('user_edit');
+
         $user_id = $this->input->post('user_id');
 
         $data['user_id'] = $user_id;
@@ -87,6 +94,8 @@ class User_admin extends CI_Controller
     //用户信息修改
     public function user_edit_save()
     {
+        checkPermission('user_edit');
+
         $data['success'] = false;
         $data['msg'] = '';
         $user_id = $this->input->post('user_id');
@@ -148,6 +157,8 @@ class User_admin extends CI_Controller
 
     public function del_user()
     {
+        checkPermission('user_edit');
+
         $data['success'] = false;
         $user_id = $this->input->post('id');
 
@@ -246,9 +257,11 @@ class User_admin extends CI_Controller
         $this->load->view('admin_user/change_password');
     }
 
-    //修改密码保存
+    //修改密码并保存
     public function change_password()
 	{
+        checkPermission('user_edit');
+
         $data['success'] = false;
         $data['msg'] = '';
 
@@ -306,6 +319,8 @@ class User_admin extends CI_Controller
 
     public function del_roles()
     {
+        checkPermission('role_edit');
+
         $default_ids = array(1);
         $data['success'] = false;
         $ids = $this->input->post('id');
@@ -362,6 +377,8 @@ class User_admin extends CI_Controller
     //角色权限保存
     public function perms_save()
     {
+        checkPermission('perm_admin');
+        
         $data['success'] = false;
         $perms = $this->input->post('perms');
 

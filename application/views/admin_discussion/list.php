@@ -5,9 +5,9 @@
             <div class='widget-box'>
                 <div class="widget-title">
                     <div class="navbar-form pull-left">
-                        <h5>议程列表</h5>
+                        <h5>讨论列表</h5>
                         <div class="buttons">
-                            <a href="<?=site_url($controller_url."add")?>" class="btn btn-small" target="right"><i class="icon-plus"></i> 添加议程</a>
+                            <a href="<?=site_url($controller_url."add")?>" class="btn btn-small" target="right"><i class="icon-plus"></i> 添加讨论</a>
                         </div>   
                     </div>
                 </div>
@@ -15,9 +15,7 @@
                     <table class='table table-bordered data-table'>
                         <thead>
                             <tr>
-                                <th>议程名</th>
-                                <th>开始时间</th>
-                                <th>结束时间</th>
+                                <th>讨论标题</th>
                                 <th>所属大会</th>
                                 <th>操作</th>
                             </tr>
@@ -26,8 +24,6 @@
                         <?php foreach($result as $key => $row):?>
                             <tr>
                                 <td><?=$row['title']?></td>
-                                <td><?=$row['startTime']?></td>
-                                <td><?=$row['endTime']?></td>
                                 <td><?=$row['party_title']?></td>
                                 <td>
                                     <a href="<?=site_url($controller_url."edit/".$row['id'])?>" traget="right" class="btn btn-primary"> <i class="icon-pencil icon-white"></i> 编辑</a>

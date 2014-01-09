@@ -26,25 +26,26 @@ $(function () {
                         <span class="icon">
                             <i class="icon-align-justify"></i>                                  
                         </span>
-                        <h5>编辑议程</h5>
+                        <h5>编辑投票</h5>
                     </div>
                     <form id='editForm' class="form-horizontal" action="<?php echo site_url($controller_url."edit_save")?>">
                         <div class="control-group">
-                            <label class="control-label">议程名称</label>
+                            <label class="control-label">投票主题</label>
                             <div class="controls">
                                 <input type='text' name="title" value='<?=$row['title']?>' datatype="*" sucmsg="" nullmsg="请输入名称！"/>
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">开始时间</label>
+                            <label class="control-label">是否单选</label>
                             <div class="controls">
-                                <input type='text' name='startTime' class="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" datatype="*" value="<?=$row['startTime']?>"/>
+                                <label><input type='radio' name='isSimple' value='0' <?php radio_check($row['isSimple'], 0)?>/>否</label>
+                                <label><input type='radio' name='isSimple' value='1' <?php radio_check($row['isSimple'], 1)?>/>是</label>
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">结束时间</label>
+                            <label class="control-label">选项</label>
                             <div class="controls">
-                                <input type='text' name='endTime' value='<?=$row['endTime']?>' class="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" datatype="*"/>
+                                <?php foreach ($row['content'] as $key => $value) { echo sprintf("%s.%s<br>", $key+1,$value); }?>
                             </div>
                         </div>
                         <div class="control-group">

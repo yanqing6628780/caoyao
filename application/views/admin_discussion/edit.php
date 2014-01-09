@@ -26,25 +26,13 @@ $(function () {
                         <span class="icon">
                             <i class="icon-align-justify"></i>                                  
                         </span>
-                        <h5>编辑议程</h5>
+                        <h5>编辑讨论</h5>
                     </div>
                     <form id='editForm' class="form-horizontal" action="<?php echo site_url($controller_url."edit_save")?>">
                         <div class="control-group">
-                            <label class="control-label">议程名称</label>
+                            <label class="control-label">讨论主题</label>
                             <div class="controls">
                                 <input type='text' name="title" value='<?=$row['title']?>' datatype="*" sucmsg="" nullmsg="请输入名称！"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">开始时间</label>
-                            <div class="controls">
-                                <input type='text' name='startTime' class="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" datatype="*" value="<?=$row['startTime']?>"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">结束时间</label>
-                            <div class="controls">
-                                <input type='text' name='endTime' value='<?=$row['endTime']?>' class="datetimepicker" data-date-format="yyyy-mm-dd hh:ii" datatype="*"/>
                             </div>
                         </div>
                         <div class="control-group">

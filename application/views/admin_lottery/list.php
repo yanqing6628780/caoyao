@@ -5,9 +5,9 @@
             <div class='widget-box'>
                 <div class="widget-title">
                     <div class="navbar-form pull-left">
-                        <h5>议程列表</h5>
+                        <h5>抽奖列表</h5>
                         <div class="buttons">
-                            <a href="<?=site_url($controller_url."add")?>" class="btn btn-small" target="right"><i class="icon-plus"></i> 添加议程</a>
+                            <a href="<?=site_url($controller_url."add")?>" class="btn btn-small" target="right"><i class="icon-plus"></i> 添加抽奖</a>
                         </div>   
                     </div>
                 </div>
@@ -15,9 +15,9 @@
                     <table class='table table-bordered data-table'>
                         <thead>
                             <tr>
-                                <th>议程名</th>
-                                <th>开始时间</th>
-                                <th>结束时间</th>
+                                <th>抽奖主题</th>
+                                <th>奖项</th>
+                                <th>指定中奖人</th>
                                 <th>所属大会</th>
                                 <th>操作</th>
                             </tr>
@@ -26,8 +26,8 @@
                         <?php foreach($result as $key => $row):?>
                             <tr>
                                 <td><?=$row['title']?></td>
-                                <td><?=$row['startTime']?></td>
-                                <td><?=$row['endTime']?></td>
+                                <td><?=$row['content_string']?></td>
+                                <td><?=$row['watchdog_string']?></td>
                                 <td><?=$row['party_title']?></td>
                                 <td>
                                     <a href="<?=site_url($controller_url."edit/".$row['id'])?>" traget="right" class="btn btn-primary"> <i class="icon-pencil icon-white"></i> 编辑</a>

@@ -26,11 +26,11 @@ $(function () {
                         <span class="icon">
                             <i class="icon-align-justify"></i>                                  
                         </span>
-                        <h5>编辑议程</h5>
+                        <h5>编辑签到</h5>
                     </div>
                     <form id='editForm' class="form-horizontal" action="<?php echo site_url($controller_url."edit_save")?>">
                         <div class="control-group">
-                            <label class="control-label">议程名称</label>
+                            <label class="control-label">签到名称</label>
                             <div class="controls">
                                 <input type='text' name="title" value='<?=$row['title']?>' datatype="*" sucmsg="" nullmsg="请输入名称！"/>
                             </div>

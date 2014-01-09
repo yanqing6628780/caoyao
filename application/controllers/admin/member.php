@@ -7,7 +7,6 @@ class Member extends CI_Controller
 		checkIsLoggedIn();
 
         $this->load->model('tank_auth/users', 'users');
-        $this->load->model('members_mdl');
 
         $this->load->library('tank_auth');
         $this->lang->load('tank_auth');
@@ -19,92 +18,85 @@ class Member extends CI_Controller
 
     public function index()
     {
-        checkPermission('member_view');
-        $this->members();
-    }
+        checkPermission('user_view');
 
-    //会员列表
-    public function members()
-    {
-        checkPermission('member_view');
+        $this->general_mdl->setTable('users');
+        $query = $this->general_mdl->get_query();
+        $result = $query->result_array();
 
-        $where = array();
-        $start = $this->uri->segment(4);
-        $limit = $this->input->get_post('limit') ? $this->input->get_post('limit') : 10;
+        foreach($result as $key => $row)
+        {
+            $this->general_mdl->setTable('user_profiles');
+            $row_profile = $this->general_mdl->get_query_by_where(array("user_id" =>$row['id']))->row();
 
-        $members = $this->members_mdl->members($where, $start, $limit);
+            $result[$key]['cnname'] = $row_profile->name;
+            $result[$key]['mobile'] = $row_profile->mobile;
+            $result[$key]['sex'] = $row_profile->sex;
+            $result[$key]['company'] = $row_profile->company;
+            $result[$key]['department'] = $row_profile->department;
+            $result[$key]['jobs'] = $row_profile->jobs;
+            $result[$key]['job_title'] = $row_profile->job_title;
+            $result[$key]['photo'] = $row_profile->photo ? $row_profile->photo : base_url()."images/tavatar.gif";
+            $result[$key]['code'] = md5($row['id'].$row['password']);
+        }
 
-        $config['base_url'] = site_url('admin/member/members');
-        $config['total_rows'] = $members['total'];
-        $config['per_page'] = $limit;
-
-        $this->pagination->initialize($config);
-        $data['page_links'] = $this->pagination->create_links();
-
-        $data['members'] = $members['result'];
+        $data['users'] = $result;
 
         $this->load->view('admin/head', $data);
-        $this->load->view('member/list');
+        $this->load->view('admin_member/list');
     }
 
 
     //添加用户
     public function add()
     {
+        checkPermission('user_edit');
+        $this->general_mdl->setTable('users');
+        $query = $this->general_mdl->get_query();
+        $data['num_rows'] = $query->num_rows();
 
-        $query = $this->insurance_mdl->get_query();
-        $data['insurances'] = $query->result();
-
-        $this->load->view('member/add', $data);
+        $this->load->view('admin_member/add', $data);
     }
 
     //保存添加用户
     public function add_save()
     {
-        $data['success'] = FALSE;
+        $data['status'] = "n";
+        $data['info'] = "";
 
-        $profile = $this->input->post('profile');
+        $profile = $this->input->get_post('profile');
 
-        $this->form_validation->set_rules('username', '用户名', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
+        $this->form_validation->set_rules('username', '用户名', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash|callback__username_check');
 
         $this->form_validation->set_rules('password', '密码', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
         $this->form_validation->set_rules('confirm_password', '确认密码', 'trim|required|xss_clean|matches[password]');
-        $this->form_validation->set_rules('profile[tel]', '联系电话', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('profile[address]', '联系地址', 'trim|required|xss_clean');
 
         $email_activation = $this->config->item('email_activation', 'tank_auth');
 
-        if ($this->form_validation->run()) {                                // validation ok
+        if ($this->form_validation->run()) // validation ok
+        { 
             if (!is_null($data = $this->tank_auth->create_user(
                     $this->form_validation->set_value('username'),
                     '',
                     $this->form_validation->set_value('password'),
                     $email_activation)))
             {                                  // success
-                $data['success'] = TRUE;
+                $data['status'] = "y";
+                $data['info'] = "添加成功";
                 unset($data['password']); // Clear password (just for any case)
 
                 //保存用户profile
-
-                //序列化保险数据
-                if(isset($profile['give_insurance']))
-                {
-                    $profile['give_insurance'] = serialize($profile['give_insurance']);
-                }
-
                 $this->general_mdl->setTable('user_profiles');
                 $this->general_mdl->setData($profile);
                 $this->general_mdl->update(array("user_id" => $data['user_id']));
             } else {
                 $errors = $this->tank_auth->get_error_message();
-                foreach ($errors as $k => $v)   $data['errors'][$k] = $this->lang->line($v);
+                foreach ($errors as $k => $v)   $data['info'] .= $this->lang->line($v)."/";
             }
         }else{
-            $data['errors']['username'] = form_error('username');
-            $data['errors']['password'] = form_error('password');
-            $data['errors']['confirm_password'] = form_error('confirm_password');
-            $data['errors']['tel'] = form_error('profile[tel]');
-            $data['errors']['address'] = form_error('profile[address]');
+            $data['info'] .= form_error('username') ? form_error('username')."/" : "";
+            $data['info'] .= form_error('password') ? form_error('password')."/" : "";
+            $data['info'] .= form_error('confirm_password') ? form_error('confirm_password')."/" : "";
         }
 
         echo json_encode($data);
@@ -114,8 +106,7 @@ class Member extends CI_Controller
     //用户信息修改
     public function edit()
     {
-        $query = $this->insurance_mdl->get_query();
-        $data['insurances'] = $query->result();
+        checkPermission('user_edit');
 
         $user_id = $this->input->post('user_id');
 
@@ -124,64 +115,28 @@ class Member extends CI_Controller
 
         $this->general_mdl->setTable('user_profiles');
         $data['profile'] = $this->general_mdl->get_query_by_where(array('user_id' => $user_id))->row();
-        $data['profile']->give_insurance = (array)unserialize($data['profile']->give_insurance);
 
-        $this->load->view('member/edit', $data);
+        $this->load->view('admin_member/edit', $data);
     }
 
     //用户信息修改
     public function edit_save()
     {
-        $data['success'] = FALSE;
+        checkPermission('user_edit');
+
+        $data['status'] = "n";
 
         $user_id = $this->input->post('user_id');
-        $old_username = $this->input->post('old_username');
         $username = $this->input->post('username');
         $profile = $this->input->post('profile');
 
-        //检查用户名是否有修改
-        if($username !== $old_username)
-        {
-            $this->form_validation->set_rules('username', '用户名', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
-        }
+        //保存用户profile
+        $this->general_mdl->setTable('user_profiles');
+        $this->general_mdl->setData($profile);
+        $this->general_mdl->update(array("user_id" => $user_id));
 
-        $this->form_validation->set_rules('profile[tel]', '联系电话', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('profile[address]', '联系地址', 'trim|required|xss_clean');
-
-        if ($this->form_validation->run())
-        {
-            //用户名有修改
-            if($username !== $old_username AND $this->tank_auth->is_username_available($username))
-            {
-                $this->general_mdl->setTable('users');
-                $this->general_mdl->setData(array('username' => $username));
-                $this->general_mdl->update(array('id' => $user_id));
-            }else{
-                $data['errors']['username'] = "用名不可用";
-            }
-
-            //保存用户profile
-
-            if(isset($profile['give_insurance']))
-            {
-                //序列化保险数据
-                $profile['give_insurance'] = serialize($profile['give_insurance']);
-            }else{
-                $profile['give_insurance'] = "";
-            }
-
-            $this->general_mdl->setTable('user_profiles');
-            $this->general_mdl->setData($profile);
-            $this->general_mdl->update(array("user_id" => $user_id));
-
-            $data['success'] = TRUE;
-        }
-        else
-        {
-            $data['errors']['username'] = form_error('username');
-            $data['errors']['tel'] = form_error('profile[tel]');
-            $data['errors']['address'] = form_error('profile[address]');
-        }
+        $data['status'] = "y";
+        $data['msg'] = "修改成功";
 
         echo json_encode($data);
     }
@@ -189,6 +144,8 @@ class Member extends CI_Controller
     //重置密码
     public function reset_password()
     {
+        checkPermission('user_edit');
+
         $data['success'] = FALSE;
         $data['username'] = $username = $this->input->post('username');
 
@@ -224,27 +181,58 @@ class Member extends CI_Controller
         }
         else
         {
-            $this->load->view('member/reset_password', $data);
+            $this->load->view('admin_member/reset_password', $data);
         }
 
+    }
+
+    function _username_check($username)
+    {
+        $result = $this->tank_auth->is_username_available($username);
+        if ( ! $result)
+        {
+            $this->form_validation->set_message('_username_check', '用户名已存在。请重新填写用户名');
+        }
+                
+        return $result;
     }
 
     //检查用户名
     public function username_check()
 	{
-        $username = $this->input->post('username');
-		$data['result'] = $this->users->is_username_available($username);
+        $username = $this->input->post('param');
+		$result = $this->users->is_username_available($username);
+        if($result){
+            $data['status'] = "y";
+            $data['info'] = "用户名可用";
+        }else{
+            $data['status'] = "n";
+            $data['info'] = "用户名已存在";
+
+        }
 		echo json_encode($data);
 	}
 
     public function del()
     {
-        $data['success'] = false;
+        checkPermission('user_edit');
+
         $user_id = $this->input->post('id');
+        $code = $this->input->post('code');
 
-        $this->users->delete_user($user_id);
+        $response['success'] = false;
 
-        $data['success'] = true;
+        $row = $this->users->get_user_by_id($user_id,1);
+
+        $confirm_code = md5($user_id.$row->password);
+        if($code == $confirm_code)
+        {
+            $this->users->delete_user($user_id);
+            $response['success'] = true;
+        }
+
+        echo json_encode($response);
+
     }
 
 

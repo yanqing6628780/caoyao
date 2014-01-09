@@ -57,9 +57,9 @@ class General_mdl extends CI_Model
     **
     **
     */
-    public function delete()
+    public function delete($where = array())
     {
-        $this->db->delete($this->_table, $this->_data);
+        $this->db->delete($this->_table, $where);
         return $this->db->affected_rows();
     }
 
@@ -84,7 +84,8 @@ class General_mdl extends CI_Model
 
         if($where){
             $this->db->where($where);
-            if($this->_data){
+            if($this->_data)
+            {
                 $this->db->update($this->_table, $this->_data);
                 return $this->db->affected_rows();
             }else{

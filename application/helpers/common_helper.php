@@ -5,6 +5,34 @@
  */
 
 /**
+* 生成用户username
+* @param num_rows 数据库用户数目
+* @return  string
+*/
+function generate_username($num_rows) {
+    return 800000 + $num_rows;
+}
+/**
+* 生成随机字符串
+* @param length 要求生成的长度 默认6位
+* @return  string
+*/
+function generate_password( $length = 6 ) {  
+    // 密码字符集，可任意添加你需要的字符  
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';  
+    $password = '';  
+    for ( $i = 0; $i < $length; $i++ )  
+    {  
+        // 这里提供两种字符获取方式  
+        // 第一种是使用 substr 截取$chars中的任意一位字符；  
+        // 第二种是取字符数组 $chars 的任意元素  
+        // $password .= substr($chars, mt_rand(0, strlen($chars) – 1), 1);  
+        $password .= $chars[ mt_rand(0, strlen($chars) - 1) ];
+    }  
+    return $password;  
+} 
+
+/**
 * 得到新订单号
 * @return  string
 */
@@ -47,7 +75,7 @@ function checkIsLoggedIn()
 
 /**
  * 权限检查
- * 没有权限，显示系统信息页
+ * 没有权限，显示404页
  *
  * @param string $perm
  */
@@ -56,7 +84,7 @@ function checkPermission($perm)
     $CI = get_instance();
     if ($CI->dx_auth->get_permission_value($perm) == NULL or !$CI->dx_auth->get_permission_value($perm))
     {
-        exit('<script type="text/javascript">alert("你没有使用权限");');
+        show_404();
     }
 }
 

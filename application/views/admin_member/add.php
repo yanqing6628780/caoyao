@@ -3,11 +3,11 @@
     <div class="span12">
         <div class="widget-box">
             <div class="widget-content nopadding">
-                <form id='user_add' class="form-horizontal" action="<?php echo site_url('admin/user_admin/user_add_save')?>">
+                <form id='user_add' class="form-horizontal" action="<?php echo site_url('admin/member/add_save')?>">
                     <div class="control-group">
                         <label class="control-label">用户名</label>
                         <div class="controls">
-                            <input type='text' name="username" value='' datatype="*" ajaxurl="username_check" sucmsg="用户名验证通过！" nullmsg="请输入用户名！" errormsg="请用邮箱或手机号码注册！"/>
+                            <input type='text' name="username" value='<?=generate_username($num_rows)?>' datatype="n" ajaxurl="member/username_check" sucmsg="用户名验证通过！" nullmsg="请输入用户名！" readonly/>
                         </div>
                     </div>
                     <div class="control-group">
@@ -20,16 +20,6 @@
                         <label class="control-label">确认密码</label>
                         <div class="controls">
                             <input type='password' name="confirm_password" value='' datatype="*" recheck="password" errormsg="您两次输入的密码不一致！"/>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">用户角色</label>
-                        <div class="controls">
-                            <select name='role_id' id='role'>
-                                <?php foreach($roles as $key => $row):?>
-                                    <option value='<?=$row->id?>'><?=$row->cnname?></option>
-                                <?php endforeach;?>
-                            </select>
                         </div>
                     </div>
                     <div class="control-group">
@@ -56,9 +46,27 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">电子邮件</label>
+                        <label class="control-label">公司</label>
                         <div class="controls">
-                            <input type='text' name='profile[email]' value='' />
+                            <input type='text' name='profile[company]' value='' />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">部门</label>
+                        <div class="controls">
+                            <input type='text' name='profile[department]' value='' />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">职位</label>
+                        <div class="controls">
+                            <input type='text' name='profile[jobs]' value='' />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">职称</label>
+                        <div class="controls">
+                            <input type='text' name='profile[job_title]' value='' />
                         </div>
                     </div>
                     <div class="form-actions">

@@ -704,7 +704,7 @@ a:hover {
 }
 .widget-title .buttons {
 	float: right;
-	margin: 8px 10px 0 0;
+	margin: 5px 10px 0 0;
 }
 .widget-title .label {
 	padding: 3px 5px 2px;
@@ -1207,7 +1207,7 @@ div.dataTables_wrapper .ui-widget-header {
 
 .table th {
 	height: auto;
-	font-size: 10px;
+	font-size: 12px;
 	padding: 5px 10px 2px;
 	border-bottom: 0;
 	text-align: center;
@@ -1318,7 +1318,7 @@ form {
 	padding: 10px 0;
 }
 .form-horizontal input[type=text], .form-horizontal input[type=password], .form-horizontal textarea {
-	width: 80%;
+	/*width: 80%;*/
 }
 .form-horizontal .form-actions {
 	margin-top: 0;

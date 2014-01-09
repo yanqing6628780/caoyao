@@ -1,37 +1,37 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Program extends CI_Controller {
+class Discussion extends CI_Controller {
 
     /**
      * Index Page for this controller.
      *
      * Maps to the following URL
-     *      http://example.com/index.php/program
+     *      http://example.com/index.php/discussion
      *  - or -
-     *      http://example.com/index.php/program/index
+     *      http://example.com/index.php/discussion/index
      *  - or -
      * Since this controller is set as the default controller in
      * config/routes.php, it's displayed at http://example.com/
      *
      * So any other public methods not prefixed with an underscore will
-     * map to /index.php/program/<method_name>
+     * map to /index.php/discussion/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function __construct()
     {
         parent::__construct();
         checkIsLoggedIn();
-        $this->general_mdl->setTable('program');
+        $this->general_mdl->setTable('discussiontype');
 
         $this->load->model('dx_auth/users', 'users');
         $this->load->model('dx_auth/user_profile', 'profile');
 
-        $this->data['controller_url'] = "admin/program/";
+        $this->data['controller_url'] = "admin/discussion/";
     }
 
     public function index()
     {
-        $program_data = array();
+        $discussion_data = array();
         $party_id_array = array();
 
         $party_id = $this->input->get("party");
@@ -57,7 +57,7 @@ class Program extends CI_Controller {
             }
         }
 
-        $this->general_mdl->setTable('program');
+        $this->general_mdl->setTable('discussiontype');
         if($party_id)
         {
             if(in_array($party_id, $party_id_array))
@@ -73,20 +73,20 @@ class Program extends CI_Controller {
             }
         }
 
-        $program_data = $query->result_array();
         $this->data['total'] = $query->num_rows();
-        foreach ($program_data as $key => $value) 
+        $discussion_data = $query->result_array();
+        foreach ($discussion_data as $key => $value) 
         {
-            $program_data[$key]['code'] = md5($value['id'].$value['party_id'].$value['title']);
+            $discussion_data[$key]['code'] = md5($value['id'].$value['party_id'].$value['title']);
 
             $this->general_mdl->setTable('party');
             $query = $this->general_mdl->get_query_by_where(array("id" => $value['party_id']));
-            $program_data[$key]['party_title'] = $query->row()->title;
+            $discussion_data[$key]['party_title'] = $query->row()->title;
         }
 
-        $this->data['result'] = $program_data;
+        $this->data['result'] = $discussion_data;
         $this->load->view('admin/head');
-        $this->load->view('admin_program/list', $this->data);
+        $this->load->view('admin_discussion/list', $this->data);
     }
 
     //添加
@@ -100,7 +100,7 @@ class Program extends CI_Controller {
         $this->data['partys'] = $query->result_array();
 
         $this->load->view('admin/head');
-        $this->load->view('admin_program/add',$this->data);
+        $this->load->view('admin_discussion/add',$this->data);
     }
 
     //添加保存
@@ -135,7 +135,7 @@ class Program extends CI_Controller {
         $this->general_mdl->setTable('party');
         $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id));
         $this->data['partys'] = $partys = $query->result_array();
-        
+
         $party_id_array = array();
         foreach ($partys as $key => $value) 
         {
@@ -146,7 +146,7 @@ class Program extends CI_Controller {
         {
 
             $this->load->view('admin/head');
-            $this->load->view('admin_program/edit', $this->data);
+            $this->load->view('admin_discussion/edit', $this->data);
         }
         else
         {
@@ -196,5 +196,5 @@ class Program extends CI_Controller {
     }
 }
 
-/* End of file program.php */
-/* Location: ./application/controllers/program.php */
+/* End of file discussion.php */
+/* Location: ./application/controllers/discussion.php */
