@@ -28,14 +28,6 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">指定中奖人</label>
-                            <div class="controls">
-                                <select name="watchdog[]" id="watchDog" multiple="multiple">
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control-group">
                             <label class="control-label">所属会议</label>
                             <div class="controls">
                                 <select class="select2" name="party_id" id="party_id" datatype="*" nullmsg="请选择所属会议！">
@@ -59,9 +51,6 @@
 <script src="<?php echo base_url()?>lib/multi-select/js/jquery.multi-select.js"></script>
 <script type="text/javascript">
 $(function () {
-    var id = $("#party_id").val();
-    getPartyCustomer(id);
-
     var form = $("#addForm").Validform({
         tiptype:3,
         ajaxPost:true,
@@ -74,34 +63,8 @@ $(function () {
                 }
             }
         }
-    });
-    $("#party_id").on("change", function(e) {
-        getPartyCustomer(e.val);
-    });
-
-    $('#watchDog').multiSelect({
-        selectableHeader: "<div class='custom-header'>参会人员</div>",
-        selectedHeader: "<div class='custom-header'>指定中奖人</div>" 
-    });
-    
+    });    
 })
-function getPartyCustomer(id)
-{
-    $("#watchDog").empty();
-    $.ajax({
-        type: "POST",
-        url: "get_party_customer",
-        dataType: 'json',
-        data: {party_id: id},
-        success: function(respone){
-            $.each(respone, function(index, value){            
-                $("#watchDog").append(value);
-            });
-            $('#watchDog').multiSelect('refresh');
-            $('#watchDog').multiSelect('deselect_all');
-        }
-    });
-}
 function content_add(obj)
 {
     var _this = $(obj);

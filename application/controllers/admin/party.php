@@ -199,9 +199,9 @@ class Party extends CI_Controller {
         $this->general_mdl->setTable("customer");
         $query = $this->general_mdl->get_query_by_where(array("party_id" => $party_id));
         $customer_row = $query->row_array();
-        if(isset($customer_row['user_ids']) and $customer_row['user_ids'])
+        if(isset($customer_row['user_id']) and $customer_row['user_id'])
         {
-            $this->data['customer_user_ids'] = json_decode($customer_row['user_ids']);
+            $this->data['customer_user_ids'] = (array)json_decode($customer_row['user_id']);
         }
 
         /*会员基础数据*/
@@ -234,8 +234,10 @@ class Party extends CI_Controller {
         $this->general_mdl->setTable("customer");
         $customer_query = $this->general_mdl->get_query_by_where($where);
 
+        $user_id_array = $user_id_array ? array_filter($user_id_array) : array();
+
         $data['party_id'] = $party_id;
-        $data['user_ids'] = $user_id_array ? json_encode($user_id_array) : "";
+        $data['user_id'] = $user_id_array ? json_encode($user_id_array) : "";
 
         if($customer_query->num_rows() == 0)
         {

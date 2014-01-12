@@ -17,7 +17,6 @@
                             <tr>
                                 <th>抽奖主题</th>
                                 <th>奖项</th>
-                                <th>指定中奖人</th>
                                 <th>所属大会</th>
                                 <th>操作</th>
                             </tr>
@@ -26,12 +25,16 @@
                         <?php foreach($result as $key => $row):?>
                             <tr>
                                 <td><?=$row['title']?></td>
-                                <td><?=$row['content_string']?></td>
-                                <td><?=$row['watchdog_string']?></td>
+                                <td><?=isset($row['content_string']) ? $row['content_string'] : "无" ?></td>
                                 <td><?=$row['party_title']?></td>
                                 <td>
-                                    <a href="<?=site_url($controller_url."edit/".$row['id'])?>" traget="right" class="btn btn-primary"> <i class="icon-pencil icon-white"></i> 编辑</a>
-                                    <button class="btn btn-danger" onclick='del(<?=$row['id']?>, "<?=$row['code']?>")'><i class="icon-remove icon-white"></i> 删除</button>
+                                    <p>
+                                        <a href="<?=site_url($controller_url."edit/".$row['id'])?>" traget="right" class="btn btn-primary"> <i class="icon-pencil icon-white"></i> 编辑</a>
+                                        <button class="btn btn-danger" onclick='del(<?=$row['id']?>, "<?=$row['code']?>")'><i class="icon-remove icon-white"></i> 删除</button>
+                                    </p>
+                                    <p>
+                                        <a href="<?=site_url($controller_url."watchdog/".$row['id'])?>" traget="right" class="btn btn-warning"> <i class="icon-pencil icon-white"></i> 指定中奖人</a>
+                                    </p>
                                 </td>
                             </tr>
                         <?php endforeach;?>

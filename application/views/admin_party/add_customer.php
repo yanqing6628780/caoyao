@@ -30,6 +30,7 @@
                                     <?php foreach ($members as $key => $member) {?>                                        
                                         <option value="<?=$member['id']?>"  <?php if(in_array($member['id'], $customer_user_ids)){echo "selected";}?> ><?=$member['cnname'] ? $member['cnname'] : $member['username']?></option>
                                     <?php }?>
+                                    <option value="" selected></option>
                                 </select>
                             </div>
                         </div>
@@ -62,7 +63,10 @@ $(function () {
         }
     });
 
-    $('#optgroup').multiSelect()
+    $('#optgroup').multiSelect({
+        selectableHeader: "<div class='custom-header'>会员列表</div>",
+        selectedHeader: "<div class='custom-header'>参会人员</div>" 
+    })
 })
 </script>
 </body>

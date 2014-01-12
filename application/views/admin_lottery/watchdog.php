@@ -8,32 +8,22 @@
                         <span class="icon">
                             <i class="icon-align-justify"></i>                                  
                         </span>
-                        <h5>编辑抽奖</h5>
+                        <h5><?=$row['title']?>: 指定中奖人</h5>
                     </div>
-                    <form id='editForm' class="form-horizontal" action="<?php echo site_url($controller_url."edit_save")?>">
-                        <div class="control-group">
-                            <label class="control-label">抽奖主题</label>
-                            <div class="controls">
-                                <input type='text' name="title" value='<?=$row['title']?>' datatype="*" sucmsg="" nullmsg="请输入名称！"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">奖项</label>
-                            <div class="controls controls-row">
-                                <ol>
-                                <?php foreach ($row['content'] as $key => $value) {?>                                        
-                                    <li class="text-success"><?=sprintf("%s(人数:%s)", $value['content'], $value['num'])?></li>
-                                <?php }?>
-                                </ol>
-                            </div>
-                            <div class="controls controls-row">
-                                <input class="input-large span3" name="content[]" type="text" placeholder="奖项名称">
-                                <div class="input-append span2">
-                                    <input class="input-mini" name="content_num[]" type="text" placeholder="中奖人数">
-                                    <button onclick="content_add(this)" class="btn tip-bottom content_add" data-original-title="增加选项" type="button"><i class="icon-plus"></i></button>
+                    <form id='editForm' class="form-horizontal" action="<?php echo site_url($controller_url."watchdog_save")?>">
+                        <?php foreach ($lottery as $key => $item) {?> 
+                            <div class="control-group">
+                                <label class="control-label"><?=$item['content']?>(人数:<?=$item['num']?>)</label>
+                                <div class="controls">
+                                    <select name="watchdog[<?=$item['id']?>][]" class="watchdog_select" id="watchDog_<?=$item['id']?>" multiple="multiple">
+                                        <?php foreach ($customers as $key => $member) {?>
+                                            <option value="<?=$member['user_id']?>" <?php if( isset($item['watchdog']) and in_array($member['user_id'], $item['watchdog']) ){echo "selected";}?> ><?=$member['name']?></option>
+                                        <?php }?>
+                                        <option value="" selected></option>
+                                    </select>
                                 </div>
                             </div>
-                        </div>
+                        <?php }?>
                         <div class="control-group">
                             <label class="control-label">所属会议</label>
                             <div class="controls">
@@ -45,7 +35,6 @@
                         </div>                        
                         <div class="form-actions">
                             <input type='submit' name="save" class="btn btn-inverse btn-large" value='保存'/>
-                            <input type='hidden' name="id" value="<?=$row['id']?>"/>
                         </div>
                     </form>
                 </div>
@@ -68,6 +57,11 @@ $(function () {
                 location.reload();
             }
         }
+    });
+
+    $('.watchdog_select').multiSelect({
+        selectableHeader: "<div class='custom-header'>参会人员</div>",
+        selectedHeader: "<div class='custom-header'>指定中奖人</div>" 
     });
 })
 function content_add(obj)
