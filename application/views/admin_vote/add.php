@@ -14,14 +14,14 @@
                         <div class="control-group">
                             <label class="control-label">投票主题</label>
                             <div class="controls">
-                                <input type='text' name="title" value='' datatype="*" sucmsg="" nullmsg="请输入名称！"/>
+                                <input type='text' name="vt[title]" value='' datatype="*" sucmsg="" nullmsg="请输入名称！"/>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">是否单选</label>
                             <div class="controls">
-                                <label><input type='radio' name='isSimple' value='0'/>否</label>
-                                <label><input type='radio' name='isSimple' value='1' checked/>是</label>
+                                <label><input type='radio' name='vt[isSimple]' value='0'/>否</label>
+                                <label><input type='radio' name='vt[isSimple]' value='1' checked/>是</label>
                             </div>
                         </div>
                         <div class="control-group">
@@ -36,7 +36,7 @@
                         <div class="control-group">
                             <label class="control-label">所属会议</label>
                             <div class="controls">
-                                <select name="party_id" datatype="*" nullmsg="请选择所属会议！">
+                                <select name="vt[party_id]" datatype="*" nullmsg="请选择所属会议！">
                                     <?php foreach ($partys as $key => $row) {?>                                        
                                         <option value="<?=$row['id']?>"><?=$row['title']?> 日期:<?=$row['startDate']?>至<?=$row['endDate']?></option>
                                     <?php }?>

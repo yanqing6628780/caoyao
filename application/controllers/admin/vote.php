@@ -78,11 +78,12 @@ class Vote extends CI_Controller {
         foreach ($vote_data as $key => $value) 
         {
             // 将选项转换为html字符串
-            $vote_content = json_decode($value['content']);
+            $this->general_mdl->setTable('vote');
+            $query = $this->general_mdl->get_query_by_where(array("voteType_id" => $value['id']));
             $vote_data[$key]['content_string'] = "";
-            foreach ($vote_content as $k => $row) 
+            foreach ($query->result_array() as $k => $row) 
             {
-                $vote_data[$key]['content_string'] .= sprintf("%s.%s<br/>", $k+1, $row);
+                $vote_data[$key]['content_string'] .= sprintf("%s.%s<br/>", $k+1, $row['content']);
             }
             $vote_data[$key]['code'] = md5($value['id'].$value['party_id'].$value['isSimple']);
 
@@ -101,8 +102,9 @@ class Vote extends CI_Controller {
         /*取出当前用户管理的会议*/
         $this->data['partys'] = array();
         $user_id = $this->dx_auth->get_user_id();
+
         $this->general_mdl->setTable('party');
-        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id));
+        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id, "isVote" => 1));
         $this->data['partys'] = $query->result_array();
 
         $this->load->view('admin/head');
@@ -112,19 +114,41 @@ class Vote extends CI_Controller {
     //添加保存
     public function add_save()
     {
-        $post_data = $this->input->post(NULL,TRUE);
+        $post_data = $this->input->post("vt");
+        $content = $this->input->post("content");
 
-        // 将选项json结构化
-        $post_data['content'] = json_encode((object)$post_data['content'], JSON_UNESCAPED_UNICODE);
+        $this->general_mdl->setTable('party');
+        $query = $this->general_mdl->get_query_by_where(array("id" => $post_data['party_id'], "isVote" => 1));
+        if($query->num_rows() > 0)
+        {
+            $this->general_mdl->setTable('votetype');
+            $this->general_mdl->setData($post_data);
+            $votetype_id = $this->general_mdl->create();     
 
-        $this->general_mdl->setData($post_data);
-        if($this->general_mdl->create()){
-            $response['status'] = "y";
-            $response['info'] = "添加成功";
+            if($votetype_id)
+            {
+                // 选项写入Vote表
+                foreach ($content as $key => $value) 
+                {
+                    $vote['content'] = $value;
+                    $vote['voteType_id'] = $votetype_id;
+
+                    $this->general_mdl->setTable('vote');
+                    $this->general_mdl->setData($vote);
+                    $this->general_mdl->create();
+                }
+                
+                $response['status'] = "y";
+                $response['info'] = "添加成功";
+            }else{
+                $response['status'] = "n";
+                $response['info'] = "添加失败";
+            }
         }else{
             $response['status'] = "n";
-            $response['info'] = "添加失败";
+            $response['info'] = "添加失败,该会议不能使用投票功能";
         }
+
         echo json_encode($response);
     }
 
@@ -139,13 +163,17 @@ class Vote extends CI_Controller {
         $query = $this->general_mdl->get_query_by_where(array('id' => $this->data['id']));
         $row = $query->row_array();
 
-        $row['content'] = json_decode($row['content']);
+        // 取出投票选项
+        $this->general_mdl->setTable('vote');
+        $query = $this->general_mdl->get_query_by_where(array("voteType_id" => $this->data['id']));
+        $row['content'] = $query->result_array();
+
         $this->data['row'] = $row;
 
         /*取出当前用户管理的会议*/
         $user_id = $this->dx_auth->get_user_id();
         $this->general_mdl->setTable('party');
-        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id));
+        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id, "isVote" => 1));
         $this->data['partys'] = $partys = $query->result_array();
 
         $party_id_array = array();
@@ -154,7 +182,7 @@ class Vote extends CI_Controller {
             $party_id_array[] = $value['id'];
         }
 
-        if($row and in_array($row['party_id'], $party_id_array))
+        if(isset($row['party_id']) and in_array($row['party_id'], $party_id_array))
         {
 
             $this->load->view('admin/head');
@@ -170,18 +198,43 @@ class Vote extends CI_Controller {
     public function edit_save()
     {
         $id = $this->input->post('id');
-        $post_data = $this->input->post(NULL, TRUE);
-        unset($post_data['id']);
+        $content = $this->input->post('content');
+        $post_data = $this->input->post("vt");
         
-        $this->general_mdl->setData($post_data);
-        $where = array('id'=>$id);
+        $this->general_mdl->setTable('party');
+        $query = $this->general_mdl->get_query_by_where(array("id" => $post_data['party_id'], "isVote" => 1));
 
-        if($this->general_mdl->update($where)){
-            $response['status'] = "y";
-            $response['info'] = "添加成功";
-        }else{
+        if($query->num_rows() > 0)
+        {
+            //修改投票基本资料
+            $this->general_mdl->setTable('votetype');
+            $this->general_mdl->setData($post_data);
+            $where = array('id'=>$id);
+
+            // 增加的选项写入Vote表
+            foreach ($content as $key => $value) 
+            {
+                $vote['content'] = $value;
+                $vote['voteType_id'] = $id;
+
+                $this->general_mdl->setTable('vote');
+                $this->general_mdl->setData($vote);
+                $this->general_mdl->create();
+            }
+
+            if($this->general_mdl->update($where))
+            {
+                $response['status'] = "y";
+                $response['info'] = "修改成功";
+            }else{
+                $response['status'] = "n";
+                $response['info'] = "修改完成";
+            }
+        }
+        else
+        {
             $response['status'] = "n";
-            $response['info'] = "添加失败";
+            $response['info'] = "修改失败,该会议不能使用投票功能";
         }
         echo json_encode($response);
     }

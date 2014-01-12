@@ -71,9 +71,15 @@ function del(id){
                                     </p>
                                     <div class="btn-group">
                                         <a href="<?=site_url("admin/program/?party=".$row['id'])?>" class="btn btn-small btn-inverse" target="right">查看议程</a>
+                                        <?php if($row['isDiscussion']): ?>
                                         <a href="<?=site_url("admin/discussion/?party=".$row['id'])?>" class="btn btn-small btn-info" target="right">查看讨论主题</a>
+                                        <?php endif;?>
+                                        <?php if($row['isVote']): ?>
                                         <a href="<?=site_url("admin/vote/?party=".$row['id'])?>" class="btn btn-small btn-success" target="right">查看投票</a>
+                                        <?php endif;?>
+                                        <?php if($row['isLottery']): ?>
                                         <a href="<?=site_url("admin/lottery/?party=".$row['id'])?>" class="btn btn-small btn-danger" target="right">查看抽奖</a>
+                                        <?php endif;?>
                                         <a href="<?=site_url("admin/sign/?party=".$row['id'])?>" class="btn btn-small" target="right">查看签到</a>
                                     </div>
                                 </td>
