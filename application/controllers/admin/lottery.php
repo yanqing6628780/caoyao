@@ -128,7 +128,7 @@ class Lottery extends CI_Controller {
         $data['title'] = $title;
 
         $this->general_mdl->setTable('party');
-        $query = $this->general_mdl->get_query_by_where(array("id" => $post_data['party_id'], "isLottery" => 1));
+        $query = $this->general_mdl->get_query_by_where(array("id" => $party_id, "isLottery" => 1));
 
         if($query->num_rows() > 0)
         {
@@ -139,7 +139,7 @@ class Lottery extends CI_Controller {
                 $this->general_mdl->setTable("lottery");
                 foreach ($content as $key => $value) 
                 {
-                    if($value)
+                    if(!empty($value))
                     {
                         $lottery = array(
                             "content" => $value,

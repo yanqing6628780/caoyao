@@ -3,7 +3,7 @@ function save()
 {
     $.ajax({
         type: "POST",
-        url: siteUrl('admin/user/change_password'),
+        url: 'change_password',
         dataType: 'json',
         data: $("#changePassForm").serialize(),
         success: function(respone){

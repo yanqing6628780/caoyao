@@ -171,12 +171,11 @@ class User_admin extends CI_Controller
     //设置中心
     public function profile()
     {
-        $data['msg'] = '';
         $user_id = $this->dx_auth->get_user_id();
         $data['user_id'] = $user_id;
-        $data['username'] = $this->dx_auth->get_username();
 
-        $data['user_profile'] = $this->profile->get_profile($user_id)->row_array();
+        $data['user'] = $this->users->get_user_by_id($user_id)->row();
+        $data['profile'] = $this->profile->get_profile($user_id)->row();
 
         $this->load->view('admin/head', $data);
         $this->load->view('admin_user/profile', $data);
@@ -190,7 +189,7 @@ class User_admin extends CI_Controller
         $widths = $thumbimage_config['thumb_width']; // 需要处理的图片宽度尺寸
         $heights = $thumbimage_config['thumb_height']; // 需要处理的图片高度尺寸
 
-        $user_id = $this->input->post('user_id');
+        $user_id = $this->dx_auth->get_user_id();
         $profile = $this->input->post('profile');
 
         //图片上传
@@ -248,7 +247,7 @@ class User_admin extends CI_Controller
 
         $this->profile->set_profile($user_id, $profile);
 
-        redirect('admin/user/profile');
+        redirect('admin/user_admin/profile');
     }
 
     //修改密码页

@@ -19,7 +19,7 @@
             </ul>
         </li>
         <?php endif;?>
-        <li class="submenu">
+        <li class="submenu active open">
             <a href="#"><i class="icon icon-th-list"></i> <span>内容管理</span> <span class="label"></span></a>
             <ul>
                 <?php if(checkPermission2('party_view')):?>

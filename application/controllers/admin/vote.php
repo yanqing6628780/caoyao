@@ -131,12 +131,15 @@ class Vote extends CI_Controller {
                 // 选项写入Vote表
                 foreach ($content as $key => $value) 
                 {
-                    $vote['content'] = $value;
-                    $vote['voteType_id'] = $votetype_id;
+                    if(!empty($value))
+                    {                    
+                        $vote['content'] = $value;
+                        $vote['voteType_id'] = $votetype_id;
 
-                    $this->general_mdl->setTable('vote');
-                    $this->general_mdl->setData($vote);
-                    $this->general_mdl->create();
+                        $this->general_mdl->setTable('vote');
+                        $this->general_mdl->setData($vote);
+                        $this->general_mdl->create();
+                    }
                 }
                 
                 $response['status'] = "y";

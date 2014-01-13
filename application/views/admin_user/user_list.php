@@ -5,9 +5,6 @@ function addUser(userId){
 function editUser(userId){
     LoadAjaxPage('user_edit', {user_id: userId}, 'myModal',"编辑")
 }
-function changePassword(){
-    LoadAjaxPage('change_password_view', "", 'myModal',"修改密码")
-}
 function del(id){
     if(confirm('确认删除?'))
     {
@@ -68,8 +65,6 @@ function del(id){
                                     <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
                                     <?php endif;?>
                                     <?php endif;?>
-                                    <button href="#myModal" data-toggle="modal" class="btn btn-inverse" onclick='changePassword()' ><i class="icon-refresh icon-white"></i> 修改密码</button>
-                                    <input type='hidden' value='<?=$row['id']?>' name='userId'/>
                                 </td>
                             </tr>
                         <?php endforeach;?>

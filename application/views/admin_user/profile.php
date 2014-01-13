@@ -1,56 +1,67 @@
-<body>
-<div class='form_table'>
-    <form action='<?=site_url('admin/user/profile_save');?>' method='post' enctype="multipart/form-data">
-        <table width='100%' border="1" cellpadding="0" cellspacing="0">
-            <tr>    
-                <td align='center' height='220' width='200'>
-                    <table>
-                        <?php if(!$user_profile['photo']):?>
-                        <tr>
-                            <td>头像</td>
-                        </tr>
-                        <?php else:?>
-                        <tr>
-                            <td>
-                                <img src='<?=$user_profile['photo']?>' height='220'/>
-                            </td>
-                        </tr>
-                        <?php endif;?>
-                    </table>
-                </td>
-                <td>
-                    <table height='220' width='100%' border="1" cellpadding="1" cellspacing="2">
-                        <tr>
-                            <th>姓名</th>
-                            <td><input type='text' name='profile[name]' value='<?=$user_profile['name']?>' /></td>
-                            <th>性别</th>
-                            <td>
-                                <label for='male'>男</label>
-                                <input type='radio' name='profile[sex]' id='male' value='1' <?=$user_profile['sex'] == 1 ? 'checked=true' : ''?>/>
-                                <label for='female'>女</label>
-                                <input type='radio' name='profile[sex]' value='0' id='female' <?=$user_profile['sex'] == 0 ? 'checked=true' : ''?>/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>联系电话</th>
-                            <td><input type='text' name='profile[mobile]' value='<?=$user_profile['mobile']?>' /></td>
-                            <th>电子邮件</th>
-                            <td><input type='text' name='profile[email]' value='<?=$user_profile['email']?>' /></td>
-                        </tr>
-
-                        <tr> 
-                            <td colspan='100'>
-                            <label for='imgfile'>头像上传:</label>
-                            <input type='file' name='imgfile' id='imgfile'/> 
-                            <input type='hidden' name='user_id' value='<?=$user_id?>' />
-                            <input type='submit' value='保存' />
-                            </td>
-                        </tr>
-                    </table>        
-                </td>
-            </tr>
-        </table>
-    </form>
+<script type="text/javascript">
+function changePassword(){
+    LoadAjaxPage('change_password_view', "", 'myModal',"修改密码")
+}
+</script>
+<body class="bg_white">
+<div class='container-fluid'>
+    <div class='row-fluid'>
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-align-justify"></i>                                  
+                    </span>
+                    <h5>个人资料</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form id='profile' class="form-horizontal" action='<?=site_url('admin/user_admin/profile_save');?>' method='post' enctype="multipart/form-data">
+                        <div class="control-group">
+                            <label class="control-label">姓名</label>
+                            <div class="controls">
+                                <input type='text' name='profile[name]' value='<?=$profile->name?>' />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">性别</label>
+                            <div class="controls">
+                                <label class="inline">
+                                    <input type='radio' name='profile[sex]' value='1' id='male' <?=$profile->sex == 1 ? 'checked=true' : ''?>/>男
+                                </label>
+                                <label class="inline">
+                                    <input type='radio' name='profile[sex]' value='0' id='female' <?=$profile->sex == 0 ? 'checked=true' : ''?>/>女
+                                </label>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">联系电话</label>
+                            <div class="controls">
+                                <input type='text' name='profile[mobile]' value='<?=$profile->mobile?>' />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">电子邮件</label>
+                            <div class="controls">
+                                <input type='text' name='profile[email]' value='<?=$profile->email?>' />
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type='submit' class="btn btn-inverse btn-large" value='保存'/>
+                            <button href="#myModal" data-toggle="modal" class="btn btn-danger btn-large" onclick='changePassword()' ><i class="icon-refresh icon-white"></i> 修改密码</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal hide">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+    </div>
 </div>
 </body>
 </html>
