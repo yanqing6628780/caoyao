@@ -119,6 +119,7 @@ class Vote extends CI_Controller {
 
         $this->general_mdl->setTable('party');
         $query = $this->general_mdl->get_query_by_where(array("id" => $post_data['party_id'], "isVote" => 1));
+        
         if($query->num_rows() > 0)
         {
             $this->general_mdl->setTable('votetype');
@@ -210,19 +211,23 @@ class Vote extends CI_Controller {
             $this->general_mdl->setTable('votetype');
             $this->general_mdl->setData($post_data);
             $where = array('id'=>$id);
+            $isUpdated = $this->general_mdl->update($where);
 
             // 增加的选项写入Vote表
             foreach ($content as $key => $value) 
             {
-                $vote['content'] = $value;
-                $vote['voteType_id'] = $id;
+                if(!empty($value))
+                {                
+                    $vote['content'] = $value;
+                    $vote['voteType_id'] = $id;
 
-                $this->general_mdl->setTable('vote');
-                $this->general_mdl->setData($vote);
-                $this->general_mdl->create();
+                    $this->general_mdl->setTable('vote');
+                    $this->general_mdl->setData($vote);
+                    $this->general_mdl->create();
+                }
             }
 
-            if($this->general_mdl->update($where))
+            if($isUpdated)
             {
                 $response['status'] = "y";
                 $response['info'] = "修改成功";

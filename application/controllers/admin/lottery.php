@@ -109,7 +109,7 @@ class Lottery extends CI_Controller {
         $this->data['partys'] = array();
         $user_id = $this->dx_auth->get_user_id();
         $this->general_mdl->setTable('party');
-        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id));
+        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id, "isLottery" => 1));
         $this->data['partys'] = $query->result_array();
 
         $this->load->view('admin/min-head');
@@ -127,29 +127,42 @@ class Lottery extends CI_Controller {
         $data['party_id'] = $party_id;
         $data['title'] = $title;
 
-        $this->general_mdl->setData($data);
-        if($lotteryType_id = $this->general_mdl->create())
+        $this->general_mdl->setTable('party');
+        $query = $this->general_mdl->get_query_by_where(array("id" => $post_data['party_id'], "isLottery" => 1));
+
+        if($query->num_rows() > 0)
         {
-            $this->general_mdl->setTable("lottery");
-            foreach ($content as $key => $value) 
+            $this->general_mdl->setTable('lotterytype');
+            $this->general_mdl->setData($data);
+            if($lotteryType_id = $this->general_mdl->create())
             {
-                if($value)
+                $this->general_mdl->setTable("lottery");
+                foreach ($content as $key => $value) 
                 {
-                    $lottery = array(
-                        "content" => $value,
-                        "num" => $content_num[$key],
-                        "lotteryType_id" => $lotteryType_id
-                    );
-                    $this->general_mdl->setData($lottery);
-                    $this->general_mdl->create();
+                    if($value)
+                    {
+                        $lottery = array(
+                            "content" => $value,
+                            "num" => $content_num[$key],
+                            "lotteryType_id" => $lotteryType_id
+                        );
+                        $this->general_mdl->setData($lottery);
+                        $this->general_mdl->create();
+                    }
                 }
+                $response['status'] = "y";
+                $response['info'] = "添加成功";
+            }else{
+                $response['status'] = "n";
+                $response['info'] = "添加失败";
             }
-            $response['status'] = "y";
-            $response['info'] = "添加成功";
-        }else{
-            $response['status'] = "n";
-            $response['info'] = "添加失败";
         }
+        else
+        {
+            $response['status'] = "n";
+            $response['info'] = "添加失败,该会议不能使用抽奖功能";
+        }
+
         echo json_encode($response);
     }
 
@@ -178,7 +191,7 @@ class Lottery extends CI_Controller {
         /*取出当前用户管理的会议*/
         $user_id = $this->dx_auth->get_user_id();
         $this->general_mdl->setTable('party');
-        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id));
+        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id, "isLottery" => 1));
         $partys = $query->result_array();
 
         $party_id_array = array();
@@ -209,37 +222,51 @@ class Lottery extends CI_Controller {
         $content = $this->input->post("content");
         $content_num = $this->input->post("content_num");
         
-        // 更新抽奖名称
-        $this->general_mdl->setData(array("title" => $title));
-        $where = array('id'=>$id);
-        $lt_isUpdated = $this->general_mdl->update($where);
+        $lotterytype_row = $this->general_mdl->get_query_by_where(array("id" => $id))->row();
 
-        $this->general_mdl->setTable("lottery");
-        if($content)
-        {        
-            foreach ($content as $key => $value) 
-            {
-                if($value)
+        $this->general_mdl->setTable('party');
+        $query = $this->general_mdl->get_query_by_where(array("id" => $lotterytype_row->party_id, "isLottery" => 1));
+
+        if($query->num_rows() > 0)
+        {
+            $this->general_mdl->setTable("lotterytype");
+            // 更新抽奖名称
+            $this->general_mdl->setData(array("title" => $title));
+            $where = array('id'=>$id);
+            $lt_isUpdated = $this->general_mdl->update($where);
+
+            $this->general_mdl->setTable("lottery");
+            if($content)
+            {        
+                foreach ($content as $key => $value) 
                 {
-                    $lottery = array(
-                        "content" => $value,
-                        "num" => $content_num[$key],
-                        "lotteryType_id" => $id
-                    );
-                    $this->general_mdl->setData($lottery);
-                    $this->general_mdl->create();
+                    if($value)
+                    {
+                        $lottery = array(
+                            "content" => $value,
+                            "num" => $content_num[$key] ? $content_num[$key] : 1,
+                            "lotteryType_id" => $id
+                        );
+                        $this->general_mdl->setData($lottery);
+                        $this->general_mdl->create();
+                    }
                 }
             }
+
+            if($lt_isUpdated){
+                $response['status'] = "y";
+                $response['info'] = "修改成功";
+            }else{
+                $response['status'] = "n";
+                $response['info'] = "修改完成";
+            }
+        }
+        else
+        {
+            $response['status'] = "n";
+            $response['info'] = "修改失败,该会议不能使用讨论功能";
         }
 
-        if($lt_isUpdated){
-            $response['status'] = "y";
-            $response['info'] = "修改成功";
-        }else{
-            $response['status'] = "n";
-            $response['info'] = "修改完成";
-        }
-        
         echo json_encode($response);
     }
 

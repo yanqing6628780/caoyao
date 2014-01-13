@@ -1,7 +1,7 @@
 <div id="sidebar">
     <ul>
         <?php if(checkPermission2('user_view') or checkPermission2('perm_admin') or checkPermission2('role_view')):?>
-        <li class="active submenu">
+        <li class="submenu">
             <a href="#"><i class="icon icon-th-list"></i> <span>系统管理</span> <span class="label"></span></a>
             <ul>
                 <?php if(checkPermission2('user_view')):?>

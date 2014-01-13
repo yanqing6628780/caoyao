@@ -43,7 +43,7 @@ function del(id){
                                 <th width="60">是否使用讨论模块</th>
                                 <th width="60">是否使用投票模块</th>
                                 <th width="60">是否使用抽奖模块</th>
-                                <th>邀请码</th>
+                                <th>邀请码(右键另存为)</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -59,14 +59,18 @@ function del(id){
                                 <td><?=$row['isDiscussion'] ? "是" : "否" ?></td>
                                 <td><?=$row['isVote'] ? "是" : "否" ?></td>
                                 <td><?=$row['isLottery'] ? "是" : "否" ?></td>
-                                <td><?=$row['inviteCode']?></td>
                                 <td>
-                                    <p>
+                                    <img src="http://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=L|0&chl=<?=$row['inviteCode']?>" alt="QR code" width="80" height="80"/>
+                                </td>
+                                <td>
+                                    
                                     <?php if(checkPermission2('party_edit')):?>
-                                                                    
+                                    <p>                                
                                         <a class="btn btn-primary" href="<?=site_url($controller_url."edit/".$row['id'])?>" traget="right"> <i class="icon-pencil icon-white"></i> 编辑</a>
                                         <a class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</a>                                    
+                                    </p>
                                     <?php endif;?>
+                                    <p> 
                                         <a class="btn btn-info" href="<?=site_url($controller_url."add_customer/".$row['id'])?>"><i class="icon-plus icon-white"></i> 会议参与人</a>
                                     </p>
                                     <div class="btn-group">

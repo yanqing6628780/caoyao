@@ -10,6 +10,8 @@ $(function () {
         callback:function(response){
             if(response.status == "y"){            
                 window.location = "<?php echo site_url($controller_url)?>"
+            }else{
+                location.reload();
             }
         }
     });

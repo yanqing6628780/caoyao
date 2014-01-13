@@ -95,8 +95,9 @@ class Discussion extends CI_Controller {
         /*取出当前用户管理的会议*/
         $this->data['partys'] = array();
         $user_id = $this->dx_auth->get_user_id();
+
         $this->general_mdl->setTable('party');
-        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id));
+        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id, "isDiscussion" => 1));
         $this->data['partys'] = $query->result_array();
 
         $this->load->view('admin/head');
@@ -108,14 +109,30 @@ class Discussion extends CI_Controller {
     {
         $post_data = $this->input->post(NULL,TRUE);
 
-        $this->general_mdl->setData($post_data);
-        if($this->general_mdl->create()){
-            $response['status'] = "y";
-            $response['info'] = "添加成功";
-        }else{
-            $response['status'] = "n";
-            $response['info'] = "添加失败";
+        $this->general_mdl->setTable('party');
+        $query = $this->general_mdl->get_query_by_where(array("id" => $post_data['party_id'], "isDiscussion" => 1));
+
+        if($query->num_rows() > 0)
+        {        
+            $this->general_mdl->setTable('discussiontype');
+            $this->general_mdl->setData($post_data);
+            if($this->general_mdl->create())
+            {
+                $response['status'] = "y";
+                $response['info'] = "添加成功";
+            }
+            else
+            {
+                $response['status'] = "n";
+                $response['info'] = "添加失败";
+            }
         }
+        else
+        {
+            $response['status'] = "n";
+            $response['info'] = "添加失败,该会议不能使用讨论功能";
+        }
+
         echo json_encode($response);
     }
 
@@ -133,7 +150,7 @@ class Discussion extends CI_Controller {
         /*取出当前用户管理的会议*/
         $user_id = $this->dx_auth->get_user_id();
         $this->general_mdl->setTable('party');
-        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id));
+        $query = $this->general_mdl->get_query_by_where(array("user_id" => $user_id, "isDiscussion" => 1));
         $this->data['partys'] = $partys = $query->result_array();
 
         $party_id_array = array();
@@ -144,7 +161,6 @@ class Discussion extends CI_Controller {
 
         if($row and in_array($row['party_id'], $party_id_array))
         {
-
             $this->load->view('admin/head');
             $this->load->view('admin_discussion/edit', $this->data);
         }
@@ -161,15 +177,30 @@ class Discussion extends CI_Controller {
         $post_data = $this->input->post(NULL, TRUE);
         unset($post_data['id']);
         
-        $this->general_mdl->setData($post_data);
-        $where = array('id'=>$id);
+        $this->general_mdl->setTable('party');
+        $query = $this->general_mdl->get_query_by_where(array("id" => $post_data['party_id'], "isDiscussion" => 1));
 
-        if($this->general_mdl->update($where)){
-            $response['status'] = "y";
-            $response['info'] = "添加成功";
-        }else{
+        if($query->num_rows() > 0)
+        {        
+            $this->general_mdl->setTable('discussiontype');
+            $this->general_mdl->setData($post_data);
+            $where = array('id'=>$id);
+
+            if($this->general_mdl->update($where))
+            {
+                $response['status'] = "y";
+                $response['info'] = "修改成功";
+            }
+            else
+            {
+                $response['status'] = "n";
+                $response['info'] = "修改完成";
+            }
+        }
+        else
+        {
             $response['status'] = "n";
-            $response['info'] = "添加失败";
+            $response['info'] = "修改失败,该会议不能使用讨论功能";
         }
         echo json_encode($response);
     }
