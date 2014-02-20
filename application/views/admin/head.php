@@ -4,33 +4,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/bootstrap.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/fullcalendar.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/uniform.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/select2.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/unicorn.main.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/unicorn.grey.css" class="skin-color" />	
-<link rel="stylesheet" href="<?php echo base_url()?>css/validform.css" />	
-<link rel="stylesheet" href="<?php echo base_url()?>css/datepicker.css" />	
-<link rel="stylesheet" href="<?php echo base_url()?>css/bootstrap-datetimepicker.css" />	
-<link rel="stylesheet" href="<?php echo base_url()?>css/style.css" />	
+<meta name="MobileOptimized" content="320">
+<!-- BEGIN GLOBAL MANDATORY STYLES -->          
+<link href="<?php echo base_url()?>assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url()?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url()?>assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+<!-- END GLOBAL MANDATORY STYLES -->
 
-<script src="<?php echo base_url()?>js/excanvas.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.ui.custom.js"></script>
-<script src="<?php echo base_url()?>js/bootstrap.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.flot.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.flot.resize.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.peity.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.uniform.js"></script>
-<script src="<?php echo base_url()?>js/fullcalendar.min.js"></script>
-<script src="<?php echo base_url()?>js/unicorn.js"></script>
-<script src="<?php echo base_url()?>js/select2.min.js"></script>
-<script src="<?php echo base_url()?>js/unicorn.tables.js"></script>
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/plugins/select2/select2_metro.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/validform.css" />
+<!-- END PAGE LEVEL STYLES -->
+
+<!-- BEGIN THEME STYLES --> 
+<link href="<?php echo base_url()?>assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url()?>assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url()?>assets/css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url()?>assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+
 <script src="<?php echo base_url()?>js/api.js"></script>
 <script type="text/javascript">
-var BASEURL = '<?=base_url()?>'
+var BASEURL = '<?=base_url()?>';
 </script>
 </head>

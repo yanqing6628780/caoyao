@@ -133,11 +133,11 @@ class User_admin extends CI_Controller
 
         }
 
+        $data['title'] = '用户管理';
         $data['users'] = $result;
         $data['roles'] = $this->roles->get_all()->result_array();
 
-        $this->load->view('admin/head', $data);
-        $this->load->view('admin_user/user_list');
+        $this->load->view('admin_user/user_list', $data);
 	}
 
     //检查用户名
@@ -289,8 +289,8 @@ class User_admin extends CI_Controller
 
     public function roles()
     {
-        checkPermission('role_view');
-
+        checkPermission('role_edit');
+        $cant_delete_ids = array(1,2);
         // If Add role button pressed
         if ($this->input->post('add'))
         {
@@ -304,25 +304,35 @@ class User_admin extends CI_Controller
             foreach ($ids as $key => $id)
             {
                 // Delete role
-                $this->roles->delete_role($id);
+                if(!in_array($id, $cant_delete_ids)){
+                    $this->roles->delete_role($id);
+                }
             }
         }
 
         // Get all roles from database
         $data['roles'] = $this->roles->get_all()->result();
+        $data['title'] = "角色管理";
 
         // Load view
         $this->load->view('admin/head', $data);
         $this->load->view('admin/roles');
     }
 
+    public function add_roles()
+    {
+        checkPermission('role_edit');
+        // Create role            
+        $insert_id = $this->roles->create_role($this->input->post('role_name'), $this->input->post('role_parent'), $this->input->post('role_cnname'));
+    }   
+
     public function del_roles()
     {
         checkPermission('role_edit');
 
-        $default_ids = array(1);
+        $default_ids = array(1,2);
         $data['success'] = false;
-        $ids = $this->input->post('id');
+        $ids = $this->input->post('checkbox');
         // Loop trough $_POST array and delete checked checkbox
         foreach ($ids as $key => $value)
         {
@@ -341,7 +351,7 @@ class User_admin extends CI_Controller
     public function permissions()
     {
         checkPermission('perm_admin');
-        $role_id = $this->input->post('role') ? $this->input->post('role') : 1;
+        $role_id = $this->input->get_post('role') ? $this->input->get_post('role') : 1;
 
         $data['roles'] = $this->roles->get_all()->result();
         $data['current_role'] = $role_id;
@@ -367,6 +377,7 @@ class User_admin extends CI_Controller
             }
         }
 
+        $data['title'] = '角色权限管理';
         $data['perms'] = $perms;
 
         $this->load->view('admin/head', $data);

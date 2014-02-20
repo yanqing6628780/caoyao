@@ -1,13 +1,16 @@
-<body class="bg_white">
-<div class='container-fluid'>
-    <div class="row-fluid">
-        <div class="span12">        	
-			<form action="<?php echo site_url('admin/user_admin/roles')?>" method="post">
-			<div class="widget-box">
-				<div class="widget-title">
-					<h5>角色列表</h5>
-					<?php if(checkPermission2('role_edit')):?>
-					<div class="navbar-form pull-left">
+<?php echo $this->load->view('admin/table_head'); ?>
+<form id="roles" action="<?php echo site_url('admin/user_admin/roles')?>" method="post">
+<div class="row">
+    <div class="col-md-12">
+        <div class='portlet box light-grey'>     	
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>角色列表</div>
+				<div class="tools">
+				    <a class="collapse" href="javascript:;"></a>
+				</div>
+				<?php if(checkPermission2('role_edit')):?>
+				<div class="actions">
+					<div class="btn-group">
 						<span>父角色</span>
 						<select name='role_parent'>
 							<option value='0'>None</option>
@@ -15,41 +18,71 @@
 						        <option value='<?=$row->id?>'><?=$row->cnname?></option>
 						    <?php endforeach;?>
 						</select>
+					</div>
+					<div class="btn-group">
 						<input type="text" name="role_name" value="" class="input-small" placeholder="角色英文名"/>
 						<input type="text" name="role_cnname" value="" class="input-small"  placeholder="角色中文名"/>
-						<input type="submit" name="add" value="添加角色"  class="btn btn-primary"/>
-						<input type="submit" name="delete" value="删除选中的角色"  class="btn btn-inverse"/>
 					</div>
-					<?php endif;?>
+					<div class="btn-group">
+						<input type="button" name="add" value="添加角色"  class="btn blue" onclick="addRoles()" />
+						<input type="button" name="delete" value="删除选中的角色"  class="btn green" onclick="delRoles()"/>
+					</div>
 				</div>
-				<div class="widget-content nopadding">
-					<table class="table table-bordered table-striped with-check">
-						<thead>
-							<tr>
-								<th><i class="icon-resize-vertical"></i></th>
-								<th>ID</th>
-								<th>父ID</th>
-								<th>角色英文名</th>
-								<th>角色中文名</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($roles as $role){ ?>
-							<tr>
-								<td><input type="checkbox" name="checkbox[]" value="<?php echo $role->id?>"/></td>
-								<td><?php echo $role->id?></td>
-								<td><?php echo $role->parent_id?></td>
-								<td><?php echo $role->name?></td>
-								<td><?php echo $role->cnname?></td>
-							</tr>
-							<?php } ?>
-						</tbody>
-					</table>							
-				</div>
+				<?php endif;?>
 			</div>
-			</form>
+			<div class="portlet-body">
+				<table class='table table-striped table-bordered table-hover' id="sample_1">
+					<thead>
+						<tr>
+							<th class="table-checkbox"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
+							<th>ID</th>
+							<th>父ID</th>
+							<th>角色英文名</th>
+							<th>角色中文名</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($roles as $role){ ?>
+						<tr>
+							<td><input type="checkbox" class="checkboxes" name="checkbox[]" value="<?php echo $role->id?>"/></td>
+							<td><?php echo $role->id?></td>
+							<td><?php echo $role->parent_id?></td>
+							<td><?php echo $role->name?></td>
+							<td><?php echo $role->cnname?></td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>							
+			</div>
         </div>
     </div>
 </div>
-</body>
-</html>
+</form>
+<script type="text/javascript">
+function addRoles()
+{
+    $.ajax({
+        type: "POST",
+        url: 'admin/user_admin/add_roles',
+        dataType: 'json',
+        data: $("#roles").serialize(),
+        success: function(respone){
+        	$('#roles_view').click();
+        }
+    });
+}
+function delRoles()
+{
+    $.ajax({
+        type: "POST",
+        url: 'admin/user_admin/del_roles',
+        dataType: 'json',
+        data: $("#roles").serialize(),
+        success: function(respone){
+        	if(respone.success){
+        		$('#roles_view').click();
+        	}
+        }
+    });
+}
+</script>

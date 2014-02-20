@@ -1,52 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/bootstrap.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/fullcalendar.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/uniform.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/select2.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/unicorn.main.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>css/unicorn.grey.css" class="skin-color" />	
-<link rel="stylesheet" href="<?php echo base_url()?>css/validform.css" />	
-<link rel="stylesheet" href="<?php echo base_url()?>css/datepicker.css" />	
-<link rel="stylesheet" href="<?php echo base_url()?>css/bootstrap-datetimepicker.css" />	
-<link rel="stylesheet" href="<?php echo base_url()?>css/style.css" />	
-
-<script src="<?php echo base_url()?>js/jquery.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.ui.custom.js"></script>
-<script src="<?php echo base_url()?>js/bootstrap.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.peity.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url()?>js/jquery.uniform.js"></script>
-<script src="<?php echo base_url()?>js/fullcalendar.min.js"></script>
-<script src="<?php echo base_url()?>js/unicorn.js"></script>
-<script src="<?php echo base_url()?>js/select2.min.js"></script>
-<script src="<?php echo base_url()?>js/api.js"></script>
-<script type="text/javascript">
-var BASEURL = '<?=base_url()?>'
-$(document).ready(function(){
-	
-	$(".select2").select2();
-
-	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
-		
-	$("span.icon input:checkbox, th input:checkbox").click(function() {
-		var checkedStatus = this.checked;
-		var checkbox = $(this).parents('.widget-box').find('tr td:first-child input:checkbox');		
-		checkbox.each(function() {
-			this.checked = checkedStatus;
-			if (checkedStatus == this.checked) {
-				$(this).closest('.checker > span').removeClass('checked');
-			}
-			if (this.checked) {
-				$(this).closest('.checker > span').addClass('checked');
-			}
-		});
-	});	
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link rel="stylesheet" href="<?php echo base_url()?>assets/plugins/data-tables/DT_bootstrap.css" />
+<!-- END PAGE LEVEL STYLES -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="<?php echo base_url()?>assets/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/plugins/data-tables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/plugins/data-tables/DT_bootstrap.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script>
+jQuery(document).ready(function() {       
+	$('table.table').dataTable( {
+		"aoColumnDefs": [
+			{"bSortable": false, "aTargets": [ 0 ] }
+		],
+		"aaSorting": [[1, 'asc']],
+		"aLengthMenu": [
+			[5, 15, 20, -1],
+			[5, 15, 20, "All"] // change per page values here
+		],
+		// set the initial value
+		"iDisplayLength": 2,
+	});
 });
 </script>
-</head>
+<!-- BEGIN PAGE HEADER-->
+<div class="row">
+	<div class="col-md-12">
+	<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+	<h3 class="page-title"><?php echo $title?></h3>
+	<!-- END PAGE TITLE & BREADCRUMB-->
+	</div>
+</div>
+<!-- END PAGE HEADER-->

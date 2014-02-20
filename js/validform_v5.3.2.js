@@ -730,7 +730,7 @@
 					obj.removeClass("Validform_right Validform_wrong Validform_loading").addClass("Validform_checktip");//for ignore;
 					break;
 				default:
-					obj.removeClass("Validform_right Validform_loading").addClass("Validform_checktip Validform_wrong");//wrong;
+					obj.removeClass("Validform_right Validform_loading").addClass("help-block Validform_checktip Validform_wrong");//wrong;
 			}
 		},
 		

@@ -1,54 +1,69 @@
-<body class="bg_white">
-<div class='container-fluid'>
-    <div class="row-fluid">
-        <div class="span12">        	
-			<form id="perm_from" action="<?php echo site_url('admin/user_admin/permissions')?>" method="post">
-			<div class="widget-box">
-				<div class="widget-title">
-					<span class="icon">
-						<input type="checkbox" id="title-checkbox" name="title-checkbox" />
-					</span>
-					<h5>角色权限</h5>
-					<div class="navbar-form pull-left">
-						<span>角色</span>
-						<select name='role'>
+<?php echo $this->load->view('admin/table_head'); ?>
+<form id="perm_from" action="<?php echo site_url('admin/user_admin/permissions')?>" method="post">
+<div class="row">
+    <div class="col-md-12">
+        <div class='portlet box light-grey'>
+        	<div class="portlet-title">
+        	    <div class="caption"><i class="icon-globe"></i>权限列表</div>
+        	    <div class="tools">
+        	        <a class="collapse" href="javascript:;"></a>
+        	    </div>
+        	    <div class="actions">
+        	    	<div class="btn-group">
+						<input type="button" name="show" value="显示权限"  class="btn blue" onclick="showPerm()" />
+						<input type="button" name="save" value="保存"  class="btn green" onclick="savePerm()"/>
+					</div>
+					<div class="btn-group">
+						<select id="role" name='role'>
 						    <?php foreach($roles as $key => $row):?>
 						        <option value='<?=$row->id?>' <?php if($row->id == $current_role){echo "selected";}?> ><?=$row->cnname?></option>
 						    <?php endforeach;?>
 						</select>
-						<input type="submit" name="show" value="显示权限"  class="btn btn-primary"/>
-						<input type="button" name="save" value="保存"  class="btn btn-primary" onclick="savePerm()"/>
 					</div>
-				</div>
-				<div class="widget-content nopadding">
-					<table class="table table-bordered table-striped with-check">
-						<thead>
-							<tr>
-								<th><i class="icon-resize-vertical"></i></th>
-								<th>权限名称</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($perms as $key => $perm){ ?>
-							<tr>
-								<td><input type="checkbox" name="perms[]" value="<?php echo $perm['action_code']?>" <?php if($perm['hasperm']){echo 'checked';}?> /></td>
-								<td><?php echo $perm['name']?></td>
-							</tr>
-							<?php } ?>
-						</tbody>
-					</table>							
-				</div>
+        	    </div>
+        	</div>
+			<div class="portlet-body">
+				<table class='table table-striped table-bordered table-hover' id="sample_1">
+					<thead>
+						<tr>
+							<th class="table-checkbox"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
+							<th>权限名称</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($perms as $key => $perm){ ?>
+						<tr>
+							<td><input type="checkbox" class="checkboxes" name="perms[]" value="<?php echo $perm['action_code']?>" <?php if($perm['hasperm']){echo 'checked';}?> /></td>
+							<td><?php echo $perm['name']?></td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>							
 			</div>
-			</form>
         </div>
     </div>
 </div>
+</form>
 <script type="text/javascript">
+function showPerm()
+{
+	var role = $('#role').val();
+    $.ajax({
+        type: "GET",
+        cache: false,
+        url: 'admin/user_admin/permissions?role='+ role,
+        dataType: "html",
+        success: function (res) {
+        	pageContentBody.html(res);
+        },
+        async: false
+    });
+}
 function savePerm()
 {
     $.ajax({
         type: "POST",
-        url: 'perms_save',
+        url: 'admin/user_admin/perms_save',
         dataType: 'json',
         data: $("#perm_from").serialize(),
         success: function(respone){
@@ -58,6 +73,7 @@ function savePerm()
         }
     });
 }
+jQuery(document).ready(function() {   
+	$('#role').select2();
+})
 </script>
-</body>
-</html>
