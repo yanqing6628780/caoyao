@@ -39,7 +39,7 @@
                                 <?php endif;?>
                                 <?php if($row['id'] != 1):?>
                                 <?php if(checkPermission2('user_edit')):?>
-                                <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
+                                <button class="btn btn-danger" onclick='delUser(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
                                 <?php endif;?>
                                 <?php endif;?>
                             </td>
@@ -51,36 +51,19 @@
         </div>
     </div>
 </div>
-<div id="myModal" class="modal fade" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-                <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn default">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script type="text/javascript">
 function addUser(userId){
-    LoadAjaxPage('admin/user_admin/user_add', "", 'myModal',"添加用户")
+    LoadAjaxPage('<?=base_url()?>admin/user_admin/user_add', "", 'myModal',"添加用户")
 }
 function editUser(userId){
-    LoadAjaxPage('admin/user_admin/user_edit', {user_id: userId}, 'myModal',"编辑")
+    LoadAjaxPage('<?=base_url()?>admin/user_admin/user_edit', {user_id: userId}, 'myModal',"编辑")
 }
-function del(id){
+function delUser(id){
     if(confirm('确认删除?'))
     {
         $.ajax({
             type: "POST",
-            url: 'admin/user_admin/del_user',
+            url: '<?=base_url()?>admin/user_admin/del_user',
             dataType: 'json',
             data: {id: id},
             success: function(respone){
@@ -90,4 +73,7 @@ function del(id){
         });
     }
 }
+jQuery(document).ready(function() {       
+    TableAdvanced.init();
+});
 </script>

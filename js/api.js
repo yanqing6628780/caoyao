@@ -1,4 +1,4 @@
-function common_del(url, id, code){
+function common_del(url, id, code, reload_view){
     if(confirm('确认删除?'))
     {
         $.ajax({
@@ -9,7 +9,9 @@ function common_del(url, id, code){
             success: function(respone){
                 if(respone.success){                
                     alert( '删除成功' );
-                    location.reload(true)
+                    if(reload_view != false){
+                        $(reload_view).click();
+                    }
                 }else{
                     alert( '删除失败' );
                 }
@@ -102,46 +104,31 @@ function reloadPage()
     location.reload(true)
 }
 
-var TableAdvanced = function () {
-    var initTable1 = function() {
-        var oTable = $('#sample_1').dataTable({
-            "aoColumnDefs": [
-                {"bSortable": false, "aTargets": [ 0 ] }
-            ],
-            "aaSorting": [[1, 'asc']],
-            "aLengthMenu": [
-                [5, 15, 20, -1],
-                [5, 15, 20, "All"] // change per page values here
-            ],
-            // set the initial value
-            "iDisplayLength": 10,
-            "oLanguage": {
-                "sSearch": "搜索:",
-                "sLengthMenu": "显示 _MENU_ 条",
-                "sInfo": "显示 _START_ - _END_ 共 _TOTAL_ 记录",
-                "sEmptyTable": "没有任何记录",
-                "sInfoEmpty": "没有任何记录",
-                "sZeroRecords": "没有匹配数据"
+var DatePicker = function(){
+    return {
+        //main function to initiate the module
+        init1: function () {
+            if (jQuery().datepicker) {
+                $('.date-picker').datepicker({
+                    language:'zh-CN',
+                    format: 'yyyy-mm-dd'
+                });
+                // $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
             }
-        });
+        }
+    };
+}();
 
-        jQuery('#sample_1 .group-checkable').change(function () {
-            var set = jQuery(this).attr("data-set");
-            var checked = jQuery(this).is(":checked");
-            jQuery(set).each(function () {
-                if (checked) {
-                    $(this).attr("checked", true);
-                } else {
-                    $(this).attr("checked", false);
-                }
-            });
-            jQuery.uniform.update(set);
-        });
+var TableAdvanced = function () {
 
-        jQuery('#sample_1_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
-        jQuery('#sample_1_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#sample_1_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
-    }
+    var oLanguage = {
+        "sSearch": "搜索:",
+        "sLengthMenu": "显示 _MENU_ 条",
+        "sInfo": "显示 _START_ - _END_ 共 _TOTAL_ 记录",
+        "sEmptyTable": "没有任何记录",
+        "sInfoEmpty": "没有任何记录",
+        "sZeroRecords": "没有匹配数据"
+    };
 
     return {
         //main function to initiate the module
@@ -149,7 +136,60 @@ var TableAdvanced = function () {
             if (!jQuery().dataTable) {
                 return;
             }
-            initTable1();
+            var oTable = $('#sample_1').dataTable({
+                "aoColumnDefs": [
+                    {"bSortable": false, "aTargets": [ 0 ] }
+                ],
+                "aaSorting": [[1, 'asc']],
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 10,
+                "oLanguage": oLanguage
+            });
+
+            jQuery('#sample_1 .group-checkable').change(function () {
+                var set = jQuery(this).attr("data-set");
+                var checked = jQuery(this).is(":checked");
+                jQuery(set).each(function () {
+                    if (checked) {
+                        $(this).attr("checked", true);
+                    } else {
+                        $(this).attr("checked", false);
+                    }
+                });
+                jQuery.uniform.update(set);
+            });
+
+            jQuery('#sample_1_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+            jQuery('#sample_1_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+            jQuery('#sample_1_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+        },
+
+        initCT: function () {
+            if (!jQuery().dataTable) {
+                return;
+            }
+            var oTable = $('.Ctable').dataTable({
+                "aoColumnDefs": [
+                    {"bSortable": false, "aTargets": [ 0 ] }
+                ],
+                "aaSorting": [[1, 'asc']],
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 10,
+                "oLanguage": oLanguage
+            });
+
+            jQuery('.Ctable .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+            jQuery('.Ctable .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+            jQuery('.Ctable .dataTables_length select').select2(); // initialize select2 dropdown
+            return oTable;
         }
     };
 

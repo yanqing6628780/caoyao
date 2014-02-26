@@ -22,7 +22,7 @@
 <link href="<?php echo base_url()?>assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url()?>assets/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url()?>assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-<link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url()?>assets/css/custom.css" rel="stylesheet" type="text/css"/>
 
 <script src="<?php echo base_url()?>js/api.js"></script>
 <script type="text/javascript">

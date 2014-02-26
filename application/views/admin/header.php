@@ -4,12 +4,12 @@
   <div class="header-inner">
      <!-- BEGIN LOGO -->  
      <a class="navbar-brand" href="index.html">
-     <img src="assets/img/logo.png" alt="logo" class="img-responsive" />
+     <img src="<?=base_url()?>assets/img/logo.png" alt="logo" class="img-responsive" />
      </a>
      <!-- END LOGO -->
      <!-- BEGIN RESPONSIVE MENU TOGGLER --> 
      <a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-     <img src="assets/img/menu-toggler.png" alt="" />
+     <img src="<?=base_url()?>assets/img/menu-toggler.png" alt="" />
      </a> 
      <!-- END RESPONSIVE MENU TOGGLER -->
      <!-- BEGIN TOP NAVIGATION MENU -->
@@ -113,7 +113,7 @@
                  <ul class="dropdown-menu-list scroller" style="height: 250px;">
                     <li>  
                        <a href="inbox.html?a=view">
-                       <span class="photo"><img src="./assets/img/avatar2.jpg" alt=""/></span>
+                       <span class="photo"><img src="<?=base_url()?>assets/img/avatar2.jpg" alt=""/></span>
                        <span class="subject">
                        <span class="from">Lisa Wong</span>
                        <span class="time">Just Now</span>
@@ -126,7 +126,7 @@
                     </li>
                     <li>  
                        <a href="inbox.html?a=view">
-                       <span class="photo"><img src="./assets/img/avatar3.jpg" alt=""/></span>
+                       <span class="photo"><img src="<?=base_url()?>assets/img/avatar3.jpg" alt=""/></span>
                        <span class="subject">
                        <span class="from">Richard Doe</span>
                        <span class="time">16 mins</span>
@@ -139,7 +139,7 @@
                     </li>
                     <li>  
                        <a href="inbox.html?a=view">
-                       <span class="photo"><img src="./assets/img/avatar1.jpg" alt=""/></span>
+                       <span class="photo"><img src="<?=base_url()?>assets/img/avatar1.jpg" alt=""/></span>
                        <span class="subject">
                        <span class="from">Bob Nilson</span>
                        <span class="time">2 hrs</span>
@@ -152,7 +152,7 @@
                     </li>
                     <li>  
                        <a href="inbox.html?a=view">
-                       <span class="photo"><img src="./assets/img/avatar2.jpg" alt=""/></span>
+                       <span class="photo"><img src="<?=base_url()?>assets/img/avatar2.jpg" alt=""/></span>
                        <span class="subject">
                        <span class="from">Lisa Wong</span>
                        <span class="time">40 mins</span>
@@ -164,7 +164,7 @@
                     </li>
                     <li>  
                        <a href="inbox.html?a=view">
-                       <span class="photo"><img src="./assets/img/avatar3.jpg" alt=""/></span>
+                       <span class="photo"><img src="<?=base_url()?>assets/img/avatar3.jpg" alt=""/></span>
                        <span class="subject">
                        <span class="from">Richard Doe</span>
                        <span class="time">46 mins</span>
@@ -297,26 +297,18 @@
         <!-- BEGIN USER LOGIN DROPDOWN -->
         <li class="dropdown user">
            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-           <img alt="" src="assets/img/avatar1_small.jpg"/>
+           <img alt="" src="<?=base_url()?>assets/img/avatar1_small.jpg"/>
            <span class="username">Bob Nilson</span>
            <i class="icon-angle-down"></i>
            </a>
            <ul class="dropdown-menu">
-              <li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a>
-              </li>
-              <li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a>
-              </li>
-              <li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox <span class="badge badge-danger">3</span></a>
-              </li>
-              <li><a href="#"><i class="icon-tasks"></i> My Tasks <span class="badge badge-success">7</span></a>
-              </li>
+              <li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
+              <li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
+              <li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox <span class="badge badge-danger">3</span></a></li>
+              <li><a href="#"><i class="icon-tasks"></i> My Tasks <span class="badge badge-success">7</span></a></li>
               <li class="divider"></li>
-              <li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> Full Screen</a>
-              </li>
-              <li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a>
-              </li>
-              <li><a href="login.html"><i class="icon-key"></i> Log Out</a>
-              </li>
+              <li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> 全屏</a></li>
+              <li><a href="<?=site_url('admin/auth/logout')?>"><i class="icon-key"></i> 登出</a></li>
            </ul>
         </li>
         <!-- END USER LOGIN DROPDOWN -->

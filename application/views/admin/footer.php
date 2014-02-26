@@ -8,9 +8,25 @@
   </div>
 </div>
 <!-- END FOOTER -->
-<div id='msgbox1'></div>
-<div id='msgbox2'></div>
-<div id='alert-win'></div>
+
+<div id="myModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn default">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->   
 <!--[if lt IE 9]>
@@ -28,7 +44,10 @@
 <script src="<?php echo base_url()?>assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url()?>assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
 <!-- END CORE PLUGINS -->
+
 <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/select2/select2.min.js"></script>
+<script src="<?php echo base_url()?>js/validform_v5.3.2.js"></script>
+
 <script src="<?php echo base_url()?>assets/scripts/app.js"></script>      
 <script>
 jQuery(document).ready(function() {    

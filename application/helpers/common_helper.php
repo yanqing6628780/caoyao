@@ -5,6 +5,19 @@
  */
 
 /**
+* 生成用户验证code
+* @param array 要组合生成的数组
+* @return  string
+*/
+function generate_verify_code($array = array()) {
+    if(is_array($array)){
+        return md5(implode('', $array));
+    }else{
+        return md5($array);
+    }
+}
+
+/**
 * 生成用户username
 * @param num_rows 数据库用户数目
 * @return  string
@@ -12,6 +25,7 @@
 function generate_username($num_rows) {
     return 800000 + $num_rows;
 }
+
 /**
 * 生成随机字符串
 * @param length 要求生成的长度 默认6位
@@ -498,202 +512,6 @@ function is_today($datetime)
 }
 
 /**
- * 订单状态转换
- *
- * @param string $type
- * @return string
-*/
-function order_status_trans($status)
-{
-    switch ($status)
-    {
-        case '0':
-            return '预订成功';
-            break;
-        case '1':
-            return '请求退票';
-            break;
-        case '2':
-            return '退票成功';
-            break;
-        case '3':
-            return '拒绝退票';
-            break;
-
-    }
-}
-
-/**
- * 航程类型转换
- *
- * @param string $type
- * @return string
-*/
-function airline_type_trans($type)
-{
-    switch (strtolower($type))
-    {
-        case 's':
-            return '单程';
-            break;
-        case 'd':
-            return '往返';
-            break;
-        case 'm':
-            return '联程';
-            break;
-
-    }
-}
-
-/**
- * 乘客类型转换
- *
- * @param string $type
- * @return string
-*/
-function psgtype_trans($type)
-{
-    switch ($type)
-    {
-        case 'ADT':
-            return '成人';
-            break;
-        case 'CHD':
-            return '儿童';
-            break;
-        case 'UM':
-            return '无陪伴儿童';
-            break;
-        default:
-            return "未定义";
-            break;
-    }
-}
-
-/**
- * 证件类型转换
- *
- * @param string $idtype
- * @return string NI身份证,PP护照,ID其他证件
-*/
-function idtype_trans($idtype)
-{
-    switch ($idtype)
-    {
-        case 'NI':
-            return '身份证';
-            break;
-        case 'PP':
-            return '护照';
-            break;
-        case 'ID':
-            return '其他证件';
-            break;
-        default:
-            return "未定义";
-            break;
-    }
-}
-
-/**
- * 基本仓位字母对应
- *
- * @param string $cabin
- * return string 头等舱:F,公务舱:C,经济舱:Y
-*/
-function cabin_trans($cabin)
-{
-    switch ($cabin)
-    {
-        case 'F':
-            return '头等舱';
-            break;
-        case 'C':
-            return '公务舱';
-            break;
-        case 'Y':
-            return '经济舱';
-            break;
-        default:
-            return $cabin."舱";
-            break;
-    }
-}
-
-/**
- * 仓位可用数量
- *
- * @param string $cabin
- * return string
-*/
-function cabin_data_trans($cabin_data)
-{
-    switch ($cabin_data)
-    {
-        case 'A':
-            return '票量充足';
-            break;
-        case 'L':
-            return FALSE;
-            break;
-        case 'Q':
-            return FALSE;
-            break;
-        case 'S':
-            return FALSE;
-            break;
-        case 'C':
-            return FALSE;
-            break;
-        case 'X':
-            return FALSE;
-            break;
-        case 'Z':
-            return FALSE;
-            break;
-        case '0':
-            return FALSE;
-            break;
-        default:
-            return "仅剩".$cabin_data."张票";
-            break;
-    }
-}
-
-/**
- * 中转次数转换为中文
- *
- * @param string $num
- * return string
-*/
-function trans_s_number($num)
-{
-    switch ($num)
-    {
-        case '1':
-            return '直飞';
-            break;
-        default:
-            return "中转".($num-1)."次";
-            break;
-    }
-}
-
-
-/**
- * 得到订单单号
- * @return  string
- */
-function gen_order_sn()
-{
-    /* 选择一个随机的方案 */
-    mt_srand((double) microtime() * 1000000);
-
-    return date('YmdHi') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
-}
-
-/**
  * 数组或对像数据print
  */
 function html_print($data)
@@ -777,71 +595,6 @@ function getMinInArray($arr, $arr_key) {
         }
     }
     return $min_key;
-}
-
-//城市三字码转换城市名
-function trans_city_name($citycode)
-{
-    $CI = get_instance();
-    $CI->load->model('citycode_mdl');
-    $CI->load->model('inter_city_mdl');
-
-    if($citycode)
-    {
-        $query = $CI->inter_city_mdl->get_query_by_where(array('CITYCODE' => $citycode));
-
-        if($query->num_rows > 0)
-        {
-            return $query->row()->CITYCNAME;
-        }
-        else
-        {
-            $query = $CI->citycode_mdl->get_query_by_where(array('CITYCODE' => $citycode));
-            if($query->num_rows > 0)
-            {
-                return $query->row()->CITYCNAME;
-            }
-        }
-    }
-    return false;
-}
-
-//根据航班号获取航空公司中文名称
-/*
-* fltNo 航班号
-*/
-function get_airline_by_fltNo($fltNo)
-{
-    $CI = get_instance();
-    $CI->config->load('airlines_code', TRUE);
-    $airlines_code = $CI->config->item('airlines_code');
-
-    $CI->config->load('inter_aircode', TRUE);
-    $inter_aircode = $CI->config->item('inter_aircode');
-
-    $key = get_aircode_by_fltNo($fltNo);
-    if(array_key_exists($key, $airlines_code))
-    {
-        return $airlines_code[$key];
-    }
-    else if(array_key_exists($key, $inter_aircode))
-    {
-        return $inter_aircode[$key];
-    }
-    else
-    {
-        return "";
-    }
-}
-
-//根据航班号获取航空公司二字码
-/*
-* fltNo 航班号
-*/
-function get_aircode_by_fltNo($fltNo)
-{
-    $aircode = substr($fltNo, 0 ,2);
-    return $aircode;
 }
 
 

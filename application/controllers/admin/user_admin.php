@@ -125,9 +125,12 @@ class User_admin extends CI_Controller
 
             $result[$key]['cnname'] = $row_profile->name;
             $result[$key]['mobile'] = $row_profile->mobile;
-            $result[$key]['sex'] = $row_profile->sex;
             $result[$key]['email'] = $row_profile->email;
             $result[$key]['photo'] = $row_profile->photo;
+            $result[$key]['lat'] = $row_profile->lat;
+            $result[$key]['lng'] = $row_profile->lng;
+            $result[$key]['address'] = $row_profile->address;
+            $result[$key]['website'] = $row_profile->website;
 
             $result[$key]['role'] = $row_role->cnname;
 
