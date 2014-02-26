@@ -29,11 +29,26 @@ function generate_username($num_rows) {
 /**
 * 生成随机字符串
 * @param length 要求生成的长度 默认6位
+* @param type 字符集选择
 * @return  string
 */
-function generate_password( $length = 6 ) {  
-    // 密码字符集，可任意添加你需要的字符  
-    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';  
+function generate_password( $length = 6, $type = 3 ) {  
+    // 密码字符集，可任意添加你需要的字符
+    switch ($type) {
+        case 1:
+            $chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            break;
+        case 2:
+            $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            break;
+        case 3:
+            $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            break;
+        default:
+            $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-*/+-[]';
+            break;
+    }
+
     $password = '';  
     for ( $i = 0; $i < $length; $i++ )  
     {  

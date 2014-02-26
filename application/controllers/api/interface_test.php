@@ -7,9 +7,9 @@ class interface_test extends CI_Controller{
             'Authorization: Basic '.base64_encode("sqt:YWaWMTIzNA")
         );
 
-        $data = array('order_sn' => '21345354');
-        $url = site_url("/api/my_interface/get_order");
-        var_dump($this->curl_tool->post($url, $http_header, $data));
+        $data = array('coupon_num' => 'oh8yxi');
+        $url = site_url("/api/my_interface/coupon_print");
+        print($this->curl_tool->post($url, $http_header, $data));
     }
 
 
