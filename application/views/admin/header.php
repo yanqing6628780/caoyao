@@ -302,10 +302,7 @@
            <i class="icon-angle-down"></i>
            </a>
            <ul class="dropdown-menu">
-              <li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
-              <li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
-              <li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox <span class="badge badge-danger">3</span></a></li>
-              <li><a href="#"><i class="icon-tasks"></i> My Tasks <span class="badge badge-success">7</span></a></li>
+              <li><a href="javascript:" onclick="LoadPageContentBody('<?=site_url('admin/user_admin/profile')?>', false)"><i class="icon-user"></i> 我的个人资料</a></li>
               <li class="divider"></li>
               <li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> 全屏</a></li>
               <li><a href="<?=site_url('admin/auth/logout')?>"><i class="icon-key"></i> 登出</a></li>

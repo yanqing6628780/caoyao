@@ -45,6 +45,7 @@
 <script src="<?php echo base_url()?>assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
 <!-- END CORE PLUGINS -->
 
+<script src="<?=base_url()?>assets/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/select2/select2.min.js"></script>
 <script src="<?php echo base_url()?>js/validform_v5.3.2.js"></script>
 

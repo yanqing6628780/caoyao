@@ -63,6 +63,27 @@ function stopDefault(e) {
 ** data 发送到服务器的数据 Json&String
 ** Element 加载返回页面的元素ID String
 */
+function LoadPageContentBody(url, data)
+{
+    $.ajax({
+        type: "GET",
+        cache: false,
+        url: url,
+        dataType: "html",
+        data: data,
+        success: function (res) {
+            pageContentBody.html(res);
+        },
+        async: false
+    });
+}
+
+//页面某位置加载页面
+/*
+** url 发送请求的地址 String
+** data 发送到服务器的数据 Json&String
+** Element 加载返回页面的元素ID String
+*/
 function LoadAjaxPage(url, data, Element, title)
 {
     $.ajax({
@@ -84,6 +105,7 @@ function LoadAjaxPage(url, data, Element, title)
         }
     });
 }
+
 
 //checkbox点击全选
 function allChecked(obj, parentString)

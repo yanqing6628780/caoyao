@@ -123,10 +123,9 @@ $confirmation_code = array(
 <script src="<?=base_url()?>assets/scripts/login.js" type="text/javascript"></script> 
 <!-- END PAGE LEVEL SCRIPTS --> 
 <script>
-    jQuery(document).ready(function() {     
-      App.init();
-      Login.init();
-    });
+jQuery(document).ready(function() {     
+    App.init();
+});
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

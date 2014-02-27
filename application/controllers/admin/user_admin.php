@@ -180,7 +180,6 @@ class User_admin extends CI_Controller
         $data['user'] = $this->users->get_user_by_id($user_id)->row();
         $data['profile'] = $this->profile->get_profile($user_id)->row();
 
-        $this->load->view('admin/head', $data);
         $this->load->view('admin_user/profile', $data);
     }
 
@@ -188,69 +187,53 @@ class User_admin extends CI_Controller
     public function profile_save()
     {
         $data['msg'] = '';
-        $thumbimage_config = $this->config->item('thumbimage');
-        $widths = $thumbimage_config['thumb_width']; // 需要处理的图片宽度尺寸
-        $heights = $thumbimage_config['thumb_height']; // 需要处理的图片高度尺寸
 
         $user_id = $this->dx_auth->get_user_id();
         $profile = $this->input->post('profile');
 
-        //图片上传
-        $upload_path = 'uploads/users';
-        $config['upload_path'] = './'.$upload_path;
-        $config['encrypt_name'] = true;
-        $config['allowed_types'] = "*"; //CI的文件上传类型验证有bug 设置为*用自定义验证方法
-        $config['max_size'] = '2048'; // 允许上传文件大小的最大值
-        $config['max_width'] = '1024'; // 上传文件的宽度最大值
-        $config['max_height'] = '1024'; // 上传文件的高度最大值
+        $this->profile->set_profile($user_id, $profile);
+
+        echo json_encode($profile);
+    }
+
+    //头像上传
+    public function avatar_upload()
+    {
+        $data['msg'] = '';
+
+        $thumbimage_config = $this->config->item('thumbimage');
+        $widths = $thumbimage_config['thumb_width']; // 需要处理的图片宽度尺寸
+        $heights = $thumbimage_config['thumb_height']; // 需要处理的图片高度尺寸
+
+        $config['upload_path'] = './uploads';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '2048';
+        $config['max_width']  = '0';
+        $config['max_height']  = '0';
+        $config['encrypt_name']  = TRUE;
 
         $this->load->library('upload', $config);
 
-        $field_name = 'imgfile';
-        $allowed_type = "gif|jpg|png"; //允许上传的文件类型组
-
-        if( $_FILES[$field_name]['name'] != '' )
+        $field_name = "files";
+        if ( ! $this->upload->do_upload($field_name))
         {
-            $ext = getLowerExt($_FILES[$field_name]['name']); //文件上传扩展名
+            $data = array('error' => $this->upload->display_errors());
+        } 
+        else
+        {
+            $upload_data = $this->upload->data();
+            $profile['photo'] = $data['file']['url'] = "uploads/".$upload_data['file_name'];
+            $data['file']['width'] = $upload_data['image_width'];
+            $data['file']['height'] = $upload_data['image_height'];
 
-            //检查扩展名
-            if( ! checkAllowedTypes($allowed_type, $ext) ){
-                $data['msg'] .= '上传图片失败，错误:不允许上传的文件类型 ';
-            }else{
-                //上传文件
-                if( ! $this->upload->do_upload($field_name) ){
-                    $data['msg'] .= sprintf('上传图片失败，错误:%s '  ,$this->upload->display_errors('',''));
-                }else{
-                    $uploaded_data = $this->upload->data();
-
-                    // 图片处理
-                    $config['image_library'] = 'gd2';
-                    $config['source_image'] = $uploaded_data['full_path']; //原图绝对路径
-                    $config['create_thumb'] = TRUE;
-                    $config['maintain_ratio'] = TRUE;
-
-                    $this->load->library('image_lib');
-                    //批量处理图片
-                    foreach($widths as $key=>$row){
-                        $config['width'] = $widths[$key];
-                        $config['height'] = $heights[$key];
-                        $config['thumb_marker'] = '_'.$row;
-                        $this->image_lib->initialize($config);
-                        if ( ! $this->image_lib->resize()){
-                            $data['msg'] .= sprintf('图片处理失败，错误:%s '  ,$this->image_lib->display_errors('',''));
-                        }else{
-                            $this->image_lib->clear();
-                        }
-                    }
-
-                    $profile['photo'] = sprintf('%s%s/%s%s', base_url(), $upload_path, $uploaded_data['raw_name'], $uploaded_data['file_ext']);
-                }
-            }
+            //修改用户头像
+            $user_id = $this->dx_auth->get_user_id();
+            $old_profile = $this->profile->get_profile_field($user_id, 'photo')->row_array();
+            if(is_file($old_profile['photo'])) unlink($old_profile['photo']); // 删除旧的照片
+            $this->profile->set_profile($user_id, $profile);
         }
 
-        $this->profile->set_profile($user_id, $profile);
-
-        redirect('admin/user_admin/profile');
+        echo json_encode($data);
     }
 
     //修改密码页
