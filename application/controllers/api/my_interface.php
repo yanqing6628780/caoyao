@@ -69,13 +69,17 @@ class my_interface extends REST_Controller
             $this->general_mdl->setTable('order_goods');
             $order_goods = $this->general_mdl->get_query_by_where(array('order_id' => $result['id']))->result_array();
             $result['goods'] = $order_goods;
+
+            $this->general_mdl->setTable('admin_user_profile');
+            $profile = $this->general_mdl->get_query_by_where(array('user_id' => $result['user_id']))->row_array();
+            $result['profile'] = $profile;
             
             $result['status'] = 1;
             $this->response($result, 200); // 200 being the HTTP response code
         } else {
             $result['status'] = 0;
             $result['error'] = 'no data';
-            $this->response($result, 404);
+            $this->response($result, 200);
         }
     }
 
@@ -95,7 +99,7 @@ class my_interface extends REST_Controller
             }else{
                 $data['status'] = 0;
                 $data['error'] = "没有该优惠卷";
-                $this->response($data, 404);
+                $this->response($data, 200);
             }
 
             //获取优惠劵已经发放条数
@@ -122,7 +126,7 @@ class my_interface extends REST_Controller
                     $this->response($data, 200);
                 } else {
                     $data['status'] = 0;
-                    $this->response($data, 404);
+                    $this->response($data, 200);
                 }
             }
 
@@ -140,7 +144,7 @@ class my_interface extends REST_Controller
         }else{
             $data['status'] = 0;
             $data['error'] = "请求失败";
-            $this->response($data, 404);            
+            $this->response($data, 200);            
         }
 
     }
@@ -158,7 +162,7 @@ class my_interface extends REST_Controller
                 if($row['coupon_status'] == 1){
                     $data['status'] = 0;
                     $data['error'] = "该 优惠卷/奖品卷 已打印过";
-                    $this->response($data, 404); 
+                    $this->response($data, 200); 
                 }
 
                 $this->general_mdl->setTable('coupon_kind');
@@ -178,17 +182,17 @@ class my_interface extends REST_Controller
                 }else{
                     $data['status'] = 0;
                     $data['error'] = "没有該 优惠卷/奖品卷 信息";
-                    $this->response($data, 404); 
+                    $this->response($data, 200); 
                 }
             }else{
                 $data['status'] = 0;
                 $data['error'] = "没有此 优惠卷/奖品卷 号码";
-                $this->response($data, 404); 
+                $this->response($data, 200); 
             }
         }else{
             $data['status'] = 0;
             $data['error'] = "请求失败";
-            $this->response($data, 404);            
+            $this->response($data, 200);            
         }
     }
 }
