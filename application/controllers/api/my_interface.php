@@ -4,6 +4,60 @@ require APPPATH . '/libraries/REST_Controller.php';
 class my_interface extends REST_Controller
 {
     
+    //获取门店(用户)数据
+    function get_users_post(){
+        $this->general_mdl->setTable('admin_user_profile');
+        $query = $this->general_mdl->get_query();
+
+        $result['content'] = $query->result_array();
+        $result['status'] = 1;
+        $this->response($result, 200); // 200 being the HTTP response code
+    }
+
+    //接受门店上传的菜单数据
+    function receive_goods_post(){
+        $username = $this->post('username');
+        $password = $this->post('password');
+
+        $resp['status'] = 0;
+        $is_matche = $this->dx_auth->login($username, $password, FALSE);
+
+        if($is_matche){
+            $resp['status'] = 1;
+            $user_id = $this->dx_auth->get_user_id();
+
+            //将接受到的菜单写入数据库
+            // code...
+        }else{
+            $resp['error'] = "请填写正确的用户名和密码";
+        }
+        $this->response($resp, 200);
+    }
+
+    //获取门店的菜单数据
+    function get_user_goods_post(){
+        $result['status'] = 0;
+        $user_id = $this->post('user_id');
+
+        $this->general_mdl->setTable('goods');
+        $query = $this->general_mdl->get_query_by_where( array('user_id' => $user_id) );
+
+        if($query->num_rows() > 0){        
+            $result['content'] = $query->result_array();
+            $result['status'] = 1;
+            $this->response($result, 200);
+        }else{
+            $result['error'] = 'no data';
+            $result['status'] = 0;
+            $this->response($result, 200);
+        }
+    }
+
+    //下单
+    function save_order_post(){
+        
+    }
+
     //获取订单表数据
     function get_order_post(){
         $order_sn = $this->post('order_sn');
