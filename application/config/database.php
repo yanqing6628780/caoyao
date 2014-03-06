@@ -48,9 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '192.168.0.38';
-$db['default']['username'] = 'mysqt';
-$db['default']['password'] = 'hello123';
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'root';
+$db['default']['password'] = 'root';
 $db['default']['database'] = 'restaurant';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

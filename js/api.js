@@ -57,11 +57,10 @@ function stopDefault(e) {
 }
 
 
-//页面某位置加载页面
+//在$('.page-content .page-content-body')位置加载页面
 /*
 ** url 发送请求的地址 String
 ** data 发送到服务器的数据 Json&String
-** Element 加载返回页面的元素ID String
 */
 function LoadPageContentBody(url, data)
 {

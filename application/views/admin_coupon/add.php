@@ -6,12 +6,11 @@
         <form id='addForm' class="form-horizontal" action="<?php echo site_url($controller_url."add_save")?>">
             <div class="form-body">
                 <div class="form-group">
-                    <label class="col-md-3 col-md-3 control-label"><?=$is_coupon ? "优惠卷" : "抽奖" ?>名称</label>
+                    <label class="col-md-3 col-md-3 control-label">优惠卷名称</label>
                     <div class="col-md-4">
                         <input class="form-control" type='text' name="coupon_name" value='' datatype="*" nullmsg="请输入名称！"/>
                     </div>
                 </div>
-                <?php if($is_coupon){?>
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">优惠卷金额</label>
                     <div class="col-md-4">
@@ -21,7 +20,6 @@
                         </div>
                     </div>
                 </div>
-                <?php }?>
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">开始时间</label>
                     <div class="col-md-4">
@@ -50,7 +48,6 @@
             <div class="form-actions fluid">
                 <div class="col-md-offset-3 col-md-9">
                     <input type='button' id="btn_sub" class="btn blue btn-lg" value='保存'/>
-                    <input type='hidden' name="is_coupon" value='<?=$is_coupon?>'/>
                 </div>
             </div>
         </form>
@@ -73,7 +70,7 @@ $(function () {
                     form.resetForm();
                 }else{
                     $('#myModal').modal('hide');
-                    $('#lottery_view').click();
+                    $('#coupon_view').click();
                 }
             }
         }

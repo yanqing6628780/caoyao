@@ -27,7 +27,6 @@ class Coupon extends CI_Controller {
         $this->load->model('dx_auth/user_profile', 'profile');
 
         $this->data['controller_url'] = "admin/coupon/";
-        $this->_is_coupon = $this->data['is_coupon'] =  $this->input->get_post("is_coupon") ? 1 : 0;
     }
 
     public function index()
@@ -37,13 +36,13 @@ class Coupon extends CI_Controller {
         $coupon_data = array();
         $party_id_array = array();
 
-        $query = $this->general_mdl->get_query_by_where(array("is_coupon" => $this->_is_coupon));
+        $query = $this->general_mdl->get_query();
 
         $this->data['total'] = $query->num_rows();
         $coupon_data = $query->result_array();
         
         $this->data['result'] = $coupon_data;
-        $this->data['title'] = $this->_is_coupon ? '优惠卷管理' : '抽奖管理';
+        $this->data['title'] = '优惠卷管理';
 
         $this->load->view('admin/head');
         $this->load->view('admin_coupon/list', $this->data);
