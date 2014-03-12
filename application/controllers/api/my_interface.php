@@ -5,7 +5,7 @@ class my_interface extends REST_Controller
 {
     
     //获取门店(用户)数据
-    function get_users_post(){
+    function users_get(){
         $this->general_mdl->setTable('admin_user_profile');
         $query = $this->general_mdl->get_query();
 
@@ -54,28 +54,46 @@ class my_interface extends REST_Controller
     }
 
     //下单
-    function save_order_post(){
+    function orders_post(){
         
     }
 
     //获取订单表数据
-    function get_order_post(){
-        $order_sn = $this->post('order_sn');
+    function orders_get(){
+
+        $order_sn = $this->get('sn');
+        $wechat_openid = $this->get('openid');
+
         $this->general_mdl->setTable('order');
-        $query = $this->general_mdl->get_query_by_where(array('order_sn' => $order_sn));
-        if ($query->num_rows() > 0) {
-            $result = $query->row_array();
+        if($order_sn){
+            $where = array('order_sn' => $order_sn);
+        }else if($wechat_openid){
+            $where = array('wechat_openid' => $wechat_openid);
+        }else{
+            $where = array();
+        }
+        $query = $this->general_mdl->get_query_by_where($where);
+
+        if ($order_sn) {
+            $row = $query->row_array();
 
             $this->general_mdl->setTable('order_goods');
-            $order_goods = $this->general_mdl->get_query_by_where(array('order_id' => $result['id']))->result_array();
+            $order_goods = $this->general_mdl->get_query_by_where(array('order_id' => $row['id']))->result_array();
             $result['goods'] = $order_goods;
-
-            $this->general_mdl->setTable('admin_user_profile');
-            $profile = $this->general_mdl->get_query_by_where(array('user_id' => $result['user_id']))->row_array();
-            $result['profile'] = $profile;
             
             $result['status'] = 1;
             $this->response($result, 200); // 200 being the HTTP response code
+        } else if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+
+            foreach ($result as $key => $row) {
+                $this->general_mdl->setTable('admin_user_profile');
+                $profile = $this->general_mdl->get_query_by_where(array('user_id' => $row['user_id']))->row_array();
+                $result[$key]['profile'] = $profile;
+                
+                $this->response($result, 200); // 200 being the HTTP response code
+            }
+
         } else {
             $result['status'] = 0;
             $result['error'] = 'no data';

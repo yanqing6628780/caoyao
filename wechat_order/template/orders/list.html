@@ -1,0 +1,28 @@
+<div class="warp container" ng-controller="myordersListCtrl" >
+	<div class="row row-offcanvas row-offcanvas-right">
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>订单号</th>
+						<th>店名</th>
+						<th>顾客</th>
+						<th>电话</th>
+						<th>台数</th>
+						<th>操作</th>
+					</tr>
+					<tr ng:repeat="item in orderList" ng-class-odd="'success'">
+						<td>{{item.order_sn}}</td>
+						<td>{{item.profile.name}}</td>
+						<td>{{item.customer}}</td>
+						<td>{{item.mobile}}</td>
+						<td>{{item.table_num}}</td>
+						<td>
+							<a ng-href="#/myorders/sn/{{item.order_sn}}" class="btn btn-info">菜式</a>
+						</td>
+					</tr>
+		        </thead>
+			</table>
+		</div>
+	</div>
+</div>

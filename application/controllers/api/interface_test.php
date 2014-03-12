@@ -13,9 +13,9 @@ class interface_test extends CI_Controller{
             'Authorization: Basic '.base64_encode("sqt:YWaWMTIzNA")
         );
 
-        $data = array('username' => 'admin', 'password' => '123456');
-        $url = site_url("/api/my_interface/receive_goods");
-        print($this->curl_tool->post($url, $http_header, $data));
+        // $data = array('username' => 'admin', 'password' => '123456');
+        $url = site_url("/api/my_interface/users");
+        print($this->curl_tool->get($url, $http_header));
     }
 
     function get_wx_token() {

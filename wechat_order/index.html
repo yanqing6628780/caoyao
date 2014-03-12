@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<style type="text/css">
+body {
+  padding-top: 70px;
+}
+</style>
+</head>
+
+<body ng-controller="appCtrl">
+<div role="navigation" class="navbar navbar-fixed-top navbar-inverse" ng-controller="navCtrl">
+	<div class="container">
+		<div class="navbar-header">
+		  <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+		    <span class="sr-only">Toggle navigation</span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand">奄尖大少微下单</a>
+		</div>
+		<div class="navbar-collapse collapse" style="height: 1px;">
+		  <ul class="nav navbar-nav">
+		    <li ng-repeat="item in links" title="{{item.title}}" ng-click="navActive(item.title)" ng-class="{ active: selectedNavItem == item.title}"><a ng-href="#{{item.url}}">{{item.name}}</a></li>
+		  </ul>
+		</div><!-- /.nav-collapse -->
+	</div><!-- /.container -->
+</div>
+<ng-view></ng-view>
+
+
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-route.js"></script>
+<script src="lib/angular/angular-resource.js"></script>
+<script>
+var myApp = angular.module('myApp', ['ngRoute', 'ngResource']);
+
+/*路由*/
+myApp.config(['$routeProvider', function ($routeProvider) {
+	$routeProvider
+	.when("/orders/", {templateUrl: "template/home.html", controller: "ordersCtrl"})
+	.when("/myorders/", {templateUrl: "template/orders/list.html", controller: "myordersListCtrl"})
+	.when("/myorders/sn/:sn", {templateUrl: "template/orders/detail.html", controller: "myordersDetailCtrl"})
+	.otherwise({ redirectTo: '/orders/' });
+}]);
+
+/*服务*/
+myApp
+.factory('usersService', ['$http', function ($http) {
+	var users =  {};
+	users.getUsersList =  function() {
+		return $http.get('/ci/api/my_interface/users', {headers: {'Authorization': 'Basic c3F0OllXYVdNVEl6TkE='}});
+	};
+	return users;
+}])
+.factory('ordersService', ['$resource', function ($resource) {
+	var resConfig = {'Authorization': 'Basic c3F0OllXYVdNVEl6TkE='};
+	return $resource("/ci/api/my_interface/orders/", {}, {  
+        get: {
+        	method: "GET",  
+        	params: {id: '@sn'}, 
+        	headers: resConfig
+        },
+        query: {
+        	method: "GET",
+        	params: {},  
+        	isArray: true, 
+        	headers: resConfig
+        }
+    });
+}]);
+
+/*控制器*/
+myApp
+.controller('appCtrl', ['$scope', '$rootScope', '$location', '$routeParams',  function ($scope, $rootScope, $location, $routeParams) {
+	if(angular.isUndefined($rootScope.openid)){
+		$rootScope.openid = $location.search().openid;
+	}
+	console.log($rootScope.openid);
+}])
+.controller('navCtrl', ['$scope', '$rootScope', '$location', '$routeParams',  function ($scope, $rootScope, $location, $routeParams) {
+	$scope.links = [
+		{name: "下单", url: "/orders", title: "orders"},
+		{name: "我的订单", url: "/myorders", title: "myorders"}
+	];
+
+	$scope.navActive = function(title){
+		$scope.selectedNavItem = title;
+	}
+
+	var currentLocation = $location.path()
+    for (var i = 0, len = $scope.links.length; i < len; i++) {
+      var navItem = $scope.links[i]
+      if (currentLocation == navItem.url) {
+        $scope.selectedNavItem = navItem.title
+      }
+    }
+}])
+.controller('ordersCtrl', ['usersService', '$scope', '$rootScope', function (usersService, $scope, $rootScope) {
+	// console.log($rootScope.openid);
+	$scope.usersList = [];
+	usersService.getUsersList().success(function (response) {
+		$scope.usersList = response;
+    });
+}])
+.controller('myordersListCtrl', ['$scope', '$rootScope', 'ordersService',function ($scope, $rootScope, ordersService) {
+	// console.log($rootScope.openid);
+	if(!angular.isUndefined($rootScope.openid)){
+		$scope.orderList = ordersService.query({openid: $rootScope.openid});
+	}
+}])
+.controller('myordersDetailCtrl', ['$scope', '$routeParams','ordersService', function ($scope, $routeParams, ordersService) {
+	$scope.orderDetail = ordersService.get({sn: $routeParams.sn});
+}]);
+
+</script>
+</body>
+</html>
