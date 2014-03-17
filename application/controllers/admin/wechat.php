@@ -31,6 +31,8 @@ class wechat extends CI_Controller {
 
         $this->general_mdl->setTable('sys_config');
         $this->data['config'] = $this->general_mdl->get_query_by_where(array('cat' => 'wechat'))->result_array();
+        $this->appid = $this->data['config'][0]['value'];
+        $this->secret = $this->data['config'][1]['value'];
 
         $this->data['controller_url'] = "admin/wechat/";
     }
@@ -165,13 +167,30 @@ class wechat extends CI_Controller {
         $this->load->view('wechat/autoreply', $this->data);
     }
 
+    // 查询自定义菜单
+    public function get_menu(){
+        $token = $this->session->userdata('wechat_access_token');
+        $url = sprintf('https://api.weixin.qq.com/cgi-bin/menu/get?access_token=%s', $token);
+
+        $this->curl->create($url);
+        $this->curl->ssl(FALSE, FALSE);
+        $this->curl->get();
+        $output = $this->curl->execute();
+        html_print(json_decode($output));
+    }
+
     // 创建自定义菜单
     public function create_menu()
     {   
         $token = $this->session->userdata('wechat_access_token');
         $url = sprintf('https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s', $token);
 
+
+        $bind_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_base&state=123#wechat_redirect';
+        $bind_url = sprintf($bind_url, $this->appid, base_url('wechat_handle/member_bind'));
+
         $data['button'] = array();
+
         $data['button'][] = array(
             'type' => 'click',
             'name' => 'test',
@@ -191,17 +210,17 @@ class wechat extends CI_Controller {
                     'url' => 'http://www.baidu.com'
                 ),
                 array(
-                    'type' => 'click',
+                    'type' => 'view',
                     'name' => urlencode('会员绑定'),
-                    'key' => 'bind'
+                    'url' => $bind_url
                 )
             )
         );
 
-        $json_menut = urldecode(json_encode($data));
+        $json_menu = urldecode(json_encode($data));
         $this->curl->create($url);
         $this->curl->ssl(FALSE, FALSE);
-        $this->curl->post($json_menut);
+        $this->curl->post($json_menu);
         $output = $this->curl->execute();
         var_dump($output);
     }
@@ -217,8 +236,8 @@ class wechat extends CI_Controller {
     {
         $url = sprintf(
             'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s', 
-            $this->data['config'][0]['value'], 
-            $this->data['config'][1]['value']
+            $this->appid, 
+            $this->secret
         );
 
         $response = json_decode($this->curl_tool->get($url, '', ''));

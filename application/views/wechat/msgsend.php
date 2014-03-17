@@ -129,11 +129,11 @@
 function getToken () {
 	$.ajax({
 		method: 'post',
-		datatype: 'json',
+		dataType: 'json',
 		url: '<?=site_url("admin/wechat/reset_access_token")?>',
 		success: function(resp) {
-			if(resp.access_token){
-				$('#access_token').text(resp.access_token);
+			if( !angular.isUndefined(resp.access_token) ){
+				$('#access_token').val(resp.access_token);
 			}else{
 				alert(resp.errmsg);
 			}

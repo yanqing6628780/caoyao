@@ -11,8 +11,7 @@ class wechat_handle extends CI_Controller
     {
         parent::__construct();
         $this->load->library("logger");
-        $this->logger->conf['log_file'] = "wechat_logs.txt";
-
+        
         $this->general_mdl->setTable('sys_config');
         $result = $this->general_mdl->get_query_by_where(array('cat' => 'wechat'))->result_array();
 
@@ -24,6 +23,36 @@ class wechat_handle extends CI_Controller
     public function index()
     {
         $this->message();
+    }
+
+    public function member_bind()
+    {
+        $this->load->library("curl");
+
+        $code = $this->input->get('code');
+
+        $this->general_mdl->setTable('sys_config');
+        $config = $this->general_mdl->get_query_by_where(array('cat' => 'wechat'))->result_array();
+        $appid = $config[0]['value'];
+        $secret = $config[1]['value'];
+
+        if($code){        
+            //获取用户
+            $url_template = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code';
+            $url = sprintf($url_template, $appid, $secret, $code);
+            $this->curl->create($url);
+            $this->curl->ssl(FALSE,FALSE);
+            $response = json_decode($this->curl->execute());
+
+            if( isset($response->openid) ){
+                $redirect_url = base_url('wechat/bind.html?openid='.$response->openid);
+                redirect($redirect_url);
+            }else{
+                echo $response->errmsg;
+            }
+        }else{
+            show_404();
+        }
     }
 
     // 在微信平台上设置的对外 URL
@@ -70,6 +99,9 @@ class wechat_handle extends CI_Controller
     private function _responseMsg()
     {
         $post_str = $GLOBALS["HTTP_RAW_POST_DATA"];
+
+        $this->logger->conf['log_file'] = "wechat_receive_logs.txt";
+        $this->logger->log(array($post_str));
 
         if (!empty($post_str))
         {
@@ -159,13 +191,11 @@ class wechat_handle extends CI_Controller
     private function onClick($eKey)
     {
         switch ($eKey) {
-            case 'bind':
-                $url = base_url('wechat/bind.html?openid=' $this->FromUserName);
-                redirect($url);
+            case 'value':                
                 break;
-          default:
-              echo "";
-              break;
+            default:
+                echo "";
+                break;
         }
     }
 
@@ -182,8 +212,6 @@ class wechat_handle extends CI_Controller
               </xml>";
       $resultStr = sprintf($tpl, $this->FromUserName, $this->ToUserName, time(), "text", $content);
       $resultXML = preg_replace('/[\r|\t]/', '', $resultStr);
-      $logData[] = $resultXML;
-      $this->logger->log($logData);
       echo $resultXML;
     }
 
@@ -219,6 +247,7 @@ class wechat_handle extends CI_Controller
     // 解析用户输入的字符串
     private function _parseMessage($message)
     {
+        $this->logger->conf['log_file'] = "wechat_logs.txt";
         // $this->general_mdl->setTable('wechat_autoreply');
         // $reply_row = $this->general_mdl->get_query_by_where(array("keyword" => $message));
         $reply_row = array();
@@ -233,8 +262,11 @@ class wechat_handle extends CI_Controller
             switch ($reply_row['msgtype']) {
                 case 'text':
                     $reply_data = json_decode($reply_row['reply_data']);
+
+                    $logData[] = $message;
                     $logData[] = $reply_data->content;
                     $this->logger->log($logData);
+
                     $this->responseText($reply_data->content);
                     break;
                 case 'news':
