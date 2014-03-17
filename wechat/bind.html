@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="appCtrl" >
+<head>
+<title ng-bind="title"></title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<style type="text/css">
+.myDiv{}
+.card{position: relative;width: 320px}
+.card img{}
+.card .cardNo {
+	bottom: 2px;
+	color: #FFFFFF;
+	font-size: 19px;
+	position: absolute;
+	left: 240px;
+}
+</style>
+</head>
+
+<body>
+<div class="jumbotron">
+	<div class="container">
+		<h1 ng-bind="title"></h1>
+		<div class="row">
+			<div class="myDiv">
+				<form class="form" ng-hide="isBind">
+					<div class="form-group">
+						<div>
+							<input class="form-control input-lg" placeholder="卡号" ng-model="cardNo"/>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div>
+							<button ng-click="memberBind()" type="button" class="btn-lg btn btn-success">绑定</button>
+						</div>
+					</div>
+				</form>
+				<div ng-show="alertMsg" class="alert alert-danger help-block" ng-bind="alertMsg"></div>
+				<div class="card" ng-show="isBind">
+					<img class="img-responsive" src="img/card_bg.jpg">
+					<span class="cardNo" ng-bind="cardNo"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<footer>
+		<p>&copy; 奄尖大少 2013</p>
+	</footer>
+</div> <!-- /container -->
+
+
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="../lib/angular/angular.js"></script>
+<script src="../lib/angular/angular-sanitize.js"></script>
+<script src="global.js"></script>
+<script>
+var myApp = angular.module('myApp', ['ngSanitize']);
+myApp.config(function($locationProvider){
+    $locationProvider.html5Mode(true);
+})
+/*控制器*/
+myApp.controller('appCtrl', ['$scope', '$location', '$http', '$sce', function ($scope, $location, $http, $sce) {
+	$scope.title = "会员绑定";
+	$scope.alertMsg = "";
+	var loc = $location.search();
+	if( ! angular.isUndefined(loc.openid) ) {
+		$http.get(getApiUrl('wechat_member_check?openid=' + loc.openid), {headers: restConfig})
+		.success(function(response){
+			$scope.isBind = response.status;
+			if(response.status){
+				$scope.title = "会员卡";
+				$scope.cardNo = response.cardNo;
+			}
+		});
+		$scope.openid = loc.openid;
+
+		$scope.memberBind = function () {
+			$scope.alertMsg = '';
+			$http.get(getApiUrl('wechat_member_bind?cardNo=' + $scope.cardNo + '&openid=' + loc.openid), {headers: restConfig})
+			.success(function(response){
+				if(response.status){
+					$scope.isBind = true;
+					$scope.title = "会员卡";
+				}else{
+					$scope.alertMsg = response.info;
+				}
+			});
+		}
+	}else{
+		console.log(loc.openid);
+	}
+}])
+
+</script>
+</body>
+</html>

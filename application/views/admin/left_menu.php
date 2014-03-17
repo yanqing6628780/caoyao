@@ -1,4 +1,4 @@
-<li class="start active">
+<li class="start">
 	<a href="javascript:;">
 		<i class="icon-home"></i> 
 		<span class="title">系统管理</span>
@@ -17,6 +17,21 @@
 		<?php endif;?>
 	</ul>
 </li>
+<?php if(checkPermission2('wechat_admin')):?>	
+<li class="active">
+	<a href="javascript:;">
+		<i class="icon-linux"></i> 
+		<span class="title">微信管理</span>
+		<span class="selected"></span>
+		<span class="arrow"></span>
+	</a>
+	<ul class="sub-menu">
+		<li><a id="wechat_config_view" class="ajaxify" href="<?php echo site_url('admin/wechat/config')?>" target="right">配置</a></li>
+		<li><a id="wechat_msgsend_view" class="ajaxify" href="<?php echo site_url('admin/wechat/msgsend/')?>" target="right">群发信息</a></li>
+		<li><a id="wechat_autoreply_view" class="ajaxify" href="<?php echo site_url('admin/wechat/autoreply')?>" target="right">自动回复</a></li>
+	</ul>
+</li>
+<?php endif;?>
 <li class="last">
 	<a href="javascript:;">
 		<i class="icon-cogs"></i> 

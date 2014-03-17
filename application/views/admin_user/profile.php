@@ -1,5 +1,6 @@
 <link type="text/css" href="<?=base_url()?>assets/css/pages/profile.css" rel="stylesheet" />
-<link type="text/css" href="<?=base_url()?>assets/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+<link type="text/css" href="<?=base_url()?>assets/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet"/>
+<link type="text/css" href="<?=base_url()?>assets/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet"/>
 <div class="row profile-account">
     <div class="col-md-3">
       <ul class="ver-inline-menu tabbable margin-bottom-10">
@@ -51,8 +52,11 @@
                         </div>
                         <div class="input-group input-group-fixed">
                             <span class="btn green btn-file">
-                                <span class="fileupload-new"><i class="icon-paper-clip"></i> 选择文件</span>
+                                <span class="btn green fileinput-button">
+                                <i class="icon-paper-clip"></i> 
+                                <span>选择文件</span>
                                 <input type="file" name="files" id="avatarupload" class="default">
+                                </span>
                             </span>
                             <span class="text-danger" id="uploadstatus"></span>
                         </div>

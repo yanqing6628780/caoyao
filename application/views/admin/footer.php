@@ -49,7 +49,7 @@
 <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/select2/select2.min.js"></script>
 <script src="<?php echo base_url()?>js/validform_v5.3.2.js"></script>
 
-<script src="<?php echo base_url()?>assets/scripts/app.js"></script>      
+<script src="<?php echo base_url()?>assets/scripts/app.js"></script>
 <script>
 jQuery(document).ready(function() {    
    App.init();

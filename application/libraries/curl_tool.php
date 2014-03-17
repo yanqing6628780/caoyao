@@ -28,6 +28,7 @@ class curl_tool {
         curl_close($ch);
         return trim($output);
     }
+    
     public static final function put($url, $header, $data) {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);

@@ -1,4 +1,14 @@
 <?php
+
+// 图片路径
+function get_image_url($url){
+    if(substr($url,0,4)=='http'){
+        return $url;    
+    }else{
+        return base_url($url);
+    }
+}
+
 /*
  *常用函数
  *

@@ -1,7 +1,7 @@
 <body class="page-header-fixed page-footer-fixed page-sidebar-fixed">
 <?php echo $this->load->view('admin/header'); ?>
 <!-- BEGIN CONTAINER -->
-<div class="page-container">
+<div class="page-container" >
   <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->               
   <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
      <div class="modal-dialog">
@@ -100,7 +100,7 @@
 		</div>
 	</div>
 	<!-- END BEGIN STYLE CUSTOMIZER -->
-	<div class="page-content-body">
+	<div class="page-content-body" ng-controller="msgSendCtrl">
 	 <!-- HERE WILL BE LOADED AN AJAX CONTENT -->
 	</div>
   </div>

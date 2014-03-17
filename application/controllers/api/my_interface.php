@@ -213,4 +213,73 @@ class my_interface extends REST_Controller
             $this->response($data, 200);            
         }
     }
+
+    //获取微信图文文章内容
+    public function wechat_articles_get(){
+        $id = $this->get('id');
+        $this->general_mdl->setTable('msg_news');
+        if($id) {
+            $query = $this->general_mdl->get_query_by_where(array("id" => $id));
+            $response = $query->row_array();
+        }
+
+        echo json_encode($response);
+    }
+
+    //微信会员检查
+    public function wechat_member_check_get() {
+        $openid = $this->get('openid') ? $this->get('openid') : "";
+
+        $this->general_mdl->setTable('wechat_member_bind');
+        $query = $this->general_mdl->get_query_by_where(array("openid" => $openid));
+        
+        if($query->num_rows() > 0){
+            $resp['status'] = TRUE;
+            $resp['cardNo'] = $query->row()->cardNo;
+        }else{
+            $resp['status'] = FALSE;
+        }
+
+        echo json_encode($resp);
+    }
+
+    //微信会员绑定
+    public function wechat_member_bind_get() 
+    {
+        $this->load->library('curl');
+
+        $openid = $this->get('openid');
+        $cardNo = $this->get('cardNo');
+
+        $url = "http://192.168.0.136:8168/stt_access/get_leaguer";
+        $post_data['filter'] = json_encode( array('vch_memberno' => $cardNo) );
+        $this->curl->create($url);
+        $this->curl->http_login('sqt', 'YWaWMTIzNA', 'basic');
+        $this->curl->post($post_data);
+        $leaguer_resp = json_decode($this->curl->execute());
+
+        $response['status'] = FALSE;
+        $this->general_mdl->setTable('wechat_member_bind');
+        if(isset($leaguer_resp->leaguer) && !empty($leaguer_resp->leaguer) ){        
+            if($openid && $cardNo) {
+                $query = $this->general_mdl->get_query_by_where(array("cardNo" => $cardNo));
+                if($query->num_rows() > 0){
+                    $response['info'] = '此卡号已绑定,请不要重复绑定';
+                }else{
+                    $create_data['openid'] = $openid;
+                    $create_data['cardNo'] = $cardNo;
+                    $this->general_mdl->setData($create_data);
+                    $this->general_mdl->create();
+                    $response['status'] = TRUE;
+                    $response['info'] = '绑定成功!';
+                }
+            }else{
+                $response['info'] = '请输入卡号!';
+            }
+        }else{
+            $response['info'] = '请输入正确的卡号!';
+        }
+
+        echo json_encode($response);
+    }
 }

@@ -114,11 +114,13 @@ class Curl {
 
 	public function post($params = array(), $options = array())
 	{
+		// 这段代码会将传入的参数数组改为用&链接的形式
+		// CURLOPT_POSTFIELDS是可以直接上传数组的，不知道为什么要这样写。
 		// If its an array (instead of a query string) then format it correctly
-		if (is_array($params))
-		{
-			$params = http_build_query($params, NULL, '&');
-		}
+		// if (is_array($params))
+		// {
+		// 	$params = http_build_query($params, NULL, '&');
+		// }
 
 		// Add in the specific options provided
 		$this->options($options);

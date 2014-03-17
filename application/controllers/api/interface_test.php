@@ -4,7 +4,8 @@ class interface_test extends CI_Controller{
 	public function __construct() {
 	    parent::__construct();
 
-	    $this->load->library('curl_tool');
+        $this->load->library('curl_tool');
+	    $this->load->library('curl');
 	}
 
     function index() {
@@ -14,8 +15,21 @@ class interface_test extends CI_Controller{
         );
 
         // $data = array('username' => 'admin', 'password' => '123456');
-        $url = site_url("/api/my_interface/users");
-        print($this->curl_tool->get($url, $http_header));
+        // $url = site_url("/api/my_interface/users");
+        $url = "http://192.168.0.136:8168/stt_access/get_leaguer";
+        $data = array('filter' => '{"vch_memberno":"H1"}');
+        $this->curl->create($url);
+        $this->curl->http_login('sqt', 'YWaWMTIzNA', 'basic');
+        $this->curl->post($data);
+        var_dump($this->curl->execute());
+        echo "<br>";
+        // var_dump($this->curl->error_string);
+        echo "<br>";
+        // var_dump($this->curl->error_code);
+        echo "<br>";
+        // var_dump($this->curl->info);
+        // var_dump($this->curl_tool->post($url, $http_header, $data));
+
     }
 
     function get_wx_token() {

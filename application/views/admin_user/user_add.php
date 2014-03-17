@@ -78,7 +78,6 @@
         </form>
     </div>
 </div>
-<script src="<?php echo base_url()?>js/validform_v5.3.2.js"></script>
 <script type="text/javascript">
 $(function () {
     var form = $("#user_add").Validform({
