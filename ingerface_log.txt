@@ -1,0 +1,44 @@
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":"1002","vch_spec":"4456","num_price1":50,"num_price2":0,=
+"num_price3":0,"num_m_price1":0,"num_m_price2":0,"num_m_price3":0},{"c=
+h_dishno":"1003","vch_spec":"","num_price1":5000,"num_price2":0,"num_p=
+rice3":0,"num_m_price1":0,"num_m_price2":0,"num_m_price3":0},{"ch_dish=
+no":"D1001","vch_spec":"\u4e00\u4efd","num_price1":500,"num_price2":0,=
+"num_price3":0,"num_m_price1":0,"num_m_price2":0,"num_m_price3":0}]	
+
+[{"ch_dishno":"1002","vch_spec":"4456","num_price1":50,"num_price2":0,=
+"num_price3":0,"num_m_price1":0,"num_m_price2":0,"num_m_price3":0},{"c=
+h_dishno":"1003","vch_spec":"","num_price1":5000,"num_price2":0,"num_p=
+rice3":0,"num_m_price1":0,"num_m_price2":0,"num_m_price3":0},{"ch_dish=
+no":"D1001","vch_spec":"\u4e00\u4efd","num_price1":500,"num_price2":0,=
+"num_price3":0,"num_m_price1":0,"num_m_price2":0,"num_m_price3":0}]	
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+
+[{"ch_dishno":1,"num_price1":"50"},{"ch_dishno":2,"num_price1":"50"},{"ch_dishno":3,"num_price1":"50"}]	Array
+

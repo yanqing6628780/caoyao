@@ -14,20 +14,39 @@ class interface_test extends CI_Controller{
             'Authorization: Basic '.base64_encode("sqt:YWaWMTIzNA")
         );
 
-        // $data = array('username' => 'admin', 'password' => '123456');
-        // $url = site_url("/api/my_interface/users");
-        $url = "http://192.168.0.136:8168/stt_access/get_leaguer";
-        $data = array('filter' => '{"vch_memberno":"H1"}');
+        // $url = site_url('api/my_interface/coupon_print');
+        // $data = array('coupon_num' => '123456');
+
+        // $url = "http://192.168.0.136:8168/stt_access/get_leaguer";
+        // $data = array('filter' => '{"vch_memberno":"H1"}');
+
+        $url = site_url("/api/my_interface/bustype");
+        $data = array('username' => 'admin', 'password' => '123456');
+        $db_data[] = array('ch_bustype' => 1, 'vch_name' => '早2');
+        $db_data[] = array('ch_bustype' => 2, 'vch_name' => '午市');
+        $db_data[] = array('ch_bustype' => 3, 'vch_name' => '晚2');
+        $db_data[] = array('ch_bustype' => 4, 'vch_name' => '晚午');
+
+        // $db_data[] = array('ch_dishno' => 1, 'num_price1' => '50');
+        // $db_data[] = array('ch_dishno' => 2, 'num_price1' => '50');
+        // $db_data[] = array('ch_dishno' => 3, 'num_price1' => '50');
+        
+        $data['data'] = json_encode($db_data);
+        // die(var_dump($data));
+
         $this->curl->create($url);
         $this->curl->http_login('sqt', 'YWaWMTIzNA', 'basic');
+
         $this->curl->post($data);
+        // $this->curl->get();
+
         var_dump($this->curl->execute());
         echo "<br>";
-        // var_dump($this->curl->error_string);
+        var_dump($this->curl->error_string);
         echo "<br>";
-        // var_dump($this->curl->error_code);
+        var_dump($this->curl->error_code);
         echo "<br>";
-        // var_dump($this->curl->info);
+        html_print($this->curl->info);
         // var_dump($this->curl_tool->post($url, $http_header, $data));
 
     }

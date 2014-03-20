@@ -126,11 +126,8 @@ class wechat extends CI_Controller {
 
                     //将图文信息入库
                     if( $post['title'] && $post['picurl'] ) {
-                        $this->general_mdl->setTable('msg_news');
+                        $this->general_mdl->setTable('wechat_msg_news');
                         $id = $this->general_mdl->get_query()->num_rows() + 1;
-                        if( empty($post['url']) && !empty($post['news_content']) ) {
-                            $post['url'] = base_url('wechat/article.html?id='.$id);
-                        }
                         $create_data = array(
                             'id' => $id,
                             'title' => $post['title'],
@@ -140,7 +137,12 @@ class wechat extends CI_Controller {
                             'content' => $post['news_content']
                         );
                         $this->general_mdl->setData($create_data);
-                        $this->general_mdl->create();
+                        $insert_id = $this->general_mdl->create();
+                        if( $insert_id && empty($post['url']) && !empty($post['news_content']) ) {
+                            $update_data['url'] = base_url('wechat/article.html?id='.$id);
+                            $this->general_mdl->setData($update_data);
+                            $this->general_mdl->update(array('id' => $insert_id));
+                        }
                     }
 
                     //发送
@@ -165,6 +167,78 @@ class wechat extends CI_Controller {
     {
         checkPermission('wechat_admin');
         $this->load->view('wechat/autoreply', $this->data);
+    }
+
+    public function appmsg()
+    {
+        checkPermission('wechat_admin');
+
+        $this->general_mdl->setTable('wechat_msg_news');
+        $query = $this->general_mdl->get_query();
+        $this->data['result'] = $query->result_array();
+
+        $this->data['title'] = "图文管理";
+        $this->load->view('wechat/appmsg', $this->data);
+    }
+
+    public function newsedit()
+    {
+        checkPermission('wechat_admin');
+
+        $id = $this->input->get('id');
+
+        $this->general_mdl->setTable('wechat_msg_news');
+        $query = $this->general_mdl->get_query_by_where(array('id' => $id));
+        $this->data['row'] = $query->row_array();
+
+        $this->load->view('wechat/newsedit', $this->data);
+    }
+
+    public function newsadd()
+    {
+        checkPermission('wechat_admin');
+        $this->load->view('wechat/newsadd', $this->data);
+    }
+
+    public function news_save()
+    {
+        $post_data = $this->input->post(NULL, TRUE);
+
+        $this->general_mdl->setTable('wechat_msg_news');
+
+        if(isset($post_data['id']) && !empty($post_data['id']) ){
+            if( empty($post_data['url']) && !empty($post_data['content']) ) {
+                $post_data['url'] = base_url('wechat/article.html?id='.$post_data['id']);
+            }
+            $this->general_mdl->setData($post_data);
+            $this->general_mdl->update(array('id' => $post_data['id']));
+            $response['info'] = '修改完成';
+        }else{
+            $this->general_mdl->setData($post_data);
+            $insert_id = $this->general_mdl->create();
+            if( $insert_id && empty($post_data['url']) && !empty($post_data['content']) ) {
+                $update_data['url'] = base_url('wechat/article.html?id='.$id);
+                $this->general_mdl->setData($update_data);
+                $this->general_mdl->update(array('id' => $insert_id));
+            }
+            $response['info'] = '保存成功';
+        }
+
+        $response['status'] = 'y';
+        echo json_encode($response);
+    }
+
+    public function newsdel()
+    {
+        $id = $this->input->post('id');
+
+        $this->general_mdl->setTable('wechat_msg_news');
+        $response['success'] = false;
+
+        $this->general_mdl->delete_by_id($id);
+        $response['success'] = true;
+        
+        echo json_encode($response);
     }
 
     // 查询自定义菜单

@@ -28,7 +28,8 @@
 	<ul class="sub-menu">
 		<li><a id="wechat_config_view" class="ajaxify" href="<?php echo site_url('admin/wechat/config')?>" target="right">配置</a></li>
 		<li><a id="wechat_msgsend_view" class="ajaxify" href="<?php echo site_url('admin/wechat/msgsend/')?>" target="right">群发信息</a></li>
-		<li><a id="wechat_autoreply_view" class="ajaxify" href="<?php echo site_url('admin/wechat/autoreply')?>" target="right">自动回复</a></li>
+		<li><a id="wechat_appmsg_view" class="ajaxify" href="<?php echo site_url('admin/wechat/appmsg')?>" target="right">图文管理</a></li>
+		<!-- <li><a id="wechat_autoreply_view" class="ajaxify" href="<?php echo site_url('admin/wechat/autoreply')?>" target="right">自动回复</a></li> -->
 	</ul>
 </li>
 <?php endif;?>

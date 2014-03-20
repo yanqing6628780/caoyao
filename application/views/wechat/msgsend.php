@@ -192,6 +192,6 @@ $(function () {
 
      CKEDITOR.replace( 'ck_editor',{
 		filebrowserUploadUrl: '<?=site_url("files/ckUpload/")?>'
-     } );
+     });
 })
 </script>

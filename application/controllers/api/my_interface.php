@@ -3,7 +3,15 @@ require APPPATH . '/libraries/REST_Controller.php';
 
 class my_interface extends REST_Controller
 {
-    
+    function __construct()
+    {
+        parent::__construct();
+
+        $this->member_server_domain = "http://192.168.0.136:8168";
+        $this->load->library('logger');
+    }
+
+
     //获取门店(用户)数据
     function users_get(){
         $this->general_mdl->setTable('admin_user_profile');
@@ -12,6 +20,158 @@ class my_interface extends REST_Controller
         $result['content'] = $query->result_array();
         $result['status'] = 1;
         $this->response($result, 200); // 200 being the HTTP response code
+    }
+
+    //市别数据入库
+    function bustype_post(){
+        $username = $this->post('username');
+        $password = $this->post('password');
+        $data = json_decode($this->post('data'));
+
+        $resp['status'] = 0;
+        $is_matche = $this->dx_auth->login($username, $password, FALSE);
+
+        if($is_matche){
+            //将接受到的数据写入数据库
+            $this->post_to_db('cybr_bt_bustype', $data, 'ch_bustype');
+            $resp['status'] = 1;
+        }else{
+            $resp['error'] = "请填写正确的用户名和密码";
+        }
+        $this->response($resp, 200);
+    }
+
+    //菜品数据入库
+    function dish_post()
+    {
+
+        $username = $this->post('username');
+        $password = $this->post('password');
+        $data = json_decode($this->post('data'));
+
+        
+        $resp['status'] = 0;
+        $is_matche = $this->dx_auth->login($username, $password, FALSE);
+
+        if($is_matche){
+            $this->post_to_db('cy_bt_dish', $data, 'ch_dishno');
+            $resp['status'] = 1;
+        }else{
+            $resp['error'] = "请填写正确的用户名和密码";
+        }
+        $this->response($resp, 200);
+    }
+
+    //菜品沽清数据入库
+    function dish_warn_post(){
+        $username = $this->post('username');
+        $password = $this->post('password');
+        $data = json_decode($this->post('data'));
+
+        $resp['status'] = 0;
+        $is_matche = $this->dx_auth->login($username, $password, FALSE);
+
+        if($is_matche){
+            $this->post_to_db('cybr_u_dish_warn', $data, 'int_flowID');
+            $resp['status'] = 1;
+        }else{
+            $resp['error'] = "请填写正确的用户名和密码";
+        }
+        $this->response($resp, 200);
+    }
+
+    //特价菜品数据入库
+    function dish_special_post(){
+        $username = $this->post('username');
+        $password = $this->post('password');
+        $data = json_decode($this->post('data'));
+
+        $resp['status'] = 0;
+        $is_matche = $this->dx_auth->login($username, $password, FALSE);
+
+        if($is_matche){
+            $this->post_to_db('cybr_bt_dish_special', $data, 'int_flowID');
+            $resp['status'] = 1;
+        }else{
+            $resp['error'] = "请填写正确的用户名和密码";
+        }
+        $this->response($resp, 200);
+    }
+
+    //套菜数据入库
+    function dish_suit_post(){
+        $username = $this->post('username');
+        $password = $this->post('password');
+        $data = json_decode($this->post('data'));
+
+        $resp['status'] = 0;
+        $is_matche = $this->dx_auth->login($username, $password, FALSE);
+
+        if($is_matche){
+            $this->post_to_db('cybr_bt_dish_suit', $data, 'int_flowID');
+            $resp['status'] = 1;
+        }else{
+            $resp['error'] = "请填写正确的用户名和密码";
+        }
+        $this->response($resp, 200);
+    }
+
+    //菜品做法数据入库
+    function dish_memo_post(){
+        $username = $this->post('username');
+        $password = $this->post('password');
+        $data = json_decode($this->post('data'));
+
+        $resp['status'] = 0;
+        $is_matche = $this->dx_auth->login($username, $password, FALSE);
+
+        if($is_matche){
+            $this->post_to_db('cybr_cp_dish_memo', $data, 'ch_dishno');
+            $resp['status'] = 1;
+        }else{
+            $resp['error'] = "请填写正确的用户名和密码";
+        }
+        $this->response($resp, 200);
+    }
+
+    //餐台数据入库
+    function table_post(){
+        $username = $this->post('username');
+        $password = $this->post('password');
+        $data = json_decode($this->post('data'));
+
+        $resp['status'] = 0;
+        $is_matche = $this->dx_auth->login($username, $password, FALSE);
+
+        if($is_matche){
+            $this->post_to_db('cybr_bt_table', $data, 'ch_tableno');
+            $resp['status'] = 1;
+        }else{
+            $resp['error'] = "请填写正确的用户名和密码";
+        }
+        $this->response($resp, 200);
+    }
+
+    // 数据入库
+    private function post_to_db($table, $db_data, $matche_field){
+        $user_id = $this->dx_auth->get_user_id();
+        $this->general_mdl->setTable($table);
+
+        if(is_array($db_data)){$db_data = (object)$db_data;}
+
+        if(is_object($db_data)){        
+            foreach ($db_data as $key => $row) {
+                $row->user_id = $user_id;
+                $query = $this->general_mdl->get_query_by_where( array($matche_field => $row->{$matche_field}, 'user_id' => $user_id) );
+                $this->general_mdl->setData($row);
+                // 如果已有数据则更新,没有则创建
+                if($query->num_rows()){
+                    $this->general_mdl->update( array($matche_field => $row->{$matche_field}) );
+                }else{
+                    $this->general_mdl->create();
+                }
+            }
+        }
     }
 
     //接受门店上传的菜单数据
@@ -217,7 +377,7 @@ class my_interface extends REST_Controller
     //获取微信图文文章内容
     public function wechat_articles_get(){
         $id = $this->get('id');
-        $this->general_mdl->setTable('msg_news');
+        $this->general_mdl->setTable('wechat_msg_news');
         if($id) {
             $query = $this->general_mdl->get_query_by_where(array("id" => $id));
             $response = $query->row_array();
@@ -251,7 +411,7 @@ class my_interface extends REST_Controller
         $openid = $this->get('openid');
         $cardNo = $this->get('cardNo');
 
-        $url = "http://192.168.0.136:8168/stt_access/get_leaguer";
+        $url = $this->member_server_domain."/stt_access/get_leaguer";
         $post_data['filter'] = json_encode( array('vch_memberno' => $cardNo) );
         $this->curl->create($url);
         $this->curl->http_login('sqt', 'YWaWMTIzNA', 'basic');

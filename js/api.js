@@ -167,7 +167,7 @@ var TableAdvanced = function () {
                     [5, 15, 20, "All"] // change per page values here
                 ],
                 // set the initial value
-                "iDisplayLength": 10,
+                "iDisplayLength": 5,
                 "oLanguage": oLanguage
             });
 
