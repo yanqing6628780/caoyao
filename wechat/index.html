@@ -9,6 +9,11 @@
 body {
   padding-top: 70px;
 }
+.ovh{overflow: hidden;}
+input.ng-invalid{
+	border-color: #E9322D;
+	box-shadow: 0 0 6px #F8B9B7;
+}
 </style>
 </head>
 
@@ -24,7 +29,7 @@ body {
 		  </button>
 		  <a class="navbar-brand">奄尖大少微下单</a>
 		</div>
-		<div class="navbar-collapse collapse" style="height: 1px;">
+		<div ng-class="{collapse: collapse}" class="navbar-collapse collapse" style="height: 1px;">
 		  <ul class="nav navbar-nav">
 		    <li ng-repeat="item in links" title="{{item.title}}" ng-click="navActive(item.title)" ng-class="{ active: selectedNavItem == item.title}"><a ng-href="#{{item.url}}">{{item.name}}</a></li>
 		  </ul>
@@ -34,65 +39,108 @@ body {
 <ng-view></ng-view>
 
 
-<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="../lib/angular/angular.js"></script>
-<script src="../lib/angular/angular-route.js"></script>
-<script src="../lib/angular/angular-resource.js"></script>
-<script>
-var myApp = angular.module('myApp', ['ngRoute', 'ngResource']);
-
-/*路由*/
-myApp.config(['$routeProvider', function ($routeProvider) {
-	$routeProvider
-	.when("/orders/", {templateUrl: "template/home.html", controller: "ordersCtrl"})
-	.when("/myorders/", {templateUrl: "template/orders/list.html", controller: "myordersListCtrl"})
-	.when("/myorders/sn/:sn", {templateUrl: "template/orders/detail.html", controller: "myordersDetailCtrl"})
-	.otherwise({ redirectTo: '/orders/' });
-}]);
-
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../lib/angular/angular.js"></script>
+<script type="text/javascript" src="../lib/angular/angular-route.js"></script>
+<script type="text/javascript" src="../lib/angular/angular-resource.js"></script>
+<script type="text/javascript" src="../lib/angular/angular-sanitize.js"></script>
+<script type="text/javascript" src="../lib/angular/angular-cookies.min.js"></script>
+<script type="text/javascript" src="global.js"></script>
+<script type="text/javascript" src="route.js"></script>
+<script type="text/javascript">
 /*服务*/
 myApp
-.factory('usersService', ['$http', function ($http) {
-	var users =  {};
-	users.getUsersList =  function() {
-		return $http.get('/ci/api/my_interface/users', {headers: {'Authorization': 'Basic c3F0OllXYVdNVEl6TkE='}});
-	};
-	return users;
+.factory('usersService', ['$resource', function ($resource) {
+	return $resource(getApiUrl("users/"), {}, {  
+        query: {
+        	method: "GET",
+        	headers: AuthHeader
+        }
+    });
 }])
 .factory('ordersService', ['$resource', function ($resource) {
-	var resConfig = {'Authorization': 'Basic c3F0OllXYVdNVEl6TkE='};
-	return $resource("/ci/api/my_interface/orders/", {}, {  
+	return $resource(getApiUrl("orders/"), {}, {  
         get: {
         	method: "GET",  
         	params: {id: '@sn'}, 
-        	headers: resConfig
+        	headers: AuthHeader
         },
         query: {
         	method: "GET",
         	params: {},  
         	isArray: true, 
-        	headers: resConfig
+        	headers: AuthHeader
+        },
+        delDish:{
+        	url: getApiUrl("orders_dish/id/:id"),
+        	method: "DELETE",
+        	params: {id: "@id"},
+        	headers: AuthHeader
+        }
+    });
+}]).factory('dishService', ['$resource', function ($resource) {
+	return $resource(getApiUrl("dish/:id"), {}, {
+		get: {
+			method: "GET",  
+			params: {id: '@sn'}, 
+			headers: AuthHeader
+		},
+        query: {
+        	method: "GET",
+        	isArray: true,
+        	headers: AuthHeader
+        }
+    });
+}]).factory('bookService', ['$resource', function ($resource) {
+	return $resource(getApiUrl("book/"), {}, {
+		post: {
+			method: "POST",
+			headers: AuthHeader
+		},
+        postDetail:{
+        	url: getApiUrl("book_detail/"),
+        	method: "POST",
+        	headers: postDataHeader
         }
     });
 }]);
 
 /*控制器*/
 myApp
-.controller('appCtrl', ['$scope', '$rootScope', '$location', '$routeParams',  function ($scope, $rootScope, $location, $routeParams) {
-	if(angular.isUndefined($rootScope.openid)){
-		$rootScope.openid = $location.search().openid;
+.controller('appCtrl', ['$scope', '$location', '$cookies', function ($scope, $location, $cookies) {
+	$scope.book = {}; //预订信息
+	$scope.book.no = ''; //预订单号
+	$scope.cart = []; //购物车
+	$scope.msg = {title: "404", content: "页面不存在"};
+
+	//将openid存入cookies,防止用户刷新后openid丢失
+	if(angular.isUndefined($location.search().openid)){
+		$scope.book.openid = $cookies.openid;
+		if(angular.isUndefined($cookies.openid)){
+			$location.path('message');
+		}
+	}else{
+		$scope.book.openid = $location.search().openid;
+		$cookies.openid = $location.search().openid;
 	}
-	console.log($rootScope.openid);
+
 }])
-.controller('navCtrl', ['$scope', '$rootScope', '$location', '$routeParams',  function ($scope, $rootScope, $location, $routeParams) {
+.controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
 	$scope.links = [
 		{name: "下单", url: "/orders", title: "orders"},
-		{name: "我的订单", url: "/myorders", title: "myorders"}
+		{name: "我的订单", url: "/myorders", title: "myorders"},
+		{name: "购物车", url: "/cart", title: "cart"}
 	];
+	if(angular.isUndefined($scope.book.openid)){
+		$scope.links.splice(1, 1);
+	}
 
+	$scope.collapse = false;
 	$scope.navActive = function(title){
 		$scope.selectedNavItem = title;
+		$scope.collapse = true;
+		console.log($scope.collapse);
 	}
 
 	var currentLocation = $location.path()
@@ -103,21 +151,114 @@ myApp
       }
     }
 }])
-.controller('ordersCtrl', ['usersService', '$scope', '$rootScope', function (usersService, $scope, $rootScope) {
-	// console.log($rootScope.openid);
-	$scope.usersList = [];
-	usersService.getUsersList().success(function (response) {
-		$scope.usersList = response;
-    });
+.controller('orderMsgCtrl', ['$scope', '$sce', function ($scope, $sce) {
+	$scope.msg.trustContent = $sce.trustAsHtml($scope.msg.content);
 }])
-.controller('myordersListCtrl', ['$scope', '$rootScope', 'ordersService',function ($scope, $rootScope, ordersService) {
-	// console.log($rootScope.openid);
-	if(!angular.isUndefined($rootScope.openid)){
-		$scope.orderList = ordersService.query({openid: $rootScope.openid});
+.controller('ordersCtrl', ['$scope', 'usersService', '$http', '$location',function ($scope, usersService, $http, $location) {
+	$scope.book.person = 1;
+	$scope.book.table_nums = 1;
+	$scope.usersList = usersService.query();
+
+    $scope.bookSubmit = function(){
+    	$http.post(getApiUrl('book/'), $.param($scope.book), {headers: postDataHeader}).success(function(response){
+    		$scope.book.no = response.ch_bookno;
+    		$scope.msg.title = '下单成功';
+    		$scope.msg.content = '你的预订单号是: ' + $scope.book.no + "<br>是否继续点菜?";
+    		$location.path('message')
+    	});
+    }
+}])
+.controller('myordersListCtrl', ['$scope', 'ordersService',function ($scope, ordersService) {
+	if(!angular.isUndefined($scope.book.openid)){
+		$scope.orderList = ordersService.query({openid: $scope.book.openid});
+	}
+
+	// 设置订单号
+	$scope.setBookNo = function (bookNo) {
+		$scope.book.no = bookNo;
 	}
 }])
-.controller('myordersDetailCtrl', ['$scope', '$routeParams','ordersService', function ($scope, $routeParams, ordersService) {
+.controller('myordersDetailCtrl', ['$scope', 'ordersService', '$routeParams', function ($scope, ordersService, $routeParams) {
+	$scope.bookNo = $routeParams.sn;
 	$scope.orderDetail = ordersService.get({sn: $routeParams.sn});
+	$scope.total = function() {
+		var total = 0;
+		angular.forEach($scope.orderDetail.dishes, function (item, index) {
+			// console.log(item);
+			total = total + item.num_price * item.num_num;
+		});
+		return total;
+	}
+
+	$scope.removeDish = function(index, id, int_id) {
+		$scope.orderDetail.dishes.splice(index, 1);
+		ordersService.delDish({sn: $routeParams.sn, int_id: int_id},{id:id});
+	}
+}])
+.controller('dishListCtrl', ['$scope', '$location', 'dishService', function ($scope, $location, dishService) {
+	$scope.dishes = dishService.query();
+}])
+.controller('dishDetailCtrl', ['$scope', 'dishService', '$routeParams',  '$location', function ($scope, dishService, $routeParams, $location) {
+	$scope.dish = dishService.get({DishId: $routeParams.DishId}, {headers: AuthHeader});
+
+	$scope.addToCart = function(dish){
+		if(angular.isUndefined(dish.memo)){
+			dish.memo.vch_memo = "";
+			dish.memo.ch_memono = "";
+		}
+		var cartItem = {};
+		var exists = false;
+		$scope.cart.forEach(function (item, index) {
+			if (item.ch_dishno == dish.ch_dishno && item.ch_memono == dish.memo.ch_memono) {
+				item.nums = item.nums + parseInt(dish.nums);
+				exists = true;
+				return;
+			}
+		});
+
+		if (!exists) {
+			cartItem.vch_dishname = dish.vch_dishname;
+			cartItem.ch_dishno = dish.ch_dishno;
+			cartItem.ch_memono = dish.memo.ch_memono;
+			cartItem.vch_memo = dish.memo.vch_memo;
+			cartItem.price = dish.num_price1;
+			cartItem.ch_suitflag = dish.ch_suitflag == "Y" ? "P" : "N";
+			cartItem.nums = dish.nums;
+			$scope.cart.push(cartItem);
+		}
+		console.log($scope.cart);
+		$location.path('dishes');
+	}
+}]).controller('cartCtrl', ['$scope', '$location', 'bookService', function ($scope, $location, bookService) {
+	
+	$scope.totalCart = function() {
+		var total = 0;
+		angular.forEach($scope.cart, function (item, index) {
+			total = total + item.nums * item.price;
+		});
+		return total;
+	}
+
+	$scope.removeItem = function(index) {
+		$scope.cart.splice(index, 1);
+	}
+
+	$scope.bookDish = function(){
+		if($scope.cart.length > 0){		
+			bookService.postDetail({}, {bookno: $scope.book.no, cart: $scope.cart}, function(response){
+				if(response.status){
+					$scope.cart.length = 0;
+					$scope.msg.title = '下单成功';
+					$scope.msg.content = '订单号: ' + $scope.book.no + "点菜成功,<br>餐费合计: " + $scope.total;
+					$location.path('message');
+				}else{
+					alert(response.info);
+				}
+			});
+		}else{
+			alert('购物车内没有任何菜式,请点菜');
+		}
+	}
 }]);
 
 </script>

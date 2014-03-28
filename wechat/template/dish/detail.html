@@ -1,0 +1,51 @@
+<div class="warp container" ng-controller="dishDetailCtrl" >
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="thumbnail">
+				<img class="img-responsive" ng-src="{{dish.photo ? dish.photo : 'http://placehold.it/500/F0F0F0'}}" alt="image">
+				<div class="caption">
+					<h3>{{dish.vch_dishname}} <small class="text-danger">{{dish.num_price1 | currency:'￥'}}</small></h3>					
+					<div ng-show="dish.children" class="dropdown pull-right">
+						<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+							菜式
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li ng-repeat="child in dish.children" role="presentation">
+								<a role="menuitem" tabindex="-1">{{child.vch_dishname}}</a>
+							</li>
+						</ul>
+					</div>
+					<p ng-bind="dish.vch_explain ? dish.vch_explain : '......' "></p>
+					<hr>
+					<p>
+						<form role="form" class="form-horizontal">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">做法</label>
+								<div class="col-sm-10">
+									<select ng-model="dish.memo" ng-options="memo.vch_memo for memo in dish.memos" class="form-control">
+										<option value="">请选择做法</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">数量</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control col-xs-2" ng-model="dish.nums">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-6">
+									<a ng-href="#/dishes" class="col-xs-4 btn btn-lg btn-primary">返回</a>
+								</div>
+								<div class="col-sm-6">
+									<button ng-click="addToCart(dish)" type="button" class="pull-right col-xs-4 btn btn-lg btn-success">下单</button>
+								</div>
+							</div>
+						</form >
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

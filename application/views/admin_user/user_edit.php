@@ -79,7 +79,7 @@ function edit_user_save()
     var data = $('#user_edit').serialize()
     $.ajax({
         type: "POST",
-        url: 'user_admin/user_edit_save',
+        url: siteUrl('admin/user_admin/user_edit_save'),
         dataType: 'json',
         data: data,
         success: function(respone){

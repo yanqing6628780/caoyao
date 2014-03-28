@@ -1,0 +1,22 @@
+<div class="warp container" ng-controller="orderMsgCtrl" >
+	<div class="row">
+		<div class="col-xs-12">
+			<h1 ng-bind="msg.title"></h1>
+			<p ng-bind="msg.trustContent"></p>
+		</div>
+	</div>
+	<div ng-show="book.no" class="row">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10">
+			<div class="row text-center">
+				<div class="col-xs-6">	
+					<a href="#/dishes" class="btn btn-lg btn-success">点菜</a>
+				</div>
+				<div class="col-xs-6">	
+					<a href="#/myorders" class="btn btn-lg btn-danger">订单</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-1"></div>
+	</div>
+</div>

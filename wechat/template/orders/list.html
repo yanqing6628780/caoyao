@@ -1,28 +1,21 @@
 <div class="warp container" ng-controller="myordersListCtrl" >
-	<div class="row row-offcanvas row-offcanvas-right">
-		<div class="table-responsive">
-			<table class="table table-condensed">
-				<thead>
-					<tr>
-						<th>订单号</th>
-						<th>店名</th>
-						<th>顾客</th>
-						<th>电话</th>
-						<th>台数</th>
-						<th>操作</th>
-					</tr>
-					<tr ng:repeat="item in orderList" ng-class-odd="'success'">
-						<td>{{item.order_sn}}</td>
-						<td>{{item.profile.name}}</td>
-						<td>{{item.customer}}</td>
-						<td>{{item.mobile}}</td>
-						<td>{{item.table_num}}</td>
-						<td>
-							<a ng-href="#/myorders/sn/{{item.order_sn}}" class="btn btn-info">菜式</a>
-						</td>
-					</tr>
-		        </thead>
-			</table>
+	<div ng-repeat="item in orderList" class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">单号:<span ng-bind="item.ch_bookno"></span></h3>
 		</div>
+		<div class="panel-body">
+			店名:<span ng-bind="item.profileName"></span>
+			订台数:<span ng-bind="item.table_nums"></span>
+			<br>
+			姓名:<span ng-bind="item.vch_booker"></span>
+			电话:<span ng-bind="item.vch_tel"></span>
+		</div>
+		<div class="panel-footer">
+			<a ng-show="item.bookDish_nums" ng-href="#/myorders/sn/{{item.ch_bookno}}" class="btn btn-info">菜式</a>
+			<a ng-click="setBookNo(item.ch_bookno)" ng-hide="item.bookDish_nums||item.is_verified" ng-href="#/dishes" class="btn btn-info">点菜</a>
+		</div>
+	</div>
+	<div ng-show="showMsg" class="row">
+		<div class="col-xs-12">你还没绑定微信帐号</div>
 	</div>
 </div>
