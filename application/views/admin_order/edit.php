@@ -8,13 +8,19 @@
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">顾客姓名</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name="customer" value='<?=$row['customer']?>' datatype="*"/>
+                        <input class="form-control" type='text' name="vch_booker" value='<?=$row['vch_booker']?>' datatype="*"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 col-md-3 control-label">电话</label>
+                    <div class="col-md-4">
+                        <input class="form-control" type='text' name="vch_tel" value='<?=$row['vch_tel']?>' datatype="*"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">桌数</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name="table_num" value='<?=$row['table_num']?>' datatype="n"/>
+                        <input class="form-control" type='text' name="table_nums" value='<?=$row['table_nums']?>' datatype="n"/>
                     </div>
                 </div>
             </div>

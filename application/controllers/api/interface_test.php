@@ -5,7 +5,8 @@ class interface_test extends CI_Controller{
 	    parent::__construct();
 
         $this->load->library('curl_tool');
-	    $this->load->library('curl');
+        $this->load->library('curl');
+	    $this->load->library('stt_access');
 	}
 
     function index() {
@@ -20,34 +21,46 @@ class interface_test extends CI_Controller{
         // $url = "http://192.168.0.136:8168/stt_access/get_leaguer";
         // $data = array('filter' => '{"vch_memberno":"H1"}');
 
-        $url = site_url("/api/my_interface/bustype");
-        $data = array('username' => 'admin', 'password' => '123456');
-        $db_data[] = array('ch_bustype' => 1, 'vch_name' => '早2');
-        $db_data[] = array('ch_bustype' => 2, 'vch_name' => '午市');
-        $db_data[] = array('ch_bustype' => 3, 'vch_name' => '晚2');
-        $db_data[] = array('ch_bustype' => 4, 'vch_name' => '晚午');
+        $url = "http://192.168.0.136:8168/stt_access/get_leaguer_credit";
+        $data = array('vch_memberno' => 881111);
+
+        // $url = site_url("/api/my_interface/bustype");
+        // $data = array('username' => 'admin', 'password' => '123456');
+        // $db_data[] = array('ch_bustype' => 1, 'vch_name' => '早2');
+        // $db_data[] = array('ch_bustype' => 2, 'vch_name' => '午市');
+        // $db_data[] = array('ch_bustype' => 3, 'vch_name' => '晚2');
+        // $db_data[] = array('ch_bustype' => 4, 'vch_name' => '晚午');
 
         // $db_data[] = array('ch_dishno' => 1, 'num_price1' => '50');
         // $db_data[] = array('ch_dishno' => 2, 'num_price1' => '50');
         // $db_data[] = array('ch_dishno' => 3, 'num_price1' => '50');
         
-        $data['data'] = json_encode($db_data);
+        // $data['data'] = json_encode($db_data);
         // die(var_dump($data));
 
+        // $url = site_url('api/my_interface/users');
         $this->curl->create($url);
         $this->curl->http_login('sqt', 'YWaWMTIzNA', 'basic');
 
         $this->curl->post($data);
         // $this->curl->get();
 
-        var_dump($this->curl->execute());
-        echo "<br>";
-        var_dump($this->curl->error_string);
-        echo "<br>";
-        var_dump($this->curl->error_code);
-        echo "<br>";
-        html_print($this->curl->info);
+        // var_dump($this->curl->execute());
+        // echo "<br>";
+        // var_dump($this->curl->error_string);
+        // echo "<br>";
+        // var_dump($this->curl->error_code);
+        // echo "<br>";
+        // html_print($this->curl->info);
         // var_dump($this->curl_tool->post($url, $http_header, $data));
+
+        var_dump($this->stt_access->get_members_credit(881111));
+        echo "<br>";
+        var_dump($this->stt_access->error_string);
+        echo "<br>";
+        var_dump($this->stt_access->errno);
+        echo "<br>";
+        html_print($this->stt_access->info);
 
     }
 

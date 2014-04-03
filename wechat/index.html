@@ -5,16 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
-<style type="text/css">
-body {
-  padding-top: 70px;
-}
-.ovh{overflow: hidden;}
-input.ng-invalid{
-	border-color: #E9322D;
-	box-shadow: 0 0 6px #F8B9B7;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../lib/bootstrap-datetimepicker/css/datetimepicker.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
 <body ng-controller="appCtrl">
@@ -41,14 +33,36 @@ input.ng-invalid{
 
 <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="../lib/angular/angular.js"></script>
 <script type="text/javascript" src="../lib/angular/angular-route.js"></script>
 <script type="text/javascript" src="../lib/angular/angular-resource.js"></script>
 <script type="text/javascript" src="../lib/angular/angular-sanitize.js"></script>
 <script type="text/javascript" src="../lib/angular/angular-cookies.min.js"></script>
-<script type="text/javascript" src="global.js"></script>
-<script type="text/javascript" src="route.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/route.js"></script>
 <script type="text/javascript">
+/*指令*/
+myApp.directive('myDatetimepicker', [function () {
+	return {
+		restrict: 'A',
+		require: "ngModel",
+		link: function (scope, iElement, iAttrs, ngModelCtrl) {
+			iElement.datetimepicker({
+	            autoclose: true,
+	            format: "yyyy-mm-dd hh:ii"
+	        });
+			var startDate = new Date();
+	        var DateTime = startDate.getTime() + 60*60*1000;
+	        startDate.setTime(DateTime);
+	        iElement.datetimepicker('setStartDate', startDate);
+	        iElement.on('changeDate', function(ev){
+	        	ngModelCtrl.$setViewValue(ev.target.value);
+	        })
+		}
+	};
+}])
+
 /*服务*/
 myApp
 .factory('usersService', ['$resource', function ($resource) {
@@ -152,7 +166,7 @@ myApp
     }
 }])
 .controller('orderMsgCtrl', ['$scope', '$sce', function ($scope, $sce) {
-	$scope.msg.trustContent = $sce.trustAsHtml($scope.msg.content);
+	$scope.trustContent = $sce.trustAsHtml($scope.msg.content);
 }])
 .controller('ordersCtrl', ['$scope', 'usersService', '$http', '$location',function ($scope, usersService, $http, $location) {
 	$scope.book.person = 1;
@@ -173,9 +187,10 @@ myApp
 		$scope.orderList = ordersService.query({openid: $scope.book.openid});
 	}
 
-	// 设置订单号
-	$scope.setBookNo = function (bookNo) {
-		$scope.book.no = bookNo;
+	// 设置订单信息
+	$scope.setBook = function (order) {
+		$scope.book.no = order.ch_bookno;
+		$scope.book.user_id = order.user_id;
 	}
 }])
 .controller('myordersDetailCtrl', ['$scope', 'ordersService', '$routeParams', function ($scope, ordersService, $routeParams) {
@@ -196,7 +211,7 @@ myApp
 	}
 }])
 .controller('dishListCtrl', ['$scope', '$location', 'dishService', function ($scope, $location, dishService) {
-	$scope.dishes = dishService.query();
+	$scope.dishes = dishService.query({user_id: $scope.book.user_id});
 }])
 .controller('dishDetailCtrl', ['$scope', 'dishService', '$routeParams',  '$location', function ($scope, dishService, $routeParams, $location) {
 	$scope.dish = dishService.get({DishId: $routeParams.DishId}, {headers: AuthHeader});
@@ -247,9 +262,11 @@ myApp
 		if($scope.cart.length > 0){		
 			bookService.postDetail({}, {bookno: $scope.book.no, cart: $scope.cart}, function(response){
 				if(response.status){
-					$scope.cart.length = 0;
 					$scope.msg.title = '下单成功';
-					$scope.msg.content = '订单号: ' + $scope.book.no + "点菜成功,<br>餐费合计: " + $scope.total;
+					$scope.msg.content = '订单号: ' + $scope.book.no + "点菜成功,<br>餐费合计:  ￥" + $scope.totalCart();
+
+					$scope.cart.length = 0; // 清空购物车
+					$scope.book.no = '' // 清空订单号
 					$location.path('message');
 				}else{
 					alert(response.info);

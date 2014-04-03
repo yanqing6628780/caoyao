@@ -1,0 +1,22 @@
+/* 订单页 */
+body {
+  padding-top: 70px;
+}
+.ovh{overflow: hidden;}
+input.ng-invalid{
+	border-color: #E9322D;
+	box-shadow: 0 0 6px #F8B9B7;
+}
+
+/* 绑定页面 */
+body.bind{padding-top: 0}
+.myDiv{}
+.card{position: relative;width: 320px}
+.card img{}
+.card .cardNo {
+	bottom: 2px;
+	color: #000;
+	font-size: 19px;
+	position: absolute;
+	left: 200px;
+}

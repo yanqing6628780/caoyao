@@ -208,6 +208,14 @@ class General_mdl extends CI_Model
 
         return $this->get_query($start, $pageSize);
     }
+
+    //获取自增ID
+    public function get_auto_increment()
+    {
+        $this->db->select_max('id', 'last_id');
+        $query = $this->get_query();
+        return $query->row()->last_id + 1;
+    }
 }
 
 ?>

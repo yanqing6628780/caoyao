@@ -8,11 +8,15 @@
 			订台数:<span ng-bind="item.table_nums"></span>
 			<br>
 			姓名:<span ng-bind="item.vch_booker"></span>
+			<br>
 			电话:<span ng-bind="item.vch_tel"></span>
+			<br>
+			预订时间:<span ng-bind="item.dt_come"></span>
 		</div>
 		<div class="panel-footer">
+			<h4><span ng-show="item.is_verified" class="label label-success">下单成功</span></h4>
 			<a ng-show="item.bookDish_nums" ng-href="#/myorders/sn/{{item.ch_bookno}}" class="btn btn-info">菜式</a>
-			<a ng-click="setBookNo(item.ch_bookno)" ng-hide="item.bookDish_nums||item.is_verified" ng-href="#/dishes" class="btn btn-info">点菜</a>
+			<a ng-click="setBook(item)" ng-hide="item.bookDish_nums||item.is_verified" ng-href="#/dishes" class="btn btn-info">点菜</a>
 		</div>
 	</div>
 	<div ng-show="showMsg" class="row">

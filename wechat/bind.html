@@ -6,42 +6,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
-<style type="text/css">
-.myDiv{}
-.card{position: relative;width: 320px}
-.card img{}
-.card .cardNo {
-	bottom: 2px;
-	color: #FFFFFF;
-	font-size: 19px;
-	position: absolute;
-	left: 240px;
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="bind">
 <div class="jumbotron">
 	<div class="container">
 		<h1 ng-bind="title"></h1>
 		<div class="row">
 			<div class="myDiv">
-				<form class="form" ng-hide="isBind">
+				<form name="bindForm" class="form" ng-hide="isBind">
 					<div class="form-group">
 						<div>
-							<input class="form-control input-lg" placeholder="卡号" ng-model="cardNo"/>
+							<input class="form-control input-lg" placeholder="姓名" ng-model="reg.name" required/>
+						</div>
+					</div>
+					<div class="form-group">
+						<div>
+							<input class="form-control input-lg" placeholder="电话" ng-model="reg.tel" required/>
 						</div>
 					</div>
 					<div class="form-actions">
 						<div>
-							<button ng-click="memberBind()" type="button" class="btn-lg btn btn-success">绑定</button>
+							<button ng-disabled="bindForm.$invalid" ng-click="memberReg()" type="button" class="btn-lg btn btn-success">注册</button>
 						</div>
 					</div>
 				</form>
 				<div ng-show="alertMsg" class="alert alert-danger help-block" ng-bind="alertMsg"></div>
 				<div class="card" ng-show="isBind">
-					<img class="img-responsive" src="img/card_bg.jpg">
-					<span class="cardNo" ng-bind="cardNo"></span>
+					<img class="img-responsive" src="img/card_bg.png">
+					<span class="cardNo" ng-bind="wechat_cardno"></span>
+				</div>
+				<div class="row" ng-show="isBind">
+					<div class="col-xs-12"><button ng-click="credit()" class="btn btn-info">{{creditBtnTitle}}</button></div>
+				</div>
+				<div class="row" ng-show="isBind&&showCredit">
+					<div class="col-xs-12">
+						<table class="table">
+							<tr>
+								<th>店名</th>
+								<th>积分</th>
+							</tr>
+							<tr ng-repeat="item in creditList">
+								<td ng-bind="item.vch_company"></td>
+								<td ng-bind="item.credit"></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -59,7 +70,7 @@
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="../lib/angular/angular.js"></script>
 <script src="../lib/angular/angular-sanitize.js"></script>
-<script src="global.js"></script>
+<script src="js/global.js"></script>
 <script>
 var myApp = angular.module('myApp', ['ngSanitize']);
 myApp.config(function($locationProvider){
@@ -67,23 +78,28 @@ myApp.config(function($locationProvider){
 })
 /*控制器*/
 myApp.controller('appCtrl', ['$scope', '$location', '$http', '$sce', function ($scope, $location, $http, $sce) {
+	$scope.reg = {};
 	$scope.title = "会员绑定";
+	$scope.creditBtnTitle = "显示积分";
+	$scope.creditList = "";
 	$scope.alertMsg = "";
+	$scope.showCredit = false;
 	var loc = $location.search();
 	if( ! angular.isUndefined(loc.openid) ) {
-		$http.get(getApiUrl('wechat_member_check?openid=' + loc.openid), {headers: restConfig})
+		$http.get(getApiUrl('wechat_member_check?openid=' + loc.openid), {headers: AuthHeader})
 		.success(function(response){
 			$scope.isBind = response.status;
 			if(response.status){
 				$scope.title = "会员卡";
-				$scope.cardNo = response.cardNo;
+				$scope.wechat_cardno = "NO."+response.wechat_cardno;
+				$scope.cardno = response.cardNo;
 			}
 		});
-		$scope.openid = loc.openid;
+		$scope.reg.openid = loc.openid;
 
-		$scope.memberBind = function () {
+		$scope.memberReg = function () {
 			$scope.alertMsg = '';
-			$http.get(getApiUrl('wechat_member_bind?cardNo=' + $scope.cardNo + '&openid=' + loc.openid), {headers: restConfig})
+			$http.get(getApiUrl('wechat_member_bind'), {headers: AuthHeader, params: $scope.reg})
 			.success(function(response){
 				if(response.status){
 					$scope.isBind = true;
@@ -92,6 +108,19 @@ myApp.controller('appCtrl', ['$scope', '$location', '$http', '$sce', function ($
 					$scope.alertMsg = response.info;
 				}
 			});
+		}
+
+		$scope.credit = function () {
+			$scope.showCredit = !$scope.showCredit;
+			if($scope.showCredit){
+				$scope.creditBtnTitle = "隐藏";
+				$http.get(getApiUrl('wechat_member_credit'), { headers: AuthHeader, params: {cardNo: $scope.cardno} }).success(function(response){
+					$scope.showCredit = response.status;
+					$scope.creditList = response.credit_list;
+				})
+			}else{
+				$scope.creditBtnTitle = "显示积分";
+			}
 		}
 	}else{
 		console.log(loc.openid);

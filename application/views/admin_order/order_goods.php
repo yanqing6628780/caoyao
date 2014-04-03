@@ -23,13 +23,13 @@
                     <tbody>
                     <?php foreach($result as $key => $row):?>
                         <tr>
-                            <td><?=$row['good_name']?></td>
-                            <td><?=$row['good_methods']?></td>
-                            <td><?=$row['good_price']?></td>
-                            <td><?=$row['nums']?></td>
-                            <td><?=$row['good_price']*$row['nums']?></td>
+                            <td><?=$row['vch_dishname']?></td>
+                            <td><?=$row['vch_print_memo']?></td>
+                            <td><?=formatAmount($row['num_price'])?></td>
+                            <td><?=$row['num_num']?></td>
+                            <td><?=formatAmount($row['num_price']*$row['num_num'])?></td>
                             <td>
-                                <a class="btn red orderGoodDel" onclick="delOrderGood(this, <?=$row['id']?>, '<?=generate_verify_code(array($row['id'], $row['order_id'], $row['nums']))?>')"><i class="icon-remove icon-white"></i> 删除</a>
+                                <a class="btn red orderGoodDel" onclick="delOrderGood(this, <?=$row['id']?>, '<?=generate_verify_code(array($row['id'], $row['ch_bookno'], $row['num_num']))?>')"><i class="icon-remove icon-white"></i> 删除</a>
 
                             </td>
                         </tr>

@@ -169,6 +169,7 @@ class wechat extends CI_Controller {
         $this->load->view('wechat/autoreply', $this->data);
     }
 
+    // 图文管理页
     public function appmsg()
     {
         checkPermission('wechat_admin');
@@ -228,6 +229,7 @@ class wechat extends CI_Controller {
         echo json_encode($response);
     }
 
+    // 图文素材删除
     public function newsdel()
     {
         $id = $this->input->post('id');
@@ -239,6 +241,127 @@ class wechat extends CI_Controller {
         $response['success'] = true;
         
         echo json_encode($response);
+    }
+
+    // 微信会员管理页
+    public function members()
+    {
+
+        checkPermission('wechat_admin');
+
+        $this->load->library('stt_access');
+
+        $this->general_mdl->setTable('wechat_member_bind');
+        $query = $this->general_mdl->get_query();
+        $this->data['result'] = $query->result_array();
+
+        $this->data['title'] = "微信会员管理";
+        $this->load->view('wechat/members', $this->data);
+    }
+
+    public function members_edit()
+    {
+        checkPermission('wechat_admin');
+        
+        $id = $this->input->post('id');
+        $this->data['action'] = $this->input->post('action');
+
+        $this->general_mdl->setTable('wechat_member_bind');
+        $query = $this->general_mdl->get_query_by_where(array('id' => $id));
+        $this->data['row'] = $query->row_array();
+
+        if($this->data['action'] == "bind"){
+            $this->load->view('wechat/member_bind', $this->data);
+        }else{
+            $this->load->view('wechat/members_edit', $this->data);
+        }
+    }
+
+    public function member_save()
+    {
+        checkPermission('wechat_admin');
+
+        $id = $this->input->post('id');
+        $post_data = $this->input->post(NULL, TRUE);
+
+        $this->general_mdl->setTable('wechat_member_bind');
+        if($id) { //当有id是为修改记录
+            $this->general_mdl->setData($post_data);
+            $this->general_mdl->update(array('id' => $post_data['id']));
+            $response['info'] = '修改完成';
+        }else{
+            $this->general_mdl->setData($post_data);
+            $insert_id = $this->general_mdl->create();
+            $response['info'] = '保存成功';
+        }
+
+        $response['status'] = 'y';
+        echo json_encode($response);
+    }
+
+    public function member_bind()
+    {
+        checkPermission('wechat_admin');
+
+        $this->load->library('stt_access');
+        
+        $id = $this->input->post('id');
+        $cardNo = $this->input->post('cardNo');
+
+        $response['status'] = 'n';
+        $response['info'] = '绑定失败';
+
+        $this->general_mdl->setTable('wechat_member_bind');
+        if($id && $cardNo) { //当有id是为修改记录
+            $query = $this->general_mdl->get_query_by_where( array('cardNo' => $cardNo) );
+            if($query->num_rows()){            
+                $response['info'] = '此卡号已经绑定';
+            }else{
+                $stt_response = $this->stt_access->get_members($cardNo);
+                if($stt_response and $stt_response->leaguer){
+                    $post_data['cardNo'] = $cardNo;
+                    $this->general_mdl->setData($post_data);
+                    $this->general_mdl->update(array('id' => $id));
+                    $response['status'] = 'y';
+                    $response['info'] = '绑定成功';
+                }else{
+                    $response['info'] = '查无些卡号';                    
+                }
+            }
+        }
+
+        echo json_encode($response);
+    }
+
+    public function members_unbind()
+    {
+        checkPermission('wechat_admin');
+
+        $id = $this->input->post('id');
+        $response['status'] = 'n';
+
+        $this->general_mdl->setTable('wechat_member_bind');
+        if($id) {
+            $post_data['cardNo'] = "";
+            $this->general_mdl->setData($post_data);
+            $this->general_mdl->update(array('id' => $id));
+            $response['status'] = 'y';
+        }
+
+        echo json_encode($response);
+    }
+
+    public function members_del()
+    {
+       $id = $this->input->post('id');
+
+       $this->general_mdl->setTable('wechat_member_bind');
+       $response['success'] = false;
+
+       $this->general_mdl->delete_by_id($id);
+       $response['success'] = true;
+       
+       echo json_encode($response);
     }
 
     // 查询自定义菜单

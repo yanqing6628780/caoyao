@@ -1,6 +1,6 @@
 var myApp = angular.module('myApp', ['ngRoute', 'ngResource', 'ngCookies']);
 
-myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+myApp.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 	$routeProvider
 	.when("/orders/", {templateUrl: "template/home.html", controller: "ordersCtrl"})
 	.when("/message/", {templateUrl: "template/msg.html", controller: "orderMsgCtrl"})

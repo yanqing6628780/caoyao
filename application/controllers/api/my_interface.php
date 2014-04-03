@@ -7,7 +7,6 @@ class my_interface extends REST_Controller
     {
         parent::__construct();
 
-        $this->member_server_domain = "http://192.168.0.136:8168";
         $this->load->library('logger');
     }
 
@@ -22,7 +21,7 @@ class my_interface extends REST_Controller
 
         if($is_matche){
             //将接受到的数据写入数据库
-            $this->post_to_db('cybr_bt_bustype', $data, 'ch_bustype');
+            $this->post_to_db('cybr_bt_bustype', $data);
             $resp['status'] = 1;
         }else{
             $resp['error'] = "请填写正确的用户名和密码";
@@ -43,7 +42,7 @@ class my_interface extends REST_Controller
         $is_matche = $this->dx_auth->login($username, $password, FALSE);
 
         if($is_matche){
-            $this->post_to_db('cy_bt_dish', $data, 'ch_dishno');
+            $this->post_to_db('cy_bt_dish', $data);
             $resp['status'] = 1;
         }else{
             $resp['error'] = "请填写正确的用户名和密码";
@@ -61,7 +60,7 @@ class my_interface extends REST_Controller
         $is_matche = $this->dx_auth->login($username, $password, FALSE);
 
         if($is_matche){
-            $this->post_to_db('cybr_u_dish_warn', $data, 'int_flowID');
+            $this->post_to_db('cybr_u_dish_warn', $data);
             $resp['status'] = 1;
         }else{
             $resp['error'] = "请填写正确的用户名和密码";
@@ -79,7 +78,7 @@ class my_interface extends REST_Controller
         $is_matche = $this->dx_auth->login($username, $password, FALSE);
 
         if($is_matche){
-            $this->post_to_db('cybr_bt_dish_special', $data, 'int_flowID');
+            $this->post_to_db('cybr_bt_dish_special', $data);
             $resp['status'] = 1;
         }else{
             $resp['error'] = "请填写正确的用户名和密码";
@@ -97,7 +96,7 @@ class my_interface extends REST_Controller
         $is_matche = $this->dx_auth->login($username, $password, FALSE);
 
         if($is_matche){
-            $this->post_to_db('cybr_bt_dish_suit', $data, 'int_flowID');
+            $this->post_to_db('cybr_bt_dish_suit', $data);
             $resp['status'] = 1;
         }else{
             $resp['error'] = "请填写正确的用户名和密码";
@@ -115,7 +114,7 @@ class my_interface extends REST_Controller
         $is_matche = $this->dx_auth->login($username, $password, FALSE);
 
         if($is_matche){
-            $this->post_to_db('cybr_cp_dish_memo', $data, 'ch_memono');
+            $this->post_to_db('cybr_cp_dish_memo', $data);
             $resp['status'] = 1;
         }else{
             $resp['error'] = "请填写正确的用户名和密码";
@@ -133,7 +132,7 @@ class my_interface extends REST_Controller
         $is_matche = $this->dx_auth->login($username, $password, FALSE);
 
         if($is_matche){
-            $this->post_to_db('cybr_bt_table', $data, 'ch_tableno');
+            $this->post_to_db('cybr_bt_table', $data);
             $resp['status'] = 1;
         }else{
             $resp['error'] = "请填写正确的用户名和密码";
@@ -142,23 +141,26 @@ class my_interface extends REST_Controller
     }
 
     // 数据入库
-    private function post_to_db($table, $db_data, $matche_field){
+    private function post_to_db($table, $db_data){
+
         $user_id = $this->dx_auth->get_user_id();
+
         $this->general_mdl->setTable($table);
 
         if(is_array($db_data)){$db_data = (object)$db_data;}
 
-        if(is_object($db_data)){        
+        if(is_object($db_data)){
+            $this->general_mdl->delete(array('user_id' => $user_id)); //清空该用户的数据
             foreach ($db_data as $key => $row) {
                 $row->user_id = $user_id;
-                $query = $this->general_mdl->get_query_by_where( array($matche_field => $row->{$matche_field}, 'user_id' => $user_id) );
                 $this->general_mdl->setData($row);
+                $this->general_mdl->create();
+                // $query = $this->general_mdl->get_query_by_where( array($matche_field => $row->{$matche_field}, 'user_id' => $user_id) );
                 // 如果已有数据则更新,没有则创建
-                if($query->num_rows()){
-                    $this->general_mdl->update( array($matche_field => $row->{$matche_field}) );
-                }else{
-                    $this->general_mdl->create();
-                }
+                // if($query->num_rows()){
+                //     $this->general_mdl->update( array($matche_field => $row->{$matche_field}) );
+                // }else{
+                // }
             }
         }
     }
@@ -187,26 +189,30 @@ class my_interface extends REST_Controller
         }else{
             $where = array();
         }
-        $query = $this->general_mdl->get_query_by_where($where);
+        $query = $this->general_mdl->get_query_by_where($where, 0, "", "id DESC");
 
         if ($ch_bookno) { //返回订单内的菜式
             $row = $query->row_array(); //订单信息
-
-            // 取出订单内的菜式
-            $this->general_mdl->setTable('cybr_book_detail');
-            $order_dishes = $this->general_mdl->get_query_by_where(array('ch_bookno' => $ch_bookno))->result_array();
-            //关联菜式资料
-            foreach ($order_dishes as $key => $value) {
-                $this->general_mdl->setTable('cy_bt_dish');
-                $dish = $this->general_mdl->get_query_by_where(array('ch_dishno' => $value['ch_dishno']))->row_array();
-                $order_dishes[$key]['photo'] = $dish['photo'];
-                $order_dishes[$key]['vch_dishname'] = $dish['vch_dishname'];
+            if($row){
+                $result['master'] = $row;
+                // 取出订单内的菜式
+                $this->general_mdl->setTable('cybr_book_detail');
+                $order_dishes = $this->general_mdl->get_query_by_where(array('ch_bookno' => $ch_bookno))->result_array();
+                //关联菜式资料
+                foreach ($order_dishes as $key => $value) {
+                    $this->general_mdl->setTable('cy_bt_dish');
+                    $dish = $this->general_mdl->get_query_by_where(array('ch_dishno' => $value['ch_dishno']))->row_array();
+                    $order_dishes[$key]['photo'] = $dish['photo'];
+                    $order_dishes[$key]['vch_dishname'] = $dish['vch_dishname'];
+                }
+                $result['dishes'] = $order_dishes;
+                    $result['is_verified'] = $row['is_verified'] ? TRUE : FALSE;
+                    $result['is_paid'] = $row['is_paid'] ? TRUE : FALSE;
+                $result['status'] = 1;
+            }else{
+                $result['status'] = 0;
             }
-            $result['dishes'] = $order_dishes;
-            $result['is_verified'] = $row['is_verified'] ? TRUE : FALSE;
-            $result['is_paid'] = $row['is_paid'] ? TRUE : FALSE;
             
-            $result['status'] = 1;
             $this->response($result, 200); 
         } else if ($query->num_rows() > 0) { //返回用户订单列表
             $result = $query->result_array();
@@ -306,6 +312,7 @@ class my_interface extends REST_Controller
         $db_data['int_person'] = $this->post('person');
         $db_data['table_nums'] = $this->post('table_nums');
         $db_data['vch_booker'] = $this->post('booker');
+        $db_data['dt_come'] = $this->post('come');
         $db_data['openid'] = $this->post('openid');
         $db_data['ch_type'] = 1;
 
@@ -508,6 +515,7 @@ class my_interface extends REST_Controller
         if($query->num_rows() > 0){
             $resp['status'] = TRUE;
             $resp['cardNo'] = $query->row()->cardNo;
+            $resp['wechat_cardno'] = $query->row()->wechat_cardno;
         }else{
             $resp['status'] = FALSE;
         }
@@ -521,37 +529,43 @@ class my_interface extends REST_Controller
         $this->load->library('curl');
 
         $openid = $this->get('openid');
-        $cardNo = $this->get('cardNo');
-
-        $url = $this->member_server_domain."/stt_access/get_leaguer";
-        $post_data['filter'] = json_encode( array('vch_memberno' => $cardNo) );
-        $this->curl->create($url);
-        $this->curl->http_login('sqt', 'YWaWMTIzNA', 'basic');
-        $this->curl->post($post_data);
-        $leaguer_resp = json_decode($this->curl->execute());
+        $name = $this->get('name');
+        $tel = $this->get('tel');
 
         $response['status'] = FALSE;
         $this->general_mdl->setTable('wechat_member_bind');
-        if(isset($leaguer_resp->leaguer) && !empty($leaguer_resp->leaguer) ){        
-            if($openid && $cardNo) {
-                $query = $this->general_mdl->get_query_by_where(array("cardNo" => $cardNo));
+        if( $openid ){        
+            if($name && $tel) {
+                $query = $this->general_mdl->get_query_by_where(array("tel" => $tel));
                 if($query->num_rows() > 0){
-                    $response['info'] = '此卡号已绑定,请不要重复绑定';
+                    $response['info'] = '此电话已绑定,请不要重复绑定';
                 }else{
+                    $auto_increment = $this->general_mdl->get_auto_increment();
+                    $create_data['wechat_cardno'] = generate_username($auto_increment);
                     $create_data['openid'] = $openid;
-                    $create_data['cardNo'] = $cardNo;
+                    $create_data['name'] = $name;
+                    $create_data['tel'] = $tel;
                     $this->general_mdl->setData($create_data);
                     $this->general_mdl->create();
                     $response['status'] = TRUE;
                     $response['info'] = '绑定成功!';
                 }
             }else{
-                $response['info'] = '请输入卡号!';
+                $response['info'] = '请输入姓名和电话!';
             }
         }else{
-            $response['info'] = '请输入正确的卡号!';
+            $response['info'] = '非法进入!';
         }
 
         $this->response($response, 200);
+    }
+
+    public function wechat_member_credit_get()
+    {
+        $this->load->library('stt_access');
+        $cardNo = $this->get('cardNo');
+
+        $stt_resp = $this->stt_access->get_members_credit($cardNo);
+        $this->response($stt_resp, 200);
     }
 }

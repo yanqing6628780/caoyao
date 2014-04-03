@@ -25,18 +25,22 @@
                     <tbody>
                     <?php foreach($result as $key => $row):?>
                         <tr>
-                            <td><?=$row['order_sn']?></td>
-                            <td><?=$row['customer']?></td>
-                            <td><?=$row['mobile']?></td>
-                            <td><?=$row['table_num']?></td>
-                            <td><?=$row['user_id']?></td>
-                            <td><?=$row['total_price']?></td>
-                            <td><?=$row['is_paid'] ? '已付款' : '未付款'  ?></td>
+                            <td><?=$row['ch_bookno']?></td>
+                            <td><?=$row['vch_booker']?></td>
+                            <td><?=$row['vch_tel']?></td>
+                            <td><?=$row['table_nums']?></td>
+                            <td><?=$row['profileName']?></td>
+                            <td><?=formatAmount($row['total'])?></td>
+                            <td><?=$row['is_paid'] ? '已付款' : '未付款'  ?>/<?=$row['is_verified'] ? '已审核' : '未审核'  ?></td>
                             <td>
                                 <a class="btn green" href="#myModal" data-toggle="modal" onclick="editOrder(<?=$row['id']?>)"> <i class="icon-pencil icon-white"></i> 编辑</a>
-                                <a class="btn red" onclick='delOrder(<?=$row['id']?>, "<?=generate_verify_code(array($row['order_sn'], $row['mobile'], $row['user_id']))?>")'><i class="icon-remove icon-white"></i> 删除</a>
-                                <a class="btn yellow" onclick='verifyOrder(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 审核</a>
-                                <a class="btn dark" href="#myModal" data-toggle="modal" onclick='getOrderGoods(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 查看菜单</a>
+                                <?php if (!$row['is_paid'] && !$row['is_verified']): ?>
+                                <a class="btn red" onclick='delOrder(<?=$row['id']?>, "<?=generate_verify_code(array($row['ch_bookno'], $row['vch_tel'], $row['user_id']))?>")'><i class="icon-remove icon-white"></i> 删除</a>
+                                <?php endif ?>
+                                <?php if (!$row['is_verified']): ?>
+                                <a href="#myModal" data-toggle="modal" class="btn yellow" onclick='verifyOrder(<?=$row['ch_bookno']?>, <?=$row['table_nums']?>)'><i class="icon-remove icon-white"></i> 审核</a>
+                                <?php endif ?>
+                                <a class="btn dark" href="#myModal" data-toggle="modal" onclick='getOrderGoods(<?=$row['ch_bookno']?>)'><i class="icon-remove icon-white"></i> 查看菜单</a>
                             </td>
                         </tr>
                     <?php endforeach;?>
@@ -56,8 +60,8 @@ function editOrder(id, is_coupon){
 function delOrder(id, code){
     common_del('<?=site_url($controller_url."del")?>', id, code, '#order_view');
 }
-function verifyOrder(id) {
-    // body...
+function verifyOrder(ch_bookno, table_nums) {
+    LoadAjaxPage('<?=site_url($controller_url."verify_view/")?>', {ch_bookno: ch_bookno, table_nums: table_nums}, 'myModal','审核')
 }
 function getOrderGoods(id) {
     LoadAjaxPage('<?=site_url($controller_url."get_order_goods/")?>', {id: id}, 'myModal','菜单')
