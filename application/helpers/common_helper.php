@@ -148,7 +148,7 @@ function checkPermission($perm)
     $CI = get_instance();
     if ($CI->dx_auth->get_permission_value($perm) == NULL or !$CI->dx_auth->get_permission_value($perm))
     {
-        show_404();
+        show_error('权限不足', 403, '禁止访问');
     }
 }
 

@@ -9,7 +9,7 @@ class Auth extends CI_Controller
 
 	function Auth()
 	{
-		 parent::__construct();
+		parent::__construct();
 		
 		$this->load->library('Form_validation');
 		$this->load->library('DX_Auth');			
@@ -20,7 +20,8 @@ class Auth extends CI_Controller
 	
 	function index()
 	{
-		$this->login();
+		$data['output'] = sprintf("<h4>登录过期,请重新<a href='%s'>%s</a></h4>", site_url('admin/auth/login'), '登录');
+		$this->load->view('valid_view.php', $data);
 	}
 	
 	/* Callback function */

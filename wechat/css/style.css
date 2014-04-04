@@ -11,7 +11,13 @@ input.ng-invalid{
 /* 绑定页面 */
 body.bind{padding-top: 0}
 .myDiv{}
-.card{position: relative;width: 320px}
+.card{
+	position: relative;
+	width: 320px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
 .card img{}
 .card .cardNo {
 	bottom: 2px;
