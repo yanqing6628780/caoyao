@@ -389,27 +389,58 @@ class wechat extends CI_Controller {
         $data['button'] = array();
 
         $data['button'][] = array(
-            'type' => 'click',
-            'name' => 'test',
-            'key' => 'lottery'
+            'name' => urlencode('点餐预订'),
+            'sub_button' => array(
+                array(
+                    'type' => 'click',
+                    'name' => urlencode('电子菜单'),
+                    'key' => 'news_1'
+                ),
+                array(
+                    'type' => 'click',
+                    'name' => urlencode('用餐订位'),
+                    'key' => 'news_1'
+                )
+            )
         );
         $data['button'][] = array(
-            'type' => 'view',
-            'name' => urlencode('抽奖页'),
-            'url' => 'http://192.168.0.136/ci/wx_lottery/rotate'
-        );
-        $data['button'][] = array(
-            'name' => urlencode('多级菜单'),
+            'name' => urlencode('个人中心'),
             'sub_button' => array(
                 array(
                     'type' => 'view',
-                    'name' => urlencode('百度'),
-                    'url' => 'http://www.baidu.com'
+                    'name' => urlencode('会员卡'),
+                    'url' => $bind_url
                 ),
                 array(
-                    'type' => 'view',
-                    'name' => urlencode('会员绑定'),
-                    'url' => $bind_url
+                    'type' => 'click',
+                    'name' => urlencode('奄尖试食团'),
+                    'key' => 'news_1'
+                )
+            )
+        );
+
+        $data['button'][] = array(
+            'name' => urlencode('奄尖大少'),
+            'sub_button' => array(
+                array(
+                    'type' => 'click',
+                    'name' => urlencode('顺德文化'),
+                    'key' => 'news_1'
+                ),
+                array(
+                    'type' => 'click',
+                    'name' => urlencode('品牌故事'),
+                    'key' => 'news_1'
+                ),
+                array(
+                    'type' => 'click',
+                    'name' => urlencode('附近门店'),
+                    'key' => 'news_13'
+                ),
+                array(
+                    'type' => 'click',
+                    'name' => urlencode('优惠活动'),
+                    'key' => 'news_15'
                 )
             )
         );

@@ -548,7 +548,7 @@ class my_interface extends REST_Controller
                     $this->general_mdl->setData($create_data);
                     $this->general_mdl->create();
                     $response['status'] = TRUE;
-                    $response['info'] = '绑定成功!';
+                    $response['wechat_cardno'] = $create_data['wechat_cardno'];
                 }
             }else{
                 $response['info'] = '请输入姓名和电话!';

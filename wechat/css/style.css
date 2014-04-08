@@ -13,16 +13,16 @@ body.bind{padding-top: 0}
 .myDiv{}
 .card{
 	position: relative;
-	width: 320px;
+	width: 250px;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
 	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
 }
 .card img{}
 .card .cardNo {
-	bottom: 2px;
-	color: #000;
-	font-size: 19px;
+	bottom: -4px;
+	color: #000000;
+	font-size: 17px;
+	left: 140px;
 	position: absolute;
-	left: 200px;
 }

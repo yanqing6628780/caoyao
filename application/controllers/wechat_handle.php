@@ -101,7 +101,7 @@ class wechat_handle extends CI_Controller
         $post_str = $GLOBALS["HTTP_RAW_POST_DATA"];
 
         $this->logger->conf['log_file'] = "wechat_receive_logs.txt";
-        $this->logger->log(array($post_str));
+        $this->logger->log(array(date("Y-m-d H:i:s"),$post_str));
 
         if (!empty($post_str))
         {
@@ -190,11 +190,24 @@ class wechat_handle extends CI_Controller
     // 收到菜单点击事件时触发
     private function onClick($eKey)
     {
-        switch ($eKey) {
-            case 'value':                
+        $event_arr = explode('_', $eKey);
+        switch ($event_arr[0]) {
+            case 'text':
+                $this->responseText("感谢你的关注,功能正在建设中,请耐心等候.");                
+                break;
+            case 'news':
+                $this->general_mdl->setTable('wechat_msg_news');
+                $query = $this->general_mdl->get_query_by_where( array('id' => $event_arr[1]) );
+                if($query->num_rows()){
+                    $row = $query->row_array();
+                    $this->responseNews($row);
+                }else{
+                    $this->responseText("感谢你的关注,功能正在建设中,请耐心等候.".$event_arr[1]);
+                }
+
                 break;
             default:
-                echo "";
+                $this->responseText("感谢你的关注,功能正在建设中,请耐心等候.");
                 break;
         }
     }
@@ -235,9 +248,9 @@ class wechat_handle extends CI_Controller
                   <FuncFlag>0</FuncFlag>
                   </xml>";
         $resultStr = sprintf(
-          $tpl,
-          $this->FromUserName, $this->ToUserName, time(), "news",
-          $data['title'], $data['description'], $data['picurl'], $data['url']
+            $tpl,
+            $this->FromUserName, $this->ToUserName, time(), "news",
+            $data['title'], $data['description'], $data['picurl'], $data['url']
         );
       $resultXML = preg_replace('/[\r|\t]/', '', $resultStr);
       echo $resultXML;
@@ -256,7 +269,7 @@ class wechat_handle extends CI_Controller
         $logData = array(
             date("Y-m-d H:i:s"),
             $message,
-          );
+        );
 
         if(!empty($reply_row)){
             switch ($reply_row['msgtype']) {
@@ -270,7 +283,7 @@ class wechat_handle extends CI_Controller
                     $this->responseText($reply_data->content);
                     break;
                 case 'news':
-                    $reply_data = (array)json_decode($reply_row['reply_data']);
+                    $reply_data = json_decode($reply_row['reply_data'], TRUE);
                     $this->responseNews($reply_data);
                     break;
             }

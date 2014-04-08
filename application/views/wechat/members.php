@@ -49,7 +49,7 @@ function bindMember(id){
     LoadAjaxPage('<?=site_url($controller_url."members_edit/")?>', {id: id, action: 'bind'}, 'myModal','编辑')
 }
 function delMember(id, code){
-    common_del('<?=site_url($controller_url."members_del")?>', id, code, '#wechat_appmsg_view');
+    common_del('<?=site_url($controller_url."members_del")?>', id, code, '#wechat_member_view');
 }
 function unbindMember(id){
     $.ajax({

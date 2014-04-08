@@ -51,6 +51,10 @@
 								<td ng-bind="item.vch_company"></td>
 								<td ng-bind="item.credit"></td>
 							</tr>
+							<tr ng-hide="creditList">
+								<td>查无积分</td>
+								<td></td>
+							</tr>
 						</table>
 					</div>
 				</div>
@@ -68,8 +72,8 @@
 
 <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="../lib/angular/angular.js"></script>
-<script src="../lib/angular/angular-sanitize.js"></script>
+<script src="../lib/angular/angular.min.js"></script>
+<script src="../lib/angular/angular-sanitize.min.js"></script>
 <script src="js/global.js"></script>
 <script>
 var myApp = angular.module('myApp', ['ngSanitize']);
@@ -104,6 +108,7 @@ myApp.controller('appCtrl', ['$scope', '$location', '$http', '$sce', function ($
 				if(response.status){
 					$scope.isBind = true;
 					$scope.title = "会员卡";
+					$scope.wechat_cardno = "NO."+response.wechat_cardno;
 				}else{
 					$scope.alertMsg = response.info;
 				}
@@ -115,7 +120,7 @@ myApp.controller('appCtrl', ['$scope', '$location', '$http', '$sce', function ($
 			if($scope.showCredit){
 				$scope.creditBtnTitle = "隐藏";
 				$http.get(getApiUrl('wechat_member_credit'), { headers: AuthHeader, params: {cardNo: $scope.cardno} }).success(function(response){
-					$scope.showCredit = response.status;
+					$scope.showCredit = true;
 					$scope.creditList = response.credit_list;
 				})
 			}else{

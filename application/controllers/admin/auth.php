@@ -20,8 +20,16 @@ class Auth extends CI_Controller
 	
 	function index()
 	{
-		$data['output'] = sprintf("<h4>登录过期,请重新<a href='%s'>%s</a></h4>", site_url('admin/auth/login'), '登录');
-		$this->load->view('valid_view.php', $data);
+		$this->login();
+		// $data['output'] = sprintf("<h4>登录过期,请重新<a href='%s'>%s</a></h4>", site_url('admin/auth/login'), '登录');
+		// $this->load->view('valid_view.php', $data);
+	}	
+
+	function msg()
+	{
+		$data['heading'] = '登录过期';
+		$data['message'] = sprintf("<h4>请重新<a href='%s'>%s</a></h4>", site_url('admin/auth/login'), '登录');
+		$this->load->view('error_general.php', $data);
 	}
 	
 	/* Callback function */
@@ -134,7 +142,6 @@ class Auth extends CI_Controller
 		}
 		else
 		{
-			//echo 'abc';
             redirect(site_url('admin/'));
 			//$data['auth_message'] = 'You are already logged in.';
 			//$this->load->view($this->dx_auth->logged_in_view, $data);
@@ -144,9 +151,7 @@ class Auth extends CI_Controller
 	function logout()
 	{
 		$this->dx_auth->logout();
-		redirect(site_url('admin/'));
-		//$data['auth_message'] = 'You have been logged out.';
-		//$this->load->view($this->dx_auth->logout_view, $data);
+		redirect(site_url('admin/auth/login'));
 	}
 	
 	function register()

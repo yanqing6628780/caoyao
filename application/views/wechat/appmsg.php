@@ -13,8 +13,8 @@
                 <thead>
                     <tr>
                         <th>图片</th>
-                        <th>标题</th>
-                        <th>摘要</th>
+                        <th width="250">标题</th>
+                        <th width="400">摘要</th>
                         <th>操作</th>
                     </tr>
                 </thead>

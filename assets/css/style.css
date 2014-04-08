@@ -4043,7 +4043,7 @@ Responsive & Scrollable Tables
 .table-scrollable > .table > thead > tr > td,
 .table-scrollable > .table > tbody > tr > td,
 .table-scrollable > .table > tfoot > tr > td {
-  white-space: nowrap;
+  /*white-space: nowrap;*/
 }
 
 .table-scrollable > .table-bordered {

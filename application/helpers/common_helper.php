@@ -132,7 +132,7 @@ function checkIsLoggedIn()
 {
     $CI = get_instance();
     if(!$CI->dx_auth->is_logged_in()):
-        redirect(site_url('admin/auth'));
+        redirect(site_url('admin/auth/msg'));
         exit();
     endif;
 }

@@ -100,7 +100,19 @@ $(function () {
     });
 
     CKEDITOR.replace( 'ck_editor',{
-        filebrowserUploadUrl: '<?=site_url("files/ckUpload/")?>'
+        filebrowserUploadUrl: '<?=site_url("files/ckUpload/")?>',
+        on: {
+            instanceReady: function() {
+                this.dataProcessor.htmlFilter.addRules( {
+                    elements: {
+                        img: function( el ) {
+                            if ( !el.attributes.class )
+                                el.attributes.class = 'img-responsive';
+                        }
+                    }
+                } );            
+            }
+        }
     });
 })
 </script>
