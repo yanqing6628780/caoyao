@@ -319,11 +319,19 @@ class wechat extends CI_Controller {
             }else{
                 $stt_response = $this->stt_access->get_members($cardNo);
                 if($stt_response and $stt_response->leaguer){
-                    $post_data['cardNo'] = $cardNo;
-                    $this->general_mdl->setData($post_data);
-                    $this->general_mdl->update(array('id' => $id));
-                    $response['status'] = 'y';
-                    $response['info'] = '绑定成功';
+                    // 取出会员资料
+                    $query = $this->general_mdl->get_query_by_where( array('id' => $id) );
+                    $row = $query->row_array();
+
+                    if($row['tel'] == $stt_response->vch_cardno){
+                        $post_data['cardNo'] = $cardNo;
+                        $this->general_mdl->setData($post_data);
+                        $this->general_mdl->update(array('id' => $id));
+                        $response['status'] = 'y';
+                        $response['info'] = '绑定成功';
+                    }else{    
+                        $response['info'] = '电话号码不匹配';                    
+                    }
                 }else{
                     $response['info'] = '查无些卡号';                    
                 }

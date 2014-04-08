@@ -53,12 +53,17 @@ function generate_verify_code($array = array()) {
 }
 
 /**
-* 生成用户username
-* @param num_rows 数据库用户数目
+* 生成数字用户名.
+* 根据给定的$num_rows和$prefix组成.
+* 当$num_rows长度大于$length,则不进行任何操作
+* @param num_rows int 数据库用户数目
+* @param prefix string 前缀
+* @param length int 位数
 * @return  string
 */
-function generate_username($num_rows) {
-    return 800000 + $num_rows;
+function generate_username($num_rows, $prefix = '8', $length = 5) {
+    $string = str_pad($num_rows, $length, '0', STR_PAD_LEFT);
+    return $prefix.$string;
 }
 
 /**
@@ -102,7 +107,6 @@ function generate_password( $length = 6, $type = 3 ) {
 */
 function get_order_sn()
 {
-    /* 选择一个随机的方案 */
     mt_srand((double) microtime() * 1000000);
 
     return date('Ymd') . str_pad(mt_rand(1, 99999), 6, '0', STR_PAD_LEFT);

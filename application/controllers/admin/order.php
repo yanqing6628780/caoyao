@@ -259,7 +259,7 @@ class Order extends CI_Controller {
         if($stt_response && $stt_response->status){
             // 更改订单为审核状态
             $this->general_mdl->setTable('cybr_book_master');
-            $this->general_mdl->setData(array('is_verified' => 1, 'stt_bookno' => $ch_bookno, 'ch_bustype' => $bustype));
+            $this->general_mdl->setData(array('is_verified' => 1, 'stt_bookno' => $stt_response->ch_bookno, 'ch_bustype' => $bustype));
             $this->general_mdl->update(array('ch_bookno' => $ch_bookno));
             $response['info'] = $stt_response->error;
             $response['status'] = 'y';
