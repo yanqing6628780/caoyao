@@ -155,12 +155,6 @@ class my_interface extends REST_Controller
                 $row->user_id = $user_id;
                 $this->general_mdl->setData($row);
                 $this->general_mdl->create();
-                // $query = $this->general_mdl->get_query_by_where( array($matche_field => $row->{$matche_field}, 'user_id' => $user_id) );
-                // 如果已有数据则更新,没有则创建
-                // if($query->num_rows()){
-                //     $this->general_mdl->update( array($matche_field => $row->{$matche_field}) );
-                // }else{
-                // }
             }
         }
     }

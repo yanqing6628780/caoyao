@@ -9,7 +9,7 @@ class Files extends CI_Controller
         $this->config->load('thumbimage', true);
 	}
 
-    //头像上传
+    //图片上传
     public function imgUpload()
     {
         $dir = $this->input->get_post('dir');
@@ -21,8 +21,8 @@ class Files extends CI_Controller
         $widths = $thumbimage_config['thumb_width']; // 需要处理的图片宽度尺寸
         $heights = $thumbimage_config['thumb_height']; // 需要处理的图片高度尺寸
 
-        $path = '/uploads/'.$dir.'/';
-        $config['upload_path'] = '.'.$path;
+        $path = $dir ? 'uploads/'. $dir . '/' : 'uploads/';
+        $config['upload_path'] = './'.$path;
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '2048';
         $config['max_width']  = '0';
@@ -42,6 +42,7 @@ class Files extends CI_Controller
         else
         {
             $upload_data = $this->upload->data();
+            $data['file']['photo_path'] = $path.$upload_data['file_name'];
             $data['file']['url'] = get_image_url($path.$upload_data['file_name']);
             $data['file']['width'] = $upload_data['image_width'];
             $data['file']['height'] = $upload_data['image_height'];
@@ -50,7 +51,7 @@ class Files extends CI_Controller
         echo json_encode($data);
     }
 
-    //头像上传
+    //ckeditor图片上传
     public function ckUpload()
     {
         $funcNum = $this->input->get_post('CKEditorFuncNum');

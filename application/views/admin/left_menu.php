@@ -42,6 +42,7 @@
 		<span class="arrow"></span>
 	</a>
 	<ul class="sub-menu">
+		<li><a id="dish_view" class="ajaxify" href="<?php echo site_url('admin/dish/')?>" target="right">菜式管理</a></li>
 		<li><a id="order_view" class="ajaxify" href="<?php echo site_url('admin/order/')?>" target="right">订单管理</a></li>
 		<li><a id="lottery_view" class="ajaxify" href="<?php echo site_url('admin/lottery/')?>" target="right">抽奖管理</a></li>
 		<li><a id="coupon_view" class="ajaxify" href="<?php echo site_url('admin/coupon/')?>" target="right">优惠卷管理</a></li>
