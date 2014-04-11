@@ -270,8 +270,36 @@ class my_interface extends REST_Controller
                     }
                 }
 
+                // 获取菜品图片
+                $this->general_mdl->setTable('dish_photo');
+                $query = $this->general_mdl->get_query_by_where( array('dishno' => $result['ch_dishno'], 'user_id' => $user_id) );
+                if($query->num_rows() > 0){
+                    $result['photo'] = get_image_url($query->row()->photo);
+                }
+
             }else{ //获取所有菜式
                 $result = $query->result_array();
+
+                foreach ($result as $key => $value) {
+                    // 获取菜品沽清信息 
+                    $result[$key]['warn'] = FALSE;
+                    $this->general_mdl->setTable('cybr_u_dish_warn');
+                    $query = $this->general_mdl->get_query_by_where( array('ch_dishno' => $value['ch_dishno'], 'user_id' => $user_id) );
+                    if($query->num_rows() > 0){
+                        $warn_row = $query->row();
+                        // 当菜品沽清则不显示
+                        if($warn_row->num_sale - $warn_row->num_warn == 0){                            
+                            $result[$key]['warn'] = TRUE;
+                        }
+                    }
+
+                    // 获取菜品图片
+                    $this->general_mdl->setTable('dish_photo');
+                    $query = $this->general_mdl->get_query_by_where( array('dishno' => $value['ch_dishno'], 'user_id' => $user_id) );
+                    if($query->num_rows() > 0){
+                        $result[$key]['photo'] = get_image_url($query->row()->photo);
+                    }
+                }
             }
             $this->response($result, 200);
         }else{

@@ -7,6 +7,8 @@ input.ng-invalid{
 	border-color: #E9322D;
 	box-shadow: 0 0 6px #F8B9B7;
 }
+.dish-list-img{width: 100px;height: 100px}
+
 
 /* 绑定页面 */
 body.bind{padding-top: 0}

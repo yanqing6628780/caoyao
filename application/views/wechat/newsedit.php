@@ -25,7 +25,7 @@
                             <input class="form-control" datatype='*' type="text" id="picurl" name="picurl" placeholder="http://" value="<?=$row['picurl']?>" >
                         </div>
                         <span class="text-danger" id="uploadstatus"></span>
-                        <span class="help-block col-md-4"><img class="img-responsive" src="<?=$row['picurl']?>" alt=""></span>
+                        <span class="thumbnail help-block col-md-4"><img id="cover" class="img-responsive" src="<?=$row['picurl']?>" alt=""></span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,8 +35,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">正文</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-3 control-label">正文</label>
+                    <div class="col-sm-9">
                         <textarea id="ck_editor" class="form-control" name="content" value=""><?=$row['content']?></textarea>
                     </div>
                 </div>

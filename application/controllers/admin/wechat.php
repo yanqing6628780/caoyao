@@ -77,6 +77,7 @@ class wechat extends CI_Controller {
         if(!$token) {        
             $response = $this->get_access_token();
             $this->data['wechat_resp'] = $response;
+            $token = $this->session->userdata('wechat_access_token');
         }
 
         if($token) {
@@ -84,6 +85,7 @@ class wechat extends CI_Controller {
             if( isset($user_response->data) ) {                
                 $this->data['openid'] = join($user_response->data->openid, ',');
 
+                // 如果超过10000时,重复获取
                 // $next_openid = $user_response->next_openid;
                 // while ( $next_openid != "") {
                 //     $new_resp = $this->get_users($token, $next_openid);
@@ -93,6 +95,10 @@ class wechat extends CI_Controller {
                 //     }
                 // }
             }
+
+            $this->general_mdl->setTable('wechat_msg_news');
+            $query = $this->general_mdl->get_query();
+            $this->data['news_result'] = $query->result_array();
         }
         $this->load->view('wechat/msgsend', $this->data);
     }
@@ -124,7 +130,7 @@ class wechat extends CI_Controller {
                     break;
                 case 'news':
 
-                    //将图文信息入库
+                    //当直接编辑资料时,将图文信息入库并发送
                     if( $post['title'] && $post['picurl'] ) {
                         $this->general_mdl->setTable('wechat_msg_news');
                         $id = $this->general_mdl->get_query()->num_rows() + 1;
@@ -143,13 +149,25 @@ class wechat extends CI_Controller {
                             $this->general_mdl->setData($update_data);
                             $this->general_mdl->update(array('id' => $insert_id));
                         }
-                    }
 
-                    //发送
-                    foreach ($openid_array as $key => $value) {
-                        $output[] = $this->_sendNews($url, $value, $post);
-                        $data['errors'][] = $this->curl->error_string;
-                        sleep(1);
+                        //发送
+                        foreach ($openid_array as $key => $value) {
+                            $output[] = $this->_sendNews($url, $value, $post);
+                            $data['errors'][] = $this->curl->error_string;
+                            sleep(1);
+                        }
+                    }else if($post['news_id']) {
+                        $query = $this->general_mdl->get_query_by_where( array('id' => $post['news_id']) );
+
+
+                        //发送
+                        // foreach ($openid_array as $key => $value) {
+                        //     $output[] = $this->_sendNews($url, $value, $post);
+                        //     $data['errors'][] = $this->curl->error_string;
+                        //     sleep(1);
+                        // }
+                    }else{
+                        $output[] = "发送失败";
                     }
 
                     break;
@@ -192,13 +210,39 @@ class wechat extends CI_Controller {
         $query = $this->general_mdl->get_query_by_where(array('id' => $id));
         $this->data['row'] = $query->row_array();
 
-        $this->load->view('wechat/newsedit', $this->data);
+        if($this->input->get('isMult')){
+            $this->general_mdl->setTable('wechat_msg_news');
+            $query = $this->general_mdl->get_query_by_where(array('parent_id' => 0, 'is_mult' => 0));
+            $this->data['result'] = $query->result_array();
+
+            $query = $this->general_mdl->get_query_by_where(array('id' => $id));
+            $edit_row[] = $query->row_array();
+
+            $query = $this->general_mdl->get_query_by_where(array('parent_id' => $id));
+            $result = $query->result_array();
+            foreach ($result as $key => $value) {
+                $edit_row[$key+1] = $result[$key];
+            }
+            $this->data['edit_result'] = $edit_row;
+
+            $this->load->view('wechat/newsedit_mult', $this->data);
+        }else{
+            $this->load->view('wechat/newsedit', $this->data);
+        }
     }
 
     public function newsadd()
     {
         checkPermission('wechat_admin');
-        $this->load->view('wechat/newsadd', $this->data);
+        if($this->input->get('isMult')){
+            $this->general_mdl->setTable('wechat_msg_news');
+            $query = $this->general_mdl->get_query_by_where(array('parent_id' => 0, 'is_mult' => 0));
+            $this->data['result'] = $query->result_array();
+
+            $this->load->view('wechat/newsadd_mult', $this->data);
+        }else{
+            $this->load->view('wechat/newsadd', $this->data);
+        }
     }
 
     public function news_save()
@@ -226,6 +270,42 @@ class wechat extends CI_Controller {
         }
 
         $response['status'] = 'y';
+        echo json_encode($response);
+    }
+
+    public function news_mult_save()
+    {
+        $ids = $this->input->post('ids');
+        $old_ids = $this->input->post('old_ids');
+
+        $response['status'] = 'n';
+        $response['info'] = '保存失败';
+        
+        $this->general_mdl->setTable('wechat_msg_news');
+
+        if($old_ids){
+            $old_ids_array = json_decode($old_ids, TRUE);
+            foreach ($old_ids_array as $key => $value) {
+                $this->general_mdl->setData( array('parent_id' => 0, 'is_mult' => 0) );
+                $this->general_mdl->update( array('id' => $value['id']) );
+            }
+        }
+
+        if($ids){
+            $id_array = json_decode($ids, TRUE);
+            $parent_id = $id_array[0]['id'];
+            foreach ($id_array as $key => $value) {
+                if($key != 0){
+                    $this->general_mdl->setData( array('parent_id' => $parent_id, 'is_mult' => 0) );
+                    $this->general_mdl->update( array('id' => $value['id']) );
+                }else{
+                    $this->general_mdl->setData( array('is_mult' => 1) );
+                    $this->general_mdl->update( array('id' => $value['id']) );
+                }
+            }
+            $response['status'] = 'y';
+            $response['info'] = '保存成功';
+        }
         echo json_encode($response);
     }
 
@@ -402,12 +482,12 @@ class wechat extends CI_Controller {
                 array(
                     'type' => 'click',
                     'name' => urlencode('电子菜单'),
-                    'key' => 'news_1'
+                    'key' => 'news_5'
                 ),
                 array(
                     'type' => 'click',
                     'name' => urlencode('用餐订位'),
-                    'key' => 'news_1'
+                    'key' => 'news_14'
                 )
             )
         );
@@ -422,7 +502,7 @@ class wechat extends CI_Controller {
                 array(
                     'type' => 'click',
                     'name' => urlencode('奄尖试食团'),
-                    'key' => 'news_1'
+                    'key' => 'news_10'
                 )
             )
         );
@@ -438,7 +518,7 @@ class wechat extends CI_Controller {
                 array(
                     'type' => 'click',
                     'name' => urlencode('品牌故事'),
-                    'key' => 'news_1'
+                    'key' => 'news_2'
                 ),
                 array(
                     'type' => 'click',

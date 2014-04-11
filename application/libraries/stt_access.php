@@ -59,6 +59,24 @@ class Stt_access
 		}else{
 			return FALSE;
 		}
+	}	
+
+	//获取菜品规格
+	public function get_dish_spec($value = '')
+	{
+		$url = $this->master_server_domain."/stt_access/get_leaguer_credit";
+		$post_data = array();
+		if($value){
+			$post_data['vch_memberno'] = $value;
+		}else{
+			return FALSE;
+		}
+		$response = $this->execute($url, $post_data);
+		if($response and $response->status){
+			return $response;
+		}else{
+			return FALSE;
+		}
 	}
 
 	public function order_write($url, $tables, $order, $type)

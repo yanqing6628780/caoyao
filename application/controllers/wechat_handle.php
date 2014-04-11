@@ -188,7 +188,7 @@ class wechat_handle extends CI_Controller
     }
 
     // 收到菜单点击事件时触发
-    private function onClick($eKey)
+    public function onClick($eKey)
     {
         $event_arr = explode('_', $eKey);
         switch ($event_arr[0]) {
@@ -200,7 +200,15 @@ class wechat_handle extends CI_Controller
                 $query = $this->general_mdl->get_query_by_where( array('id' => $event_arr[1]) );
                 if($query->num_rows()){
                     $row = $query->row_array();
-                    $this->responseNews($row);
+                    $articles[] = $this->setNewsArticleArr($row);
+                    if($row['is_mult']){ // 当为多图文时
+                        $query = $this->general_mdl->get_query_by_where( array('parent_id' => $row['id']) );
+                        foreach ($query->result_array() as $key => $value) {
+                            $articles[] = $this->setNewsArticleArr($value);
+                        }
+                    }
+
+                    $this->responseNews($articles);
                 }else{
                     $this->responseText("感谢你的关注,功能正在建设中,请耐心等候.".$event_arr[1]);
                 }
@@ -210,6 +218,17 @@ class wechat_handle extends CI_Controller
                 $this->responseText("感谢你的关注,功能正在建设中,请耐心等候.");
                 break;
         }
+    }
+
+    private function setNewsArticleArr($row) 
+    {
+        $arr = array(
+            'Title' => $row['title'],
+            'Description' => $row['description'],
+            'PicUrl' => $row['picurl'],
+            'Url' => $row['url']
+        );
+        return $arr;
     }
 
     //发送被动响应文本消息
@@ -229,31 +248,45 @@ class wechat_handle extends CI_Controller
     }
 
     //发送被动响应图文消息
-    private function responseNews($data)
+    private function responseNews($articles)
     {
-      $tpl = "<xml>
-                  <ToUserName><![CDATA[%s]]></ToUserName>
-                  <FromUserName><![CDATA[%s]]></FromUserName>
-                  <CreateTime>%s</CreateTime>
-                  <MsgType><![CDATA[%s]]></MsgType>
-                  <ArticleCount>1</ArticleCount>
-                  <Articles>
-                  <item>
+        $item_tpl = "<item>
                   <Title><![CDATA[%s]]></Title>
                   <Description><![CDATA[%s]]></Description>
                   <PicUrl><![CDATA[%s]]></PicUrl>
                   <Url><![CDATA[%s]]></Url>
-                  </item>
-                  </Articles>
+                  </item>";
+        $articles_str = "";
+
+        foreach ($articles as $key => $value) {
+            $articles_str .= sprintf($item_tpl, $value['Title'], $value['Description'], $value['PicUrl'], $value['Url']);
+        }
+        $tpl = "<xml>
+                  <ToUserName><![CDATA[%s]]></ToUserName>
+                  <FromUserName><![CDATA[%s]]></FromUserName>
+                  <CreateTime>%s</CreateTime>
+                  <MsgType><![CDATA[%s]]></MsgType>
+                  <ArticleCount>%s</ArticleCount>
+                  <Articles>%s</Articles>
                   <FuncFlag>0</FuncFlag>
                   </xml>";
         $resultStr = sprintf(
             $tpl,
             $this->FromUserName, $this->ToUserName, time(), "news",
-            $data['title'], $data['description'], $data['picurl'], $data['url']
+            count($articles), $articles_str
         );
-      $resultXML = preg_replace('/[\r|\t]/', '', $resultStr);
-      echo $resultXML;
+        $resultXML = preg_replace('/[\r|\t]/', '', $resultStr);
+
+        $this->logger->conf['log_file'] = "wechat_logs.txt";
+        $logData = array(
+            date("Y-m-d H:i:s"),
+            $resultStr,
+            $this->FromUserName,
+            $this->ToUserName
+        );
+        $this->logger->log($logData);
+
+        echo $resultXML;
     }
 
 
@@ -268,7 +301,7 @@ class wechat_handle extends CI_Controller
         // 记录发送日志
         $logData = array(
             date("Y-m-d H:i:s"),
-            $message,
+            $message
         );
 
         if(!empty($reply_row)){
@@ -292,6 +325,7 @@ class wechat_handle extends CI_Controller
         }
         // TODO: 在这里做一些字符串解析，比如分析某关键字，返回什么信息等等
     }
+
 }
 
 
