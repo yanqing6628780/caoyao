@@ -1,4 +1,4 @@
-var BASE_URL = 'http://192.168.0.136/ci/api/my_interface/';
+var BASE_URL = '/ci/api/my_interface/';
 var AuthHeader = {'Authorization': 'Basic c3F0OllXYVdNVEl6TkE='};
 var postDataHeader = {'Content-Type': 'application/x-www-form-urlencoded','Authorization': 'Basic c3F0OllXYVdNVEl6TkE='};
 

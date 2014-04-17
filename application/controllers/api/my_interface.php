@@ -161,12 +161,36 @@ class my_interface extends REST_Controller
 
     //获取门店(用户)数据
     function users_get(){
-        $this->general_mdl->setTable('admin_user_profile');
-        $query = $this->general_mdl->get_query();
 
-        $result['content'] = $query->result_array();
-        $result['status'] = 1;
-        $this->response($result, 200); 
+        $user_id = $this->get('userId');
+        $response['status'] = 0;
+
+        $result = array();
+        if($user_id){        
+            $this->general_mdl->setTable('admin_user_profile');
+            $query = $this->general_mdl->get_query_by_where(array('user_id'=> $user_id));
+            if($query->num_rows()){
+                $result = $query->row();
+                $response['status'] = 1;
+            }else{
+                $response['error'] = "查无此店信息";
+                $response['status'] = 0;
+            }
+        }else{
+            $this->general_mdl->setTable('admin_users');
+            $query = $this->general_mdl->get_query_by_where(array('role_id'=> 2));
+            
+            $result = array();
+            foreach ($query->result_array() as $key => $value) {
+                $this->general_mdl->setTable('admin_user_profile');
+                $query = $this->general_mdl->get_query_by_where(array('user_id'=> $value['id']));
+                $result[] = $query->row();
+            }
+            $response['status'] = 1;
+        }
+
+        $response['content'] = $result;
+        $this->response($response, 200); 
     }
 
     //获取订单表数据

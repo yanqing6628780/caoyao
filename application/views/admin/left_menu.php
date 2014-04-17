@@ -1,3 +1,4 @@
+<?php if(checkPermission2('user_view') || checkPermission2('perm_admin') || checkPermission2('role_view')):?>
 <li class="start">
 	<a href="javascript:;">
 		<i class="icon-home"></i> 
@@ -17,6 +18,7 @@
 		<?php endif;?>
 	</ul>
 </li>
+<?php endif;?>
 <?php if(checkPermission2('wechat_admin')):?>	
 <li class="">
 	<a href="javascript:;">

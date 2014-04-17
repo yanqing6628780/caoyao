@@ -3,7 +3,7 @@
         <div class="caption"><i class="icon-reorder"></i></div>
     </div>
     <div class="portlet-body form">
-        <form id='user_edit' class="form-horizontal" action="<?php echo site_url('user_admin/user_add_save')?>">
+        <form id='user_edit' class="form-horizontal" action="<?php echo site_url('user_admin/user_edit_save')?>">
             <div class="form-body">
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">用户名</label>
@@ -83,7 +83,7 @@ function edit_user_save()
         dataType: 'json',
         data: data,
         success: function(respone){
-            alert( respone.msg );
+            alert( respone.info );
             $('#myModal').modal('hide');
             $('#users_view').click();
         }

@@ -131,7 +131,7 @@ class wechat_handle extends CI_Controller
                     break;
 
                   case 'LOCATION':
-                    $this->onEventLocation();
+                    $this->onEventLocation($post_obj);
                     break;
 
                   case 'CLICK':
@@ -218,6 +218,38 @@ class wechat_handle extends CI_Controller
                 $this->responseText("感谢你的关注,功能正在建设中,请耐心等候.");
                 break;
         }
+    }
+
+    //上报地理位置事件
+    public function onEventLocation($post_obj)
+    {
+        $this->general_mdl->setTable('admin_users');
+        $query = $this->general_mdl->get_query_by_where(array('role_id'=> 2));
+
+        //将店铺资料拼成图文信息发送
+        $result = array();
+        foreach ($query->result_array() as $key => $value) {
+            $this->general_mdl->setTable('admin_user_profile');
+            $query = $this->general_mdl->get_query_by_where(array('user_id'=> $value['id']));
+            $row = $query->row();
+            $params_arr = array(
+                'userLat' => $post_obj->Latitude,
+                'userLng' => $post_obj->Longitude,
+                'precision' => $post_obj->Precision,
+                'shopLat' => $row['lat'],
+                'shopLng' => $row['lng'],
+                'userId' => $value['id']
+            );
+            $params_str = http_build_query($params_arr);
+            $arr = array(
+                'title' => $row['name'],
+                'description' => $row['address'],
+                'picurl' => get_image_url($row['photo']),
+                'url' => site_url("wechat/lbs.html?".$params_arr)
+            );
+            $articles[] = $this->setNewsArticleArr($arr);
+        }
+        $this->responseNews($articles);
     }
 
     private function setNewsArticleArr($row) 

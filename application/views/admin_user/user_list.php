@@ -35,6 +35,7 @@
                             <td><?=$row['last_login']?></td>
                             <td>
                                 <?php if(checkPermission2('user_edit')):?>                                    
+                                <a target="_blank" class="btn purple" href='<?=site_url("admin/user_admin/user_lbs/?user_id=".$row['id'])?>'><i class="icon-map-marker icon-white"></i> 地理位置</a>
                                 <button href="#myModal" data-toggle="modal" class="btn btn-primary" onclick='editUser(<?=$row['id']?>)'> <i class="icon-pencil icon-white"></i> 编辑</button>
                                 <?php endif;?>
                                 <?php if($row['id'] != 1):?>
@@ -53,10 +54,10 @@
 </div>
 <script type="text/javascript">
 function addUser(userId){
-    LoadAjaxPage('<?=base_url()?>admin/user_admin/user_add', "", 'myModal',"添加用户")
+    LoadAjaxPage('<?=site_url("admin/user_admin/user_add")?>', "", 'myModal',"添加用户")
 }
 function editUser(userId){
-    LoadAjaxPage('<?=base_url()?>admin/user_admin/user_edit', {user_id: userId}, 'myModal',"编辑")
+    LoadAjaxPage('<?=site_url("admin/user_admin/user_edit")?>', {user_id: userId}, 'myModal',"编辑")
 }
 function delUser(id){
     if(confirm('确认删除?'))

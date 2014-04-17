@@ -97,16 +97,20 @@ class User_admin extends CI_Controller
         checkPermission('user_edit');
 
         $data['success'] = false;
+        $data['info'] = "n";
         $data['msg'] = '';
         $user_id = $this->input->post('user_id');
         $role_id = $this->input->post('role_id');
         $profile = $this->input->post('profile');
 
-		$this->users->set_role($user_id, $role_id);
+        if($role_id){
+		  $this->users->set_role($user_id, $role_id);
+        }
 
         $this->profile->set_profile($user_id, $profile);
         $data['success'] = true;
-        $data['msg'] = '修改成功';
+        $data['status'] = "y";
+        $data['info'] = '修改成功';
         echo json_encode($data);
     }
 
@@ -196,6 +200,14 @@ class User_admin extends CI_Controller
         echo json_encode($profile);
     }
 
+    //用户地理坐标设置页
+    public function user_lbs()
+    {
+        $user_id = $this->input->get('user_id');
+        $data['profile'] = $this->profile->get_profile($user_id)->row_array();
+        $this->load->view('admin_user/user_lbs.php', $data);
+    }
+
     //头像上传
     public function avatar_upload()
     {
@@ -273,6 +285,7 @@ class User_admin extends CI_Controller
 		echo json_encode($data);
 	}
 
+    //角色管理
     public function roles()
     {
         checkPermission('role_edit');

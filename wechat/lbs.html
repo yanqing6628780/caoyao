@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+
+<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="../lib/bootstrap-datetimepicker/css/datetimepicker.css" />
+<title></title>
+<style type="text/css">
+body, html{width: 100%;height: 100%;overflow: hidden;margin:0;}
+#map{width:100%;height: 100%}
+#l-map{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
+#r-result{height:100%;width:20%;float:left;}
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+</body>
+</html>
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=L7KaPONl21QL03CdVH4YOZ9w"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript">
+function getQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if (r != null) return unescape(r[2]); return null;
+}
+var precision = getQueryString('precision');
+var user = {}; //用户对象
+var shop = {}; //店铺对象
+user.lat = getQueryString('userLat'); //用户纬度位置
+user.lng = getQueryString('userLng'); //用户经度位置
+user.id = getQueryString('userId'); //店铺纬度位置
+shop.lat = getQueryString('shopLat'); //店铺纬度位置
+shop.lng = getQueryString('shopLng'); //店铺经度位置
+// 百度地图API功能
+var map = new BMap.Map("map");
+var zoom = 14; //缩放级别
+var userPP = new BMap.Point(user.lng, user.lat); //用户位置
+var shopPP = new BMap.Point(shop.lng, shop.lat); //店铺位置
+var userMarker = new BMap.Marker(userPP);  // 创建标注
+var shopMarker = new BMap.Marker(shopPP);  // 创建标注
+
+map.addOverlay(userMarker);              // 将标注添加到地图中
+map.addOverlay(shopMarker);              // 将标注添加到地图中
+map.centerAndZoom(new BMap.Point(shop.lng, shop.lat), zoom); //设置中心点和缩放级别
+map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
+map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+
+// 信息窗口参数
+var opts = {
+  width : 200,
+  height: 70,
+  title : "~~" ,
+  enableMessage:true,//设置允许信息窗发送短息
+  message:"亲，晚上来吃个饭吧？戳下面的链接看下地址喔~"
+}
+
+var infoWindow = new BMap.InfoWindow("", opts);  // 创建信息窗口对象
+shopMarker.addEventListener("click", function(){          
+   this.openInfoWindow(infoWindow);
+});
+if(user.id){
+	$.ajax({
+		url: getApiUrl('users'),
+		type: 'GET',
+		dataType: 'json',
+		data: {userId: user.id},
+		headers: {'Authorization': 'Basic c3F0OllXYVdNVEl6TkE='},
+		success: function (response) {
+			if(response.status){
+				var content = "<div class='pull-left'>地址:"+ response.content.address +"<br>电话:"+ response.content.mobile +"<br></div><button onclick='navigate()' class='btn btn-success pull-right'>导航</button>";
+				infoWindow.setTitle(response.content.name);
+				infoWindow.setContent(content);
+				shopMarker.openInfoWindow(infoWindow); //开启信息窗口
+			}
+		}
+	})
+}
+
+var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+function navigate() {
+	driving.search(userPP, shopPP);
+}
+</script>
