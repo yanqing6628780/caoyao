@@ -1,39 +1,52 @@
-<div class="warp container" ng-controller="ordersCtrl" >
-	<div class="row row-offcanvas row-offcanvas-right">
-		<div class="col-xs-12 col-sm-9">
-			<form class="form-horizontal" role="form">
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">门店</label>
-					<div class="col-sm-10">
-						<select class="form-control">
-							<option ng:repeat="item in usersList.content" value="{{item.id}}">{{item.name}}</option>
-						</select>
-					</div>
+<?php $this->load->view('admin/table_head');?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet box light-grey">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-reorder"></i>列表</div>
+				<div class="actions">
+                    <a onclick="add()" class="btn blue" ><i class="icon-plus"></i> 添加关键字</a>
 				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label" requ>姓名</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">电话</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">订台数目</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">下单</button>
-					</div>
-				</div>
-			</form>
+			</div>
+			<div class="portlet-body">
+				<table class='table table-striped table-bordered table-hover Ctable' id="sample_1">
+                    <thead>
+                        <tr>
+                            <th>消息类型</th>
+                            <th width="250">关键字</th>
+                            <th width="400">回复内容</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($result as $key => $row):?>
+                        <tr>
+                            <td><?=$row['msgtype']?></td>
+                            <td><?=$row['keyword']?></td>
+                            <td><?=$row['reply_data']?></td>
+                            <td>
+                                <a class="btn green" onclick="edit(<?=$row['id']?>, 0)"> <i class="icon-pencil icon-white"></i> 编辑</a>
+                                <a class="btn red" onclick="del(<?=$row['id']?>)"><i class="icon-remove icon-white"></i> 删除</a>
+                            </td>
+                        </tr>
+                    <?php endforeach;?>
+                    </tbody>
+                </table>
+			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+jQuery(document).ready(function() {       
+    TableAdvanced.init();
+});
+function add(){
+    LoadPageContentBody('<?=site_url($controller_url."autoreply_edit/")?>');
+}
+function edit(id){
+    LoadPageContentBody('<?=site_url($controller_url."autoreply_edit/")?>', {id: id});
+}
+function del(id, code){
+    common_del('<?=site_url($controller_url."autoreply_del")?>', id, code, '#wechat_autoreply_view');
+}
+</script>

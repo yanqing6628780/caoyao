@@ -59,7 +59,7 @@ var opts = {
   enableMessage:true,//设置允许信息窗发送短息
   message:"亲，晚上来吃个饭吧？戳下面的链接看下地址喔~"
 }
-
+var content = "<div class='pull-left'>地址:"+ response.content.address +"<br>电话:"+ response.content.mobile +"<br></div><button onclick='navigate()' class='btn btn-success pull-right'>导航</button>";
 var infoWindow = new BMap.InfoWindow("", opts);  // 创建信息窗口对象
 shopMarker.addEventListener("click", function(){          
    this.openInfoWindow(infoWindow);

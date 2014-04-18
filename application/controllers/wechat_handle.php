@@ -150,7 +150,7 @@ class wechat_handle extends CI_Controller
                 break;
 
               case 'location':
-                $this->onLocation();
+                $this->onLocation($post_obj);
                 break;
 
               case 'link':
@@ -220,8 +220,8 @@ class wechat_handle extends CI_Controller
         }
     }
 
-    //上报地理位置事件
-    public function onEventLocation($post_obj)
+    //地理位置消息
+    public function onLocation($post_obj)
     {
         $this->general_mdl->setTable('admin_users');
         $query = $this->general_mdl->get_query_by_where(array('role_id'=> 2));
@@ -231,11 +231,11 @@ class wechat_handle extends CI_Controller
         foreach ($query->result_array() as $key => $value) {
             $this->general_mdl->setTable('admin_user_profile');
             $query = $this->general_mdl->get_query_by_where(array('user_id'=> $value['id']));
-            $row = $query->row();
+            $row = $query->row_array();
             $params_arr = array(
-                'userLat' => $post_obj->Latitude,
-                'userLng' => $post_obj->Longitude,
-                'precision' => $post_obj->Precision,
+                'userLat' => $post_obj->Location_X,
+                'userLng' => $post_obj->Location_Y,
+                'precision' => $post_obj->Scale,
                 'shopLat' => $row['lat'],
                 'shopLng' => $row['lng'],
                 'userId' => $value['id']
@@ -245,7 +245,7 @@ class wechat_handle extends CI_Controller
                 'title' => $row['name'],
                 'description' => $row['address'],
                 'picurl' => get_image_url($row['photo']),
-                'url' => site_url("wechat/lbs.html?".$params_arr)
+                'url' => site_url("wechat/lbs.html?".$params_str)
             );
             $articles[] = $this->setNewsArticleArr($arr);
         }
@@ -326,9 +326,13 @@ class wechat_handle extends CI_Controller
     private function _parseMessage($message)
     {
         $this->logger->conf['log_file'] = "wechat_logs.txt";
-        // $this->general_mdl->setTable('wechat_autoreply');
-        // $reply_row = $this->general_mdl->get_query_by_where(array("keyword" => $message));
+
         $reply_row = array();
+        $this->general_mdl->setTable('wechat_autoreply');
+        $query = $this->general_mdl->get_query_by_where(array("keyword" => $message));
+        if($query->num_rows()){
+            $reply_row = $query->row_array();
+        }
 
         // 记录发送日志
         $logData = array(
@@ -348,8 +352,24 @@ class wechat_handle extends CI_Controller
                     $this->responseText($reply_data->content);
                     break;
                 case 'news':
-                    $reply_data = json_decode($reply_row['reply_data'], TRUE);
-                    $this->responseNews($reply_data);
+                    $news_id = $reply_row['reply_data'];
+
+                    $this->general_mdl->setTable('wechat_msg_news');
+                    $query = $this->general_mdl->get_query_by_where( array('id' => $news_id) );
+                    if($query->num_rows()){
+                        $row = $query->row_array();
+                        $articles[] = $this->setNewsArticleArr($row);
+                        if($row['is_mult']){ // 当为多图文时
+                            $query = $this->general_mdl->get_query_by_where( array('parent_id' => $row['id']) );
+                            foreach ($query->result_array() as $key => $value) {
+                                $articles[] = $this->setNewsArticleArr($value);
+                            }
+                        }
+
+                        $this->responseNews($articles);
+                    }else{
+                        $this->responseText("感谢你的关注,功能正在建设中,请耐心等候.".$event_arr[1]);
+                    }
                     break;
             }
         }else{

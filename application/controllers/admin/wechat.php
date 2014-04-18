@@ -184,7 +184,112 @@ class wechat extends CI_Controller {
     public function autoreply()
     {
         checkPermission('wechat_admin');
+
+        $this->general_mdl->setTable('wechat_autoreply');
+        $query = $this->general_mdl->get_query();
+        $result = $query->result_array();
+        
+        foreach ($result as $key => $value) {
+            switch ($value['msgtype']) {
+                    case 'news':
+                        $result[$key]['msgtype'] = '图文';
+                        $result[$key]['reply_data'] = '图文id号:'.$value['reply_data'];
+                        break;
+                    case 'text':
+                        $result[$key]['msgtype'] = '文本';
+                        $result[$key]['reply_data'] = json_decode($value['reply_data'])->content;
+                        break;
+                }    
+        }
+
+        $this->data['result'] = $result;
         $this->load->view('wechat/autoreply', $this->data);
+    }    
+
+    public function autoreply_edit()
+    {
+        checkPermission('wechat_admin');
+
+        $id = $this->input->get('id');
+
+        $this->general_mdl->setTable('wechat_msg_news');
+        $query = $this->general_mdl->get_query();
+        $this->data['news_result'] = $query->result_array();
+
+        if($id){
+            $this->general_mdl->setTable('wechat_autoreply');
+            $query = $this->general_mdl->get_query_by_where(array('id' => $id));
+            $row = $query->row_array();
+
+            switch ($row['msgtype']) {
+                case 'text':
+                    $row['content'] = json_decode($row['reply_data'])->content;
+                    break;
+                case 'news':
+                    $row['news_id'] = $row['reply_data'];
+                    break;
+            }
+            $this->data['row'] = $row;
+            $view = 'wechat/autoreply_edit';
+        }else{
+            $view = 'wechat/autoreply_add';
+        }
+
+        $this->load->view($view, $this->data);
+
+    }
+
+    // 自动回复删除
+    public function autoreply_del()
+    {
+        $id = $this->input->post('id');
+
+        $this->general_mdl->setTable('wechat_autoreply');
+        $response['success'] = false;
+
+        $this->general_mdl->delete_by_id($id);
+        $response['success'] = true;
+        
+        echo json_encode($response);
+    }
+
+    public function autoreply_save()
+    {
+        checkPermission('wechat_admin');
+        $post_data = $this->input->post(NULL, TRUE);
+        $response['status'] = 'n';
+
+        $this->general_mdl->setTable('wechat_autoreply');
+        switch ($post_data['type']) {
+            case 'news':
+                $db_data = array(
+                    'keyword' => $post_data['keyword'],
+                    'msgtype' => $post_data['type'],
+                    'reply_data' => $post_data['news_id']
+                );
+                break;
+            
+            default:
+                $db_data = array(
+                    'keyword' => $post_data['keyword'],
+                    'msgtype' => $post_data['type'],
+                    'reply_data' => json_encode(array('content' => $post_data['content']))
+                );
+                break;
+        }
+
+        $this->general_mdl->setData($db_data);
+        if(isset($post_data['id']) and !empty($post_data['id'])){
+            $this->general_mdl->update( array('id' => $post_data['id']) );
+            $response['status'] = 'y';
+            $response['info'] = '修改完成';                    
+        }else{
+            $this->general_mdl->create();
+            $response['status'] = 'y';
+            $response['info'] = '添加完成'; 
+        }
+
+        echo json_encode($response);
     }
 
     // 图文管理页

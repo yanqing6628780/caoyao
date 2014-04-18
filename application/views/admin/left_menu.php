@@ -20,7 +20,7 @@
 </li>
 <?php endif;?>
 <?php if(checkPermission2('wechat_admin')):?>	
-<li class="">
+<li class="active">
 	<a href="javascript:;">
 		<i class="icon-linux"></i> 
 		<span class="title">微信管理</span>
@@ -32,11 +32,11 @@
 		<li><a id="wechat_msgsend_view" class="ajaxify" href="<?php echo site_url('admin/wechat/msgsend/')?>" target="right">群发信息</a></li>
 		<li><a id="wechat_appmsg_view" class="ajaxify" href="<?php echo site_url('admin/wechat/appmsg')?>" target="right">图文管理</a></li>
 		<li><a id="wechat_member_view" class="ajaxify" href="<?php echo site_url('admin/wechat/members')?>" target="right">微信会员管理</a></li>
-		<!-- <li><a id="wechat_autoreply_view" class="ajaxify" href="<?php echo site_url('admin/wechat/autoreply')?>" target="right">自动回复</a></li> -->
+		<li><a id="wechat_autoreply_view" class="ajaxify" href="<?php echo site_url('admin/wechat/autoreply')?>" target="right">自动回复</a></li>
 	</ul>
 </li>
 <?php endif;?>
-<li class="active last">
+<li class="last">
 	<a href="javascript:;">
 		<i class="icon-cogs"></i> 
 		<span class="title">内容管理</span>
