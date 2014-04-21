@@ -1,7 +1,7 @@
 <div class="warp container" ng-controller="dishListCtrl" >
 	<div ng-repeat="dish in dishes" ng-hide="dish.warn" class="media">
 		<a ng-href="#/dishes/{{dish.ch_dishno}}" class="pull-left">
-			<img ng-src="{{dish.photo ? dish.photo : 'http://placehold.it/80/F0F0F0'}}" class="dish-list-img media-object img-responsive">
+			<img ng-src="../dish_img/{{dish.ch_dishno}}.jpg" err-src="http://placehold.it/80/F0F0F0" class="dish-list-img media-object img-responsive">
 		</a>
 		<a ng-href="#/dishes/{{dish.ch_dishno}}">
 		<div class="media-body">

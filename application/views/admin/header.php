@@ -15,7 +15,7 @@
      <!-- BEGIN TOP NAVIGATION MENU -->
      <ul class="nav navbar-nav pull-right">
         <!-- BEGIN NOTIFICATION DROPDOWN -->
-        <li class="dropdown" id="header_notification_bar">
+        <li class="dropdown hidden" id="header_notification_bar">
            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
               data-close-others="true">
            <i class="icon-warning-sign"></i>
@@ -99,7 +99,7 @@
         </li>
         <!-- END NOTIFICATION DROPDOWN -->
         <!-- BEGIN INBOX DROPDOWN -->
-        <li class="dropdown" id="header_inbox_bar">
+        <li class="dropdown hidden" id="header_inbox_bar">
            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
               data-close-others="true">
            <i class="icon-envelope"></i>
@@ -184,7 +184,7 @@
         </li>
         <!-- END INBOX DROPDOWN -->
         <!-- BEGIN TODO DROPDOWN -->
-        <li class="dropdown" id="header_task_bar">
+        <li class="dropdown hidden" id="header_task_bar">
            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
            <i class="icon-tasks"></i>
            <span class="badge">5</span>
@@ -297,8 +297,8 @@
         <!-- BEGIN USER LOGIN DROPDOWN -->
         <li class="dropdown user">
            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-           <img alt="" src="<?=base_url()?>assets/img/avatar1_small.jpg"/>
-           <span class="username">Bob Nilson</span>
+           <img style="height:30px" alt="" src="<?=$profile->photo ? get_image_url($profile->photo) : site_url('assets/img/avatar1_small.jpg') ?>"/>
+           <span class="username"><?=$this->dx_auth->get_username()?></span>
            <i class="icon-angle-down"></i>
            </a>
            <ul class="dropdown-menu">

@@ -39,6 +39,9 @@
                <div class="margiv-top-10">
                   <a class="btn green" href="#">保存</a>
                   <a class="btn default" href="#">取消</a>
+                  <?php if($profile->user_id != 1):?>
+                  <a target="_blank" class="btn purple" href='<?=site_url("admin/user_admin/user_lbs/?user_id=".$profile->user_id)?>'><i class="icon-map-marker icon-white"></i> 地理位置</a>
+                  <?php endif; ?>
                </div>
             </form>
          </div>

@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="thumbnail">
-				<img class="img-responsive" ng-src="{{dish.photo ? dish.photo : 'http://placehold.it/500/F0F0F0'}}" alt="image">
+				<img class="img-responsive" alt="image" ng-src="../dish_img/{{dish.ch_dishno}}.jpg" err-src="http://placehold.it/500/F0F0F0">
 				<div class="caption">
 					<h3>{{dish.vch_dishname}} <small class="text-danger">{{dish.num_price1 | currency:'￥'}}</small></h3>					
 					<div ng-show="dish.children" class="dropdown pull-right">

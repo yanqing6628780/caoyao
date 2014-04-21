@@ -61,7 +61,16 @@ myApp.directive('myDatetimepicker', [function () {
 	        })
 		}
 	};
-}])
+}]);
+myApp.directive('errSrc', function() {
+  return {
+    link: function(scope, element, attrs) {
+      element.bind('error', function() {
+        element.attr('src', attrs.errSrc);
+      });
+    }
+  }
+});
 
 /*服务*/
 myApp
@@ -211,10 +220,18 @@ myApp
 	}
 }])
 .controller('dishListCtrl', ['$scope', '$location', 'dishService', function ($scope, $location, dishService) {
-	$scope.dishes = dishService.query({user_id: $scope.book.user_id});
+	if($scope.book.user_id){
+		$scope.dishes = dishService.query({user_id: $scope.book.user_id});
+	}else{
+		$location.path('myorders');
+	}
 }])
 .controller('dishDetailCtrl', ['$scope', 'dishService', '$routeParams',  '$location', function ($scope, dishService, $routeParams, $location) {
-	$scope.dish = dishService.get({DishId: $routeParams.DishId}, {headers: AuthHeader});
+	if($scope.book.user_id){
+		$scope.dish = dishService.get({DishId: $routeParams.DishId,user_id: $scope.book.user_id}, {headers: AuthHeader});
+	}else{
+		$location.path('myorders');
+	}
 
 	$scope.addToCart = function(dish){
 		if(angular.isUndefined(dish.memo)){
