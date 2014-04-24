@@ -3,12 +3,12 @@
         <div class="caption"><i class="icon-reorder"></i></div>
     </div>
     <div class="portlet-body form">
-        <form id='user_add' class="form-horizontal" action="<?php echo site_url('user_admin/user_add_save')?>">
+        <form id='user_add' class="form-horizontal" action="<?php echo site_url('admin/user_admin/user_add_save')?>">
             <div class="form-body">
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">用户名</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name="username" value='' datatype="*" ajaxurl="user_admin/username_check" sucmsg="用户名验证通过！" nullmsg="请输入用户名！" errormsg="请用邮箱或手机号码注册！"/>
+                        <input class="form-control" type='text' name="username" value='' datatype="*" ajaxurl="<?=site_url('admin/user_admin/username_check')?>" sucmsg="用户名验证通过！" nullmsg="请输入用户名！" errormsg="请用邮箱或手机号码注册！"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -34,39 +34,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3 control-label">店名</label>
+                    <label class="col-md-3 control-label">姓名</label>
                     <div class="col-md-4">
                         <input class="form-control" type='text' name='profile[name]' value='' />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3 control-label">经度</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[lng]' value='' />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">纬度</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[lat]' value='' />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">网址/IP</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[website]' value='' />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">地址</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[address]' value='' />
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-md-3 control-label">联系电话</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[mobile]' value='' datatype="n" nullmsg="请输入联系电话！"/>
+                        <input class="form-control" type='text' name='profile[mobile]' value=''/>
                     </div>
                 </div>
             </div>

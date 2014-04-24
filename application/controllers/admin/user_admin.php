@@ -24,6 +24,54 @@ class User_admin extends CI_Controller
         $this->users();
     }
 
+//用户列表
+    public function users()
+    {
+        checkPermission('user_view');
+
+        $this->general_mdl->setTable('admin_users');
+        $query = $this->general_mdl->get_query();
+        $result = $query->result_array();
+
+        foreach($result as $key => $row){
+            $row_profile = $this->profile->get_profile($row['id'])->row();
+            $row_role = $this->roles->get_role_by_id($row['role_id'])->row();
+
+            $result[$key]['cnname'] = $row_profile->name;
+            $result[$key]['mobile'] = $row_profile->mobile;
+            $result[$key]['email'] = $row_profile->email;
+            $result[$key]['photo'] = $row_profile->photo;
+            $result[$key]['lat'] = $row_profile->lat;
+            $result[$key]['lng'] = $row_profile->lng;
+            $result[$key]['address'] = $row_profile->address;
+            $result[$key]['website'] = $row_profile->website;
+
+            $result[$key]['role'] = $row_role->cnname;
+
+        }
+
+        $data['title'] = '用户管理';
+        $data['users'] = $result;
+        $data['roles'] = $this->roles->get_all()->result_array();
+
+        $this->load->view('admin_user/user_list', $data);
+    }
+
+    //检查用户名
+    public function username_check()
+    {
+        $username = $this->input->post('param');
+        $result = $this->dx_auth->is_username_available($username);
+        if($result){
+            $data['status'] = "y";
+            $data['info'] = "用户名可以使用";
+        }else{
+            $data['status'] = "n";
+            $data['info'] = "用户名已存在";            
+        }
+        echo json_encode($data);
+    }
+
     //添加用户
     public function user_add()
     {
@@ -113,54 +161,6 @@ class User_admin extends CI_Controller
         $data['info'] = '修改成功';
         echo json_encode($data);
     }
-
-    //用户列表
-	public function users()
-	{
-        checkPermission('user_view');
-
-        $this->general_mdl->setTable('admin_users');
-        $query = $this->general_mdl->get_query();
-        $result = $query->result_array();
-
-        foreach($result as $key => $row){
-            $row_profile = $this->profile->get_profile($row['id'])->row();
-            $row_role = $this->roles->get_role_by_id($row['role_id'])->row();
-
-            $result[$key]['cnname'] = $row_profile->name;
-            $result[$key]['mobile'] = $row_profile->mobile;
-            $result[$key]['email'] = $row_profile->email;
-            $result[$key]['photo'] = $row_profile->photo;
-            $result[$key]['lat'] = $row_profile->lat;
-            $result[$key]['lng'] = $row_profile->lng;
-            $result[$key]['address'] = $row_profile->address;
-            $result[$key]['website'] = $row_profile->website;
-
-            $result[$key]['role'] = $row_role->cnname;
-
-        }
-
-        $data['title'] = '用户管理';
-        $data['users'] = $result;
-        $data['roles'] = $this->roles->get_all()->result_array();
-
-        $this->load->view('admin_user/user_list', $data);
-	}
-
-    //检查用户名
-    public function username_check()
-	{
-        $username = $this->input->post('param');
-		$result = $this->dx_auth->is_username_available($username);
-        if($result){
-            $data['status'] = "y";
-            $data['info'] = "用户名可以使用";
-        }else{
-            $data['status'] = "n";
-            $data['info'] = "用户名已存在";            
-        }
-		echo json_encode($data);
-	}
 
     public function del_user()
     {
@@ -360,7 +360,7 @@ class User_admin extends CI_Controller
 
         /*所有权限的数据*/
         $this->general_mdl->setTable('permissions_code');
-        $query = $this->general_mdl->get_query();
+        $query = $this->general_mdl->get_query_by_where(array('is_show' => 1));
         $perms = $query->result_array();
         // $this->config->load('permissions', true);
         // $permissions = $this->config->item('permissions');

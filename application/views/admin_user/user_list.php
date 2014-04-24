@@ -38,7 +38,6 @@
                                 <button href="#myModal" data-toggle="modal" class="btn btn-primary" onclick='editUser(<?=$row['id']?>)'> <i class="icon-pencil icon-white"></i> 编辑</button>
                                 <?php if($row['id'] != 1):?>                                 
                                 <button class="btn btn-danger" onclick='delUser(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
-                                <a target="_blank" class="btn purple" href='<?=site_url("admin/user_admin/user_lbs/?user_id=".$row['id'])?>'><i class="icon-map-marker icon-white"></i> 地理位置</a>
                                 <?php endif;?>
                                 <?php endif;?>
                             </td>
@@ -67,7 +66,7 @@ function delUser(id){
             data: {id: id},
             success: function(respone){
                 alert( '删除成功' );
-                $('.page-sidebar #users').click();
+                $('#users_view').click();
             }
         });
     }

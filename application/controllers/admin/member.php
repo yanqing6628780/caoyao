@@ -18,7 +18,7 @@ class Member extends CI_Controller
 
     public function index()
     {
-        checkPermission('user_view');
+        checkPermission('member_view');
 
         $this->general_mdl->setTable('users');
         $query = $this->general_mdl->get_query();
@@ -42,15 +42,14 @@ class Member extends CI_Controller
 
         $data['users'] = $result;
 
-        $this->load->view('admin/head', $data);
-        $this->load->view('admin_member/list');
+        $this->load->view('admin_member/list', $data);
     }
 
 
     //添加用户
     public function add()
     {
-        checkPermission('user_edit');
+        checkPermission('member_edit');
         $this->general_mdl->setTable('users');
         $query = $this->general_mdl->get_query();
         $data['num_rows'] = $query->num_rows();
@@ -106,7 +105,7 @@ class Member extends CI_Controller
     //用户信息修改
     public function edit()
     {
-        checkPermission('user_edit');
+        checkPermission('member_edit');
 
         $user_id = $this->input->post('user_id');
 
@@ -122,7 +121,7 @@ class Member extends CI_Controller
     //用户信息修改
     public function edit_save()
     {
-        checkPermission('user_edit');
+        checkPermission('member_edit');
 
         $data['status'] = "n";
 
@@ -136,7 +135,7 @@ class Member extends CI_Controller
         $this->general_mdl->update(array("user_id" => $user_id));
 
         $data['status'] = "y";
-        $data['msg'] = "修改成功";
+        $data['info'] = "修改成功";
 
         echo json_encode($data);
     }
@@ -144,7 +143,7 @@ class Member extends CI_Controller
     //重置密码
     public function reset_password()
     {
-        checkPermission('user_edit');
+        checkPermission('member_edit');
 
         $data['success'] = FALSE;
         $data['username'] = $username = $this->input->post('username');

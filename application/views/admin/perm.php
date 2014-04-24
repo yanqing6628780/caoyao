@@ -23,10 +23,10 @@
         	    </div>
         	</div>
 			<div class="portlet-body">
-				<table class='table table-striped table-bordered table-hover' id="sample_1">
+				<table class='table table-striped table-bordered table-hover' id="Ptable">
 					<thead>
 						<tr>
-							<th class="table-checkbox"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
+							<th class="table-checkbox"><input type="checkbox" class="group-checkable" data-set="#Ptable .checkboxes" /></th>
 							<th>权限名称</th>
 						</tr>
 					</thead>
@@ -46,7 +46,18 @@
 </form>
 <script type="text/javascript">
 jQuery(document).ready(function() {       
-    TableAdvanced.init();
+    jQuery('#Ptable .group-checkable').change(function () {
+        var set = jQuery(this).attr("data-set");
+        var checked = jQuery(this).is(":checked");
+        jQuery(set).each(function () {
+            if (checked) {
+                $(this).attr("checked", true);
+            } else {
+                $(this).attr("checked", false);
+            }
+        });
+        jQuery.uniform.update(set);
+    });
 });
 function showPerm()
 {
@@ -58,6 +69,7 @@ function showPerm()
         dataType: "html",
         success: function (res) {
         	pageContentBody.html(res);
+            App.initAjax();
         },
         async: false
     });

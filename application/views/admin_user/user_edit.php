@@ -22,45 +22,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3 control-label">店名</label>
+                    <label class="col-md-3 control-label">姓名</label>
                     <div class="col-md-4">
                         <input class="form-control" type='text' name='profile[name]' value='<?=$profile->name?>' />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">经度</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[lng]' value='<?=$profile->lng?>' />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">纬度</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[lat]' value='<?=$profile->lat?>' />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">网址/IP</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[website]' value='<?=$profile->website?>' />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">地址</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[address]' value='<?=$profile->address?>' />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">联系电话</label>
                     <div class="col-md-4">
                         <input class="form-control" type='text' name='profile[mobile]' value='<?=$profile->mobile?>' datatype="n" nullmsg="请输入联系电话！"/>
-                    </div>
-                </div>
-                <div class="form-group last">
-                    <label class="col-md-3 control-label">电子邮件</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[email]' value='<?=$profile->email?>' />
                     </div>
                 </div>
             </div>
