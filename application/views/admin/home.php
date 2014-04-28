@@ -100,7 +100,7 @@
 		</div>
 	</div>
 	<!-- END BEGIN STYLE CUSTOMIZER -->
-	<div class="page-content-body" ng-controller="msgSendCtrl">
+	<div class="page-content-body">
 	 <!-- HERE WILL BE LOADED AN AJAX CONTENT -->
 	</div>
   </div>

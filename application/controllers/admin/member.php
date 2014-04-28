@@ -29,6 +29,7 @@ class Member extends CI_Controller
             $this->general_mdl->setTable('user_profiles');
             $row_profile = $this->general_mdl->get_query_by_where(array("user_id" =>$row['id']))->row();
 
+            $result[$key]['credit'] = $row_profile->credit;
             $result[$key]['cnname'] = $row_profile->name;
             $result[$key]['mobile'] = $row_profile->mobile;
             $result[$key]['sex'] = $row_profile->sex;

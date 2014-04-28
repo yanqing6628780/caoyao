@@ -22,6 +22,7 @@
                             <th>姓名</th>
                             <th>性别</th>
                             <th>电话</th>
+                            <th>信用额度</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -33,6 +34,7 @@
                             <td><?=$row['cnname']?></td>
                             <td><?=$row['sex'] ? "男" : "女" ?></td>
                             <td><?=$row['mobile']?></td>
+                            <td><?=$row['credit']?></td>
                             <td>
                                 <?php if(checkPermission2('user_edit')):?>                                    
                                 <button href="#myModal" data-toggle="modal" class="btn btn-small btn-primary" onclick='editUser(<?=$row['id']?>)'> <i class="icon-pencil icon-white"></i> 编辑</button>

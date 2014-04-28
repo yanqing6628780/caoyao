@@ -8,10 +8,8 @@ class Login extends CI_Controller {
         $this->load->library('form_validation');
 		$this->load->library('security');
 		$this->load->library('tank_auth');
-		$this->load->library('em_client'); //亿美短信平台类
 
         $this->load->model('members_mdl'); //载入前台用户数据模型
-
 		$this->lang->load('tank_auth'); //tank_auth语言包
     }
 
@@ -111,6 +109,7 @@ class Login extends CI_Controller {
 			}
 
 			$data['mobile_captcha_expire'] = $this->config->item('mobile_captcha_expire'); //手机验证码存活时间
+			$data['title'] = '登录';
 			$this->load->view('front/head');
 			$this->load->view('front/login', $data);
 		}
@@ -124,12 +123,6 @@ class Login extends CI_Controller {
 	function logout()
 	{
 		$this->tank_auth->logout();
-
-		//登出时,挂起SBE帐户
-		$config['ManualMode'] = TRUE;
-        $this->load->library('HxClient', $config);
-        $this->hxclient->account_deactive();
-
 		$this->_show_message($this->lang->line('auth_message_logged_out'));
 	}
 
@@ -142,7 +135,7 @@ class Login extends CI_Controller {
 	function _show_message($message)
 	{
 		$this->session->set_flashdata('message', $message);
-		redirect('/login/');
+		redirect('/home/');
 	}
 
 	/**

@@ -169,15 +169,8 @@ class General_mdl extends CI_Model
     }
 
 
-    public function get_query_by_or_where($where=array(), $or_where=array(), $start = 0, $pageSize = '', $orderby = '')
+    public function get_query_by_or_where($or_where=array(), $start = 0, $pageSize = '', $orderby = '')
     {
-        if($where){
-            foreach($where as $key=>$row)
-            {
-                $this->db->where($key, $row);
-			}
-        }
-
         if($or_where){
             foreach($or_where as $key=>$row)
             {
@@ -193,7 +186,7 @@ class General_mdl extends CI_Model
         return $this->get_query($start, $pageSize);
     }
 
-    public function get_query_like($like = array(), $where = array(), $start = 0, $pageSize = '')
+    public function get_query_or_like($like = array(), $where = array(), $start = 0, $pageSize = '')
     {
         if($like){
             $this->db->or_like($like);

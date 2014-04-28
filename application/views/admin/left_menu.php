@@ -20,7 +20,7 @@
 	</ul>
 </li>
 <?php endif;?>
-<li class="last">
+<li class="last active">
 	<a href="javascript:;">
 		<i class="icon-cogs"></i> 
 		<span class="title">内容管理</span>

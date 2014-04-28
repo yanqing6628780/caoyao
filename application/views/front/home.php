@@ -1,15 +1,44 @@
-<div class="warp">
-	<div class="pt20">
-		<table width="100%">
-			<tr>
-                <td align="center"><a href="<?php echo site_url('/home/flight_inquiry')?>" class="btn9">国内机票</a></td>
-				<td align="center"><a href="<?php echo site_url('/inter_flight')?>" class="btn9">国际机票</a></td>
-				<td align="center"><a href="<?php echo site_url('/order/')?>" class="btn9">订单查询</a></td>
-				<td align="center"><a href="<?php echo site_url('/bill/')?>" class="btn9">账单查询</a></td>
-			</tr>
-		</table>
+<body>
+<?php $this->load->view('front/nav'); ?>
+<div class="page-container">
+	<div class="row margin-bottom-40"></div>
+	<div class="container">
+		<div class="row search-form-default">
+		    <form id="search" action="<?=site_url('home/search') ?>" class="form-inline">
+		        <div class="row">
+					<div class="col-md-2">					
+						<select name="table" class="form-control">
+						<?php foreach ($categories as $key => $value): ?>
+						<option value="<?=$value['table']?>" ><?=$value['name']?></option>
+						<?php endforeach ?>
+						</select>
+					</div>
+					<div class="col-md-10">
+						<div class="input-group">
+						    <div class="input-cont">   
+						       <input name="q" type="text" class="form-control" datatype="*" nullmsg="请填写关键词" placeholder="关键词..." >
+						    </div>
+						    <span class="input-group-btn">
+						    	<button type="submit" class="btn btn-info">搜索 <i class="icon-search"></i></button>
+						    </span>    
+						</div>
+					</div>
+		        </div>
+		    </form>
+		</div>
 	</div>
-    <div class="cl mt20" style="width:937px"><img src="<?php echo base_url() ?>/images/bus_ad.jpg" alt=""></div>
-    <div class="cl mt20" style="width:937px"><img src="<?php echo base_url() ?>/images/hotel_ad.jpg" alt=""></div>
-    <div class="cl mt20" style="width:937px"><img src="<?php echo base_url() ?>/images/air_ad.jpg" alt=""></div>
 </div>
+<?php $this->load->view('front/footer'); ?>
+<script type="text/javascript">
+$(function () {
+	var form = $("#search").Validform({
+	    tiptype:1,
+	    ajaxPost:false,
+	    callback:function(data){
+
+	    }
+	});
+})
+</script>
+</body>
+</html>

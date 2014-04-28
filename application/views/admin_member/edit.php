@@ -28,6 +28,12 @@
                         <input class="form-control" type='text' name='profile[mobile]' value='<?=$profile->mobile?>' datatype="m" sucmsg=" 手机验证通过！" nullmsg="请输入手机号码！" errormsg="请填写正确手机号码！"/>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">信用额度</label>
+                    <div class="col-md-4">
+                        <input class="form-control" type='text' name='profile[credit]' value='<?=$profile->credit?>' datatype="n"/>
+                    </div>
+                </div>
             </div>
             <div class="form-actions fluid">
                 <div class="col-md-offset-3 col-md-9">
