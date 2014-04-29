@@ -14,9 +14,10 @@
                     <li><a href="#"><i class="icon-weibo"></i></a></li>
                     <?php if($this->tank_auth->is_logged_in()): ?>
                     <li>欢迎你, <?=$this->tank_auth->get_username()?></li>
-                    <li><a href="<?=site_url('login/logout')?>">退出</a></li>
+                    <li><a href="<?=site_url('member')?>">[会员中心]</a></li>
+                    <li><a href="<?=site_url('login/logout')?>">[退出]</a></li>
                     <?php else: ?>
-                    <li><a href="<?=site_url('login')?>">登录</a></li>
+                    <li><a href="<?=site_url('login')?>">[登录]</a></li>
                     <?php endif; ?>
                 </ul>
             </div>

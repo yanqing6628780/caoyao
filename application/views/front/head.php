@@ -10,5 +10,6 @@
 <link rel="stylesheet" type="text/css" href="<?=site_url('front_assets/css/style.css') ?>" />
 <link rel="stylesheet" type="text/css" href="<?=site_url('front_assets/plugins/font-awesome/css/font-awesome.min.css') ?>" />
 <link rel="stylesheet" type="text/css" href="<?=site_url('front_assets/css/style-responsive.css') ?>" />
+<link rel="stylesheet" type="text/css" href="<?=site_url('front_assets/css/style-metronic.css') ?>" />
 <link rel="stylesheet" type="text/css" href="<?=site_url('css/validform.css')?>" />
 </head>

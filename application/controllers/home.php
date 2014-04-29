@@ -87,7 +87,7 @@ class Home extends CI_Controller {
 
             if($buy_log_row){ //已购买
                 if(!$info_row->time_limit){ //信息未设置时限
-                    $this->show_page($info_row);
+                    $this->show_detail_page($info_row);
                 }else{
 
                     //计算信息到期时间
@@ -97,7 +97,7 @@ class Home extends CI_Controller {
                     $end_time = $buy_time->add($interval);
 
                     if($now < $end_time){ //未到期
-                        $this->show_page($info_row);
+                        $this->show_detail_page($info_row);
                     }else{ //信息到期
                         $this->buy_info($profile, $info_row, $table); //购买
                     }
@@ -111,7 +111,7 @@ class Home extends CI_Controller {
     }
 
     //显示页面
-    private function show_page($info_row) {
+    private function show_detail_page($info_row) {
         $data['title'] = '信息详情';
         $data['detail'] = $info_row;
         $this->load->view('front/head');
@@ -136,7 +136,7 @@ class Home extends CI_Controller {
             //更新用户的信用额度
             $this->profiles_mdl->update_credit($info_row->price, $profile->user_id, FALSE);
 
-            $this->show_page($info_row);
+            $this->show_detail_page($info_row);
         }else{
             $this->show_error('403', '信用不足', '您的帐户信用额度不足，请及时充值');
         }
