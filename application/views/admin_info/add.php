@@ -1,4 +1,3 @@
-<?php if($table){ ?>
 <div class="portlet box green">
     <div class="portlet-title">
         <div class="caption"><i class="icon-reorder"></i></div>
@@ -7,8 +6,21 @@
         <form id='addForm' class="form-horizontal" action="<?php echo site_url($controller_url."add_save")?>">
             <div class="form-body">
                 <div class="form-group">
-                    <label class="col-md-3 col-md-3 control-label">价格</label>
+                    <label class="col-md-3 col-md-3 control-label">行业</label>
                     <div class="col-md-4">
+                        <div class="input-group">
+                            <select datatype="*" class="form-control" name="table">
+                            <option value="">请选择分类</option>
+                            <?php foreach ($categories as $key => $value): ?>
+                            <option value="<?=$value['table']?>"><?=$value['name']?></option>
+                            <?php endforeach ?>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 col-md-3 control-label">价格</label>
+                    <div class="col-md-6">
                         <div class="input-group">
                             <input class="form-control" type='text' name="price" value='' datatype="*"/>
                             <span class="input-group-addon">信用</span>
@@ -17,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">时限</label>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="input-group">
                             <input class="form-control" type='text' name="time_limit" value='' datatype="n"/>
                             <span class="input-group-addon">小时</span>
@@ -31,17 +43,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3 col-md-3 control-label">类型</label>
-                    <div class="col-md-4">
-                        <input class="form-control" type='text' name="type" value='' datatype="*" nullmsg="请输入类型！"/>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">省市区</label>
                     <div class="col-md-4">
-                        <select name="province"></select>
-                        <select name="city"></select>
-                        <select name="district"></select>
+                        <div id="area">                        
+                            <select class="form-control" name="province"></select>
+                            <select class="form-control" name="city"></select>
+                            <select class="form-control" name="district"></select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -144,15 +152,13 @@
         </form>
     </div>
 </div>
-<?php }else{?>
-<p>请先选择分类</p>
-<? } ?>
+<script src="<?php echo base_url()?>js/cityselect.js"></script>
 <script type="text/javascript">
 $(function () {
     DatePicker.init1();
     var form = $("#addForm").Validform({
         btnSubmit: '#btn_sub',
-        tiptype:4,
+        tiptype:3,
         ajaxPost:true,
         callback:function(response){
             if(response.status == "y"){            
@@ -165,6 +171,7 @@ $(function () {
                 }
             }
         }
-    });    
-})
+    });
+    $('#area').citySelect();
+});
 </script>

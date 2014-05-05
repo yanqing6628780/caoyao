@@ -65,7 +65,9 @@ class info extends CI_Controller {
     //添加
     public function add()
     {
-        $this->data['table'] = $this->input->post('table');
+        $this->general_mdl->setTable('category');
+        $this->data['categories'] = $this->general_mdl->get_query()->result_array();
+
         $this->load->view('admin_info/add',$this->data);
     }
 

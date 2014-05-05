@@ -32,7 +32,11 @@
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">省市区</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name="name" value=''/>
+                        <div id="area">                        
+                            <select data-selected="<?=$row['province']?>" class="form-control" name="province"></select>
+                            <select data-selected="<?=$row['city']?>" class="form-control" name="city"></select>
+                            <select data-selected="<?=$row['district']?>" class="form-control" name="district"></select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -130,6 +134,7 @@
         </form>
     </div>
 </div>
+<script src="<?php echo base_url()?>js/cityselect.js"></script>
 <script type="text/javascript">
 $(function () {
     DatePicker.init1();
@@ -144,5 +149,6 @@ $(function () {
             }
         }
     });
+    $('#area').citySelect();
 })
 </script>

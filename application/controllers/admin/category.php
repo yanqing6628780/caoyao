@@ -143,7 +143,7 @@ class category extends CI_Controller {
                     'type' => 'int'
                 ),
                 'price' => array(
-                    'type' => 'float'.
+                    'type' => 'float',
                     'default' => 0
                 )
             );

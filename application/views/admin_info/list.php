@@ -77,7 +77,7 @@
 <script type="text/javascript">
 function selectCategory(obj) {
     var value = $(obj).val();
-    LoadPageContentBody('<?=site_url($controller_url)?>', {table: value})
+    LoadPageContentBody('<?=site_url($controller_url)?>', {table: value});
 }
 function add(){
     LoadAjaxPage('<?=site_url($controller_url."add/")?>', {table: '<?=$table?>'}, 'myModal','添加')
@@ -104,29 +104,11 @@ function del(id, table){
         });
     }
 }
+function query() {
+    var formData = $('#search').serialize();
+    LoadPageContentBody('<?=site_url($controller_url)?>', formData);
+}
 $(function () {
     $('#category').select2();
-    var form = $("#search").Validform({
-        btnSubmit: '#btn_sub',
-        tiptype:1,
-        ajaxPost:true,
-        callback:function(response){
-            pageContentBody.html(response);
-        }
-    });
 })
-function query() {
-    var formData = $('#search').serialize();    
-    $.ajax({
-        type: "POST",
-        cache: false,
-        url: "<?=site_url($controller_url)?>",
-        dataType: "html",
-        data: formData,
-        success: function (res) {
-            pageContentBody.html(res);
-        },
-        async: false
-    });
-}
 </script>

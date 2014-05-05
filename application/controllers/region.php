@@ -26,10 +26,11 @@ class region extends CI_Controller {
     public function index()
     {
         $local_name = $this->input->get_post('local_name');
+        $data['selected'] = $this->input->get_post('selected');
         $where = array();
+        $this->general_mdl->setTable('regions');
         if($local_name){
             $where['local_name'] = $local_name;
-            $this->general_mdl->setTable('regions');
             $row = $this->general_mdl->get_query_by_where($where)->row();
 
             $where = array('p_region_id' => $row->region_id);
