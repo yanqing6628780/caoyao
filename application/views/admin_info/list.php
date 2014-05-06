@@ -8,6 +8,7 @@
                     <a class="collapse" href="javascript:;"></a>
                 </div>
                 <div class="actions">
+                    <button onclick="copy()" class="btn yellow"><i class="icon-copy"></i> 复制到免费信息</button>
                     <a onclick="add()" class="btn blue"  href="#myModal" data-toggle="modal" ><i class="icon-plus"></i> 添加</a>
                 </div>
             </div>
@@ -17,6 +18,7 @@
                         <label for="exampleInputEmail2" class="sr-only">分类</label>
                         <select class="form-control" id="category" onchange="selectCategory(this)" name="table">
                             <option value="">请选择分类</option>
+                            <option value="free_info" <?=option_select('free_info', $table)?> >免费信息</option>
                             <?php foreach ($categories as $key => $value): ?>
                             <option value="<?=$value['table']?>" <?=option_select($value['table'], $table)?> ><?=$value['name']?></option>
                             <?php endforeach ?>
@@ -24,16 +26,18 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail2" class="sr-only">分类</label>
-                        <input name="q" type="text" class="form-control" placeholder="关键字">
+                        <input name="q" type="text" value="<?=$q?>" class="form-control" placeholder="关键字">
                     </div>
-                    <button id="search_sub" class="btn btn-default theme-btn" onclick="query()" >搜索</button>
+                    <input type="button" value="搜索" class="btn btn-default" onclick="infoQuery()" >
                 </form>
                 <hr>
                 <div class="row">
                     <div class="col-md-12">    
+                        <form id="dataForm">                                
                         <table class='table table-striped table-bordered table-hover'>
                             <thead>
                                 <tr>
+                                    <th width="80"><input id="checkboxes" type="checkbox"></th>
                                     <th width="80">类型</th>
                                     <th>地址</th>
                                     <th>单位</th>
@@ -49,6 +53,7 @@
                             <tbody>
                             <?php foreach($result as $key => $row):?>
                                 <tr>
+                                    <td><input type="checkbox" name="id[]" value="<?=$row['id']?>"></td>
                                     <td><?=$row['type']?></td>
                                     <td><?=$row['address']?></td>
                                     <td><?=$row['company']?></td>
@@ -68,8 +73,18 @@
                             <?php endforeach;?>
                             </tbody>
                         </table>
+                        </form>
                     </div>
                 </div>
+                <?php if ($table): ?>                    
+                <ul class="bootpag pagination">
+                    <li class="prev <?=$current_page==1 ? 'disabled' : '' ?>" data-lp="<?=$current_page?>"><a class="ajaxify" href="<?=site_url($controller_url.'?table='.$table.'&page='.($current_page-1))?>"><icon class="icon-angle-left"></icon></a></li>
+                    <?php for ($i=1; $i <= $page; $i++){ ?>    
+                    <li data-lp="<?=$i?>" class="<?=$i == $current_page ? 'disabled' : '' ?>"><a class="ajaxify" href="<?=site_url($controller_url.'?table='.$table.'&page='.$i.'&q='.$q)?>"><?=$i?></a></li>
+                    <? } ?>
+                    <li class="next <?=$current_page==$page ? 'disabled' : '' ?>" data-lp="<?=$current_page?>"><a class="ajaxify" href="<?=site_url($controller_url.'?table='.$table.'&page='.($current_page+1))?>"><icon class="icon-angle-right"></icon></a></li>
+                </ul>
+                <?php endif ?>
             </div>
         </div>
     </div>
@@ -80,10 +95,27 @@ function selectCategory(obj) {
     LoadPageContentBody('<?=site_url($controller_url)?>', {table: value});
 }
 function add(){
-    LoadAjaxPage('<?=site_url($controller_url."add/")?>', {table: '<?=$table?>'}, 'myModal','添加')
+    LoadAjaxPage('<?=site_url($controller_url."add/")?>', "", 'myModal','添加');
 }
 function edit(id){
-    LoadAjaxPage('<?=site_url($controller_url."edit/")?>', {id: id, table: '<?=$table?>'}, 'myModal','编辑')
+    LoadAjaxPage('<?=site_url($controller_url."edit/")?>', {id: id, table: '<?=$table?>'}, 'myModal','编辑');
+}
+function copy(){
+    var checkBoxData = $('#dataForm').serializeArray();
+    console.log(checkBoxData);
+    $.ajax({
+        type: "POST",
+        url: '<?=site_url($controller_url."copy_to_free")?>',
+        dataType: 'json',
+        data: {id: checkBoxData, table: '<?=$table?>'},
+        success: function(response){
+            if(response.success){
+                alert('复制成功');
+            }else{
+                alert('复制失败');
+            }
+        }
+    });
 }
 function del(id, table){
     if(confirm('确认删除?'))
@@ -96,7 +128,7 @@ function del(id, table){
             success: function(respone){
                 if(respone.success){                
                     alert( '删除成功' );
-                    query();
+                    infoQuery();
                 }else{
                     alert( '删除失败' );
                 }
@@ -104,11 +136,27 @@ function del(id, table){
         });
     }
 }
-function query() {
+function infoQuery() {
     var formData = $('#search').serialize();
     LoadPageContentBody('<?=site_url($controller_url)?>', formData);
 }
 $(function () {
     $('#category').select2();
+    $('.pagination').on('click', ' li > a.ajaxify', function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+        LoadPageContentBody(url);
+    });
+    $('#checkboxes').bind('click', function(event) {
+        var checked = $(this).is(":checked");
+        var tbodyCheckBox = $(this).parents('table').find(':checkbox');
+        tbodyCheckBox.each(function() {
+            if (checked) {
+                $(this).attr("checked", true);
+            } else {
+                $(this).attr("checked", false);
+            }
+        });
+    });
 })
 </script>

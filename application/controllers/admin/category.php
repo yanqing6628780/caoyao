@@ -58,6 +58,13 @@ class category extends CI_Controller {
     {
         $data = $this->input->post(NULL, TRUE);
 
+        if ($this->db->table_exists($data['table'])) {
+            $response['status'] = "n";
+            $response['info'] = "添加失败,表名已存在";
+            echo json_encode($response);
+            exit();
+        }
+
         $this->general_mdl->setData($data);
         if($categoryType_id = $this->general_mdl->create())
         {
@@ -147,12 +154,12 @@ class category extends CI_Controller {
                     'default' => 0
                 )
             );
+
             $this->dbforge->add_field($fields);
             $this->dbforge->add_key('id', TRUE);
             $info = $this->dbforge->create_table($data['table'], TRUE);
-
             $response['status'] = "y";
-            $response['info'] = "添加成功,".$info;
+            $response['info'] = "添加成功,".$info;           
         }else{
             $response['status'] = "n";
             $response['info'] = "添加失败";
@@ -216,8 +223,13 @@ class category extends CI_Controller {
         $table = $this->input->post('param');
         $query = $this->general_mdl->get_query_by_where(array('table'=>$table));
         if($query->num_rows()==0){
-            $data['status'] = "y";
-            $data['info'] = "表名可以使用";
+            if ($this->db->table_exists($table)){
+                $data['status'] = "n";
+                $data['info'] = "表名已存在";            
+            }else{            
+                $data['status'] = "y";
+                $data['info'] = "表名可以使用";
+            }
         }else{
             $data['status'] = "n";
             $data['info'] = "表名已存在";            

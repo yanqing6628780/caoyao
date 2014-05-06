@@ -29,10 +29,20 @@
 		<?php if($result): ?>
 		<div class="row">
 			<?php foreach ($result as $key => $value): ?>				
-			<div class="col-md-12 search-result-item">
-		       <h4><a href="<?=site_url('home/info/'.$table.'/'.$value['id']) ?>"><?=$value['company']?></a></h4>
-		       <p><?=$value['type']?>......<?=$value['actingbrand'] ? $value['actingbrand'].'...' : ''?></p>
-		       <a class="search-link" href="#">付费信息</a>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a href="<?=site_url('home/info/'.$table.'/'.$value['id']) ?>"><?=$value['company']?></a>
+							<small><a class="search-link" href="#">价格:<?=$value['price']?></a></small>
+							<small class="search-link pull-right"><a href="<?=site_url('home/info/'.$table.'/'.$value['id']) ?>">详细信息</a></small>
+						</h3>
+					</div>
+					<div class="panel-body">
+						类型:<?=$value['type']?><br>
+						代理品牌:<?=$value['actingbrand'] ? $value['actingbrand'] : '无'?>
+					</div>
+				</div>
 		    </div>
 			<?php endforeach ?>
 		</div>

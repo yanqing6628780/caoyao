@@ -32,8 +32,12 @@ class info extends CI_Controller {
     {
         checkPermission('info_view');
 
+        $this->load->library('pagination');
+
         $this->data['table'] = $table = $this->input->get_post('table');
         $this->data['q'] = $q = $this->input->get_post('q');
+        $this->data['start'] = $start = $this->input->get_post('page') ? $this->input->get_post('page') : 1;
+        $this->data['pageSize'] = $pageSize = $this->input->get_post('pageSize') ? $this->input->get_post('pageSize') : 30;
 
         $this->general_mdl->setTable('category');
         $this->data['categories'] = $this->general_mdl->get_query()->result_array();
@@ -50,11 +54,15 @@ class info extends CI_Controller {
 
         if($table){
             $this->general_mdl->setTable($table);
-
+            //查询数据的总量,计算出页数
             $query = $this->general_mdl->get_query_or_like($like);
+            $page = ceil($query->num_rows()/$pageSize);
+            $this->data['page'] = $page;
 
+            //取出当前面数据
+            $query = $this->general_mdl->get_query_or_like($like, array(), $start, $pageSize);
             $info_data = $query->result_array();
-            
+            $this->data['current_page'] = $start;
         }
         $this->data['result'] = $info_data;
         $this->data['title'] = '信息管理';
@@ -150,17 +158,24 @@ class info extends CI_Controller {
         echo json_encode($response);
     }
 
-    public function check(){
-        $table = $this->input->post('param');
-        $query = $this->general_mdl->get_query_by_where(array('table'=>$table));
-        if($query->num_rows()>0){
-            $data['status'] = "y";
-            $data['info'] = "用户名可以使用";
-        }else{
-            $data['status'] = "n";
-            $data['info'] = "用户名已存在";            
+    public function copy_to_free()
+    {
+        $ids = $this->input->get_post('id');
+        $table = $this->input->get_post('table');
+        foreach ($ids as $value) {
+            $this->general_mdl->setTable($table);
+            $query = $this->general_mdl->get_query_by_where(array('id' => $value['value']));
+            $row = $query->row_array();
+
+            unset($row['id']);
+            $row['table'] = $table;
+            $this->general_mdl->setTable('free_info');
+            $this->general_mdl->setData($row);
+            $this->general_mdl->create();
         }
-        echo json_encode($data);
+
+        $response['success'] = true;
+        echo json_encode($response);
     }
 }
 

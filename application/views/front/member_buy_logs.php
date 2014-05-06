@@ -5,7 +5,6 @@
             <th>行业</th>
             <th>信息</th>
             <th>购买时间</th>
-            <th>时限</th>
         </tr>
     </thead>
     <tbody>

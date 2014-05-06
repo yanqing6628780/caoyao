@@ -164,10 +164,10 @@ $(function () {
             if(response.status == "y"){            
                 if(confirm('是否继续添加')){
                     form.resetForm();
-                    query()
+                    infoQuery();
                 }else{
                     $('#myModal').modal('hide');
-                    query()
+                    infoQuery();
                 }
             }
         }
