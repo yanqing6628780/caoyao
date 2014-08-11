@@ -1,44 +1,20 @@
 <body>
 <?php $this->load->view('front/nav'); ?>
-<div class="page-container">
-	<div class="row margin-bottom-40"></div>
-	<div class="container">
-		<div class="row search-form-default">
-		    <form id="search" action="<?=site_url('home/search') ?>" class="form-inline">
-		        <div class="row">
-					<div class="col-md-2">					
-						<select name="table" class="form-control">
-						<?php foreach ($categories as $key => $value): ?>
-						<option value="<?=$value['table']?>" ><?=$value['name']?></option>
-						<?php endforeach ?>
-						</select>
-					</div>
-					<div class="col-md-10">
-						<div class="input-group">
-						    <div class="input-cont">   
-						       <input name="q" type="text" class="form-control" datatype="*" nullmsg="请填写关键词" placeholder="关键词..." >
-						    </div>
-						    <span class="input-group-btn">
-						    	<button type="submit" class="btn btn-info">搜索 <i class="icon-search"></i></button>
-						    </span>    
-						</div>
-					</div>
-		        </div>
-		    </form>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-2 col-md-1 sidebar">
+			<ul class="nav nav-sidebar">
+				<?php foreach ($small_classes as $key => $value): ?>					
+				<li><a data-trigger="ajax" href="<?=site_url('goods/?class='.$value['id'])?>" data-target="#main" ><?=$value['small_class_name']?></a></li>
+				<?php endforeach ?>
+			</ul>
+		</div>
+		<div id="main" class="col-sm-10 col-sm-offset-2 col-md-11 col-md-offset-1 main">
+			
 		</div>
 	</div>
 </div>
 <?php $this->load->view('front/footer'); ?>
-<script type="text/javascript">
-$(function () {
-	var form = $("#search").Validform({
-	    tiptype:1,
-	    ajaxPost:false,
-	    callback:function(data){
-
-	    }
-	});
-})
-</script>
+<?php $this->load->view('front/js'); ?>
 </body>
 </html>

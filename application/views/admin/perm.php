@@ -65,7 +65,7 @@ function showPerm()
     $.ajax({
         type: "GET",
         cache: false,
-        url: 'admin/user_admin/permissions?role='+ role,
+        url: siteUrl('admin/user_admin/permissions?role='+ role),
         dataType: "html",
         success: function (res) {
         	pageContentBody.html(res);
@@ -78,7 +78,7 @@ function savePerm()
 {
     $.ajax({
         type: "POST",
-        url: 'admin/user_admin/perms_save',
+        url: siteUrl('admin/user_admin/perms_save'),
         dataType: 'json',
         data: $("#perm_from").serialize(),
         success: function(respone){

@@ -2,3 +2,4 @@ application/logs/
 captcha/*.png
 uploads/
 wechat_logs.txt
+captcha

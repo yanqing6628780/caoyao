@@ -14,8 +14,8 @@
 		<li><a id="perm_view" class="ajaxify" href="<?php echo site_url('admin/user_admin/permissions')?>" target="right">权限管理</a></li>
 		<?php endif;?>
 		<?php if(checkPermission2('role_view')):?>
-		<li><a id="roles_view" class="ajaxify" href="<?php echo site_url('admin/user_admin/roles')?>" target="right">角色管理</a></li>
-		<li><a id="member_view" class="ajaxify" href="<?php echo site_url('admin/member/')?>" target="right">会员管理</a></li>
+		<li><a id="roles_view" class="ajaxify" href="<?php echo site_url('admin/user_admin/roles')?>" target="right">后台用户角色管理</a></li>
+		<li><a id="member_view" class="ajaxify" href="<?php echo site_url('admin/member/')?>" target="right">前台会员管理</a></li>
 		<?php endif;?>
 	</ul>
 </li>
@@ -28,7 +28,11 @@
 		<span class="arrow"></span>
 	</a>
 	<ul class="sub-menu">
-		<li><a id="category_view" class="ajaxify" href="<?php echo site_url('admin/category/')?>" target="right">信息分类管理</a></li>
-		<li><a id="info_view" class="ajaxify" href="<?php echo site_url('admin/info/')?>" target="right">信息管理</a></li>
+		<li><a id="branch_view" class="ajaxify" href="<?php echo site_url('admin/branch/')?>" target="right">分公司管理</a></li>
+		<li><a id="category_view" class="ajaxify" href="<?php echo site_url('admin/big_class/')?>" target="right">大类管理</a></li>
+		<li><a id="category2_view" class="ajaxify" href="<?php echo site_url('admin/small_class/')?>" target="right">小类管理</a></li>
+		<li><a id="exchange_view" class="ajaxify" href="<?php echo site_url('admin/exchange/')?>" target="right">订货会管理</a></li>
+		<li><a id="announce_view" class="ajaxify" href="<?php echo site_url('admin/announce/')?>" target="right">公告管理</a></li>
+		<li><a id="product_view" class="ajaxify" href="<?php echo site_url('admin/product/')?>" target="right">产品管理</a></li>
 	</ul>
 </li>

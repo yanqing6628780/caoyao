@@ -284,7 +284,7 @@ function formatAmount($d)
     {
         $d = "0";
     }
-    return sprintf('￥%s', $d);
+    return number_format($d, 2, '.', ',');
 }
 
 /**

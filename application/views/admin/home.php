@@ -54,7 +54,7 @@
   <!-- BEGIN PAGE -->
   <div class="page-content">
 	<!-- BEGIN STYLE CUSTOMIZER -->
-	<div class="theme-panel hidden-xs hidden-sm">
+	<div class="theme-panel hidden hidden-xs hidden-sm">
 		<div class="toggler"></div>
 		<div class="toggler-close"></div>
 		<div class="theme-options">
@@ -101,7 +101,7 @@
 	</div>
 	<!-- END BEGIN STYLE CUSTOMIZER -->
 	<div class="page-content-body">
-	 <!-- HERE WILL BE LOADED AN AJAX CONTENT -->
+		<!-- HERE WILL BE LOADED AN AJAX CONTENT -->
 	</div>
   </div>
 </div>

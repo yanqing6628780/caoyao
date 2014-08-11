@@ -66,7 +66,7 @@ function addRoles()
 {
     $.ajax({
         type: "POST",
-        url: 'admin/user_admin/add_roles',
+        url:  "<?php echo site_url('admin/user_admin/add_roles') ?>",
         dataType: 'json',
         data: $("#roles").serialize(),
         success: function(respone){
@@ -78,7 +78,7 @@ function delRoles()
 {
     $.ajax({
         type: "POST",
-        url: 'admin/user_admin/del_roles',
+        url: "<?php echo site_url('admin/user_admin/del_roles') ?>",
         dataType: 'json',
         data: $("#roles").serialize(),
         success: function(respone){

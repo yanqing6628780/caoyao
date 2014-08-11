@@ -103,12 +103,18 @@ function LoadAjaxPage(url, data, Element, title)
         beforeSend: function(){
             var obj = $('#'+ Element)
             obj.find("h3").text("")
-            obj.find(".modal-body").html("")
+            if(obj.find(".modal-body").length){
+                obj.find(".modal-body").html("")
+            }
         },
         success: function(data){
             var obj = $('#'+ Element)
             obj.find("h4").text(title)
-            obj.find(".modal-body").html(data)
+            if(obj.find(".modal-body").length){
+                obj.find(".modal-body").html(data)
+            }else{
+                obj.html(data);
+            }
         },
         complete: function(){
         }

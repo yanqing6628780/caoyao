@@ -21,7 +21,7 @@ class category extends CI_Controller {
     {
         parent::__construct();
         checkIsLoggedIn();
-        $this->general_mdl->setTable('category');
+        $this->general_mdl->setTable('big_class');
 
         $this->load->model('dx_auth/users', 'users');
         $this->load->model('dx_auth/user_profile', 'profile');
