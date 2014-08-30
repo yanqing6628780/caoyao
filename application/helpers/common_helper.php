@@ -129,6 +129,57 @@ function getDomain()
 }
 
 /**
+ * 前台登录检查
+ *
+ */
+function check_front_IsLoggedIn()
+{
+    $CI = get_instance();
+    if(!$CI->tank_auth->is_logged_in()){
+        redirect(site_url('login'));
+        exit();
+    }else{
+        $CI->general_mdl->setTable('exchange_fair');
+        $where = array(
+            'start_time <=' => date("Y-m-d"),
+            'end_time >=' => date("Y-m-d"),
+            'state' => 1
+        );
+        $query = $CI->general_mdl->get_query_by_where($where);
+
+        if($query->num_rows()){
+            $exchange_fair = $query->row();
+            $CI->general_mdl->setTable('rel_stores_exchange_fair');
+            $where = array(
+                'user_id' => $CI->tank_auth->get_user_id(),
+                'exchange_fair_id' => $exchange_fair->id,
+                'state' => 1
+            );
+            $rel_query = $CI->general_mdl->get_query_by_where($where);
+            if($rel_query->num_rows() == 0){
+                show_error('你还未能参与任何订货会 <a href="'.site_url('login/logout').'">返回</a>', 403, '权限不足');
+            }else{
+                $CI->session->set_userdata('current_exchange_fair', $exchange_fair->id);
+                $CI->session->set_userdata('small_class_restrictions_id', $rel_query->row()->small_class_restrictions_id);
+                $CI->session->set_userdata('necessities_scheme_id', $rel_query->row()->necessities_scheme_id);
+                // 取出订单ID
+                $CI->general_mdl->setTable('order');
+                $order_where = array(
+                    'exchange_fair_id' => $exchange_fair->id,
+                    'user_id' => $CI->tank_auth->get_user_id()
+                );
+                $query = $CI->general_mdl->get_query_by_where($order_where);
+                if ($query->num_rows()) {
+                    $CI->session->set_userdata('order_id', $query->row()->id);
+                }
+            }
+        }else{
+            show_error('当前没有订货会 <a href="'.site_url('login/logout').'">返回</a>', 404, '找不到页面');
+        }
+    }
+}
+
+/**
  * 后台登录检查
  *
  */

@@ -51,6 +51,7 @@
                                     <?php if (checkPermission2('product_edit')): ?>
                                     <a  href="#myModal" data-toggle="modal"  onclick="edit(<?=$row['id']?>)" class="btn green"> <i class="icon-pencil icon-white"></i> 编辑</a>
                                     <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
+                                    <button class="btn btn-info" onclick='comments(<?=$row['id']?>, "<?=$row['product_name']?>")'><i class="icon-remove icon-list"></i> 评价管理</button>
                                     <?php endif ?>                                    
                                 </td>
                             </tr>
@@ -92,6 +93,9 @@ function edit(id){
 }
 function del(id, table){
     common_del('<?=site_url($controller_url."del")?>', id, table, "#product_view");
+}
+function comments(id, name){
+    LoadPageContentBody('<?=site_url($controller_url."comments/")?>', {id: id, name: name});
 }
 function infoQuery() {
     var formData = $('#search').serialize();

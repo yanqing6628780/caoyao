@@ -66,8 +66,21 @@ class exchange extends CI_Controller {
         $data['create_time'] = date("Y-m-d H:i:s");
 
         $this->general_mdl->setData($data);
-        if($this->general_mdl->create())
+        if($exchange_fair_id = $this->general_mdl->create())
         {
+            /*会员数据*/
+            $this->general_mdl->setTable('users');
+            $query = $this->general_mdl->get_query();
+            $members = $query->result_array();
+
+            $this->general_mdl->setTable("rel_stores_exchange_fair");
+            foreach ($members as $key => $value) {
+                $rel_data['exchange_fair_id'] = $exchange_fair_id;
+                $rel_data['user_id'] = $value['id'];
+                $this->general_mdl->setData($rel_data);
+                $this->general_mdl->create();
+            }
+
             $response['status'] = "y";
             $response['info'] = "添加成功";
         }else{
@@ -126,6 +139,123 @@ class exchange extends CI_Controller {
         echo json_encode($response);
     }
 
+    //参会人员设置
+    public function set_members()
+    {
+        $id = $this->input->get('id');
+        
+        /*订货会资料*/
+        $query = $this->general_mdl->get_query_by_where(array('id' => $id));
+        $this->data['row'] = $query->row_array();
+
+        /*订货会会参与人*/
+        $this->data['user_ids'] = array();
+        $this->general_mdl->setTable("rel_stores_exchange_fair");
+        $query = $this->general_mdl->get_query_by_where(array("exchange_fair_id" => $id));
+
+        /*会员基础数据*/
+        $members = $query->result_array();
+
+        /*关联会员详细资料*/
+        foreach($members as $key => $row){
+            $this->general_mdl->setTable('user_profiles');
+            $row_profile = $this->general_mdl->get_query_by_where(array("user_id" =>$row['user_id']))->row();
+
+            $this->general_mdl->setTable('users');
+            $row = $this->general_mdl->get_query_by_where(array("id" =>$row['user_id']))->row();
+
+            $members[$key]['cnname'] = $row_profile->name;
+            $members[$key]['username'] = $row->username;
+        }
+        $this->data['members'] = $members;
+
+        $this->load->view('admin_exchange/set_members', $this->data);
+    }
+
+    public function members_save() 
+    {
+        $user_id_array = $this->input->post("user_id");
+        $exchange_fair_id = $this->input->post("exchange_id");
+        $response['info'] = "";
+
+        // 过滤数组内的空值
+        $user_id_array = $user_id_array ? array_filter($user_id_array) : array();
+
+        $this->general_mdl->setTable("rel_stores_exchange_fair");
+        $where['exchange_fair_id'] = $exchange_fair_id;
+        $where['state'] = 1;
+        $query = $this->general_mdl->get_query_by_where($where); //取出已参会人员
+        $current_members = $query->result_array();
+        if($current_members){        
+            foreach ($current_members as $key => $value) {
+                if( !in_array($value['user_id'], $user_id_array) ){
+                    $this->general_mdl->setData(array('state' => 0));
+                    $this->general_mdl->update(array('exchange_fair_id' => $exchange_fair_id, 'user_id' => $value['user_id']));
+                }
+            }
+        }
+
+        foreach ($user_id_array as $key => $value) {
+            $this->general_mdl->setData(array('state' => 1));
+            $this->general_mdl->update(array('exchange_fair_id' => $exchange_fair_id, 'user_id' => $value));
+        }
+
+        $response['info'] = "修改成功";
+        echo json_encode($response);
+    }
+
+    public function set_members_scheme() {
+
+        $id = $this->input->get('id');
+        
+        /*订货会资料*/
+        $query = $this->general_mdl->get_query_by_where(array('id' => $id));
+        $this->data['row'] = $query->row_array();
+
+        $this->general_mdl->setTable("rel_stores_exchange_fair");
+        $where['exchange_fair_id'] = $id;
+        $where['state'] = 1;
+        $query = $this->general_mdl->get_query_by_where($where); //取出已参会人员
+        $members = $query->result_array();
+
+        /*关联会员详细资料*/
+        foreach($members as $key => $row){
+            $this->general_mdl->setTable('user_profiles');
+            $row_profile = $this->general_mdl->get_query_by_where(array("user_id" =>$row['user_id']))->row();
+
+            $this->general_mdl->setTable('users');
+            $row = $this->general_mdl->get_query_by_where(array("id" =>$row['user_id']))->row();
+
+            $members[$key]['cnname'] = $row_profile->name;
+            $members[$key]['username'] = $row->username;
+        }
+        $this->data['members'] = $members;
+
+        /*必需品方案数据*/
+        $this->general_mdl->setTable("necessities_scheme");
+        $this->data['necessities_scheme'] = $this->general_mdl->get_query()->result_array();
+        /*小类限制方案数据*/
+        $this->general_mdl->setTable("small_class_restrictions");
+        $this->data['small_class_restrictions'] = $this->general_mdl->get_query()->result_array();
+
+        $this->load->view('admin_exchange/set_members_scheme', $this->data);
+    }
+
+    public function members_scheme_save() {
+        $amount = $this->input->post('amount');
+        $necessities_scheme_id = $this->input->post('necessities_scheme_id');
+        $small_class_restrictions_id = $this->input->post('small_class_restrictions_id');
+        $exchange_fair_id = $this->input->post("exchange_id");
+
+        $this->general_mdl->setTable("rel_stores_exchange_fair");
+        foreach ($amount as $user_id => $value) {
+            $this->general_mdl->setData( array('amount' => $value, 'necessities_scheme_id' => $necessities_scheme_id[$user_id],'small_class_restrictions_id' => $small_class_restrictions_id[$user_id]) );
+            $this->general_mdl->update( array('exchange_fair_id' => $exchange_fair_id, 'user_id' => $user_id) );
+        }
+
+        $response['info'] = "修改成功";
+        echo json_encode($response);
+    }
 }
 
 /* End of file exchange.php */

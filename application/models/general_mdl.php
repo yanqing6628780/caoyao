@@ -200,6 +200,22 @@ class General_mdl extends CI_Model
         }
 
         return $this->get_query($start, $pageSize);
+    }    
+
+    public function get_query_like($like = array(), $where = array(), $start = 0, $pageSize = '')
+    {
+        if($like){
+            $this->db->like($like);
+        }
+
+        if($where){
+            foreach($where as $key => $row)
+            {
+                $this->db->where($key, $row);
+            }
+        }
+
+        return $this->get_query($start, $pageSize);
     }
 
     //获取自增ID

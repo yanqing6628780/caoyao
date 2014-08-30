@@ -1,4 +1,5 @@
-body {padding-top: 50px;} 
+body {padding-top: 50px;}
+.clear{clear: both;}
 .lgx-navbar{margin-bottom: 0px}
 .sub-header{
     background-color: #428bca;
@@ -56,7 +57,17 @@ body {padding-top: 50px;}
 }
 
 .goods_list .col-sm-4,.goods_list .col-md-3{padding-left: 0;padding-right: 0}
-.goods_list .media{border: 1px solid #ddd;padding: 4px}
-
-
+.goods_list .media{border: 1px solid #ddd;padding: 4px;min-height: 155px;position: relative;}
+.goods_list .media .btn-box {
+    width: 100%;
+    padding: 0 8px 5px;
+    position: absolute;
+    bottom: 0;
+}
 .copyright{background-color: #222222;color: #ffffff}
+
+@media (max-width: 805px) {
+    .my-navbar-right{float: none !important}
+}
+
+#rel_product{top:2%;left: 2%}

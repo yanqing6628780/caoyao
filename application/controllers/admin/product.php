@@ -252,6 +252,111 @@ class product extends CI_Controller {
 
         echo json_encode($response);
     }
+
+    public function comments()
+    {
+        $id = $this->input->get('id');
+        $this->data['name'] = $this->input->get('name');
+
+        $this->general_mdl->setTable('comments');
+        $query = $this->general_mdl->get_query_by_where(array('product_id' => $id));
+        $comments = $query->result_array();
+
+        foreach ($comments as $key => $value) {
+            $this->general_mdl->setTable('user_profiles');
+            $query = $this->general_mdl->get_query_by_where(array('user_id' => $value['user_id']));
+            $comments[$key]['user_name'] = $query->row()->name;
+
+            $this->general_mdl->setTable('exchange_fair');
+            $query = $this->general_mdl->get_query_by_where(array('id' => $value['exchange_fair_id']));
+            $comments[$key]['exchange_name'] = $query->row()->exchange_fair_name;
+        }
+
+        $this->data['comments'] = $comments;
+        $this->load->view('admin_product/comment_list', $this->data);
+    }
+
+    public function relation()
+    {
+        $this->load->model('product_mdl');
+
+        $this->general_mdl->setTable('product_rel');
+
+        /*产品资料*/
+        $query = $this->general_mdl->get_query();
+        $result = $query->result_array();
+
+        foreach ($result as $key => $value) {
+            $product_rel_name = array();
+            foreach (json_decode($value['product_rel_data']) as $pid) {
+                $product_rel_name[] = $this->product_mdl->get_product_info($pid)->product_name;
+            }
+            $result[$key]['product_rel_name'] = implode(',', $product_rel_name);
+        }
+        $this->data['result'] = $result;
+
+        $this->load->view('admin_product/rel_list', $this->data);
+    }    
+
+    public function set_relation()
+    {
+        $this->load->model('product_mdl');
+
+        $row_id = $this->data['id'] = $this->input->post('id');
+
+        $this->general_mdl->setTable('small_class');
+        $query = $this->general_mdl->get_query();
+        $rs = $query->result_array();
+
+        $this->general_mdl->setTable('product');
+        foreach ($rs as $key => $value) {
+            $query = $this->general_mdl->get_query_by_where(array('small_class_id' => $value['id']));
+            $products = $query->result_array();
+            $rs[$key]['products'] = $products;
+        }
+
+
+        $this->data['group_products'] = $rs;
+
+        $this->load->view('admin_product/product_relate', $this->data);
+    }
+
+    public function relation_save()
+    {
+        $row_id = $this->input->post('id');
+        $ids = $this->input->post('product_id');
+        $response['info'] = "保存失败";
+
+        // 过滤数组内的空值
+        $ids = $ids ? array_filter($ids) : array();
+
+        $this->general_mdl->setTable("product_rel");
+        $this->general_mdl->setData(array('product_rel_data' => json_encode($ids)));
+
+        if($row_id){
+            $this->general_mdl->update(array('id' => $row_id));
+            $response['info'] = "修改成功";
+        }else{
+            $this->general_mdl->create();
+            $response['info'] = "创建成功";
+        }
+
+        echo json_encode($response);
+    }
+
+    //关联删除
+    public function del_relation()
+    {
+        $id = $this->input->post('id');
+
+        $response['success'] = false;
+    
+        $this->general_mdl->setTable("product_rel");
+        $this->general_mdl->delete_by_id($id);
+        $response['success'] = true;
+
+        echo json_encode($response);
+    }
 }
 
 /* End of file product.php */

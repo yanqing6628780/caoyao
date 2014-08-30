@@ -150,7 +150,7 @@ var DatePicker = function(){
                     language:'zh-CN',
                     format: 'yyyy-mm-dd'
                 });
-                // $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+                $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
             }
         }
     };

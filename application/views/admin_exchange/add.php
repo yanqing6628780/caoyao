@@ -17,6 +17,18 @@
                         <textarea class="form-control" name="description"  rows="6" datatype="*" nullmsg="请输入名称！"></textarea>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">开始日期</label>
+                    <div class="col-md-4">
+                         <input class="form-control date-picker" type='text' name="start_time" value='' datatype="*" nullmsg="请输入时间！"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">结束日期</label>
+                    <div class="col-md-4">
+                         <input class="form-control date-picker" type='text' name="end_time" value='' datatype="*" nullmsg="请输入时间！"/>
+                    </div>
+                </div>
             </div>
             <div class="form-actions fluid">
                 <div class="col-md-offset-3 col-md-9">
@@ -26,6 +38,10 @@
         </form>
     </div>
 </div>
+<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/plugins/bootstrap-datepicker/css/datepicker.css" />
+
+<script type="text/javascript" src="<?=base_url()?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript">
 $(function () {
     DatePicker.init1();

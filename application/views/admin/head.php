@@ -25,7 +25,6 @@
 <link href="<?=base_url()?>assets/css/custom.css" rel="stylesheet" type="text/css"/>
 
 <script src="<?=base_url()?>js/api.js"></script>
-<script src="<?=base_url()?>/lib/angular/angular.js"></script>
 <script type="text/javascript">
 var BASEURL = '<?=base_url()?>';
 </script>

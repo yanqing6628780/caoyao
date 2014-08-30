@@ -9,9 +9,7 @@ class Home extends CI_Controller {
         $this->load->library('tank_auth');
         $this->load->library('logger');
 
-        if(!$this->tank_auth->is_logged_in()){
-            redirect('/login/');
-        }
+        check_front_IsLoggedIn();
 
         $this->load->model('tank_auth/profiles_mdl', 'profiles_mdl');
     }
@@ -33,5 +31,7 @@ class Home extends CI_Controller {
         $data['msg'] = $msg;
         $this->load->view('front/head');
         $this->load->view('front/error', $data);
+        die();
     }
+
 }
