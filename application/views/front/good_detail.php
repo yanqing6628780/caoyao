@@ -21,15 +21,16 @@
 				</div>
 			</div>
 		</div>
-		<div style="max-height:283px;overflow:auto" class="col-md-3">
+		<div class="col-md-3">
 			<h4>相关产品</h4>
+			<div style="max-height:263px;overflow:auto">
 			<?php 
 			foreach ($rel_products as $key => $pid): 
 				if($pid != $row['id']): $rel_row = $this->product_mdl->get_product_info($pid);
 			?>
-			<img data-target="#rel_product" data-href="<?=site_url('goods/id/'.$pid);?>" onclick="show_modal(this)"  src="<?=$rel_row->picture ? $rel_row->picture : 'http://placehold.it/200x200/999999'?>" title="<?=$rel_row->product_name?>" alt="<?=$rel_row->product_name?>" class="img-responsive img-rounded center-block">
-
+			<img data-target="#rel_product" data-href="<?=site_url('goods/id/'.$pid.'?view=rel');?>" onclick="show_modal(this)"  src="<?=$rel_row->picture ? $rel_row->picture : 'http://placehold.it/200x200/999999'?>" title="<?=$rel_row->product_name?>" alt="<?=$rel_row->product_name?>" class="img-responsive img-rounded center-block">
 			<?php endif;endforeach; ?>
+			</div>
 		</div>
 	</div>
 	<?php if($colors): ?>

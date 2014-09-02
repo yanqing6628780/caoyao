@@ -1,25 +1,20 @@
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			
-		</div>
+		<div class="modal-content"></div>
 	</div>
 </div>
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			
-		</div>
+		<div class="modal-content"></div>
 	</div>
 </div>
 <div class="modal fade" id="rel_product" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			
-		</div>
+		<div class="modal-content"></div>
 	</div>
 </div>
+
 <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="<?=site_url('js/bootstrap.min.js')?>"></script>
 
@@ -33,6 +28,7 @@ function resetPassword()
     LoadAjaxPage('member/reset_password', {}, 'msgbox1')
 }
 </script>
+
 <script type="text/javascript" src="<?=base_url('js/validform_v5.3.2.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('js/sco.ajax.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('js/sco.message.js')?>"></script>

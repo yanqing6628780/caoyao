@@ -1,5 +1,7 @@
 body {padding-top: 50px;}
 .clear{clear: both;}
+.ovh{overflow: hidden;}
+
 .lgx-navbar{margin-bottom: 0px}
 .sub-header{
     background-color: #428bca;
@@ -34,6 +36,13 @@ body {padding-top: 50px;}
 .nav-sidebar > li > a {
     padding-left:20px;
     padding-right:20px;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    color: #fff;
+}
+.nav > li > a:hover, .nav > li > a:focus{
+    background-color: #428bca;
+    color: #fff;
 }
 .nav-sidebar > li > a:hover {
     background-color: #428bca;
@@ -44,19 +53,13 @@ body {padding-top: 50px;}
     color: #fff;
 }
 .main {
-    padding: 20px;
-}
-@media (min-width: 768px) {
-.main {
-    padding-left: 40px;
-    padding-right: 40px;
-}
+    padding-top:10px;
 }
 .main .page-header {
     margin-top: 0;
 }
 
-.goods_list .col-sm-4,.goods_list .col-md-3{padding-left: 0;padding-right: 0}
+.goods_list .good_box{margin-bottom: 6px;padding-left: 3px;padding-right: 3px}
 .goods_list .media{border: 1px solid #ddd;padding: 4px;min-height: 155px;position: relative;}
 .goods_list .media .btn-box {
     width: 100%;

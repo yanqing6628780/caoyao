@@ -16,31 +16,31 @@
 				<div class="radio-inline">
 			    <label>
 					<input style="margin-top: 15px;" type="radio" name="score" value="1"> 
-					<input value="1" type="number" class="rating" data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
+					<input value="1" type="number" class="rating" data-size="sm" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
 			    </label>
 			    </div>
 			    <div class="radio-inline">
 			    <label>
 			    	<input style="margin-top: 15px;" type="radio" name="score" value="2"> 
-			    	<input value="2" type="number" class="rating" data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
+			    	<input value="2" type="number" class="rating" data-size="sm" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
 			    </label>
 			    </div>
 			    <div class="radio-inline">
 			    <label>
 			    	<input style="margin-top: 15px;" type="radio" name="score" value="3"> 
-					<input value="3" type="number" class="rating" data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
+					<input value="3" type="number" class="rating" data-size="sm" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
 			    </label>
 			    </div>
 			    <div style="margin-left:0" class="radio-inline">
 			    <label>
 			    	<input style="margin-top: 15px;" type="radio" name="score" value="4"> 
-					<input value="4" type="number" class="rating" data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
+					<input value="4" type="number" class="rating" data-size="sm" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
 			    </label>
 			    </div>
 			    <div class="radio-inline">
 			    <label>
 			    	<input checked style="margin-top: 15px;" type="radio" name="score" value="5"> 
-					<input value="5" type="number" class="rating" data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
+					<input value="5" type="number" class="rating" data-size="sm" data-readonly="true" data-show-clear="false" data-show-caption="false"/>
 			    </label>
 			    </div>
 			</div>
@@ -58,7 +58,6 @@
 	<input name="good_id" type="hidden" value="<?=$row['id']?>">
 </div>
 </form>
-<link rel="stylesheet" href="<?=base_url('css/star-rating.min.css')?>">
 <script type="text/javascript" src="<?=base_url('js/star-rating.min.js')?>"></script>
 <script type="text/javascript">
 $(function () {

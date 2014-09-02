@@ -1,9 +1,9 @@
 <div class="row goods_list">
 <?php foreach ($result as $key => $value):?>
-	<div class="col-sm-4 col-md-3">
+	<div class="good_box col-sm-6 col-md-4">
 		<div class="media">
-			<a class="pull-left" href="#">
-				<img width="100" src="<?=$value['picture'] ? $value['picture'] : 'http://placehold.it/100x100/999999'?>" alt="...">
+			<a class="pull-left" href="<?=site_url('goods/pic/?name='.$value['product_name']);?>" role="button" data-toggle="modal" data-target="#gallery">
+				<img width="100" src="<?=$value['picture'] ? $value['picture'] : 'http://placehold.it/100x100/999999'?>">
 			</a>
 			<div class="media-body">
 				<h4 class="media-heading"><?=$value['product_name']?></h4>
@@ -31,13 +31,24 @@
 	</div>
 <?php endforeach; ?>
 </div>
+<div class="modal fade" id="gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content"></div>
+	</div>
+</div>
 <link rel="stylesheet" href="<?=base_url('css/star-rating.min.css')?>">
 <style>
 .rating-xs {font-size: 1.5em;}
 </style>
 <script type="text/javascript" src="<?=base_url('js/star-rating.min.js')?>"></script>
+<script src="<?=base_url('js/jssor.slider.min.js')?>"></script>
+
 <script type="text/javascript">
 $(function () {
 	$('.rating').rating();
+
+	$("#gallery").on("hidden.bs.modal", function() {
+	    $(this).removeData("bs.modal");
+	});
 })
 </script>

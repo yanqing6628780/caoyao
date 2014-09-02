@@ -1,8 +1,7 @@
-<div class="well">
-	<p class="text-danger">
-		现已购买<?=formatAmount($row['total']); ?>元 商品.方案要求最少购买额为 <?=formatAmount($RSTR['amount']); ?>	元
-		<?php if($RSTR['amount']-$row['total'] > 0): ?>还差<?=formatAmount($RSTR['amount']-$row['total'])?> 元<?php endif; ?>
-	</p>
+<div class="row">
+	<div class="col-md-12">
+		<div id="amount"></div>		
+	</div>	
 </div>
 <div class="row">
 	<div class="col-md-6">
@@ -12,7 +11,8 @@
 		<div id="order_class"></div>		
 	</div>
 </div>
-<table class="table table-striped" >
+
+<table class="table table-bordered" >
 	<thead>
 		<tr>
 			<th>订单编号</th>
@@ -133,6 +133,65 @@ $(function () {
 			type: 'pie',
 			name: '占比',
 			data: pieData
+		}]
+	});
+
+	var colors = Highcharts.getOptions().colors;
+	var categories = ['订单金额', '方案要求金额'];
+	var data = [{y: <?=$row['total']?>,color: colors[0]}, {y: <?=$RSTR['amount']-$row['total']?>,color: colors[1]}];
+	$('#amount').highcharts({
+		chart: {
+			type: 'bar'
+		},
+		title: {
+			text: '金额'
+		},
+		xAxis: { categories: categories }, 
+		yAxis: { title: { text: '金额' } },
+		tooltip: {
+			formatter: function() {
+				var point = this.point,
+					s = this.x + ':<b>￥' + this.y + '</b><br>';
+				return s;
+			}
+		},
+		plotOptions: {
+			column: {
+				cursor: 'pointer',
+				point: {
+					events: {
+						click: function() {
+							var drilldown = this.drilldown;
+							if (drilldown) { 
+								setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color); // drill down 
+							} else { 
+								setChart(name, categories, data); // restore 
+							} 
+						} 
+					} 
+				}, 
+				dataLabels: {
+					enabled: true, 
+					color: colors[0], 
+					style: { fontWeight: 'bold' }, 
+					formatter: function() { return this.y +'%'; }
+				} 
+			}
+		},
+		series: [{
+			name: '金额', 
+			data: data, 
+			color: 'white',
+			dataLabels: {
+				enabled: true,
+				color: '#FFFFFF',
+				align: 'right',
+				style: {
+					fontSize: '13px',
+					fontFamily: 'Verdana, sans-serif',
+					textShadow: '0 0 3px black'
+				}
+			}
 		}]
 	});
 });

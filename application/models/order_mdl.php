@@ -40,7 +40,7 @@ class order_mdl extends General_mdl
         $this->setTable('order_product');
         $this->db->select('product_id, count(product_id) as style_num');
         $this->db->select_sum('qty', 'sum_qty');
-        $this->db->group_by("product_id"); 
+        $this->db->group_by("product_id");
         $query = $this->get_query_by_where(array('order_id' => $order_id));
         $order_products = $query->result_array();
 
@@ -67,6 +67,7 @@ class order_mdl extends General_mdl
         return $rs;
     }
 
+    //获取订单指定规格商品数量
     public function get_qty($order_id, $product_id, $first_id, $second_id)
     {
         $this->setTable('order_product');
@@ -80,6 +81,33 @@ class order_mdl extends General_mdl
 
         return $query->num_rows() ? $query->row()->qty : 0;  
     }
+
+    public function product_sales_ranking($exchage_id)
+    {
+
+        $this->setTable('order');
+        $query =  $this->get_query_by_where(array('exchange_fair_id' => $exchage_id));
+        $orders = $query->result_array();
+        foreach ($orders as $key => $item) {
+            $order_id_arr[] = $item['id'];
+        }
+
+        $this->setTable('order_product');
+        $this->db->select('product_id, count(product_id) as style_num');
+        $this->db->select_sum('qty', 'sum_qty');
+        $this->db->group_by("product_id");
+        $query = $this->get_query_by_where_in('order_id', $order_id_arr, 0, '', 'sum_qty DESC');
+
+        $order_products = $query->result_array();
+
+        foreach ($order_products as $key => $value) {
+            $this->setTable('product');
+            $this->db->join('small_class', 'small_class.id = product.small_class_id', 'left');
+            $query = $this->get_query_by_where(array('product.id' => $value['product_id']));
+            $order_products[$key]['info'] = $query->row_array();
+        }
+        return $order_products;
+    }    
 }
 
 ?>

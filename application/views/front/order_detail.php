@@ -1,5 +1,6 @@
 <form id="order_products">
 <button type="button" class="btn btn-warning" onclick="update_order_products()">更新数量</button>
+<a data-trigger="ajax" href="<?=site_url('orders/my')?>" data-target="#main" class="btn btn-info navbar-btn" type="button">返回</a>   
 <table class="clear table table-striped" >
 	<thead>
 		<tr>
@@ -46,6 +47,7 @@
 	</tbody>
 </table>
 <button type="button" class="btn btn-warning" onclick="update_order_products()">更新数量</button>
+<a data-trigger="ajax" href="<?=site_url('orders/my')?>" data-target="#main" class="btn btn-info navbar-btn" type="button">返回</a>    
 <input name="order_id" value="<?=$order_id?>" type="hidden">
 <input name="order_num" value="<?=$order_num?>" type="hidden">
 <input name="product_id" value="<?=$product_id?>" type="hidden">

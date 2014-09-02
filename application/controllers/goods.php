@@ -54,6 +54,9 @@ class Goods extends CI_Controller {
 
 	public function query()
 	{
+        $this->load->model('RSTR_mdl');
+        $this->load->model('attr_mdl');
+        
         $post_data = $this->input->post(NULL, true);
         $data = array();
         $where = array();
@@ -125,7 +128,11 @@ class Goods extends CI_Controller {
         $data['order_id'] = $this->session->userdata('order_id') ? $this->session->userdata('order_id') : 0;
         $data['necessities_scheme_id'] = $this->session->userdata('necessities_scheme_id') ? $this->session->userdata('necessities_scheme_id') : 0;
 
-        $this->load->view('front/good_detail', $data);
+        if($this->input->get('view')){
+            $this->load->view('front/rel_good_detail', $data);
+        }else{
+            $this->load->view('front/good_detail', $data);
+        }
     }
 
     public function to_cart()
@@ -273,5 +280,18 @@ class Goods extends CI_Controller {
         }
 
         echo json_encode($response);
+    }
+
+    public function pic()
+    {
+        $this->load->helper('directory');
+
+        $name = $this->input->get('name');
+        $path = sprintf("%s/%s", 'product_pic', $name);
+        $map = directory_map($path, 0);
+        $data['map'] = $map ? $map : array();
+        $data['path'] = $path;
+        $data['name'] = $name;
+        $this->load->view('front/pic', $data);
     }
 }
