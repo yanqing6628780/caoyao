@@ -23,13 +23,19 @@
 		</tr>
 	</thead>
 	<tbody>
+		<?php if($row): ?>
 		<tr>
 			<td><?=$row['order_number']; ?></td>
-			<td>￥<?=formatAmount($row['total']); ?>元</td>
+			<td>￥<?=formatAmount($total); ?>元</td>
 			<td><?=$row['create_time']; ?></td>
 			<td><?=$row['modify_time']; ?></td>
 			<td><?=$row['is_pass'] ? '成功下单' : '未提交'; ?></td>
 		</tr>
+		<?php else: ?>
+			<tr>
+				<td colspan="100">没有订单数据</td>
+			</tr>
+		<?php endif?>
 	</tbody>
 </table>
 <table class="table table-striped" >
@@ -138,7 +144,7 @@ $(function () {
 
 	var colors = Highcharts.getOptions().colors;
 	var categories = ['订单金额', '方案要求金额'];
-	var data = [{y: <?=$row['total']?>,color: colors[0]}, {y: <?=$RSTR['amount']-$row['total']?>,color: colors[1]}];
+	var data = [{y: <?=$total?>,color: colors[0]}, {y: <?=$RSTR['amount']?>,color: colors[1]}];
 	$('#amount').highcharts({
 		chart: {
 			type: 'bar'

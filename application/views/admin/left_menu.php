@@ -20,7 +20,7 @@
 	</ul>
 </li>
 <?php endif;?>
-<li class="last active">
+<li class="last ">
 	<a href="javascript:;">
 		<i class="icon-cogs"></i> 
 		<span class="title">内容管理</span>
@@ -28,18 +28,39 @@
 		<span class="arrow"></span>
 	</a>
 	<ul class="sub-menu">
+		<?php if(checkPermission2('branch_view')):?>
 		<li><a id="branch_view" class="ajaxify" href="<?php echo site_url('admin/branch/')?>" target="right">分公司管理</a></li>
+		<?php endif;?>
+		<?php if(checkPermission2('category_view')):?>
 		<li><a id="category_view" class="ajaxify" href="<?php echo site_url('admin/big_class/')?>" target="right">大类管理</a></li>
+		<?php endif;?>
+		<?php if(checkPermission2('category_view')):?>
 		<li><a id="category2_view" class="ajaxify" href="<?php echo site_url('admin/small_class/')?>" target="right">小类管理</a></li>
+		<?php endif;?>
+		<?php if(checkPermission2('product_view')):?>
 		<li><a id="product_view" class="ajaxify" href="<?php echo site_url('admin/product/')?>" target="right">产品管理</a></li>
+		<?php endif;?>
+		<?php if(checkPermission2('product_view')):?>
 		<li><a id="product_relate_view" class="ajaxify" href="<?php echo site_url('admin/product/relation')?>" target="right">产品关联</a></li>
+		<?php endif;?>
+		<?php if(checkPermission2('exchange_view')):?>
 		<li><a id="exchange_view" class="ajaxify" href="<?php echo site_url('admin/exchange/')?>" target="right">订货会管理</a></li>
+		<?php endif;?>
+		<?php if(checkPermission2('announce_view')):?>
 		<li><a id="announce_view" class="ajaxify" href="<?php echo site_url('admin/announce/')?>" target="right">公告管理</a></li>
+		<?php endif;?>
+		<?php if(checkPermission2('scheme_view')):?>
 		<li><a id="necessary_view" class="ajaxify" href="<?php echo site_url('admin/necessary/')?>" target="right">必需品限制方案</a></li>
+		<?php endif;?>
+		<?php if(checkPermission2('scheme_view')):?>
 		<li><a id="small_class_view" class="ajaxify" href="<?php echo site_url('admin/small_class_limit/')?>" target="right">小类限制方案</a></li>
+		<?php endif;?>
+		<?php if(checkPermission2('order_view')):?>
+		<li><a id="order_view" class="ajaxify" href="<?php echo site_url('admin/orders/')?>" target="right">订单管理</a></li>
+		<?php endif;?>
 	</ul>
 </li>
-<li class="last">
+<li class="last active">
 	<a href="javascript:;">
 		<i class="icon-bar-chart"></i> 
 		<span class="title">报表</span>
@@ -47,6 +68,7 @@
 		<span class="arrow"></span>
 	</a>
 	<ul class="sub-menu">
-		<li><a id="score_report_view" class="ajaxify" href="<?php echo site_url('admin/scoring/report')?>" target="right">产品评分表</a></li>
+		<li><a id="branch_sales_report_view" class="ajaxify" href="<?php echo site_url('admin/report/branch_sales')?>" target="right">整体销售报表</a></li>
+		<li><a id="user_sales_report_view" class="ajaxify" href="<?php echo site_url('admin/report/user_sales')?>" target="right">门店销售报表</a></li>
 	</ul>
 </li>

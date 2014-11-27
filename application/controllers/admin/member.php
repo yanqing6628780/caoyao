@@ -7,6 +7,7 @@ class Member extends CI_Controller
 		checkIsLoggedIn();
 
         $this->load->model('tank_auth/users', 'users');
+        $this->load->model('tank_auth/profiles_mdl', 'profiles');
 
         $this->load->library('tank_auth');
         $this->lang->load('tank_auth');
@@ -14,10 +15,11 @@ class Member extends CI_Controller
         $this->load->library('pagination');
         $this->load->library('form_validation');
         $this->load->helper('form');
-	}
+    }
 
     public function index()
     {
+        $this->lang->load('tank_auth');
         checkPermission('member_view');
 
         $this->general_mdl->setTable('users');
@@ -27,16 +29,10 @@ class Member extends CI_Controller
         foreach($result as $key => $row)
         {
             $this->general_mdl->setTable('user_profiles');
-            $row_profile = $this->general_mdl->get_query_by_where(array("user_id" =>$row['id']))->row();
+            $row_profile = $this->profiles->get_profiles(array("user_id" =>$row['id']))->row();
 
-            $result[$key]['credit'] = $row_profile->credit;
-            $result[$key]['cnname'] = $row_profile->name;
-            $result[$key]['mobile'] = $row_profile->mobile;
-            $result[$key]['sex'] = $row_profile->sex;
-            $result[$key]['company'] = $row_profile->company;
-            $result[$key]['department'] = $row_profile->department;
-            $result[$key]['jobs'] = $row_profile->jobs;
-            $result[$key]['job_title'] = $row_profile->job_title;
+            $result[$key]['profile'] = $row_profile;
+
             $result[$key]['photo'] = $row_profile->photo ? $row_profile->photo : base_url()."images/tavatar.gif";
             $result[$key]['code'] = md5($row['id'].$row['password']);
         }
@@ -54,6 +50,9 @@ class Member extends CI_Controller
         $this->general_mdl->setTable('users');
         $query = $this->general_mdl->get_query();
         $data['num_rows'] = $query->num_rows();
+
+        $this->general_mdl->setTable('branch');
+        $data['branches'] = $this->general_mdl->get_query()->result_array();
 
         $this->load->view('admin_member/add', $data);
     }
@@ -113,8 +112,10 @@ class Member extends CI_Controller
         $data['user_id'] = $user_id;
         $data['member'] = $this->users->get_user_by_id($user_id, TRUE);
 
-        $this->general_mdl->setTable('user_profiles');
-        $data['profile'] = $this->general_mdl->get_query_by_where(array('user_id' => $user_id))->row();
+        $data['profile'] = $this->profiles->get_profiles(array('user_id' => $user_id))->row();
+
+        $this->general_mdl->setTable('branch');
+        $data['branches'] = $this->general_mdl->get_query()->result_array();
 
         $this->load->view('admin_member/edit', $data);
     }

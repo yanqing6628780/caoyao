@@ -24,7 +24,7 @@
                         <tr>
                             <td><?=$row['small_class_restrictions_name']?></td>
                             <td>
-                                <?php if (checkPermission2('necessary_edit')): ?>
+                                <?php if (checkPermission2('scheme_edit')): ?>
                                 <a  onclick="scheme_edit(<?=$row['id']?>)" class="btn green"> <i class=" icon-list-ol icon-white"></i> 方案设置</a>
                                 <a  href="#myModal" data-toggle="modal"  onclick="edit(<?=$row['id']?>)" class="btn green"> <i class="icon-pencil icon-white"></i> 编辑</a>
                                 <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>

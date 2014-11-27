@@ -40,6 +40,9 @@
                                 <a  href="#myModal" data-toggle="modal"  onclick="edit(<?=$row['id']?>)" class="btn green"> <i class="icon-pencil icon-white"></i> 编辑</a>
                                 <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
                                 <?php endif ?>
+                                <?php if (checkPermission2('order_view')): ?>
+                                <a onclick="LoadPageContentBody('<?php echo site_url('admin/orders/?exchange_id='.$row['id'])?>')" class="btn blue" ><i class="icon-globe"></i> 订单管理 </a>
+                                <?php endif ?>
                             </td>
                         </tr>
                     <?php endforeach;?>

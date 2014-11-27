@@ -36,6 +36,5 @@
         </div>
     </div>
 </div>
-<?php $this->load->view('front/footer'); ?>
 </body>
 </html>

@@ -1,14 +1,13 @@
 <!-- BEGIN FOOTER -->
 <div class="footer">
-  <div class="footer-inner">2014 &copy; by <a href='www.mysqt.com'>顺企通</a> 版本:20140219 </div>
-  <div class="footer-tools">
-     <span class="go-top">
-     <i class="icon-angle-up"></i>
-     </span>
-  </div>
+    <div class="footer-inner">2014 &copy; by <a href='www.mysqt.com'>顺企通</a> 版本:20140219 </div>
+    <div class="footer-tools">
+        <span class="go-top">
+        <i class="icon-angle-up"></i>
+        </span>
+    </div>
 </div>
 <!-- END FOOTER -->
-
 <div id="myModal" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -48,6 +47,8 @@
 <script src="<?=base_url()?>assets/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/select2/select2.min.js"></script>
 <script src="<?php echo base_url()?>js/validform_v5.3.2.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/sco.ajax.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/highcharts/highcharts.js"></script>
 
 <script src="<?php echo base_url()?>assets/scripts/app.js"></script>
 <script>

@@ -6,32 +6,43 @@
         <form id='user_edit' class="form-horizontal" action="<?php echo site_url('admin/member/edit_save')?>">
             <div class="form-body">
                 <div class="form-group">
-                    <label class="col-md-3 control-label">姓名</label>
+                    <label class="col-md-3 control-label">门店名称</label>
                     <div class="col-md-4">
                         <input class="form-control" type='text' name='profile[name]' value='<?=$profile->name?>' />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3 control-label">性别</label>
-                    <div class="col-md-4">
-                        <label class="inline">
-                            <input type='radio' name='profile[sex]' value='1' id='male' <?=$profile->sex ? 'checked' : '' ?> />男
-                        </label>
-                        <label class="inline">
-                            <input type='radio' name='profile[sex]' value='0' id='female' <?=$profile->sex ? '' : 'checked' ?> />女
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-md-3 control-label">联系电话</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[mobile]' value='<?=$profile->mobile?>' datatype="m" sucmsg=" 手机验证通过！" nullmsg="请输入手机号码！" errormsg="请填写正确手机号码！"/>
+                        <input class="form-control" type='text' name='profile[phone]' value='<?=$profile->phone?>'/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3 control-label">信用额度</label>
+                    <label class="col-md-3 control-label">联系人</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[credit]' value='<?=$profile->credit?>' datatype="n"/>
+                        <input class="form-control" type='text' name='profile[contact]' value='<?=$profile->contact?>' />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">传真</label>
+                    <div class="col-md-4">
+                        <input class="form-control" type='text' name='profile[fax]' value='<?=$profile->fax?>' />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">地址</label>
+                    <div class="col-md-4">
+                        <input class="form-control" type='text' name='profile[address]' value='<?=$profile->address?>'/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">分公司</label>
+                    <div class="col-md-4">
+                        <select name="profile[branch_id]" class="form-control">
+                            <?php foreach ($branches as $key => $value): ?>
+                                <option value="<?=$value['id'] ?>" <?=option_select($value['id'], $profile->branch_id) ?> ><?=$value['branch_name'] ?></option>
+                            <?php endforeach ?>
+                        </select>
                     </div>
                 </div>
             </div>

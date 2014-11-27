@@ -24,32 +24,43 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3 control-label">姓名</label>
+                    <label class="col-md-3 control-label">门店名称</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[name]' value='' />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">性别</label>
-                    <div class="col-md-4">
-                        <label class="inline">
-                            <input type='radio' name='profile[sex]' value='1' id='male' checked/>男
-                        </label>
-                        <label class="inline">
-                            <input type='radio' name='profile[sex]' value='0' id='female' />女
-                        </label>
+                        <input class="form-control" type='text' name='profile[name]' />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">联系电话</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[mobile]' value='' datatype="m" sucmsg=" 手机验证通过！" nullmsg="请输入手机号码！" errormsg="请填写正确手机号码！"/>
+                        <input class="form-control" type='text' name='profile[phone]' />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3 control-label">信用额度</label>
+                    <label class="col-md-3 control-label">联系人</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name='profile[credit]' value='1000' datatype="n"/>
+                        <input class="form-control" type='text' name='profile[contact]'/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">传真</label>
+                    <div class="col-md-4">
+                        <input class="form-control" type='text' name='profile[fax]' />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">地址</label>
+                    <div class="col-md-4">
+                        <input class="form-control" type='text' name='profile[address]'/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">分公司</label>
+                    <div class="col-md-4">
+                        <select name="profile[branch_id]" class="form-control">
+                            <?php foreach ($branches as $key => $value): ?>
+                                <option value="<?=$value['id'] ?>"><?=$value['branch_name'] ?></option>
+                            <?php endforeach ?>
+                        </select>
                     </div>
                 </div>
             </div>

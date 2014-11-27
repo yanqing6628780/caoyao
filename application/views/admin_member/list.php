@@ -17,24 +17,26 @@
                 <table class='table table-striped table-bordered table-hover' id="sample_1">
                     <thead>
                         <tr>
-                            <th width="90">头像</th>
                             <th>用户名</th>
-                            <th>姓名</th>
-                            <th>性别</th>
+                            <th>门店名</th>
+                            <th>联系人</th>
                             <th>电话</th>
-                            <th>信用额度</th>
+                            <th>传真</th>
+                            <th>地址</th>
+                            <th>所属分公司</th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php foreach($users as $key => $row):?>
                         <tr>
-                            <td><img width="80" src="<?=$row['photo']?>" class="img-polaroid"></td>
                             <td><?=$row['username']?></td>
-                            <td><?=$row['cnname']?></td>
-                            <td><?=$row['sex'] ? "男" : "女" ?></td>
-                            <td><?=$row['mobile']?></td>
-                            <td><?=$row['credit']?></td>
+                            <td><?=$row['profile']->name?></td>
+                            <td><?=$row['profile']->contact?></td>
+                            <td><?=$row['profile']->phone?></td>
+                            <td><?=$row['profile']->fax?></td>
+                            <td><?=$row['profile']->address?></td>
+                            <td><?=$row['profile']->branch_name?></td>
                             <td>
                                 <?php if(checkPermission2('user_edit')):?>                                    
                                 <button href="#myModal" data-toggle="modal" class="btn btn-small btn-primary" onclick='editUser(<?=$row['id']?>)'> <i class="icon-pencil icon-white"></i> 编辑</button>

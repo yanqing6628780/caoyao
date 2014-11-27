@@ -17,7 +17,7 @@ class billboard extends CI_Controller {
 
         $exchange_fair_id = $this->session->userdata('current_exchange_fair');
         $data['billboard'] = $this->order_mdl->product_sales_ranking($exchange_fair_id);
-
+        
 		$this->load->view('front/billboard', $data);
 	}
 

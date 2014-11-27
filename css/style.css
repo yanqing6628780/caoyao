@@ -1,6 +1,7 @@
 body {padding-top: 50px;}
 .clear{clear: both;}
 .ovh{overflow: hidden;}
+.close{font-size: 40px}
 
 .lgx-navbar{margin-bottom: 0px}
 .sub-header{
@@ -54,6 +55,7 @@ body {padding-top: 50px;}
 }
 .main {
     padding-top:10px;
+    padding-bottom: 50px;
 }
 .main .page-header {
     margin-top: 0;

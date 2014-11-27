@@ -8,6 +8,17 @@ class order_mdl extends General_mdl
 		parent::__construct();
     }
 
+    public function get_orders($where = array(), $start = 0, $pageSize = '', $orderby = '')
+    {
+        $this->setTable('order');
+        $this->db->select('order.*,user_profiles.name,exchange_fair.exchange_fair_name');
+        $this->db->join('user_profiles', 'user_profiles.user_id = order.user_id', 'left');
+        $this->db->join('exchange_fair', 'exchange_fair.id = order.exchange_fair_id', 'left');
+        $query = $this->get_query_by_where($where, $start, $pageSize, $orderby);
+
+        return $query;
+    }
+
     public function sum($order_id)
     {
         $total = 0;
@@ -53,11 +64,13 @@ class order_mdl extends General_mdl
         return $order_products;
     }    
 
-    public function smal_class_group($order_id)
+    // 统计订单内分类的销售量和销售额
+    public function small_class_group($order_id)
     {
         $this->setTable('order_product');
         $this->db->select('small_class.small_class_name');
         $this->db->select_sum('qty', 'sum_qty');
+        $this->db->select_sum('product.unit_price * order_product.qty', 'small_total');
         $this->db->join('product', 'product.id = order_product.product_id', 'left');
         $this->db->join('small_class', 'small_class.id = product.small_class_id', 'left');
         $this->db->group_by("product.small_class_id"); 

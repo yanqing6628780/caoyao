@@ -28,7 +28,7 @@ class small_class_limit extends CI_Controller {
 
     public function index()
     {
-        checkPermission('necessary_view');
+        checkPermission('scheme_view');
 
         $this->data['start'] = $start = $this->input->get_post('page') ? $this->input->get_post('page') : 1;
         $this->data['pageSize'] = $pageSize = $this->input->get_post('pageSize') ? $this->input->get_post('pageSize') : 20;

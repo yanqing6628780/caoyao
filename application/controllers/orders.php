@@ -52,10 +52,10 @@ class orders extends CI_Controller {
         $data['row'] = $row = $query->row_array();
 
         $this->general_mdl->setTable('order_product');
-        $data['row']['total'] = $this->order_mdl->sum($row['id']);
+        $data['total'] = $row ? $this->order_mdl->sum($row['id']) : 0;
 
-        $data['order_products'] = $this->order_mdl->product_group($row['id']);
-        $data['order_small_class_sum'] = $this->order_mdl->smal_class_group($row['id']);
+        $data['order_products'] = $row ? $this->order_mdl->product_group($row['id']) : array();
+        $data['order_small_class_sum'] = $row ? $this->order_mdl->small_class_group($row['id']) : array();
 
         $data['RSTR'] = $this->RSTR_mdl->get_RSTR($exchange_fair_id, $this->tank_auth->get_user_id());
 
@@ -136,5 +136,30 @@ class orders extends CI_Controller {
         if($order_id){
             $this->id($order_id);
         }
+    }
+
+    public function scheme()
+    {
+        $this->load->model('order_mdl');
+        $this->load->model('RSTR_mdl');
+
+        $exchange_fair_id = $this->session->userdata('current_exchange_fair');
+
+        $where = array(
+            'exchange_fair_id' => $exchange_fair_id,
+            'user_id' => $this->tank_auth->get_user_id()
+        );
+
+        $query = $this->general_mdl->get_query_by_where($where);
+        $data['row'] = $row = $query->row_array();
+
+        $this->general_mdl->setTable('order_product');
+        $data['row']['total'] = $this->order_mdl->sum($row['id']);
+
+        $data['order_small_class_sum'] = $this->order_mdl->small_class_group($row['id']);
+
+        $data['RSTR'] = $this->RSTR_mdl->get_RSTR($exchange_fair_id, $this->tank_auth->get_user_id());
+
+        $this->load->view('front/scheme', $data);
     }
 }

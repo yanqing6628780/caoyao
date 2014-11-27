@@ -3,7 +3,6 @@
 		<div id="billboard"></div>		
 	</div>	
 </div>
-
 <script type="text/javascript">
 $(function () {
 	var colors = Highcharts.getOptions().colors;
