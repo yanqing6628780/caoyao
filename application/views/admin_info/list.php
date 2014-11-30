@@ -64,7 +64,7 @@
                                     <td><?=$row['time_limit']?></td>
                                     <td><?=$row['price']?></td>
                                     <td>
-                                        <?php if (checkPermission2('info_edit')): ?>                                            
+                                        <?php if (chk_perm_to_bool('info_edit')): ?>                                            
                                         <a  href="#myModal" data-toggle="modal"  onclick="edit(<?=$row['id']?>)" class="btn green"> <i class="icon-pencil icon-white"></i> 编辑</a>
                                         <button class="btn btn-danger" onclick='del(<?=$row['id']?>, "<?=$table?>")'><i class="icon-remove icon-white"></i> 删除</button>
                                         <?php endif ?>

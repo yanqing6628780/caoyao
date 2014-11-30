@@ -34,7 +34,7 @@
 						<?php foreach ($perms as $key => $perm){ ?>
 						<tr>
 							<td><input type="checkbox" class="checkboxes" name="perms[]" value="<?php echo $perm['action_code']?>" <?php if($perm['hasperm']){echo 'checked';}?> /></td>
-							<td><?php echo $perm['name']?></td>
+							<td><?php echo $perm['name']?>(<?php echo $perm['action_code']?>)</td>
 						</tr>
 						<?php } ?>
 					</tbody>

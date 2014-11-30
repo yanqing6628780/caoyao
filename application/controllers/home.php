@@ -16,9 +16,6 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-        $this->general_mdl->setTable('small_class');
-        $data['small_classes'] = $this->general_mdl->get_query()->result_array();
-
 		$this->load->view('front/head');
 		$this->load->view('front/home', $data);
 	}

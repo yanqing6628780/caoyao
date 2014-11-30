@@ -8,7 +8,7 @@
                     <a class="collapse" href="javascript:;"></a>
                 </div>
                 <div class="actions">
-                    <?php if(checkPermission2('member_edit')):?> 
+                    <?php if(chk_perm_to_bool('member_edit')):?> 
                     <a class="btn blue" href="#myModal" data-toggle="modal" onclick='addUser()'><i class="icon-plus"></i> 添加用户</a>
                     <?php endif;?>
                 </div>
@@ -38,11 +38,11 @@
                             <td><?=$row['profile']->address?></td>
                             <td><?=$row['profile']->branch_name?></td>
                             <td>
-                                <?php if(checkPermission2('user_edit')):?>                                    
+                                <?php if(chk_perm_to_bool('user_edit')):?>                                    
                                 <button href="#myModal" data-toggle="modal" class="btn btn-small btn-primary" onclick='editUser(<?=$row['id']?>)'> <i class="icon-pencil icon-white"></i> 编辑</button>
                                 <?php endif;?>
                                 <?php if($row['id'] != 1):?>
-                                <?php if(checkPermission2('user_edit')):?>
+                                <?php if(chk_perm_to_bool('user_edit')):?>
                                 <button class="btn btn-small btn-danger" onclick='del(<?=$row['id']?>, "<?=$row['code']?>")'><i class="icon-remove icon-white"></i> 删除</button>
                                 <?php endif;?>
                                 <?php endif;?>

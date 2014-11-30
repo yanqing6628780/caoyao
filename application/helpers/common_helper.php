@@ -1,5 +1,104 @@
 <?php
 
+/**
+ * 前台登录检查
+ *
+ */
+function check_front_IsLoggedIn()
+{
+    $CI = get_instance();
+    if(!$CI->tank_auth->is_logged_in()){
+        redirect(site_url('login'));
+        exit();
+    }
+}
+
+/**
+ * 后台登录检查
+ *
+ */
+function checkIsLoggedIn()
+{
+    $CI = get_instance();
+    if(!$CI->dx_auth->is_logged_in()):
+        redirect(site_url('admin/auth/msg'));
+        exit();
+    endif;
+}
+
+/**
+ * 权限检查
+ * 没有权限，显示404页
+ *
+ * @param string $perm
+ */
+function checkPermission($perm)
+{
+    $CI = get_instance();
+    if ($CI->dx_auth->get_permission_value($perm) == NULL or !$CI->dx_auth->get_permission_value($perm))
+    {
+        show_error('权限不足', 403, '禁止访问');
+    }
+}
+
+function chk_perm_to_bool($perm)
+{
+    $CI = get_instance();
+    if ($CI->dx_auth->get_permission_value($perm) == NULL or ! $CI->dx_auth->get_permission_value($perm))
+    {
+        return false;
+    }else{
+        return true;
+    }
+}
+
+/**
+ * 角色权限检查
+ * 没有权限，显示系统信息页
+ *
+ * @param string $perm
+ */
+function checkRoles($roles = array())
+{
+    $CI = get_instance();
+    if ( ! is_array($roles))
+    {
+        $roles = array($roles);
+    }
+    if (!$CI->dx_auth->is_role($roles))
+    {
+        exit('<script type="text/javascript">alert("你没有使用权限");');
+    }
+}
+
+//权限数组
+function getPermissionsArray()
+{
+    $CI = get_instance();
+    $CI->config->load('permissions', true);
+    $permissions = $CI->config->item('permissions');
+
+    $perms = array();
+
+    $i = 0;
+    foreach($permissions as $key => $row)
+    {
+        foreach($row as $k => $v){
+            $perms[$i]['group'] = $key;
+            $perms[$i]['action_code'] = $k;
+            $perms[$i]['name'] = $v['name'];
+            $perms[$i]['hasperm'] = false;
+            if($v['url']){
+                $perms[$i]['url'] = $v['url'];
+            }else{
+                $perms[$i]['url'] = $key.'/'.$k;
+            }
+            $i++;
+        }
+    }
+    return $perms;
+}
+
 // 图片路径
 function get_image_url($url){
     if(substr($url,0,4)=='http'){
@@ -129,115 +228,6 @@ function getDomain()
 }
 
 /**
- * 前台登录检查
- *
- */
-function check_front_IsLoggedIn()
-{
-    $CI = get_instance();
-    if(!$CI->tank_auth->is_logged_in()){
-        redirect(site_url('login'));
-        exit();
-    }else{
-        $CI->general_mdl->setTable('exchange_fair');
-        $where = array(
-            'start_time <=' => date("Y-m-d"),
-            'end_time >=' => date("Y-m-d"),
-            'state' => 1
-        );
-        $query = $CI->general_mdl->get_query_by_where($where);
-
-        if($query->num_rows()){
-            $exchange_fair = $query->row();
-            $CI->general_mdl->setTable('rel_stores_exchange_fair');
-            $where = array(
-                'user_id' => $CI->tank_auth->get_user_id(),
-                'exchange_fair_id' => $exchange_fair->id,
-                'state' => 1
-            );
-            $rel_query = $CI->general_mdl->get_query_by_where($where);
-            if($rel_query->num_rows() == 0){
-                show_error('你还未能参与任何订货会 <a href="'.site_url('login/logout').'">返回</a>', 403, '权限不足');
-            }else{
-                $CI->session->set_userdata('current_exchange_fair', $exchange_fair->id);
-                $CI->session->set_userdata('small_class_restrictions_id', $rel_query->row()->small_class_restrictions_id);
-                $CI->session->set_userdata('necessities_scheme_id', $rel_query->row()->necessities_scheme_id);
-                // 取出订单ID
-                $CI->general_mdl->setTable('order');
-                $order_where = array(
-                    'exchange_fair_id' => $exchange_fair->id,
-                    'user_id' => $CI->tank_auth->get_user_id()
-                );
-                $query = $CI->general_mdl->get_query_by_where($order_where);
-                if ($query->num_rows()) {
-                    $CI->session->set_userdata('order_id', $query->row()->id);
-                }
-            }
-        }else{
-            show_error('当前没有订货会 <a href="'.site_url('login/logout').'">返回</a>', 404, '找不到页面');
-        }
-    }
-}
-
-/**
- * 后台登录检查
- *
- */
-function checkIsLoggedIn()
-{
-    $CI = get_instance();
-    if(!$CI->dx_auth->is_logged_in()):
-        redirect(site_url('admin/auth/msg'));
-        exit();
-    endif;
-}
-
-/**
- * 权限检查
- * 没有权限，显示404页
- *
- * @param string $perm
- */
-function checkPermission($perm)
-{
-    $CI = get_instance();
-    if ($CI->dx_auth->get_permission_value($perm) == NULL or !$CI->dx_auth->get_permission_value($perm))
-    {
-        show_error('权限不足', 403, '禁止访问');
-    }
-}
-
-function checkPermission2($perm)
-{
-    $CI = get_instance();
-    if ($CI->dx_auth->get_permission_value($perm) == NULL or ! $CI->dx_auth->get_permission_value($perm))
-    {
-		return false;
-	}else{
-		return true;
-	}
-}
-
-/**
- * 角色权限检查
- * 没有权限，显示系统信息页
- *
- * @param string $perm
- */
-function checkRoles($roles = array())
-{
-    $CI = get_instance();
-    if ( ! is_array($roles))
-    {
-        $roles = array($roles);
-    }
-    if (!$CI->dx_auth->is_role($roles))
-    {
-        exit('<script type="text/javascript">alert("你没有使用权限");');
-    }
-}
-
-/**
  * 返回文件后缀
  *
  *
@@ -338,115 +328,6 @@ function formatAmount($d)
     return number_format($d, 2, '.', ',');
 }
 
-/**
- * 生成tree数组
- *
- * return array
- */
-function getTreeArray($text, $href = '', $id = '', $leaf = true, $expanded = false, $qtip = '', $iconCls = '')
-{
-    $arr = array(
-        'text' => $text,
-        'leaf' => $leaf,
-        'id' => $id,
-        'qtip' => $qtip,
-        'iconCls' => $iconCls,
-        'expanded' => $expanded
-    );
-
-    if($href)
-    {
-        $arr['href'] = site_url($href);
-    }
-
-    if( ! $leaf){
-        $arr['children'] = array();
-    }
-    return $arr;
-}
-
-//配送公式验算function
-function cal_fee($exp,$weight,$totalmoney,$defPrice=0){
-    if($str=trim($exp)){
-        $dprice = 0;
-        $weight = $weight + 0;
-        $totalmoney = $totalmoney + 0;
-        $str = str_replace("[", "getceil(", $str);
-        $str = str_replace("]", ")", $str);
-        $str = str_replace("{", "getval(", $str);
-        $str = str_replace("}", ")", $str);
-
-        $str = str_replace("w", $weight, $str);
-        $str = str_replace("W", $weight, $str);
-        $str = str_replace("p", $totalmoney, $str);
-        $str = str_replace("P", $totalmoney, $str);
-        eval("\$dprice = $str;");
-        if($dprice === 'failed'){
-            return $defPrice;
-        }else{
-            return $dprice;
-        }
-    }else{
-        return $defPrice;
-    }
-}
-function getval($expval){
-    $expval = trim($expval);
-    if($expval !== ''){
-    eval("\$expval = $expval;");
-        if ($expval > 0){
-            return 1;
-        }else if ($expval == 0){
-            return 1/2;
-        }else{
-            return 0;
-        }
-    }else{
-        return 0;
-    }
-}
-
-function getceil($expval){
-    if($expval = trim($expval)){
-        eval("\$expval = $expval;");
-        if ($expval > 0){
-            return ceil($expval);
-        }else{
-            return 0;
-        }
-    }else{
-        return 0;
-    }
-}
-
-//权限数组
-function getPermissionsArray()
-{
-    $CI = get_instance();
-    $CI->config->load('permissions', true);
-    $permissions = $CI->config->item('permissions');
-
-    $perms = array();
-
-    $i = 0;
-    foreach($permissions as $key => $row)
-    {
-        foreach($row as $k => $v){
-            $perms[$i]['group'] = $key;
-            $perms[$i]['action_code'] = $k;
-            $perms[$i]['name'] = $v['name'];
-            $perms[$i]['hasperm'] = false;
-            if($v['url']){
-                $perms[$i]['url'] = $v['url'];
-            }else{
-                $perms[$i]['url'] = $key.'/'.$k;
-            }
-            $i++;
-        }
-    }
-    return $perms;
-}
-
 //二维数组按照指定的键值进行排序
 function array_sort($arr, $keys, $type='asc'){
     $keysvalue = $new_array = array();
@@ -468,33 +349,6 @@ function array_sort($arr, $keys, $type='asc'){
 //递归创建多级目录
 function create_folders($dir){
     return is_dir($dir) or (create_folders(dirname($dir)) and mkdir($dir, 0777));
-}
-
-/**
- * 生成图片链接
- * @return  array
- */
-function image_path($file_path)
-{
-    $CI = get_instance();
-    $CI->config->load('thumbimage', true);
-    $thumbimage_config = $CI->config->item('thumbimage');
-    $size = $thumbimage_config['thumb_width'];
-
-    if($file_path){
-        $image_path[] = $file_path;
-
-
-        $file_path_data = pathinfo($file_path);
-        foreach($size as $row){
-            $image_path[$row] = sprintf("%s/%s_%s.%s", $file_path_data['dirname'], $file_path_data['filename'], $row, $file_path_data['extension']);
-        }
-    }else{
-        foreach($size as $row){
-            $image_path[$row] = '';
-        }
-    }
-	return $image_path;
 }
 
 //年龄计算
@@ -570,6 +424,14 @@ function option_select($val, $checkVal){
     }
 }
 
+/**
+ * 中文字符串截取
+ *
+ * @param string $str 字符串
+ * @param int $start 起始位置
+ * @param int $len 截取长度
+ * return string
+*/
 function msubstr($str, $start, $len) {
     $tmpstr = "";
     $strlen = $start + $len;
@@ -585,7 +447,7 @@ function msubstr($str, $start, $len) {
 
 
 /**
- * 时间数据处理
+ * 时间格式转换
  *
  * @param string $datetime 时间 可以是字符串
  * @param string $format 返回的时间格式
@@ -624,25 +486,6 @@ function html_print($data)
     echo "<pre style='text-align:left'>";
     print_r($data);
     echo "</pre>";
-}
-
-function encode_json($str) {
-    return urldecode(json_encode(url_encode($str)));
-}
-
-/**
- *
- */
-function url_encode($str) {
-    if(is_array($str)) {
-        foreach($str as $key=>$value) {
-            $str[urlencode($key)] = url_encode($value);
-        }
-    } else {
-        $str = urlencode($str);
-    }
-
-    return $str;
 }
 
 
@@ -702,67 +545,4 @@ function getMinInArray($arr, $arr_key) {
     return $min_key;
 }
 
-
-//亿美发送短信操作结果状态码转换
-/*
-* fltNo 航班号
-*/
-function trans_sendSMS_code($statusCode)
-{
-    switch ($statusCode)
-    {
-        case 17:
-            $result = "亿美短信提示:发送信息失败";
-            break;
-        case 18:
-            $result = "亿美短信提示:发送定时信息失败";
-            break;
-        case 303:
-            $result = "亿美短信提示:客户端网络故障";
-            break;
-        case 305:
-            $result = "亿美短信提示:服务器端返回错误，错误的返回值（返回值不是数字字符串）";
-            break;
-        case 307:
-            $result = "亿美短信提示:目标电话号码不符合规则，电话号码必须是以0、1开头";
-            break;
-        case 997:
-            $result = "亿美短信提示:平台返回找不到超时的短信，该信息是否成功无法确定";
-            break;
-        case 998:
-            $result = "亿美短信提示:由于客户端网络问题导致信息发送超时，该信息是否成功下发无法确定";
-            break;
-        default:
-            $result = "亿美短信提示:短信发送成功";
-            break;
-    }
-    return $result;
-}
-
-//亿美注册序列号功能结果状态码转换
-/*
-* fltNo 航班号
-*/
-function trans_em_login_code($statusCode)
-{
-    switch ($statusCode)
-    {
-        case 10:
-            $result = "亿美短信提示:客户端注册失败";
-            break;
-        case 303:
-            $result = "亿美短信提示:客户端网络故障";
-            break;
-        case 305:
-            $result = "亿美短信提示:服务器端返回错误，错误的返回值（返回值不是数字字符串）";
-            break;
-        case 999:
-            $result = "亿美短信提示:操作频繁";
-            break;
-        default:
-            $result = "亿美短信提示:短信功能注册失败";
-            break;
-    }
-    return $result;
-}
 // END common_helper.php

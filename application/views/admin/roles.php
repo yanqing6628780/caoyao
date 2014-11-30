@@ -8,7 +8,7 @@
 				<div class="tools">
 				    <a class="collapse" href="javascript:;"></a>
 				</div>
-				<?php if(checkPermission2('role_edit')):?>
+				<?php if(chk_perm_to_bool('role_edit')):?>
 				<div class="actions">
 					<div class="btn-group">
 						<span>父角色</span>

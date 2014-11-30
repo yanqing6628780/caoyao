@@ -22,22 +22,6 @@ class Member extends CI_Controller
 
     public function index()
     {
-        $this->load->model('buylogs_mdl');
-        $members_id = $this->tank_auth->get_user_id();
-        $query = $this->buylogs_mdl->get_query_by_where(array('member_id' => $members_id));
-
-        $buy_logs = $query->result();
-        foreach ($buy_logs as $key => $value) {
-            $this->general_mdl->setTable('category');
-            $row = $this->general_mdl->get_query_by_where(array('table'=>$value->table))->row();
-            $buy_logs[$key]->category = $row->name;
-
-            $this->general_mdl->setTable($value->table);
-            $row = $this->general_mdl->get_query_by_where(array('id'=>$value->info_id))->row();
-            $buy_logs[$key]->info = $row;
-        }
-        $data['buy_logs'] = $buy_logs;
-
 
         $data['title'] = "会员中心";
         $this->load->view('front/head', $data);
