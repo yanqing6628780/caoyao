@@ -1,2 +1,3 @@
 /* here you can put your own css to customize and override the theme */
 .ms-container .ms-selectable li.ms-elem-selectable, .ms-container .ms-selection li.ms-elem-selection{text-indent: 10px}
+.input-group .help-block{display: table-cell;}

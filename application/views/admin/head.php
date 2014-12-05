@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title><?php echo isset($title) ? $title : 'Leung'; ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="MobileOptimized" content="320">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->          
@@ -22,6 +22,8 @@
 <link href="<?=base_url()?>assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="<?=base_url()?>assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
+<link href="<?=base_url()?>assets/plugins/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css"/>
 <link href="<?=base_url()?>assets/css/custom.css" rel="stylesheet" type="text/css"/>
 
 <script src="<?=base_url()?>js/api.js"></script>

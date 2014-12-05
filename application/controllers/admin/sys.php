@@ -17,27 +17,27 @@ class Sys extends CI_Controller {
 	{
         checkRoles('admin');
         checkPermission('sys_admin');
-        $this->_data['system'] = $this->general_mdl->get_query()->row();
-
-        $this->load->view('system', $this->_data);
+        $data['system'] = $this->general_mdl->get_query()->row();
+        $data['title'] = '';
+        $this->load->view('admin/sys_config', $data);
 
 	}
 
-    public function save()
+    //修改保存
+    public function config_save()
     {
-        $tel_point = $this->input->post('tel_point');
-        $shopex_url = $this->input->post('shopex_url');
-        $array = array('tel_point' => $tel_point);
-        $array = array('shopex_url' => $shopex_url);
-        $where['id'] =  1;
-        $this->general_mdl->setData($array);
-        $this->general_mdl->update($where);
+        $data = $this->input->post(NULL, TRUE);
 
-        $data['success'] = true;
-        $data['msg'] = '更新成功';
-        echo json_encode($data);
+        foreach ($data as $key => $value) {
+            $this->general_mdl->setData( array('value' => $value) );
+            $isUpdated[] = $this->general_mdl->update( array('name' => $key) );
+        }
+
+        $response['info'] = $isUpdated;
+
+        echo json_encode($response);
     }
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file sys.php */
+/* Location: ./application/controllers/sys.php */

@@ -360,7 +360,7 @@ class User_admin extends CI_Controller
 
         /*所有权限的数据*/
         $this->general_mdl->setTable('permissions_code');
-        $query = $this->general_mdl->get_query_by_where(array('is_show' => 1));
+        $query = $this->general_mdl->get_query_by_where(array('is_show' => 1),0,'','id ASC');
         $perms = $query->result_array();
         // $this->config->load('permissions', true);
         // $permissions = $this->config->item('permissions');

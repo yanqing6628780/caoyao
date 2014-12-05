@@ -48,7 +48,10 @@
 <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/select2/select2.min.js"></script>
 <script src="<?php echo base_url()?>js/validform_v5.3.2.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>js/sco.ajax.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>js/highcharts/highcharts.js"></script>
+
+
+<script type="text/javascript" src="<?php echo base_url()?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
 
 <script src="<?php echo base_url()?>assets/scripts/app.js"></script>
 <script>

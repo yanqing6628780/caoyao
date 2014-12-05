@@ -75,4 +75,7 @@ body {padding-top: 50px;}
     .my-navbar-right{float: none !important}
 }
 
-#rel_product{top:2%;left: 2%}
+#date-picker .datepicker {
+  box-shadow: 2px 2px 2px 2px #000;
+}
+.datepicker td, .datepicker th{width: 30px}

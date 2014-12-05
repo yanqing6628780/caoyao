@@ -16,10 +16,14 @@ class Home extends CI_Controller {
         $nickname = $profile->name;
         $nickname = $nickname ? $nickname : '佚名';
         $data['profile'] = $profile;
-        $data['title'] = '龙山客运站';
+        $data['title'] = '后台';
         $data['header_welcome_msg'] = sprintf("欢迎你, %s(%s)", $this->dx_auth->get_username(), $nickname);
         $this->load->view('admin/head', $data);
         $this->load->view('admin/home');
 	}
 
+    public function dashboard()
+    {
+        $this->load->view('admin/dashboard');
+    }
 }

@@ -99,13 +99,15 @@
 		   </div>
 		</div>
 	</div>
-	<!-- END BEGIN STYLE CUSTOMIZER -->
-	<div class="page-content-body">
-		<!-- HERE WILL BE LOADED AN AJAX CONTENT -->
-	</div>
+	<div class="page-content-body"></div>
   </div>
 </div>
 <!-- END CONTAINER -->
 <?php echo $this->load->view('admin/footer'); ?>
+<script type="text/javascript" >
+$(function () {
+    $('#dashboard_view').click();
+})
+</script>
 </body>
 </html>

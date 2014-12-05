@@ -144,7 +144,7 @@ function reloadPage()
 var DatePicker = function(){
     return {
         //main function to initiate the module
-        init1: function () {
+        init: function () {
             if (jQuery().datepicker) {
                 $('.date-picker').datepicker({
                     language:'zh-CN',
