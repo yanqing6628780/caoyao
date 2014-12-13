@@ -37,7 +37,6 @@ class Home extends CI_Controller {
            $where['book_date <'] = date('Y-m-d', strtotime('+1 day', strtotime($book_date)));
        }
 
-
        //取出当前面数据
        $this->db->where($where);
        $query = $this->general_mdl->get_query(0,"", 'book_date ASC');

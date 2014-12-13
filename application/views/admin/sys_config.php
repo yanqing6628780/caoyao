@@ -18,17 +18,33 @@
                                     <span class="input-group-addon">开始</span>
                                     <select name="bh_am_start"  class="form-control" id="am_start">
                                         <?php for ($i=6; $i <= 12; $i++) { 
-                                            echo "<option value='".$i."'>".$i.":00</option>";
+                                            $selected = $config['bh_am_start'] == $i ? 'selected=true' : '';
+                                            echo "<option $selected value='".$i."'>".$i.":00</option>";
                                         } ?>
                                     </select>
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon">结束</span>
                                     <select name="bh_am_end"  class="form-control" id="am_end">
-                                        <?php for ($i=7; $i <= 12; $i++) { 
-                                            echo "<option value='".$i."'>".$i.":00</option>";
+                                        <?php for ($i=7; $i <= 12; $i++) {
+                                            $selected = $config['bh_am_end'] == $i ? 'selected=true' : '';
+                                            echo "<option $selected value='".$i."'>".$i.":00</option>";
                                         } ?>
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">上午时间间隔</label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <select name="am_time_interval" class="form-control">
+                                        <option <?php option_select(30, $config['am_time_interval']) ?> value="10">10</option>
+                                        <option <?php option_select(30, $config['am_time_interval']) ?> value="15">15</option>
+                                        <option <?php option_select(30, $config['am_time_interval']) ?> value="20">20</option>
+                                        <option <?php option_select(30, $config['am_time_interval']) ?> value="30">30</option>
+                                    </select>
+                                    <span class="input-group-addon">分钟</span>
                                 </div>
                             </div>
                         </div>
@@ -38,8 +54,9 @@
                                 <div class="input-group">
                                     <span class="input-group-addon">开始</span>
                                     <select name="bh_pm_start"  class="form-control" id="pm_start">
-                                        <?php for ($i=14; $i <= 18; $i++) { 
-                                            echo "<option value='".$i."'>".$i.":00</option>";
+                                        <?php for ($i=14; $i <= 18; $i++) {
+                                            $selected = $config['bh_pm_start'] == $i ? 'selected=true' : '';
+                                            echo "<option $selected value='".$i."'>".$i.":00</option>";
                                         } ?>
                                     </select>
                                 </div>
@@ -47,21 +64,22 @@
                                     <span class="input-group-addon">结束</span>
                                     <select name="bh_pm_end"  class="form-control" id="pm_end">
                                         <?php for ($i=15; $i <= 18; $i++) { 
-                                            echo "<option value='".$i."'>".$i.":00</option>";
+                                            $selected = $config['bh_pm_end'] == $i ? 'selected=true' : '';
+                                            echo "<option $selected value='".$i."'>".$i.":00</option>";
                                         } ?>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">时间间隔</label>
+                            <label class="col-md-3 control-label">下午时间间隔</label>
                             <div class="col-md-2">
                                 <div class="input-group">
-                                    <select name="time_interval" class="form-control">
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
-                                        <option value="30">30</option>
+                                    <select name="pm_time_interval" class="form-control">
+                                        <option <?php option_select(10, $config['pm_time_interval']) ?> value="10">10</option>
+                                        <option <?php option_select(15, $config['pm_time_interval']) ?> value="15">15</option>
+                                        <option <?php option_select(20, $config['pm_time_interval']) ?> value="20">20</option>
+                                        <option <?php option_select(30, $config['pm_time_interval']) ?> value="30">30</option>
                                     </select>
                                     <span class="input-group-addon">分钟</span>
                                 </div>

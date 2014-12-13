@@ -17,7 +17,14 @@ class Sys extends CI_Controller {
 	{
         checkRoles('admin');
         checkPermission('sys_admin');
-        $data['system'] = $this->general_mdl->get_query()->row();
+
+        $this->general_mdl->setTable('sys_config');
+        $res = $this->general_mdl->get_query_by_where(array('cat' => 'sys'))->result_array();
+        foreach ($res as $key => $item) {
+            $this->sys_configs[$item['name']] = $item['value'];
+        }
+        
+        $data['config'] = $this->sys_configs;
         $data['title'] = '';
         $this->load->view('admin/sys_config', $data);
 

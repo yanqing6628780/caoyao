@@ -29,25 +29,34 @@
                             <input type="text" readonly class="form-control date-picker" name="book_date[date]" value='' datatype="*" nullmsg="请输入日期！">
                         </div>
                         <div class="input-group">
+                            <select id="amorpm" class="form-control">
+                                <option value="0">上午</option>
+                                <option value="1">下午</option>
+                            </select>
                             <span class="input-group-addon">时间</span>
-                            <select class="form-control" name="book_date[time][]">
-                                <optgroup label="上午">
-                                    <?php for ($i= $config['bh_am_start']; $i <= $config['bh_am_end']; $i++) { 
-                                        echo "<option value=".$i.">".$i."</option>";
-                                    } ?>
-                                </optgroup>
-                                <optgroup label="下午">
-                                    <?php for ($i= $config['bh_pm_start']; $i <= $config['bh_pm_end']; $i++) { 
-                                        echo "<option value=".$i.">".$i."</option>";
-                                    } ?>
-                                </optgroup>
+                            <select id="am" class="form-control" name="book_date[time][]">
+                                <?php for ($i= $config['bh_am_start']; $i <= $config['bh_am_end']; $i++) { 
+                                    echo "<option value=".$i.">".$i."</option>";
+                                } ?>
+                            </select>
+                            <select style="display:none" disabled="true" id="pm" class="form-control" name="book_date[time][]">
+                                <?php for ($i= $config['bh_pm_start']; $i <= $config['bh_pm_end']; $i++) { 
+                                    echo "<option value=".$i.">".$i."</option>";
+                                } ?>
                             </select>
                             <span class="input-group-addon">时</span>
-                            <select class="form-control" name="book_date[time][]">
+                            <select id="am_ti" class="form-control" name="book_date[time][]">
                                 <?php 
 
-                                for ($i=0; $i < 60/$config['time_interval']; $i++) { 
-                                    echo "<option value=".$i*$config['time_interval'].">".$i*$config['time_interval']."</option>";
+                                for ($i=0; $i < 60/$config['am_time_interval']; $i++) { 
+                                    echo "<option value=".$i*$config['am_time_interval'].">".$i*$config['am_time_interval']."</option>";
+                                } 
+                                ?>
+                            </select>
+                            <select style="display:none" disabled="true" id="pm_ti" class="form-control" name="book_date[time][]">
+                                <?php 
+                                for ($i=0; $i < 60/$config['pm_time_interval']; $i++) { 
+                                    echo "<option value=".$i*$config['pm_time_interval'].">".$i*$config['pm_time_interval']."</option>";
                                 } 
                                 ?>
                             </select>
@@ -82,6 +91,10 @@ $(function () {
             if(response.status == "y"){
                 if(confirm('是否继续添加')){
                     form.resetForm();
+                    $('#am').show().removeAttr('disabled');
+                    $('#am_ti').show().removeAttr('disabled');
+                    $('#pm').hide().attr('disabled', 'true');
+                    $('#pm_ti').hide().attr('disabled', 'true');
                     $('#dashboard_view').click();
                 }else{
                     $('#myModal').modal('hide');
@@ -89,6 +102,21 @@ $(function () {
                 }
             }
         }
-    });    
+    });
+
+    $('#amorpm').change(function(event) {
+        var v = $(this).val();
+        if(v == 1){
+            $('#pm').show().removeAttr('disabled');
+            $('#pm_ti').show().removeAttr('disabled');
+            $('#am').hide().attr('disabled', 'true');
+            $('#am_ti').hide().attr('disabled', 'true');
+        }else{
+            $('#am').show().removeAttr('disabled');
+            $('#am_ti').show().removeAttr('disabled');
+            $('#pm').hide().attr('disabled', 'true');
+            $('#pm_ti').hide().attr('disabled', 'true');
+        }
+    });
 })
 </script>
