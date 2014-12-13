@@ -49,13 +49,11 @@ class book extends CI_Controller {
         $like = array();
         $where = array();
 
-        echo $book_date;
         if($q){
             $like['name'] = $q;
         }else{        
             if($book_date){
                 $book_date = trans_date_format($book_date,'Y-m-d');
-                echo $book_date;
                 $this->data['book_date'] = $book_date;
                 $where['book_date >'] = $book_date;
                 $where['book_date <'] = date('Y-m-d', strtotime('+1 day', strtotime($book_date)));
