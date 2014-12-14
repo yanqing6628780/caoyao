@@ -38,6 +38,7 @@
                                 <button href="#myModal" data-toggle="modal" class="btn btn-primary" onclick='editUser(<?=$row['id']?>)'> <i class="icon-pencil icon-white"></i> 编辑</button>
                                 <?php if($row['id'] != 1):?>                                 
                                 <button class="btn btn-danger" onclick='delUser(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
+                                <button class="btn btn-warning" onclick='resetpsw(<?=$row['id']?>)'><i class="icon-refresh icon-white"></i> 重置密码</button>
                                 <?php endif;?>
                                 <?php endif;?>
                             </td>
@@ -67,6 +68,20 @@ function delUser(id){
             success: function(respone){
                 alert( '删除成功' );
                 $('#users_view').click();
+            }
+        });
+    }
+}
+function resetpsw(id){
+    if(confirm('是否将该用户密码重置为123456 ?'))
+    {
+        $.ajax({
+            type: "POST",
+            url: '<?=base_url()?>admin/user_admin/reset_password',
+            dataType: 'json',
+            data: {id: id},
+            success: function(respone){
+                alert( '重置成功' );
             }
         });
     }

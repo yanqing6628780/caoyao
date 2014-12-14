@@ -15,7 +15,6 @@ class Sys extends CI_Controller {
 
 	public function index()
 	{
-        checkRoles('admin');
         checkPermission('sys_admin');
 
         $this->general_mdl->setTable('sys_config');

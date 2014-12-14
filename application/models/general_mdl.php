@@ -6,10 +6,17 @@ class General_mdl extends CI_Model
     private $_table;
     private $_from;
     private $_data;
+    public $sys_configs;
 
 	function __construct()
 	{
 		parent::__construct();
+        //系统配置数据
+        $this->setTable('sys_config');
+        $res = $this->get_query_by_where(array('cat' => 'sys'))->result_array();
+        foreach ($res as $key => $item) {
+            $this->sys_configs[$item['name']] = $item['value'];
+        }
         $this->setTable('');
         $this->setData(array());
 	}

@@ -282,8 +282,21 @@ class User_admin extends CI_Controller
                 $data['errors']['confirm_new_password'] = form_error('confirm_new_password');
             }
         }
-		echo json_encode($data);
-	}
+        echo json_encode($data);
+    }
+
+    //重置密码为123456
+    public function reset_password()
+    {
+        checkPermission('user_edit');
+        $this->load->model('dx_auth/users','users');
+        $user_id = $this->input->post('id');
+        // Crypt and encode new password
+        $new_pass = crypt($this->dx_auth->_encode('123456'));
+        
+        // Replace old password with new password
+        $this->users->change_password($user_id, $new_pass);
+    }
 
     //角色管理
     public function roles()

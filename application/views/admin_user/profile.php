@@ -4,17 +4,17 @@
 <div class="row profile-account">
     <div class="col-md-3">
       <ul class="ver-inline-menu tabbable margin-bottom-10">
-         <li class="active">
+         <!-- <li class="active">
             <a href="#tab_1-1" data-toggle="tab"><i class="icon-cog"></i> 门店信息</a> 
             <span class="after"></span>                                    
-         </li>
-         <li class=""><a href="#tab_2-2" data-toggle="tab"><i class="icon-picture"></i> 改变头像</a></li>
-         <li class=""><a href="#tab_3-3" data-toggle="tab"><i class="icon-lock"></i> 修改密码</a></li>
+         </li> -->
+         <!-- <li class=""><a href="#tab_2-2" data-toggle="tab"><i class="icon-picture"></i> 改变头像</a></li> -->
+         <li class="active"><a href="#tab_3-3" data-toggle="tab"><i class="icon-lock"></i> 修改密码</a></li>
       </ul>
     </div>
     <div class="col-md-9">
       <div class="tab-content">
-         <div class="tab-pane active" id="tab_1-1">
+         <div class="tab-pane" id="tab_1-1">
             <form role="form" id='profile' class="form-horizontal" action='<?=site_url('admin/user_admin/profile_save');?>' method='post' enctype="multipart/form-data">
                <div class="form-group">
                   <label class="control-label">门店名称</label>
@@ -67,7 +67,7 @@
                </div>
             </form>
          </div>
-         <div class="tab-pane" id="tab_3-3">
+         <div class="tab-pane active" id="tab_3-3">
             <form id="changePswForm">
                <div class="form-group">
                   <label class="control-label">旧密码</label>

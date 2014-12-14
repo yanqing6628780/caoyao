@@ -5,7 +5,7 @@
 	   <span class="selected"></span>
    </a>
 </li>
-<?php if(chk_perm_to_bool('user_view') || chk_perm_to_bool('perm_admin') || chk_perm_to_bool('role_view')):?>
+<?php if(chk_perm_to_bool('sys_admin') || chk_perm_to_bool('user_view') || chk_perm_to_bool('perm_admin') || chk_perm_to_bool('role_view')):?>
 <li class="start open">
 	<a href="javascript:;">
 		<i class="icon-home"></i> 

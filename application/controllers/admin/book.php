@@ -22,12 +22,7 @@ class book extends CI_Controller {
         parent::__construct();
         checkIsLoggedIn();
         
-        $this->general_mdl->setTable('sys_config');
-        $res = $this->general_mdl->get_query_by_where(array('cat' => 'sys'))->result_array();
-        foreach ($res as $key => $item) {
-            $this->sys_configs[$item['name']] = $item['value'];
-        }
-        $this->data['config'] = $this->sys_configs;
+        $this->data['config'] = $this->general_mdl->sys_configs;
 
         $this->general_mdl->setTable('appointment');
 
@@ -69,7 +64,7 @@ class book extends CI_Controller {
         //取出当前面数据
         $this->db->where($where);
         $this->db->or_like($like);
-        $query = $this->general_mdl->get_query($start-1, $pageSize);
+        $query = $this->general_mdl->get_query($start-1, $pageSize, 'book_date ASC');
         $book_data = $query->result_array();
 
         $this->data['current_page'] = $start;

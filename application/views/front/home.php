@@ -24,73 +24,40 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">预约</h3>
-        </div>
-        <div class="panel-body">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">预约</h4>
+            </div>
             <form id='addForm' class="form-horizontal" action="<?php echo site_url("home/book_save")?>">
+            <div class="modal-body">
                 <div class="form-group">
                     <label class="col-md-4 control-label">预约人</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name="name" value='' datatype="*" nullmsg="请输入名称！"/>
+                        <input autocomplete="off" class="form-control" type='text' name="name" value='' datatype="*" nullmsg="请输入名称！"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label">预约人电话</label>
                     <div class="col-md-4">
-                        <input class="form-control" type='text' name="phone" value='' datatype="m" nullmsg="请输入电话！"/>
+                        <input autocomplete="off" class="form-control" type='text' name="phone" value='' datatype="m" nullmsg="请输入电话！"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label">预约时间</label>
                     <div class="col-md-4">
-                        <div class="input-group">
-                            <span class="input-group-addon">日期</span>
-                            <input type="text" readonly class="form-control date-picker" name="book_date[date]" value='<?php echo date('Y-m-d') ?>' datatype="*" nullmsg="请输入日期！">
-                        </div>
-                        <div class="input-group">
-                            <select id="amorpm" class="form-control">
-                                <option value="0">上午</option>
-                                <option value="1">下午</option>
-                            </select>
-                            <span class="input-group-addon">时间</span>
-                            <select id="am" class="form-control" name="book_date[time][]">
-                                <?php for ($i= $config['bh_am_start']; $i <= $config['bh_am_end']; $i++) { 
-                                    echo "<option value=".$i.">".$i."</option>";
-                                } ?>
-                            </select>
-                            <select style="display:none" disabled="true" id="pm" class="form-control" name="book_date[time][]">
-                                <?php for ($i= $config['bh_pm_start']; $i <= $config['bh_pm_end']; $i++) { 
-                                    echo "<option value=".$i.">".$i."</option>";
-                                } ?>
-                            </select>
-                            <span class="input-group-addon">时</span>
-                            <select id="am_ti" class="form-control" name="book_date[time][]">
-                                <?php 
-
-                                for ($i=0; $i < 60/$config['am_time_interval']; $i++) { 
-                                    echo "<option value=".$i*$config['am_time_interval'].">".$i*$config['am_time_interval']."</option>";
-                                } 
-                                ?>
-                            </select>
-                            <select style="display:none" disabled="true" id="pm_ti" class="form-control" name="book_date[time][]">
-                                <?php 
-                                for ($i=0; $i < 60/$config['pm_time_interval']; $i++) { 
-                                    echo "<option value=".$i*$config['pm_time_interval'].">".$i*$config['pm_time_interval']."</option>";
-                                } 
-                                ?>
-                            </select>
-                            <span class="input-group-addon">分</span>
-                        </div>
+                        <input class="form-control" type='text' readonly id="book_date" name="book_date" datatype="*" nullmsg="请选择预约时间" value=''/>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-4 col-md-8">
-                        <input type='button' id="btn_sub" class="btn btn-success btn-lg" value='保存'/>
-                    </div>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="btn_sub" >保存</button>
+            </div>
             </form>
         </div>
     </div>
@@ -104,54 +71,27 @@ $(function () {
         format: 'yyyy-mm-dd',
         startDate: new Date()
     }).on('changeDate', function(ev){
-        book_datepicker.datepicker('update', ev.date);
-        load_book_table(book_datepicker.val());
+        load_book_table(ev.date.toUTCString());
     });
 
-    var book_datepicker = $(".date-picker").datepicker({
-        language: 'zh-CN',
-        format: "yyyy-m-d",
-        autoclose: true,
-        startDate: new Date()
-    });
-
-    load_book_table(book_datepicker.val());
+    load_book_table(date_picker.datepicker('getDate').toUTCString());
 
     var form = $("#addForm").Validform({
         btnSubmit: '#btn_sub',
         tiptype:1,
         ajaxPost:true,
         callback:function(response){
-            setTimeout('$(".Validform_msg").hide()', 1500);
-            if(response.status == "y"){
-                form.resetForm();
-                $('#am').show().removeAttr('disabled');
-                $('#am_ti').show().removeAttr('disabled');
-                $('#pm').hide().attr('disabled', 'true');
-                $('#pm_ti').hide().attr('disabled', 'true');
-                load_book_table(book_datepicker.val());
-                date_picker.datepicker('update', book_datepicker.val());
-            }
-        }
-    });
-
-    $('#amorpm').change(function(event) {
-        var v = $(this).val();
-        if(v == 1){
-            $('#pm').show().removeAttr('disabled');
-            $('#pm_ti').show().removeAttr('disabled');
-            $('#am').hide().attr('disabled', 'true');
-            $('#am_ti').hide().attr('disabled', 'true');
-        }else{
-            $('#am').show().removeAttr('disabled');
-            $('#am_ti').show().removeAttr('disabled');
-            $('#pm').hide().attr('disabled', 'true');
-            $('#pm_ti').hide().attr('disabled', 'true');
+            setTimeout('$("#Validform_msg").hide()', 2500);
+            load_book_table(date_picker.datepicker('getDate').toUTCString());
+            form.resetForm();
+            $('#myModal').modal('hide');
         }
     });
 })
+function book(date){
+    $('#book_date').val(date);
+}
 function load_book_table (date) {
-    console.log(date);
     $.ajax({
         url: '<?=site_url("home/book_list")?>',
         type: 'POST',

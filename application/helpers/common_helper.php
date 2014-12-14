@@ -545,4 +545,22 @@ function getMinInArray($arr, $arr_key) {
     return $min_key;
 }
 
+//日期时间拼接
+/*
+* $date string 日期
+* $start int 开始小时
+* $end int 结束小时
+* $step int 分钟间隔
+*/
+function date_time_joint($date, $start, $end, $step) {
+    $datetime_tmpl = "%s %s:%s";
+    for ($i=$start; $i <= $end; $i++) { 
+         for ($j=0; $j < 60; $j = $j + $step) {
+             // $time = date('H:i:s',mktime($i, $j));
+             $arr[] = sprintf($datetime_tmpl, $date, $i, $j);
+         }
+    }
+    return $arr;
+}
+
 // END common_helper.php
