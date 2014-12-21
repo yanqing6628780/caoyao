@@ -22,6 +22,18 @@
             </div>
             <div class="form-body">
                 <div class="form-group">
+                    <label class="col-md-3 col-md-3 control-label">预约医生</label>
+                    <div class="col-md-4">
+                        <select name="doctor_id" datatype="*" nullmsg="请选择医生！" id="amorpm" class="form-control">
+                            <?php foreach ($doctors as $key => $value):?>
+                            <option value="<?php echo $value->id?>"><?php echo $value->name?></option>
+                            <?php endforeach; ?>
+\                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-body">
+                <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">预约时间</label>
                     <div class="col-md-9">
                         <div class="input-group">

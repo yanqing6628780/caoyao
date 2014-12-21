@@ -7,6 +7,7 @@ body {padding-top: 70px;background:url("../images/debut_dark.png") repeat scroll
 
 #book-table .table td{vertical-align: middle;}
 
+#date-picker{margin-bottom: 10px}
 #date-picker .datepicker {
   box-shadow: 2px 2px 2px 2px #000;
 }

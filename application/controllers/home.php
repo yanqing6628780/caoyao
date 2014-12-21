@@ -7,11 +7,15 @@ class Home extends CI_Controller {
         parent::__construct();
 
         $this->data['config'] = $this->general_mdl->sys_configs;
+        $this->load->model('book_mdl');
     }
 
     public function index()
     {
         $this->data['title'] = '预约';
+
+        $this->general_mdl->setTable('doctor');
+        $this->data['doctors'] = $this->general_mdl->get_query()->result();
 
         $this->load->view('front/head',$this->data);
         $this->load->view('front/home');
@@ -19,20 +23,22 @@ class Home extends CI_Controller {
 
     public function book_list()
     {
-        $this->load->model('book_mdl');
 
         $book_date = $this->input->get_post('book_date') ? $this->input->get_post('book_date') : date('Y-m-d');
+        $doctor_id = $this->input->get_post('doctor_id');
 
-        if($book_date){
-            $book_data = trans_date_format($book_date,'Y-m-d');
-            $this->data['book_date'] = $book_data;
+        $book_data = trans_date_format($book_date,'Y-m-d');
+        $this->data['cn_book_date'] = trans_date_format($book_data, 'Y年m月d日');
+        
+        $this->data['doctor'] = '';
+        if($doctor_id){
+            $doctor = $this->db->where('id', $doctor_id)->get('doctor')->row();
+            $this->data['doctor'] = $doctor->name;
         }
 
-
-        $book_data = $this->book_mdl->get_allbookdatetime_data_by_date($book_data);
+        $book_data = $this->book_mdl->get_allbookdatetime_data_by_date($book_data, $doctor_id);
         
         $this->data['result'] = $book_data;
-        $this->data['title'] = '预约';
 
         $this->load->view('front/book_list', $this->data);
     }
@@ -44,7 +50,7 @@ class Home extends CI_Controller {
 
         $this->general_mdl->setTable('appointment');
         
-        if( $this->book_date_check($data['book_date']) )
+        if( !$this->book_mdl->check_doctor_book_date($data['doctor_id'], $data['book_date']) )
         {
             $this->general_mdl->setData($data);
             if($this->general_mdl->create())
@@ -61,17 +67,6 @@ class Home extends CI_Controller {
         }
 
         echo json_encode($response);
-    }
-
-    public function book_date_check($book_date)
-    {
-        $query = $this->general_mdl->get_query_by_where(array('book_date' => $book_date));
-        if(!$query->num_rows())
-        {
-            return true;
-        }else{
-            return false;
-       }
     }
 
     public function show_error($code=404, $head='找不到页面' ,$msg='')

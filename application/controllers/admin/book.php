@@ -23,6 +23,9 @@ class book extends CI_Controller {
         checkIsLoggedIn();
         
         $this->data['config'] = $this->general_mdl->sys_configs;
+        //医生资料
+        $this->general_mdl->setTable('doctor');
+        $this->data['doctors'] = $this->general_mdl->get_query()->result();
 
         $this->general_mdl->setTable('appointment');
 
@@ -36,8 +39,10 @@ class book extends CI_Controller {
     {
         checkPermission('book_view');
         
-        $this->data['name'] = $q = $this->input->get_post('q');
-        $this->data['book_date'] = $book_date = $this->input->get_post('book_date') ? $this->input->get_post('book_date') : date('Y-m-d');
+        $this->data['name'] = $q = $this->input->get_post('q'); //预约人姓名
+        $this->data['book_date'] = $book_date = $this->input->get_post('book_date') ? $this->input->get_post('book_date') : date('Y-m-d'); //预约人时间
+        $this->data['doctor_id'] = $doctor_id = $this->input->get_post('doctor_id'); //预约医生
+        
         $this->data['start'] = $start = $this->input->get_post('page') ? $this->input->get_post('page') : 1;
         $this->data['pageSize'] = $pageSize = $this->input->get_post('pageSize') ? $this->input->get_post('pageSize') : 20;
 
@@ -54,6 +59,9 @@ class book extends CI_Controller {
                 $where['book_date <'] = date('Y-m-d', strtotime('+1 day', strtotime($book_date)));
             }
         }
+        if($doctor_id){
+            $where['doctor_id'] = $doctor_id;
+        }
 
         //查询数据的总量,计算出页数
         $query = $this->general_mdl->get_query();
@@ -62,6 +70,8 @@ class book extends CI_Controller {
         $this->data['page'] = $page;
 
         //取出当前面数据
+        $this->db->select('appointment.*,doctor.name as doctor_name');
+        $this->db->join('doctor', 'doctor.id = appointment.doctor_id');
         $this->db->where($where);
         $this->db->or_like($like);
         $query = $this->general_mdl->get_query($start-1, $pageSize, 'book_date ASC');
@@ -101,15 +111,15 @@ class book extends CI_Controller {
     //添加保存
     public function add_save()
     {
+        $this->load->model('book_mdl');
         $data = $this->input->post(NULL, TRUE);
 
         $data['book_date'] = $data['book_date']['date']." ".$data['book_date']['time'][0].":".$data['book_date']['time'][1];
 
-        
-        if( $this->book_date_check($data['book_date']) )
+        if( !$this->book_mdl->check_doctor_book_date($data['doctor_id'], $data['book_date']) )
         {
-            $this->general_mdl->setData($data);
-            if($this->general_mdl->create())
+            $this->book_mdl->setData($data);
+            if($this->book_mdl->create())
             {
                 $response['status'] = "y";
                 $response['info'] = "添加成功";
@@ -171,17 +181,6 @@ class book extends CI_Controller {
         $response['success'] = true;
 
         echo json_encode($response);
-    }
-
-    public function book_date_check($book_date)
-    {
-        $query = $this->general_mdl->get_query_by_where(array('book_date' => $book_date));
-        if(!$query->num_rows())
-        {
-            return true;
-        }else{
-            return false;
-       }
     }
 }
 

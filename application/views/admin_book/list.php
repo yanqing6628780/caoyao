@@ -2,6 +2,11 @@
 <div class="row">
     <div class="col-sm-4 col-md-3">
         <div id="date-picker" data-date="<?php echo $book_date?>"></div>
+        <div class="list-group">
+            <?php foreach ($doctors as $key => $value):?>
+            <a href="javascript:void(0)" class="list-group-item" onclick="select_docotor(<?php echo $value->id?>)"><?php echo $value->name?></a>
+            <?php endforeach; ?>
+        </div>
     </div>
     <div class="col-sm-8 col-md-9">
         <div class='portlet box light-grey'>
@@ -33,6 +38,7 @@
                                 <th>预约日期</th>
                                 <th>预约人</th>
                                 <th>预约电话</th>
+                                <th>预约医生</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -42,6 +48,7 @@
                                 <td><?=$row['book_date']?></td>
                                 <td><?=$row['name']?></td>
                                 <td><?=$row['phone']?></td>
+                                <td><?=$row['doctor_name']?></td>
                                 <td>
                                     <?php if (chk_perm_to_bool('book_edit')): ?>
                                     <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
@@ -57,6 +64,7 @@
     </div>
 </div>
 <script type="text/javascript">
+var post_data = {doctor_id: 0,book_date: '<?php echo $book_date?>'};
 function add(){
     LoadAjaxPage('<?=site_url($controller_url."add/")?>', '', 'myModal','添加')
 }
@@ -79,9 +87,14 @@ $(function() {
         language:'zh-CN',
         format: 'yyyy-mm-dd',
     }).on('changeDate', function(ev){
-        LoadPageContentBody('<?=site_url($controller_url)?>', {book_date: ev.date.toUTCString()});
+        post_data.book_date = ev.date.toUTCString();
+        LoadPageContentBody('<?=site_url($controller_url)?>', post_data);
     });
     $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
 });
+function select_docotor(id){
+    post_data.doctor_id = id;
+    LoadPageContentBody('<?=site_url($controller_url)?>', post_data);
+};
 </script>
 <script type="text/javascript" src="<?=base_url()?>js/page.js"></script>

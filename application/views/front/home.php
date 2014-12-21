@@ -16,6 +16,11 @@
         	<div class="row">
                 <div class="col-sm-4 col-md-3">
                     <div id="date-picker"></div>
+                    <div id="doctors" class="list-group">
+                        <?php foreach ($doctors as $key => $value):?>
+                        <a href="javascript:void(0)" class="list-group-item" onclick="select_docotor(<?php echo $value->id?>, this)"><?php echo $value->name?></a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
                 <div class="col-sm-8 col-md-9">                   
                     <div id="book-table"></div>
@@ -57,6 +62,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" id="btn_sub" >保存</button>
+                <input type='hidden' id="doctor_id" name="doctor_id" datatype="*" nullmsg="请选择医生" value=''/>
             </div>
             </form>
         </div>
@@ -65,16 +71,16 @@
 <?php $this->load->view('front/footer'); ?>
 <?php $this->load->view('front/js'); ?>
 <script type="text/javascript">
+var post_data = {doctor_id: 0,book_date: ''},
+    date_picker;
 $(function () {
-    var date_picker = $('#date-picker').datepicker({
+    date_picker = $('#date-picker').datepicker({
         language:'zh-CN',
         format: 'yyyy-mm-dd',
         startDate: new Date()
     }).on('changeDate', function(ev){
-        load_book_table(ev.date.toUTCString());
+        load_book_table();
     });
-
-    load_book_table(date_picker.datepicker('getDate').toUTCString());
 
     var form = $("#addForm").Validform({
         btnSubmit: '#btn_sub',
@@ -82,21 +88,34 @@ $(function () {
         ajaxPost:true,
         callback:function(response){
             setTimeout('$("#Validform_msg").hide()', 2500);
-            load_book_table(date_picker.datepicker('getDate').toUTCString());
+            load_book_table();
             form.resetForm();
             $('#myModal').modal('hide');
         }
     });
+
+    $('#doctors').find('a:first').click();
 })
-function book(date){
+//预约对话框
+function book_dialog(date){
     $('#book_date').val(date);
 }
-function load_book_table (date) {
+//预约对话框
+function select_docotor(id,obj){
+    post_data.doctor_id = id;
+    $('#doctor_id').val(id);
+    $(obj).siblings().removeClass('active');
+    $(obj).addClass('active');
+    load_book_table();
+}
+//预约时间加载
+function load_book_table () {
+    post_data.book_date = date_picker.datepicker('getDate').toUTCString();
     $.ajax({
         url: '<?=site_url("home/book_list")?>',
         type: 'POST',
         dataType: 'html',
-        data: {book_date: date},
+        data: post_data,
     })
     .done(function(html) {
         $('#book-table').html(html)
