@@ -11,16 +11,12 @@
                         <input class="form-control" type='text' name="name" value='' datatype="*" nullmsg="请输入名称！"/>
                     </div>
                 </div>
-            </div>
-            <div class="form-body">
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">预约人电话</label>
                     <div class="col-md-4">
                         <input class="form-control" type='text' name="phone" value='' datatype="*" nullmsg="请输入电话！"/>
                     </div>
                 </div>
-            </div>
-            <div class="form-body">
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">预约医生</label>
                     <div class="col-md-4">
@@ -31,8 +27,12 @@
 \                        </select>
                     </div>
                 </div>
-            </div>
-            <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 col-md-3 control-label">症状</label>
+                    <div class="col-md-9">
+                        <textarea class="form-control" type='text' name="history"></textarea>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-md-3 col-md-3 control-label">预约时间</label>
                     <div class="col-md-9">

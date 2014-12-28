@@ -58,6 +58,12 @@
                         <input class="form-control" type='text' readonly id="book_date" name="book_date" datatype="*" nullmsg="请选择预约时间" value=''/>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">症状</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" type='text' name="history"></textarea>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

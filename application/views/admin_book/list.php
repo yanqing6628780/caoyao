@@ -39,6 +39,7 @@
                                 <th>预约人</th>
                                 <th>预约电话</th>
                                 <th>预约医生</th>
+                                <th width="45%">症状</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -49,6 +50,7 @@
                                 <td><?=$row['name']?></td>
                                 <td><?=$row['phone']?></td>
                                 <td><?=$row['doctor_name']?></td>
+                                <td><?=$row['history']?></td>
                                 <td>
                                     <?php if (chk_perm_to_bool('book_edit')): ?>
                                     <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
