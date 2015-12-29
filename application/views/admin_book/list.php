@@ -35,17 +35,17 @@
                     <table class='table table-striped table-bordered table-hover'>
                         <thead>
                             <tr>
-                                <th>预约日期</th>
+                                <th width="10%">预约日期</th>
                                 <th>预约人</th>
                                 <th>预约电话</th>
                                 <th>预约医生</th>
-                                <th width="45%">症状</th>
-                                <th>操作</th>
+                                <th width="30%">症状</th>
+                                <th width="30%">操作</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php foreach($result as $key => $row):?>
-                            <tr>
+                            <tr <?php if ($row['is_show'] == 0): ?>class="success"<?php endif ?> >
                                 <td><?=$row['book_date']?></td>
                                 <td><?=$row['name']?></td>
                                 <td><?=$row['phone']?></td>
@@ -53,7 +53,9 @@
                                 <td><?=$row['history']?></td>
                                 <td>
                                     <?php if (chk_perm_to_bool('book_edit')): ?>
-                                    <button class="btn btn-danger" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 删除</button>
+                                    <button class="btn btn-success  input-sm" onclick='editShow(<?=$row['id']?>, 0)'> 已看</button>
+                                    <button class="btn btn-warning  input-sm" onclick='editShow(<?=$row['id']?>, 1)'> 未看</button>
+                                    <button class="btn btn-danger input-sm" onclick='del(<?=$row['id']?>)'><i class="icon-remove icon-white"></i> 重置</button>
                                     <?php endif ?>                                    
                                 </td>
                             </tr>
@@ -70,8 +72,16 @@ var post_data = {doctor_id: 0,book_date: '<?php echo $book_date?>'};
 function add(){
     LoadAjaxPage('<?=site_url($controller_url."add/")?>', '', 'myModal','添加')
 }
-function edit(id){
-    LoadAjaxPage('<?=site_url($controller_url."edit/")?>', {id: id}, 'myModal','编辑')
+function editShow(id, value){
+    $.ajax({
+        url: '<?=site_url($controller_url."edit_save")?>',
+        type: 'POST',
+        dataType: 'json',
+        data: {is_show: value, id: id},
+    })
+    .done(function() {
+        location.reload(true);
+    });
 }
 function del(id){
     common_del('<?=site_url($controller_url."del")?>', id, '', "#dashboard_view");

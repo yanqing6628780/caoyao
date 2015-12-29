@@ -7,6 +7,7 @@
             <table class='table table-striped table-bordered table-hover'>
                 <thead>
                     <tr>
+                        <th>编号</th>
                         <th>预约日期</th>
                         <th>预约人</th>
                         <th>预约电话</th>
@@ -16,11 +17,17 @@
                 <tbody>
                 <?php foreach($result as $key => $row):?>
                     <tr>
+                        <td><?=$key+1?></td>
                         <td><?=$row['book_date']?></td>
+                        <?php if ($row['is_show'] == 1): ?>
                         <td <?=$row['name'] ? '': 'class="text-danger"'?> ><?=$row['name'] ? str_pad(substr_ext($row['name'], 0, 1), 5, '*', STR_PAD_RIGHT) : '无预约'?></td>
                         <td <?=$row['name'] ? '': 'class="text-danger"'?> ><?=$row['phone'] ? str_pad(substr($row['phone'], -4), 11, '*', STR_PAD_LEFT) : '无预约';?></td>
+                        <?php else: ?>
+                        <td>已看</td>
+                        <td>已看</td>
+                        <?php endif ?>
                         <td>
-                            <?php if(!$row['id']): ?>
+                            <?php if(!$row['id'] && $row['is_show'] == 1): ?>
                             <button data-toggle="modal" data-target="#myModal" onclick="book_dialog('<?=$row['book_date']?>')" class="btn btn-success" type="button">预约</button>
                             <?php endif; ?>
                         </td>

@@ -9,7 +9,7 @@ class book_mdl extends General_mdl
     {
         parent::__construct();
         $this->setTable('appointment');
-        $this->table_fields = array('id','name','phone','book_date');
+        $this->table_fields = array('id','name','phone','book_date', 'is_show');
     }
 
     public function get_allbookdatetime_data_by_date($date, $doctor_id = 0){
@@ -41,6 +41,9 @@ class book_mdl extends General_mdl
             }else{
                 foreach ($this->table_fields as $key => $filed) {
                     $row[$filed] = $filed == 'book_date' ? trans_date_format($datetime, 'Y-m-d H:i:s') : '';
+                    if($filed == 'is_show'){                    
+                        $row[$filed] = 1;
+                    }
                 }
                 $data[] = $row;
             }
