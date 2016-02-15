@@ -50,7 +50,7 @@ class book extends CI_Controller {
         $where = array();
 
         if($q){
-            $like['name'] = $q;
+            $like['appointment.name'] = $q;
         }else{        
             if($book_date){
                 $book_date = trans_date_format($book_date,'Y-m-d');

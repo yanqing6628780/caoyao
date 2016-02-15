@@ -63,6 +63,27 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="bootpag pagination">
+                            <li class="prev <?=$current_page==1 ? 'disabled' : '' ?>" data-lp="<?=$current_page?>">
+                                <a class="ajaxify" href="<?=site_url($prev_link)?>">
+                                    <icon class="icon-angle-left"></icon>
+                                </a>
+                            </li>
+                            <?php foreach($page_links as $key => $lnk){ ?>    
+                            <li data-lp="<?=$key?>" class="<?=$key == $current_page ? 'disabled' : '' ?>">
+                                <a class="ajaxify" href="<?=site_url($lnk)?>"><?=$key?></a>
+                            </li>
+                            <? } ?>
+                            <li class="next <?=$current_page==$page ? 'disabled' : '' ?>" data-lp="<?=$current_page?>">
+                                <a class="ajaxify" href="<?=site_url($controller_url.'?page='.($current_page+1))?>">
+                                <icon class="icon-angle-right"></icon>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
